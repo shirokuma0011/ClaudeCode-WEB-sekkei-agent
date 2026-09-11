@@ -1,0 +1,211 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<link rel="stylesheet" href="_base.css">
+<style>
+.sheet{width:1420px}
+.stage{display:grid;grid-template-columns:1fr 330px;gap:32px;align-items:start}
+.browser{border:2px solid var(--roast);border-radius:5px;overflow:hidden;background:#fff}
+.chrome{background:var(--cream);padding:9px 14px;display:flex;align-items:center;gap:8px;border-bottom:1.5px solid var(--line)}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.urlbar{flex:1;background:#fff;border:1px solid var(--line);border-radius:12px;padding:4px 12px;
+  font-family:monospace;font-size:11px;color:var(--ash);margin-left:8px}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--line)}
+.logo{font-size:15px;font-weight:700}
+.nav ul{display:flex;gap:18px;list-style:none;font-size:12px}
+.crumb{padding:10px 20px;font-size:11px;color:var(--ash);border-bottom:1px solid var(--line)}
+.ttl{padding:22px 20px 16px}
+.ttl h1{font-size:24px;font-weight:700;margin-bottom:6px}
+.ttl p{font-size:12px;color:var(--ash);line-height:1.8}
+.first{margin:0 20px 20px;border:2px solid var(--ember);background:#FDF4EF;border-radius:3px;
+  padding:15px 18px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.first b{font-size:14.5px;display:block;margin-bottom:4px}
+.first span{font-size:11.5px;color:var(--ash)}
+.first .bs{display:flex;gap:10px;flex:0 0 auto}
+.first .btn{height:36px;font-size:12px;padding:0 16px}
+.main{display:grid;grid-template-columns:214px 1fr;gap:20px;padding:0 20px 22px}
+.filter{border:1.5px solid var(--line);border-radius:3px;padding:15px 14px;background:var(--paper);height:fit-content}
+.fg{margin-bottom:17px}
+.fg:last-child{margin-bottom:0}
+.fg b{font-size:12px;display:block;margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--line)}
+.fo{font-size:11.5px;color:var(--roast);padding:4px 0;display:flex;align-items:center;gap:7px}
+.fo i{width:12px;height:12px;border:1.5px solid var(--ash);border-radius:2px;flex:0 0 auto}
+.fo.on i{background:var(--ember);border-color:var(--ember)}
+.fo.on{font-weight:700}
+.fo em{font-style:normal;color:var(--ash);font-size:10px;margin-left:auto}
+.sortbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;
+  font-size:11.5px;color:var(--ash)}
+.sortbar .s{display:flex;gap:12px}
+.sortbar .s span.on{color:var(--roast);font-weight:700;border-bottom:1.5px solid var(--ember)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.card{border:1.5px solid var(--line);border-radius:2px;overflow:hidden;background:#fff}
+.card .ph{height:104px;font-size:10px}
+.card .c{padding:11px 12px}
+.tg{font-size:9px;color:var(--ash);letter-spacing:.11em;display:block;margin-bottom:4px}
+.nm{font-size:13px;font-weight:700;line-height:1.4;margin-bottom:6px;min-height:36px}
+.roast{display:flex;gap:3px;align-items:center;margin-bottom:6px}
+.roast i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.roast i.r1{background:var(--r1)}.roast i.r2{background:var(--r2)}
+.roast i.r3{background:var(--r3)}.roast i.r4{background:var(--r4)}.roast i.r5{background:var(--r5)}
+.roast em{font-style:normal;font-size:10px;color:var(--ash);margin-left:4px}
+.fl{font-size:10px;color:var(--ash);margin-bottom:9px;line-height:1.55;min-height:30px}
+.pr{display:flex;justify-content:space-between;align-items:baseline;font-size:10px;color:var(--ash);margin-bottom:9px}
+.pr b{font-size:15px;color:var(--roast)}
+.cbtn{display:block;text-align:center;background:var(--ember);color:#fff;font-size:11.5px;
+  font-weight:700;padding:9px 0;border-radius:2px;letter-spacing:.05em}
+.card.out{opacity:.55}
+.card.out .cbtn{background:transparent;border:1.5px solid var(--ash);color:var(--ash);padding:7.5px 0}
+/* spec */
+.spec h3{font-size:15px;border-bottom:2px solid var(--roast);padding-bottom:8px;margin-bottom:14px}
+.sp{border:1.5px solid var(--line);border-radius:3px;background:#fff;padding:13px 15px;margin-bottom:11px}
+.sp b{font-size:13px;display:block;margin-bottom:5px}
+.sp p{font-size:11px;color:var(--ash);line-height:1.85}
+.sp.key{border-color:var(--ember);border-left-width:5px;background:#FDF4EF}
+.sp.key b{color:var(--ember)}
+.rl{margin-top:16px;border:1.5px solid var(--line);border-radius:3px;padding:13px 15px;background:#fff}
+.rl b{font-size:13px;display:block;margin-bottom:9px}
+.rl .r{display:flex;align-items:center;gap:9px;font-size:11px;margin-bottom:6px}
+.rl .r span{width:14px;height:14px;border-radius:50%;flex:0 0 auto}
+.rl .r em{font-style:normal;color:var(--ash);margin-left:auto;font-size:10px}
+</style></head><body><div class="sheet">
+<div class="doc-head">
+  <div><div class="doc-title">豆一覧ページ ワイヤーフレーム</div>
+  <div class="doc-sub">/beans/ ／ 課題 C「豆を選べない」への対応</div></div>
+  <div class="doc-meta">図 06<br>2026-09-11</div>
+</div>
+
+<div class="stage">
+<div class="browser">
+  <div class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    <span class="urlbar">https://muto-coffee.com/beans/</span></div>
+  <div class="nav"><span class="logo">MUTO coffee roastery</span>
+    <ul><li>豆を買う</li><li>店舗案内</li><li>MUTOについて</li><li>ジャーナル</li><li>EN</li><li>カート 0</li></ul></div>
+  <div class="crumb">ホーム ＞ 豆を買う</div>
+  <div class="ttl"><h1>豆を買う</h1>
+    <p>毎朝、オランダ GIESEN の焙煎機で焼いています。常時 10〜15 種類。焙煎度・味わい・産地からお選びいただけます。</p></div>
+
+  <div class="first"><div><b>はじめての方へ</b><span>どれを選べばいいか迷ったら</span></div>
+    <div class="bs"><span class="btn btn-p">飲み比べセットを見る</span><span class="btn btn-s">豆の選び方を読む</span></div></div>
+
+  <div class="main">
+    <div class="filter">
+      <div class="fg"><b>焙煎度</b>
+        <div class="fo"><i></i>浅煎り<em>2</em></div>
+        <div class="fo"><i></i>中浅煎り<em>3</em></div>
+        <div class="fo on"><i></i>中煎り<em>4</em></div>
+        <div class="fo"><i></i>中深煎り<em>3</em></div>
+        <div class="fo"><i></i>深煎り<em>3</em></div></div>
+      <div class="fg"><b>味わい</b>
+        <div class="fo"><i></i>華やか・フルーティ</div>
+        <div class="fo"><i></i>甘い・バランス</div>
+        <div class="fo"><i></i>香ばしい・コク</div>
+        <div class="fo"><i></i>しっかり苦味</div></div>
+      <div class="fg"><b>産地</b>
+        <div class="fo"><i></i>アフリカ<em>5</em></div>
+        <div class="fo"><i></i>中南米<em>6</em></div>
+        <div class="fo"><i></i>アジア<em>1</em></div></div>
+      <div class="fg"><b>種別</b>
+        <div class="fo"><i></i>ブレンド<em>4</em></div>
+        <div class="fo"><i></i>シングルオリジン<em>9</em></div>
+        <div class="fo"><i></i>カフェインレス<em>1</em></div>
+        <div class="fo"><i></i>セット・ギフト<em>3</em></div></div>
+      <div class="fg"><b>抽出器具</b>
+        <div class="fo"><i></i>ドリップ</div>
+        <div class="fo"><i></i>エスプレッソ</div>
+        <div class="fo"><i></i>フレンチプレス</div></div>
+    </div>
+
+    <div>
+      <div class="sortbar"><span>15 件中 1 – 9 件を表示</span>
+        <div class="s"><span class="on">おすすめ順</span><span>新着順</span><span>価格が安い順</span><span>価格が高い順</span></div></div>
+      <div class="grid">
+        <div class="card"><div class="ph">商品写真 4:3</div><div class="c">
+          <span class="tg">シングルオリジン</span><div class="nm">エチオピア／ファロ</div>
+          <div class="roast"><i class="r3"></i><i class="r3"></i><i class="r3"></i><i></i><i></i><em>中煎り</em></div>
+          <div class="fl">ジャスミン / 桃 / 紅茶</div>
+          <div class="pr"><span>200g</span><b>¥1,850</b></div><span class="cbtn">カートに入れる</span></div></div>
+
+        <div class="card"><div class="ph">商品写真 4:3</div><div class="c">
+          <span class="tg">ブレンド</span><div class="nm">ももぞのブレンド</div>
+          <div class="roast"><i class="r3"></i><i class="r3"></i><i class="r3"></i><i></i><i></i><em>中煎り</em></div>
+          <div class="fl">【要記入】フレーバーノート 3 語</div>
+          <div class="pr"><span>200g</span><b>¥1,800</b></div><span class="cbtn">カートに入れる</span></div></div>
+
+        <div class="card"><div class="ph">商品写真 4:3</div><div class="c">
+          <span class="tg">シングルオリジン</span><div class="nm">ケニア／キリニャガ カムワンギ・ファクトリー</div>
+          <div class="roast"><i class="r2"></i><i class="r2"></i><i></i><i></i><i></i><em>中浅煎り</em></div>
+          <div class="fl">【要記入】フレーバーノート 3 語</div>
+          <div class="pr"><span>200g</span><b>¥2,200</b></div><span class="cbtn">カートに入れる</span></div></div>
+
+        <div class="card"><div class="ph">商品写真 4:3</div><div class="c">
+          <span class="tg">ブレンド</span><div class="nm">ふかいりブレンド</div>
+          <div class="roast"><i class="r5"></i><i class="r5"></i><i class="r5"></i><i class="r5"></i><i class="r5"></i><em>深煎り</em></div>
+          <div class="fl">【要記入】フレーバーノート 3 語</div>
+          <div class="pr"><span>200g</span><b>¥1,800</b></div><span class="cbtn">カートに入れる</span></div></div>
+
+        <div class="card"><div class="ph">商品写真 4:3</div><div class="c">
+          <span class="tg">シングルオリジン</span><div class="nm">グアテマラ／ウエウエテナンゴ サンタバルバラ</div>
+          <div class="roast"><i class="r3"></i><i class="r3"></i><i class="r3"></i><i class="r3"></i><i></i><em>中深煎り</em></div>
+          <div class="fl">【要記入】フレーバーノート 3 語</div>
+          <div class="pr"><span>200g</span><b>¥1,900</b></div><span class="cbtn">カートに入れる</span></div></div>
+
+        <div class="card out"><div class="ph">商品写真 4:3</div><div class="c">
+          <span class="tg">シングルオリジン</span><div class="nm">タンザニア／ハイツ農園 ブルーリボンAA</div>
+          <div class="roast"><i class="r3"></i><i class="r3"></i><i class="r3"></i><i></i><i></i><em>中煎り</em></div>
+          <div class="fl">【要記入】フレーバーノート 3 語</div>
+          <div class="pr"><span>200g</span><b>¥1,950</b></div><span class="cbtn">入荷通知を受け取る</span></div></div>
+
+        <div class="card"><div class="ph">商品写真 4:3</div><div class="c">
+          <span class="tg">カフェインレス</span><div class="nm">メキシコ／トリウンフォ・ベルデ</div>
+          <div class="roast"><i class="r4"></i><i class="r4"></i><i class="r4"></i><i class="r4"></i><i></i><em>中深煎り</em></div>
+          <div class="fl">【要記入】フレーバーノート 3 語</div>
+          <div class="pr"><span>200g</span><b>¥2,000</b></div><span class="cbtn">カートに入れる</span></div></div>
+
+        <div class="card"><div class="ph">商品写真 4:3</div><div class="c">
+          <span class="tg">シングルオリジン</span><div class="nm">ホンジュラス／サンミゲル・デ・セルグァパ</div>
+          <div class="roast"><i class="r3"></i><i class="r3"></i><i class="r3"></i><i></i><i></i><em>中煎り</em></div>
+          <div class="fl">【要記入】フレーバーノート 3 語</div>
+          <div class="pr"><span>200g</span><b>¥2,100</b></div><span class="cbtn">カートに入れる</span></div></div>
+
+        <div class="card"><div class="ph">商品写真 4:3</div><div class="c">
+          <span class="tg">セット</span><div class="nm">はじめての MUTO（飲み比べ）</div>
+          <div class="roast"><i class="r2"></i><i class="r3"></i><i class="r5"></i><i></i><i></i><em>3 種</em></div>
+          <div class="fl">ブレンド 3 種を 100g ずつ</div>
+          <div class="pr"><span>100g×3</span><b>¥2,400</b></div><span class="cbtn">カートに入れる</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="spec">
+  <h3>このページの要件</h3>
+  <div class="sp key"><b>焙煎度を最上位の絞り込み軸に</b>
+    <p>客が最初に決めるのは「浅いか深いか」です。他の軸より先に、最も目立つ位置に置きます。</p></div>
+  <div class="sp key"><b>焙煎度アイコン＋フレーバー 3 語</b>
+    <p>この 2 つがあるだけで、一覧上での比較が成立します。現状は商品名と価格が中心のため、
+    客は 10 種類以上を前にして選べずに離脱します。コーヒー通販における最大の離脱ポイントです。</p></div>
+  <div class="sp"><b>味わいの表現は専門用語を避ける</b>
+    <p>「酸が明るい」ではなく「華やか・フルーティ」。買う人の言葉に合わせます。</p></div>
+  <div class="sp"><b>在庫切れは消さない</b>
+    <p>グレーアウトして残し、入荷通知の登録を受け付けます。毎朝焙煎する店は在庫変動が頻繁なため、
+    この設計が機会損失を減らします。</p></div>
+  <div class="sp"><b>「はじめての方へ」を最上部に</b>
+    <p>単品 200g（¥1,700〜2,200）は初回購入のハードルが高い価格帯です。
+    100g×3 のセットは同程度の金額でも「選ばなくていい」「試せる」という理由で買いやすくなります。</p></div>
+  <div class="sp"><b>絞り込みは URL に反映する</b>
+    <p>?roast=medium のようにクエリを持たせ、絞り込んだ状態を共有・ブックマークできるようにします。</p></div>
+
+  <div class="rl"><b>焙煎度インジケータの配色</b>
+    <div class="r"><span style="background:#C49A6C"></span>浅煎り<em>#C49A6C</em></div>
+    <div class="r"><span style="background:#A8763F"></span>中浅煎り<em>#A8763F</em></div>
+    <div class="r"><span style="background:#8A5A2B"></span>中煎り<em>#8A5A2B</em></div>
+    <div class="r"><span style="background:#5F3A1E"></span>中深煎り<em>#5F3A1E</em></div>
+    <div class="r"><span style="background:#3A2416"></span>深煎り<em>#3A2416</em></div>
+    <p style="font-size:10.5px;color:var(--ash);line-height:1.8;margin-top:9px">
+    実際の焙煎豆の色から取っています。必ず aria-label で段階を文章化してください。</p></div>
+</div>
+</div>
+
+<div class="note">
+掲載している商品名と価格は、検索結果および第三者媒体で確認できた値です【要確認】。
+フレーバーノート・焙煎度・産地情報は店舗しか持っていない情報のため、<b>data/products.csv</b> に記入用のフォーマットを用意しています。
+</div>
+</div></body></html>

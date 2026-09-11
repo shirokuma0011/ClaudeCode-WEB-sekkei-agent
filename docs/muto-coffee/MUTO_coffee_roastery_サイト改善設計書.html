@@ -1,0 +1,3989 @@
+<style>
+@page{size:A4;margin:16mm 14mm}
+*{box-sizing:border-box}
+:root{--paper:#FAF8F5;--cream:#F1EBE3;--roast:#2B211B;--ash:#6B5F57;
+  --bean:#6F4A2E;--ember:#B4542A;--line:#DED5CA;--open:#4A7C59;--closed:#A8762B;--error:#A63D2F}
+body{font-family:"IPAPGothic","IPAGothic","Noto Sans JP",sans-serif;background:var(--paper);
+  color:var(--roast);font-size:10.5pt;line-height:1.85;letter-spacing:.02em;margin:0;padding:0}
+.wrap{max-width:190mm;margin:0 auto;padding:0 4mm}
+.cover{text-align:center;padding:64mm 0 40mm;page-break-after:always}
+.cover .eyebrow{font-size:11pt;letter-spacing:.3em;color:var(--ash);margin-bottom:14mm}
+.cover h1{font-size:27pt;font-weight:700;letter-spacing:.06em;line-height:1.45;margin:0 0 8mm}
+.cover .site{font-family:monospace;font-size:11pt;color:var(--bean);margin-bottom:16mm}
+.cover .meta{font-size:10pt;color:var(--ash);line-height:2.1}
+.cover hr{border:none;border-top:2px solid var(--roast);width:60mm;margin:12mm auto}
+.cover .warn{margin:18mm auto 0;max-width:150mm;border:1.5px solid var(--closed);
+  border-left-width:5px;background:#FBF6EC;padding:6mm 7mm;text-align:left;font-size:9pt;line-height:1.9}
+.cover .warn b{display:block;color:var(--closed);font-size:10.5pt;margin-bottom:2mm}
+.toc{page-break-after:always;padding-top:6mm}
+.toc h2{font-size:16pt;border-bottom:2px solid var(--roast);padding-bottom:3mm;margin-bottom:6mm}
+.toc ol{list-style:none;padding:0;counter-reset:c}
+.toc li{counter-increment:c;padding:3mm 0;border-bottom:1px dashed var(--line);font-size:11pt}
+.toc li::before{content:counter(c,decimal-leading-zero);color:var(--ember);font-weight:700;margin-right:5mm;font-family:monospace}
+.toc li span{color:var(--ash);font-size:9pt;display:block;margin-left:13mm;margin-top:1mm}
+.doc{page-break-before:always}
+h1{font-size:19pt;font-weight:700;letter-spacing:.04em;border-bottom:3px solid var(--roast);
+  padding-bottom:3mm;margin:0 0 7mm;page-break-after:avoid}
+h2{font-size:14pt;font-weight:700;margin:9mm 0 4mm;padding-left:4mm;
+  border-left:5px solid var(--bean);page-break-after:avoid}
+h3{font-size:11.5pt;font-weight:700;margin:6mm 0 3mm;color:var(--bean);page-break-after:avoid}
+h4{font-size:10.5pt;font-weight:700;margin:5mm 0 2mm}
+p{margin:0 0 3.5mm}
+ul,ol{margin:0 0 4mm;padding-left:6mm}
+li{margin-bottom:1.5mm}
+strong{font-weight:700}
+code{font-family:monospace;font-size:9pt;background:var(--cream);padding:.5mm 1.5mm;border-radius:1mm}
+pre{background:var(--cream);border:1px solid var(--line);border-radius:1mm;padding:4mm 5mm;
+  font-size:8.5pt;line-height:1.7;overflow-x:auto;margin:0 0 4mm;page-break-inside:avoid}
+pre code{background:none;padding:0;font-size:8.5pt}
+blockquote{border-left:4px solid var(--ember);background:#FDF4EF;margin:0 0 4mm;padding:3.5mm 5mm;
+  font-size:9.5pt;line-height:1.9}
+blockquote p:last-child{margin-bottom:0}
+table{width:100%;border-collapse:collapse;font-size:9pt;margin:0 0 5mm;page-break-inside:avoid}
+th,td{border:1px solid var(--line);padding:2mm 3mm;text-align:left;vertical-align:top;line-height:1.7}
+th{background:var(--cream);font-weight:700}
+hr{border:none;border-top:1px solid var(--line);margin:7mm 0}
+img{max-width:100%;height:auto;border:1px solid var(--line);border-radius:1mm;
+  margin:3mm 0 5mm;page-break-inside:avoid;display:block}
+a{color:var(--bean);text-decoration:none;border-bottom:1px solid rgba(111,74,46,.3)}
+.figcap{font-size:8.5pt;color:var(--ash);margin:-3mm 0 6mm;text-align:center}
+</style>
+<div class="wrap">
+
+<div class="cover">
+  <div class="eyebrow">WEB SITE RENEWAL DESIGN DOCUMENT</div>
+  <h1>MUTO coffee roastery<br>サイト改善設計書</h1>
+  <div class="site">https://muto-coffee.com/</div>
+  <hr>
+  <div class="meta">
+    対象事業者: MUTO coffee roastery（運営: 株式会社 Lounge M）<br>
+    所在地: 〒164-0001 東京都中野区中野3-34-18<br>
+    作成日: 2026-09-11 ／ 版 1.0
+  </div>
+  <div class="warn"><b>調査上の制約について</b>
+  本設計書を作成した環境では、組織のネットワーク送信ポリシーにより muto-coffee.com への直接アクセスが遮断されていました。
+  このためサイト本体の HTML 取得・実画面のスクリーンショット撮影・掲載画像のダウンロードは実行できていません。
+  現状分析は、検索エンジン経由で取得できた URL・ページタイトル・スニペットと、第三者媒体の記述を突き合わせて構成しています。
+  記述には【確認済】【推定】【要確認】のラベルを付けています。実装着手前に【推定】【要確認】をすべて確認してください。</div>
+</div>
+
+<div class="toc"><h2>目次</h2><ol><li>目次と概要<span>全体像・重要な制約・今すぐできること</span></li><li>はじめに<span>目的、調査方法と制約、成果物一覧</span></li><li>現状分析と課題<span>店舗プロフィール、現行構成、課題 A〜H と優先度</span></li><li>サイト設計（情報設計・ワイヤーフレーム）<span>統合方針、サイトマップ、全ページの画面設計</span></li><li>デザインシステム<span>配色、タイポグラフィ、コンポーネント、写真</span></li><li>技術要件・SEO・計測設計<span>技術構成、リダイレクト、構造化データ、速度、計測</span></li><li>実装ロードマップ・見積<span>フェーズ 0〜3、工数と費用、運用設計</span></li></ol></div>
+<div class="doc"><h1>MUTO coffee roastery サイト改善設計書</h1>
+<p>対象サイト: https://muto-coffee.com/ ／ 作成日: 2026-09-11 ／ 版: 1.0</p>
+<p>中野の自家焙煎コーヒー店 <strong>MUTO coffee roastery</strong> の公式サイトを、
+実店舗の体験価値をそのまま伝え、豆の通販と来店の両方につなげるサイトへ引き上げるための設計書一式です。</p>
+<hr />
+<h2>まず読むもの</h2>
+<table>
+<thead>
+<tr>
+<th>順</th>
+<th>ファイル</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>00_はじめに.md</strong></td>
+<td>目的、調査方法と制約、成果物一覧、結論の要点</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>01_現状分析と課題.md</strong></td>
+<td>店舗プロフィール、現行構成、課題 A〜H と優先度</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>02_サイト設計.md</strong></td>
+<td>統合方針の 3 案比較、サイトマップ、全ページの画面設計</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>03_デザインシステム.md</strong></td>
+<td>配色、タイポグラフィ、コンポーネント、写真とアクセシビリティ</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>04_技術要件・SEO・計測設計.md</strong></td>
+<td>技術構成、リダイレクト、構造化データ、SEO、速度、計測</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>05_実装ロードマップ・見積.md</strong></td>
+<td>フェーズ 0〜3、工数と費用、運用設計、確認チェックリスト</td>
+</tr>
+</tbody>
+</table>
+<p><strong>時間がない場合は <code>00_はじめに.md</code> の §5「結論」と <code>01_現状分析と課題.md</code> の §4「優先度マトリクス」だけで全体像がつかめます。</strong></p>
+<hr />
+<h2>重要な制約（必読）</h2>
+<blockquote>
+<p>本設計書を作成したセッションでは、<strong>組織のネットワーク送信ポリシーにより muto-coffee.com への直接アクセスが遮断されていました。</strong>
+このため <strong>サイト本体の HTML 取得・実画面のスクリーンショット撮影・掲載画像のダウンロードは実行できていません。</strong></p>
+</blockquote>
+<p>現状分析は、検索エンジン経由で取得できた URL・ページタイトル・スニペットと、第三者媒体（食べログ、さんたつ、中野経済新聞、号外NET 中野区ほか）の記述を突き合わせて構成しています。
+出典は <strong>data/sources.md</strong> にすべて記載しています。</p>
+<p>記述には確度のラベルを付けています。</p>
+<ul>
+<li><strong>【確認済】</strong> 公開情報で裏付けが取れた事実</li>
+<li><strong>【推定】</strong> URL 構造などからの推論。実装前に現物確認が必要</li>
+<li><strong>【要確認】</strong> 店舗へのヒアリングが必要</li>
+</ul>
+<p><strong>実装着手前に、【推定】【要確認】をすべて潰してください。</strong> チェックリストは <code>05_実装ロードマップ・見積.md</code> の巻末にあります。</p>
+<p>現物の画像とスクリーンショットは、同梱の <code>tools/capture_site.py</code> を
+<strong>ネットワーク制限のない環境</strong>で実行すれば自動収集できます。</p>
+<hr />
+<h2>図版</h2>
+<table>
+<thead>
+<tr>
+<th>図</th>
+<th>ファイル</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td><code>images/01_sitemap_current.png</code></td>
+<td>現行サイト構成と、そこから生じている問題</td>
+</tr>
+<tr>
+<td>02</td>
+<td><code>images/02_sitemap_proposed.png</code></td>
+<td>改善後サイト構成（1 ドメイン・1 システムへの統合）</td>
+</tr>
+<tr>
+<td>03</td>
+<td><code>images/03_user_journey.png</code></td>
+<td>3 つの利用者のつまずきと改善後の状態</td>
+</tr>
+<tr>
+<td>04</td>
+<td><code>images/04_wireframe_top_pc.png</code></td>
+<td>トップページ ワイヤーフレーム（PC）</td>
+</tr>
+<tr>
+<td>05</td>
+<td><code>images/05_wireframe_top_sp.png</code></td>
+<td>トップページ ワイヤーフレーム（スマートフォン）</td>
+</tr>
+<tr>
+<td>06</td>
+<td><code>images/06_wireframe_beans_list.png</code></td>
+<td>豆一覧ページ（絞り込みと味の見える化）</td>
+</tr>
+<tr>
+<td>07</td>
+<td><code>images/07_wireframe_product_detail.png</code></td>
+<td>商品詳細ページ</td>
+</tr>
+<tr>
+<td>08</td>
+<td><code>images/08_wireframe_shop_access.png</code></td>
+<td>店舗案内・アクセス（写真つき道順）</td>
+</tr>
+<tr>
+<td>09</td>
+<td><code>images/09_style_guide.png</code></td>
+<td>デザインシステム スタイルガイド</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>images/10_roadmap.png</code></td>
+<td>実装ロードマップ（フェーズ 0〜3）</td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>images/11_kpi_tree.png</code></td>
+<td>KPI ツリーと計測設計</td>
+</tr>
+</tbody>
+</table>
+<p>図版の生成元 HTML は <code>src/</code> にあります。<code>python3 src/render.py &lt;ファイル名&gt;</code> で再生成できます。</p>
+<hr />
+<h2>データ</h2>
+<table>
+<thead>
+<tr>
+<th>ファイル</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>data/page_inventory.csv</code></td>
+<td>確認できた 24 ページの一覧（URL・title・システム推定・確度）</td>
+</tr>
+<tr>
+<td><code>data/products.csv</code></td>
+<td>確認できた商品と価格＋<strong>店舗記入用の産地情報フォーマット</strong></td>
+</tr>
+<tr>
+<td><code>data/store_menu.csv</code></td>
+<td>店内メニューと参考価格【要確認】</td>
+</tr>
+<tr>
+<td><code>data/keyword_plan.csv</code></td>
+<td>SEO キーワード設計（優先度・意図・受け皿ページ・施策）</td>
+</tr>
+<tr>
+<td><strong>data/sources.md</strong></td>
+<td>出典 URL 一覧と、情報の不一致についての注記</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong><code>data/products.csv</code> の【要記入】欄は、店舗しか持っていない情報です。</strong>
+標高・品種・精製方法・フレーバーノート・焙煎度を全商品分ヒアリングしてください。
+ここが埋まらないと、課題 C（豆を選べない）は解決しません。</p>
+</blockquote>
+<hr />
+<h2>この改善で狙う変化</h2>
+<table>
+<thead>
+<tr>
+<th>観点</th>
+<th>現状</th>
+<th>改善後</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>サイトの役割</td>
+<td>存在の告知</td>
+<td>来店と購入を生む装置</td>
+</tr>
+<tr>
+<td>店舗情報</td>
+<td>媒体ごとにバラバラ</td>
+<td>公式が唯一の正</td>
+</tr>
+<tr>
+<td>豆の見せ方</td>
+<td>個別ページに散在</td>
+<td>選べる・比べられる・迷わない</td>
+</tr>
+<tr>
+<td>News</td>
+<td>臨時休業の告知</td>
+<td>豆と焙煎の物語（検索資産）</td>
+</tr>
+<tr>
+<td>購入</td>
+<td>カードのみ・都度購入</td>
+<td>決済多様化・定期便</td>
+</tr>
+<tr>
+<td>対応言語</td>
+<td>日本語のみ</td>
+<td>日本語＋英語（要点のみ）</td>
+</tr>
+<tr>
+<td>運用</td>
+<td>2 システムを二重更新</td>
+<td>1 箇所の更新で全面反映</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>今すぐできること（フェーズ 1）</h2>
+<p>本体改修の予算を待たずに着手できる 9 項目です。合計 約 18 時間・10〜20 万円程度。</p>
+<ol>
+<li>News ページの title を「roastary」→「roastery」に修正（誤字）</li>
+<li>営業時間・定休日をトップの目立つ位置に明記</li>
+<li>構造化データ（<code>CafeOrCoffeeShop</code>）を追加</li>
+<li>www あり／なしの 301 統一</li>
+<li>Google ビジネスプロフィールの情報を修正・同期</li>
+<li>コロナ関連の古い記事を整理</li>
+<li>トップからショップへの導線を明確化</li>
+<li><strong>GA4 とイベント計測を設置（基準値の取得開始）</strong></li>
+<li>Instagram へのリンクを全ページのフッターに追加</li>
+</ol>
+<p><strong>8 を最優先で実施してください。</strong> 改修前の数値がなければ、改修の効果を証明できません。</p></div>
+<div class="doc"><h1>MUTO coffee roastery サイト改善設計書 — はじめに</h1>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>対象サイト</td>
+<td>https://muto-coffee.com/ （およびオンラインショップ https://www.muto-coffee.com/shop/）</td>
+</tr>
+<tr>
+<td>対象事業者</td>
+<td>MUTO coffee roastery（運営: 株式会社 Lounge M / 店主: 武藤 修一郎）</td>
+</tr>
+<tr>
+<td>所在地</td>
+<td>〒164-0001 東京都中野区中野3-34-18</td>
+</tr>
+<tr>
+<td>作成日</td>
+<td>2026-09-11</td>
+</tr>
+<tr>
+<td>版</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>作成</td>
+<td>Claude Code（自動生成）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>1. この設計書の目的</h2>
+<p>MUTO coffee roastery の公式サイトを、<strong>「中野の名店として知られているが、Web 上の存在感がそれに追いついていない」</strong> 状態から、
+<strong>「実店舗の体験価値をそのまま伝え、豆の通販・来店の両方に確実につなげるサイト」</strong> へ引き上げるための設計図です。</p>
+<p>本書は以下の読者を想定しています。</p>
+<ul>
+<li><strong>店主・運営者</strong> — 何をどの順番で直すと売上・来店にどう効くかを判断する</li>
+<li><strong>制作会社・フリーランス</strong> — そのまま見積・実装に着手できるレベルの仕様として使う</li>
+<li><strong>運用担当</strong> — 公開後に何を更新し、何を測るかを把握する</li>
+</ul>
+<hr />
+<h2>2. 調査方法と制約（重要・必読）</h2>
+<h3>2.1 実施できた調査</h3>
+<p>本設計書の現状分析は、以下の<strong>公開情報の突き合わせ</strong>によって構成しています。</p>
+<ul>
+<li>検索エンジン経由で取得した muto-coffee.com の <strong>URL 構造・ページタイトル・スニペット</strong>（トップ、News 一覧、News 個別記事、ショップ商品詳細、特商法表記、当サイトについて）</li>
+<li>商品名・価格・容量（検索結果のスニペットに現れた範囲）</li>
+<li>第三者媒体に掲載された店舗情報（食べログ、ヒトサラ、ホットペッパー、さんたつ、Retty、CafeSnap、号外NET 中野区、中野経済新聞、無印良品 中野マルイ記事、Only Roaster ほか）</li>
+<li>SNS アカウントの存在と規模（Instagram / Facebook）</li>
+</ul>
+<h3>2.2 実施できなかった調査（制約）</h3>
+<blockquote>
+<p><strong>本セッションの実行環境では、組織のネットワーク送信ポリシー（egress proxy）により <code>muto-coffee.com</code> を含む外部サイトへの直接アクセスが遮断されました。</strong>
+このため <strong>サイト本体の HTML 取得・実画面のスクリーンショット撮影・掲載画像そのもののダウンロードは実行できていません。</strong></p>
+</blockquote>
+<p>具体的に取得できていないもの:</p>
+<table>
+<thead>
+<tr>
+<th>取得できなかったもの</th>
+<th>影響</th>
+<th>対応策</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>実ページのスクリーンショット</td>
+<td>現状デザインの視覚的評価ができない</td>
+<td>ローカル実行用の取得スクリプト <code>tools/capture_site.py</code> を同梱（後述）</td>
+</tr>
+<tr>
+<td>掲載画像ファイル（写真・ロゴ）</td>
+<td>画像最適化の実測（容量・寸法・形式）ができない</td>
+<td>測定手順と合格基準を <code>04_技術要件・SEO・計測設計.md</code> に定義</td>
+</tr>
+<tr>
+<td>HTML / CSS / JS ソース</td>
+<td>使用 CMS・テーマ・プラグインの確定ができない</td>
+<td>URL 構造からの<strong>推定</strong>として明示（§現状分析）</td>
+</tr>
+<tr>
+<td>Core Web Vitals 実測値</td>
+<td>速度改善の before/after が数値で示せない</td>
+<td>測定方法と目標値を定義、実測は実装時に取得</td>
+</tr>
+</tbody>
+</table>
+<h3>2.3 本書における事実と推定の区別</h3>
+<p>誤った前提で実装が進むことを防ぐため、記述には以下のラベルを付けています。</p>
+<ul>
+<li><strong>【確認済】</strong> — 公開情報で裏付けが取れた事実</li>
+<li><strong>【推定】</strong> — URL 構造や業界の一般的構成からの推論。実装前に現物確認が必要</li>
+<li><strong>【要確認】</strong> — 店舗側にヒアリングしないと確定できない項目</li>
+</ul>
+<p>実装着手前に、<strong>【推定】と【要確認】のラベルが付いた項目をすべて潰してください。</strong> チェックリストを <code>05_実装ロードマップ・見積.md</code> の巻末に用意しています。</p>
+<hr />
+<h2>3. 成果物一覧</h2>
+<pre><code>docs/muto-coffee/
+├── 00_はじめに.md                      ← 本書
+├── 01_現状分析と課題.md                 現状の構成・課題の棚卸しと優先度
+├── 02_サイト設計（IA・ワイヤーフレーム）.md   サイトマップ・全ページの画面設計
+├── 03_デザインシステム.md               配色・タイポ・コンポーネント定義
+├── 04_技術要件・SEO・計測設計.md         実装要件、構造化データ、計測、性能基準
+├── 05_実装ロードマップ・見積.md          フェーズ分け、工数目安、確認チェックリスト
+├── images/                             図版・ワイヤーフレーム（PNG）
+│   ├── 01_sitemap_current.png
+│   ├── 02_sitemap_proposed.png
+│   ├── 03_user_journey.png
+│   ├── 04_wireframe_top_pc.png
+│   ├── 05_wireframe_top_sp.png
+│   ├── 06_wireframe_beans_list.png
+│   ├── 07_wireframe_product_detail.png
+│   ├── 08_wireframe_shop_access.png
+│   ├── 09_style_guide.png
+│   ├── 10_roadmap.png
+│   └── 11_kpi_tree.png
+├── src/                                図版の生成元 HTML（再編集可能）
+├── data/                               調査データ（CSV / 出典一覧）
+│   ├── page_inventory.csv              確認できたページの一覧
+│   ├── products.csv                    確認できた商品と価格
+│   ├── keyword_plan.csv                SEO キーワード設計
+│   └── sources.md                      出典 URL 一覧
+└── tools/
+    └── capture_site.py                 サイト画像・スクショ取得スクリプト（ローカル実行用）
+</code></pre>
+<hr />
+<h2>4. 同梱スクリプトについて</h2>
+<p><code>tools/capture_site.py</code> は、<strong>ネットワーク制限のない環境</strong>（店舗側 PC、制作会社の開発機など）で実行することで、
+本セッションで取得できなかった以下を自動収集します。</p>
+<ul>
+<li>主要ページのフルページ・スクリーンショット（PC 幅 / スマホ幅の両方）</li>
+<li>各ページに掲載されている画像ファイルの実体と、その寸法・容量・形式の一覧（CSV 出力）</li>
+<li><code>&lt;title&gt;</code> / <code>meta description</code> / OGP / 見出し構造の抽出（CSV 出力）</li>
+</ul>
+<p>実行方法は <code>tools/capture_site.py</code> の冒頭コメントに記載しています。
+収集結果を <code>images/actual/</code> に置けば、本設計書の現状分析を実測値で補強できます。</p>
+<hr />
+<h2>5. 結論（先に要点だけ）</h2>
+<p>詳細は各章に譲りますが、優先順位は次の通りです。</p>
+<ol>
+<li><strong>サイトが 2 つに割れている状態の解消</strong> — コーポレート側（muto-coffee.com）とショップ側（www.muto-coffee.com/shop/）が別システムで、ドメインの <code>www</code> 有無も揺れている。ここが最大の損失源。</li>
+<li><strong>豆を選べる導線の設計</strong> — 常時 10〜15 種類ある豆が、一覧で比較・絞り込みできる形になっていない。</li>
+<li><strong>店舗情報の一次情報化</strong> — 営業時間・定休日が外部媒体ごとに食い違っている。公式サイトが最も信頼される情報源になっていない。</li>
+<li><strong>News を資産に変える</strong> — 臨時休業のお知らせだけでは、検索流入も再訪も生まない。</li>
+<li><strong>英語対応</strong> — 中野は訪日客の多いエリアで、実際に英語のレビューが第三者媒体に蓄積している。</li>
+</ol></div>
+<div class="doc"><h1>01. 現状分析と課題</h1>
+<h2>1. 事業・店舗のプロフィール</h2>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>内容</th>
+<th>確度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>店名</td>
+<td>MUTO coffee roastery（ムトウ コーヒー ロースタリー）</td>
+<td>【確認済】</td>
+</tr>
+<tr>
+<td>運営会社</td>
+<td>株式会社 Lounge M</td>
+<td>【確認済】特商法表記</td>
+</tr>
+<tr>
+<td>代表</td>
+<td>武藤 修一郎</td>
+<td>【確認済】</td>
+</tr>
+<tr>
+<td>所在地</td>
+<td>〒164-0001 東京都中野区中野3-34-18</td>
+<td>【確認済】</td>
+</tr>
+<tr>
+<td>電話</td>
+<td>03-6382-5439</td>
+<td>【確認済】</td>
+</tr>
+<tr>
+<td>開業</td>
+<td>2014年10月3日</td>
+<td>【確認済】中野経済新聞</td>
+</tr>
+<tr>
+<td>アクセス</td>
+<td>JR中央線・東京メトロ東西線 中野駅 南口 徒歩2〜3分／中野マルイ裏、れんが坂を上って左</td>
+<td>【確認済】</td>
+</tr>
+<tr>
+<td>営業時間</td>
+<td>11:30〜19:00（L.O. 18:00）</td>
+<td>【要確認】※後述の不一致あり</td>
+</tr>
+<tr>
+<td>定休日</td>
+<td>水曜・木曜</td>
+<td>【要確認】※後述の不一致あり</td>
+</tr>
+<tr>
+<td>焙煎機</td>
+<td>オランダ GIESEN 社製</td>
+<td>【確認済】</td>
+</tr>
+<tr>
+<td>豆の品揃え</td>
+<td>常時 10〜15 種類</td>
+<td>【確認済】</td>
+</tr>
+<tr>
+<td>店主の経歴</td>
+<td>元 CM プロデューサー。堀口珈琲で焙煎・テイスティングを修業後、地元・中野で開業</td>
+<td>【確認済】</td>
+</tr>
+<tr>
+<td>公式 Instagram</td>
+<td>@mutocoffeeroastery（フォロワー約 482 / 投稿 9 件）</td>
+<td>【確認済】</td>
+</tr>
+<tr>
+<td>公式 Facebook</td>
+<td>あり</td>
+<td>【確認済】</td>
+</tr>
+</tbody>
+</table>
+<h3>この店の強み（設計の出発点）</h3>
+<p>現状分析の前に、<strong>サイトが伝えきれていない強み</strong>を確認しておきます。改善設計はすべてここに接続します。</p>
+<ol>
+<li><strong>毎朝焙煎、常時 10〜15 種類</strong> — ロースタリーとして明確な差別化要素。しかも単一銘柄とオリジナルブレンドの両方を持つ。</li>
+<li><strong>トレーサビリティの明示</strong> — 農園名・地区名までを商品名に含めている（例: ケニア／キリニャガ カムワンギ・ファクトリー、ホンジュラス／サンミゲル・デ・セルグァパ）。これはスペシャルティを扱う店として強い訴求材料。</li>
+<li><strong>オランダ GIESEN の焙煎機</strong> — 店内で存在感を放つ設備。写真の主役になる。</li>
+<li><strong>店主のストーリー</strong> — CM プロデューサーから転身し、堀口珈琲で修業し、地元中野で独立。物語として完成度が高い。</li>
+<li><strong>立地の情緒</strong> — 中野駅至近でありながら、れんが坂を上がった路地裏という「隠れ家」の文脈。</li>
+<li><strong>10 年以上の営業実績</strong> — 2014 年開業。2026 年時点で 11 年超。</li>
+</ol>
+<blockquote>
+<p><strong>これらは第三者媒体（さんたつ、中野経済新聞、号外NET 中野区、無印良品の中野まち歩き記事など）では繰り返し語られています。</strong>
+一方で、公式サイトからこれらが同じ強度で伝わっているとは言い難い状態です。これが本改善の核心です。</p>
+</blockquote>
+<hr />
+<h2>2. 現状のサイト構成</h2>
+<p><img alt="現行サイトマップ" src="images/01_sitemap_current.png" /></p>
+<h3>2.1 確認できたページ</h3>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>役割</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>https://muto-coffee.com/</code></td>
+<td>トップページ</td>
+<td><code>&lt;title&gt;</code>: 「MUTO coffee roastery - 中野 / 東京」</td>
+</tr>
+<tr>
+<td><code>https://muto-coffee.com/news/</code></td>
+<td>News 一覧</td>
+<td><code>&lt;title&gt;</code>: 「News一覧 | MUTO coffee roastary」</td>
+</tr>
+<tr>
+<td><code>https://muto-coffee.com/{日本語スラッグ}/</code></td>
+<td>News 個別記事</td>
+<td>例: 「ルワンダ・コアカカ ムガンザ」「オレンジのパウンドケーキ」「年末・年始 営業日時のお知らせ」「３周年ブレンド豆半額セール」「テイク・アウト 始めました。」「営業再開のお知らせ」「営業時間変更（新型コロナウイルス感染拡大防止のため）」</td>
+</tr>
+<tr>
+<td><code>https://www.muto-coffee.com/shop/</code></td>
+<td>オンラインショップ TOP</td>
+<td><code>&lt;title&gt;</code>: 「MUTO coffee roastery / TOPページ」</td>
+</tr>
+<tr>
+<td><code>https://www.muto-coffee.com/shop/products/detail/{ID}</code></td>
+<td>商品詳細</td>
+<td>ID は 8, 10, 11, 12, 15, 17, 20, 34, 37, 41, 55 などを確認</td>
+</tr>
+<tr>
+<td><code>https://www.muto-coffee.com/shop/help/about</code></td>
+<td>当サイトについて</td>
+<td></td>
+</tr>
+<tr>
+<td><code>https://www.muto-coffee.com/shop/help/tradelaw</code></td>
+<td>特定商取引法に基づく表記</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>（詳細は <code>data/page_inventory.csv</code>）</p>
+<h3>2.2 技術構成の推定</h3>
+<table>
+<thead>
+<tr>
+<th>領域</th>
+<th>推定</th>
+<th>根拠</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>コーポレート側</td>
+<td><strong>WordPress</strong>【推定】</td>
+<td><code>/news/</code> というアーカイブ構造、投稿タイトルが日本語のままスラッグ化されている URL 形式、<code>{記事名} \| {サイト名}</code> という標準的な title 構成</td>
+</tr>
+<tr>
+<td>ショップ側</td>
+<td><strong>EC-CUBE</strong>【推定】</td>
+<td><code>/shop/products/detail/{ID}</code>、<code>/shop/help/about</code>、<code>/shop/help/tradelaw</code> は EC-CUBE の既定 URL 体系と一致</td>
+</tr>
+<tr>
+<td>連携</td>
+<td><strong>なし、もしくは弱い</strong>【推定】</td>
+<td>2 システムが別ディレクトリ・別ドメイン表記で並存</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>【要確認】</strong> 実装着手前に、WordPress のバージョン・テーマ・プラグイン、EC-CUBE のメジャーバージョン（2系/3系/4系）を必ず確認してください。EC-CUBE 2 系・3 系はすでにサポートが終了しており、<strong>セキュリティ上の重大リスク</strong>になります。ここは「デザイン改善」より優先度が高い可能性があります。</p>
+</blockquote>
+<hr />
+<h2>3. 課題の棚卸し</h2>
+<p>課題は <strong>影響度（売上・来店への効き方）× 改修コスト</strong> で整理しています。</p>
+<h3>【課題 A】サイトが 2 つに分断されている — 影響度: 最大</h3>
+<p><strong>現象</strong></p>
+<ul>
+<li>コーポレートサイト（<code>muto-coffee.com</code>、WordPress 推定）とオンラインショップ（<code>www.muto-coffee.com/shop/</code>、EC-CUBE 推定）が別システム。</li>
+<li>しかも <strong><code>www</code> の有無が揺れている</strong>。検索結果には <code>https://muto-coffee.com/shop/products/detail/41</code> と <code>https://www.muto-coffee.com/shop/products/detail/12</code> の<strong>両方</strong>が出現しており、同一コンテンツが 2 つの URL で到達可能な状態【確認済】。</li>
+</ul>
+<p><strong>何が起きるか</strong></p>
+<ol>
+<li><strong>SEO 評価の分散</strong> — 同じページが www 有り／無しの 2 URL で認識されると、被リンクや評価が分かれます。正規化（canonical / 301）が効いていない疑いがあります。</li>
+<li><strong>デザインの断絶</strong> — 「店の世界観を見てから豆を買う」導線の途中で、見た目も操作感も別のサイトに切り替わります。購入意欲が最も高まった瞬間に体験が途切れます。</li>
+<li><strong>回遊の消失</strong> — News で紹介した豆（例: 「ルワンダ・コアカカ ムガンザ」の記事）から、その豆の商品ページへ直接つながっていない可能性が高い【推定】。<strong>記事で欲しくさせて、買わせない</strong>という最ももったいない状態です。</li>
+<li><strong>運用の二重化</strong> — 新しい豆が入荷するたび、WordPress と EC-CUBE の両方を更新する必要があります。小規模店舗にとってこの手間は致命的で、結果として片方が放置されます。</li>
+</ol>
+<p><strong>対応方針</strong> → <code>02_サイト設計</code> §2（統合方針）</p>
+<hr />
+<h3>【課題 B】店舗基本情報が一次情報になっていない — 影響度: 大 / コスト: 小</h3>
+<p><strong>現象</strong> — 営業時間・定休日が媒体ごとに食い違っています【確認済】。</p>
+<table>
+<thead>
+<tr>
+<th>情報源</th>
+<th>営業時間</th>
+<th>定休日</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>複数媒体（多数派）</td>
+<td>11:30〜19:00（L.O. 18:00）</td>
+<td>水曜・木曜</td>
+</tr>
+<tr>
+<td>一部媒体</td>
+<td>11:30〜19:30（L.O. 19:00）</td>
+<td>木曜＋第1・第3水曜</td>
+</tr>
+</tbody>
+</table>
+<p><strong>何が起きるか</strong></p>
+<ul>
+<li>「今日やってる？」を調べた客が <strong>閉まっている店に来る／開いている店を諦める</strong>。どちらも直接の機会損失です。</li>
+<li>Google のナレッジパネルや地図サービスは複数ソースを参照するため、<strong>公式サイトの記述が曖昧だと誤った情報が拡散し続けます</strong>。</li>
+<li>実際、この不一致は本調査の時点で外部から観測できています。つまり<strong>今まさに起きている損失</strong>です。</li>
+</ul>
+<p><strong>対応方針</strong> — 公式サイトに単一の「正」を置き、構造化データ（<code>LocalBusiness</code> / <code>openingHoursSpecification</code>）で機械可読にする。→ <code>04_技術要件</code> §3</p>
+<p>これは <strong>コストが小さく効果が確実</strong>。最優先で着手すべき項目です。</p>
+<hr />
+<h3>【課題 C】豆を「選べない」 — 影響度: 大</h3>
+<p><strong>現象</strong></p>
+<ul>
+<li>常時 10〜15 種類という強みに対し、商品ページは <code>/shop/products/detail/{ID}</code> に個別に存在するだけ【確認済】。</li>
+<li>一覧での<strong>絞り込み・比較・並べ替え</strong>の仕組みが確認できません【推定】。</li>
+<li>商品名は「エチオピア／ゴロ・ペデッサ ナチュラル」のように産地・農園・精製方法まで入っており情報は豊富ですが、<strong>その情報が構造化されていない</strong>（名前の文字列に埋まっている）。</li>
+</ul>
+<p><strong>何が起きるか</strong></p>
+<p>コーヒー豆の通販で客が知りたいのは、突き詰めると次の 4 点です。</p>
+<ol>
+<li><strong>どんな味か</strong>（酸味／苦味／コク、フレーバーの方向）</li>
+<li><strong>どのくらい深く焙煎されているか</strong></li>
+<li><strong>自分の淹れ方に合うか</strong>（ドリップ／エスプレッソ／フレンチプレス）</li>
+<li><strong>どれを選べばいいか</strong>（初めての人向けの指針）</li>
+</ol>
+<p>現状は商品名と価格が主で、この 4 点に答える設計になっていない可能性が高い状態です。
+結果、<strong>迷った客は買わずに離脱</strong>します。コーヒー通販における最大の離脱ポイントです。</p>
+<p><strong>対応方針</strong> → <code>02_サイト設計</code> §5（豆一覧・商品詳細の設計）</p>
+<hr />
+<h3>【課題 D】News がストック資産になっていない — 影響度: 中</h3>
+<p><strong>現象</strong> — 確認できた News 記事の内訳【確認済】:</p>
+<table>
+<thead>
+<tr>
+<th>種別</th>
+<th>例</th>
+<th>性質</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>臨時休業・時短の告知</td>
+<td>「本日7月26日（火）18時で閉店いたします。」「やむを得ない事情により18時閉店」</td>
+<td>フロー情報（翌日には価値ゼロ）</td>
+</tr>
+<tr>
+<td>年末年始の営業案内</td>
+<td>「年末・年始 営業日時のお知らせ」</td>
+<td>毎年繰り返される</td>
+</tr>
+<tr>
+<td>営業再開・コロナ対応</td>
+<td>「営業再開のお知らせ」「営業時間変更（新型コロナウイルス感染拡大防止のため）」</td>
+<td>すでに陳腐化</td>
+</tr>
+<tr>
+<td><strong>商品・メニューの紹介</strong></td>
+<td><strong>「ルワンダ・コアカカ ムガンザ」「オレンジのパウンドケーキ」</strong></td>
+<td><strong>ストック情報（資産になる）</strong></td>
+</tr>
+<tr>
+<td>セール告知</td>
+<td>「３周年ブレンド豆半額セール」</td>
+<td>フロー情報</td>
+</tr>
+</tbody>
+</table>
+<p><strong>何が起きるか</strong></p>
+<ul>
+<li>更新頻度は決して低くないのに（2025年10月、12月、2026年1月と継続更新を確認）、<strong>そのほとんどが翌日には価値を失う情報</strong>に費やされています。</li>
+<li>一方「ルワンダ・コアカカ ムガンザ」のような<strong>豆の紹介記事は検索にヒットしており</strong>、書けば資産になることが実証されています。</li>
+<li>コロナ対応の記事が残り続けているのは、<strong>更新はしているが整理はしていない</strong>状態を示します。訪問者に「情報が古い」という印象を与えます。</li>
+</ul>
+<p><strong>対応方針</strong> — 臨時のお知らせは記事にせず「お知らせバー」で処理し、記事枠は豆・焙煎・淹れ方の資産コンテンツに集中する。→ <code>02_サイト設計</code> §7</p>
+<hr />
+<h3>【課題 E】SNS が実力に見合っていない — 影響度: 中</h3>
+<p><strong>現象</strong> — 公式 Instagram @mutocoffeeroastery は <strong>フォロワー約 482・投稿 9 件</strong>【確認済】。</p>
+<p><strong>何が起きるか</strong></p>
+<ul>
+<li>開業 11 年、第三者媒体に何度も取り上げられ、個人ブログのレビューも多数ある店としては、<strong>明らかに小さい数字</strong>です。</li>
+<li>一方、一般ユーザーによる投稿（「中野【MUTO coffee roastery】混雑度…」「MUTO Coffee Roastery – A Hidden Gem in Nakano!」など英語投稿含む）は継続的に発生しており、<strong>話題にはなっている</strong>【確認済】。</li>
+<li>つまり <strong>需要はあるが受け皿がない</strong>。カフェ・ロースタリー業態において Instagram は主要な発見チャネルであり、ここは伸びしろがそのまま残っています。</li>
+<li>毎朝焙煎する店には、<strong>毎日撮るべき絵（焙煎中の GIESEN、生豆、焼き上がり、ケーキ）が存在します</strong>。素材に困らない業態です。</li>
+</ul>
+<p><strong>対応方針</strong> — サイト側に Instagram 導線と埋め込みを設け、投稿→サイト→購入の往復を作る。撮影・投稿の運用ルールを定義する。→ <code>05_実装ロードマップ</code> §運用設計</p>
+<hr />
+<h3>【課題 F】英語対応がない — 影響度: 中</h3>
+<p><strong>現象</strong></p>
+<ul>
+<li>Trip.com、Yelp、Wanderlog、英語の Instagram 投稿など、<strong>訪日外国人による言及が実在</strong>します【確認済】。</li>
+<li>中野駅周辺は訪日客の多いエリアで、中野ブロードウェイという強い集客装置があります。</li>
+<li>一方、公式サイトの英語ページは確認できませんでした【推定: 未対応】。</li>
+</ul>
+<p><strong>対応方針</strong> — 全訳ではなく、<strong>訪日客が必要とする情報だけの 1 ページ英語版</strong>（場所・行き方・営業時間・何が飲めるか・豆は買えるか・支払い方法）を用意。費用対効果が非常に高い施策です。→ <code>02_サイト設計</code> §8</p>
+<hr />
+<h3>【課題 G】title のタイプミス — 影響度: 小 / コスト: 極小</h3>
+<p><strong>現象</strong> — News ページの <code>&lt;title&gt;</code> が <strong>「MUTO coffee roastary」</strong> となっています【確認済】。正しくは <strong>roastery</strong>。トップページは「MUTO coffee roastery - 中野 / 東京」で正しい表記です。</p>
+<p><strong>何が起きるか</strong> — 検索結果とブラウザのタブに誤字が表示され続けます。実害は小さいものの、<strong>品質にこだわる店のサイトとしては相応しくありません</strong>。修正コストはほぼゼロです。</p>
+<p><strong>対応方針</strong> — WordPress のサイトタイトル設定を修正（作業 5 分）。</p>
+<hr />
+<h3>【課題 H】決済手段がクレジットカードのみ — 影響度: 中</h3>
+<p><strong>現象</strong> — 特商法表記より、<strong>支払方法はクレジットカードのみ</strong>、ヤマト運輸で 3 営業日以内に発送、配送は国内のみ【確認済】。</p>
+<p><strong>何が起きるか</strong></p>
+<ul>
+<li>コーヒー豆の EC における主要顧客層には、<strong>コンビニ払い・代引き・各種 QR 決済</strong>を選ぶ層が一定数存在します。</li>
+<li>特に <strong>Amazon Pay / PayPay</strong> は、カード情報の入力そのものを嫌う層のカゴ落ちを直接的に減らします。</li>
+<li><strong>定期購入（サブスク）がない</strong>のは、ロースタリーとして最大の取りこぼしです。毎朝焙煎する店の顧客は<strong>必ず定期的に豆を切らす</strong>ため、定期便との相性が構造的に良い業態です。</li>
+</ul>
+<p><strong>対応方針</strong> → <code>02_サイト設計</code> §5.4、<code>05_実装ロードマップ</code> フェーズ3</p>
+<hr />
+<h2>4. 課題の優先度マトリクス</h2>
+<table>
+<thead>
+<tr>
+<th>課題</th>
+<th>影響度</th>
+<th>改修コスト</th>
+<th>優先度</th>
+<th>着手フェーズ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>B: 店舗情報の一次情報化</td>
+<td>大</td>
+<td>小</td>
+<td><strong>1</strong></td>
+<td>フェーズ 1</td>
+</tr>
+<tr>
+<td>G: title 誤字</td>
+<td>小</td>
+<td>極小</td>
+<td><strong>1</strong></td>
+<td>フェーズ 1</td>
+</tr>
+<tr>
+<td>A: サイト分断の解消</td>
+<td>最大</td>
+<td>大</td>
+<td><strong>2</strong></td>
+<td>フェーズ 2</td>
+</tr>
+<tr>
+<td>C: 豆を選べる導線</td>
+<td>大</td>
+<td>中</td>
+<td><strong>2</strong></td>
+<td>フェーズ 2</td>
+</tr>
+<tr>
+<td>F: 英語 1 ページ</td>
+<td>中</td>
+<td>小</td>
+<td><strong>3</strong></td>
+<td>フェーズ 2</td>
+</tr>
+<tr>
+<td>D: News の資産化</td>
+<td>中</td>
+<td>小（運用）</td>
+<td><strong>3</strong></td>
+<td>フェーズ 2〜継続</td>
+</tr>
+<tr>
+<td>E: SNS 連携と運用</td>
+<td>中</td>
+<td>小（運用）</td>
+<td><strong>3</strong></td>
+<td>フェーズ 2〜継続</td>
+</tr>
+<tr>
+<td>H: 決済・定期購入</td>
+<td>中</td>
+<td>中</td>
+<td><strong>4</strong></td>
+<td>フェーズ 3</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>セキュリティに関する注記</strong>
+【要確認】EC-CUBE のバージョンが 2 系・3 系である場合、サポート終了済みのため<strong>上記すべてに優先して</strong>対応方針の判断が必要です。カード情報を扱う以上、これは経営リスクの問題です。4 系への移行、または外部 EC プラットフォーム（Shopify / STORES / BASE）への移設を検討してください。判断材料は <code>05_実装ロードマップ</code> §3 に整理しています。</p>
+</blockquote>
+<hr />
+<h2>5. ユーザー像と現状の体験ギャップ</h2>
+<p><img alt="ユーザージャーニー" src="images/03_user_journey.png" /></p>
+<p>想定する主要な 3 つの利用者と、現状のつまずきです。</p>
+<h3>ペルソナ 1: 近隣の常連予備軍（30〜50代・中野在住／勤務）</h3>
+<ul>
+<li><strong>求めるもの</strong> — 今日開いているか。落ち着いて座れるか。どんな豆があるか。</li>
+<li><strong>現状のつまずき</strong> — 営業時間が媒体ごとに違う（課題 B）。公式サイトが答えになっていない。</li>
+<li><strong>改善後</strong> — トップに「本日の営業」を明示。臨時休業はお知らせバーで即時反映。</li>
+</ul>
+<h3>ペルソナ 2: 豆を買いたいコーヒー好き（全国・通販）</h3>
+<ul>
+<li><strong>求めるもの</strong> — 味の方向性、焙煎度、自分の抽出器具との相性、どれを選べばいいか。</li>
+<li><strong>現状のつまずき</strong> — 商品が個別ページに散在し比較できない（課題 C）。記事から商品へ飛べない（課題 A）。</li>
+<li><strong>改善後</strong> — 焙煎度・フレーバー・産地で絞り込める一覧。味の見える化。飲み比べセット。定期便。</li>
+</ul>
+<h3>ペルソナ 3: 訪日客・遠方からの来訪者</h3>
+<ul>
+<li><strong>求めるもの</strong> — 場所、行き方、何が体験できるか、豆を持ち帰れるか、支払い方法。</li>
+<li><strong>現状のつまずき</strong> — 英語情報がない（課題 F）。路地裏立地のため地図だけでは迷う。</li>
+<li><strong>改善後</strong> — 英語 1 ページ。駅からの写真つき道順。「れんが坂を上って左」という<strong>目印ベースの案内</strong>。</li>
+</ul>
+<hr />
+<h2>6. まとめ — 本改善で狙う変化</h2>
+<table>
+<thead>
+<tr>
+<th>観点</th>
+<th>現状</th>
+<th>改善後</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>サイトの役割</td>
+<td>存在の告知</td>
+<td>来店と購入を生む装置</td>
+</tr>
+<tr>
+<td>店舗情報</td>
+<td>媒体ごとにバラバラ</td>
+<td>公式が唯一の正</td>
+</tr>
+<tr>
+<td>豆の見せ方</td>
+<td>個別ページに散在</td>
+<td>選べる・比べられる・迷わない</td>
+</tr>
+<tr>
+<td>News</td>
+<td>臨時休業の告知</td>
+<td>豆と焙煎の物語（検索資産）</td>
+</tr>
+<tr>
+<td>購入</td>
+<td>カードのみ・都度購入</td>
+<td>決済多様化・定期便</td>
+</tr>
+<tr>
+<td>対応言語</td>
+<td>日本語のみ</td>
+<td>日本語＋英語（要点のみ）</td>
+</tr>
+<tr>
+<td>運用</td>
+<td>2 システムを二重更新</td>
+<td>1 箇所の更新で全面反映</td>
+</tr>
+</tbody>
+</table></div>
+<div class="doc"><h1>02. サイト設計（情報設計・ワイヤーフレーム）</h1>
+<h2>1. 設計コンセプト</h2>
+<blockquote>
+<h3>「毎朝、焙煎しています。」</h3>
+<p>— 店の前を通れば分かることを、Web でも分かるようにする。</p>
+</blockquote>
+<p>MUTO coffee roastery の本質は <strong>ロースタリーであること</strong>です。オランダ GIESEN の焙煎機が店内にあり、毎朝そこで豆が焼かれ、その豆が棚に並び、その場で淹れられ、量り売りで持ち帰れる。この一連の流れが、この店の価値そのものです。</p>
+<p>新しいサイトは、この流れをそのまま構造にします。</p>
+<pre><code>焙煎する  →  並ぶ  →  飲む  →  持ち帰る／届く
+ (物語)     (豆一覧)   (店舗)     (購入・定期便)
+</code></pre>
+<h3>設計の 3 原則</h3>
+<table>
+<thead>
+<tr>
+<th>原則</th>
+<th>意味</th>
+<th>具体的な判断基準</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. 迷わせない</strong></td>
+<td>「今日開いてる？」「どの豆？」に即答する</td>
+<td>トップから 2 クリック以内で全情報に到達</td>
+</tr>
+<tr>
+<td><strong>2. 途切れさせない</strong></td>
+<td>読む→欲しくなる→買う が同一体験</td>
+<td>記事・豆・購入が同じデザイン言語の中で完結</td>
+</tr>
+<tr>
+<td><strong>3. 静けさを保つ</strong></td>
+<td>路地裏の隠れ家という実店舗の質感を Web でも守る</td>
+<td>余白を広く、装飾を削り、写真と文字だけで語る</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. サイト統合方針【最重要】</h2>
+<p>課題 A（サイトの分断）への対応です。<strong>3 案を比較し、案 B を推奨します。</strong></p>
+<h3>案 A: 現構成の維持＋連携強化</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>概要</td>
+<td>WordPress と EC-CUBE を残したまま、デザインを揃え相互リンクを強化</td>
+</tr>
+<tr>
+<td>コスト</td>
+<td>小（〜50万円規模）</td>
+</tr>
+<tr>
+<td>メリット</td>
+<td>既存資産・既存 URL をほぼ維持できる。移行リスクが最小</td>
+</tr>
+<tr>
+<td>デメリット</td>
+<td><strong>二重運用が残る</strong>。EC-CUBE のバージョンが古い場合、セキュリティ課題も残る。体験の断絶は緩和されるが解消しない</td>
+</tr>
+<tr>
+<td>向くケース</td>
+<td>EC-CUBE が 4 系で稼働中かつ、当面は現状維持したい場合</td>
+</tr>
+</tbody>
+</table>
+<h3>案 B: WordPress + WooCommerce に統合 ★推奨</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>概要</td>
+<td>コーポレートとショップを WordPress 側に一本化。EC は WooCommerce で構築し、<code>muto-coffee.com</code> 単一ドメインに集約</td>
+</tr>
+<tr>
+<td>コスト</td>
+<td>中（80〜150万円規模）</td>
+</tr>
+<tr>
+<td>メリット</td>
+<td><strong>1 システム・1 デザイン・1 回の更新</strong>。記事から商品への導線が自然に作れる。SEO 評価が 1 ドメインに集約される。定期購入プラグインで サブスク も実現可能</td>
+</tr>
+<tr>
+<td>デメリット</td>
+<td>EC-CUBE からの商品・顧客データ移行が必要。URL 変更に伴う 301 リダイレクト設計が必須</td>
+</tr>
+<tr>
+<td>向くケース</td>
+<td><strong>本件に最も適合。</strong> 商品点数が 10〜20 点規模で、記事と商品の連動が価値を生む業態</td>
+</tr>
+</tbody>
+</table>
+<h3>案 C: Shopify へ全面移行</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>概要</td>
+<td>EC の基盤を Shopify にし、コーポレートページも Shopify 上に構築</td>
+</tr>
+<tr>
+<td>コスト</td>
+<td>中〜大（100〜200万円＋月額）</td>
+</tr>
+<tr>
+<td>メリット</td>
+<td>決済・定期購入・在庫・セキュリティを全てプラットフォームが担保。運用負荷が最小</td>
+</tr>
+<tr>
+<td>デメリット</td>
+<td>月額費用と決済手数料が継続発生。デザインの自由度がテーマに制約される。記事機能（Shopify Blog）は WordPress より弱い</td>
+</tr>
+<tr>
+<td>向くケース</td>
+<td>通販を事業の主軸に据え、拡大を狙う場合</td>
+</tr>
+</tbody>
+</table>
+<h3>推奨理由（案 B）</h3>
+<ol>
+<li><strong>商品点数が 10〜20 点規模</strong> — Shopify のような大規模 EC 基盤は過剰。WooCommerce で十分に扱えます。</li>
+<li><strong>記事と商品の連動が本件の価値の中心</strong> — 「ルワンダ・コアカカ ムガンザ」のような豆の紹介記事から、その豆の購入ページへ直結させる。この体験は WordPress + WooCommerce が最も素直に実現できます。</li>
+<li><strong>運用者が店主自身である前提</strong> — 焙煎の合間に更新する以上、<strong>更新場所は 1 つでなければ続きません</strong>。</li>
+<li><strong>月額の固定費が増えない</strong> — 小規模店舗にとって重要です。</li>
+</ol>
+<blockquote>
+<p><strong>【要確認】</strong> 最終判断の前に、現行 EC-CUBE のバージョン、商品データ・顧客データ・注文履歴の件数、現在の月間受注数を確認してください。移行工数がここで決まります。</p>
+</blockquote>
+<h3>URL 正規化（案 B・案 A 共通の必須作業）</h3>
+<p>現在 <code>www</code> 有り／無しの両方で到達可能な状態です【確認済】。どちらかに統一し、他方は <strong>301 リダイレクト</strong>します。</p>
+<pre><code>推奨: https://muto-coffee.com/ に統一（www なし）
+  https://www.muto-coffee.com/*  →  301  →  https://muto-coffee.com/*
+</code></pre>
+<p>旧 EC-CUBE の URL も個別に対応付けます。</p>
+<pre><code>/shop/products/detail/10   →  301  →  /beans/momozono-blend/
+/shop/products/detail/8    →  301  →  /beans/fukairi-blend/
+/shop/help/tradelaw        →  301  →  /legal/tradelaw/
+/shop/help/about           →  301  →  /about-shop/
+</code></pre>
+<p><strong>全商品 ID の対応表を作成してから移行してください。</strong> 対応付けを怠ると、検索流入と外部リンクを失います。</p>
+<hr />
+<h2>3. サイトマップ（改善案）</h2>
+<p><img alt="改善後サイトマップ" src="images/02_sitemap_proposed.png" /></p>
+<pre><code>muto-coffee.com/
+│
+├── /                          トップ
+│
+├── /beans/                    豆を買う（一覧・絞り込み）
+│   ├── /beans/blend/             ブレンド
+│   ├── /beans/single-origin/     シングルオリジン
+│   ├── /beans/decaf/             カフェインレス
+│   ├── /beans/set/               飲み比べセット・ギフト
+│   └── /beans/{商品スラッグ}/      商品詳細
+│
+├── /subscription/             定期便（フェーズ3）
+│
+├── /shop-info/                店舗案内（メニュー・アクセス・店内）
+│   ├── /shop-info/menu/          店内メニュー
+│   └── /shop-info/access/        アクセス（写真つき道順）
+│
+├── /about/                    MUTO について（店主・焙煎・豆の選定）
+│   ├── /about/roasting/          焙煎について（GIESEN）
+│   └── /about/sourcing/          豆の選び方・仕入れ
+│
+├── /journal/                  ジャーナル（旧 News の発展形）
+│   ├── /journal/beans/           入荷した豆の紹介
+│   ├── /journal/brewing/         淹れ方・道具
+│   └── /journal/news/            お知らせ
+│
+├── /en/                       English（1ページ）
+│
+├── /contact/                  お問い合わせ
+│
+└── /legal/                    特商法・プライバシーポリシー
+    ├── /legal/tradelaw/
+    ├── /legal/privacy/
+    └── /legal/shipping/          送料・配送について
+</code></pre>
+<h3>グローバルナビゲーション</h3>
+<p><strong>PC（7項目以内・横並び）</strong></p>
+<pre><code>[ロゴ]   豆を買う   店舗案内   MUTOについて   ジャーナル   EN   [🛒 カート]
+</code></pre>
+<p><strong>スマートフォン（ハンバーガー＋固定フッターCTA）</strong></p>
+<pre><code>上部: [☰]  [ロゴ]  [🛒]
+下部固定: [ 豆を見る ]  [ アクセス ]  [ 電話 ]
+</code></pre>
+<blockquote>
+<p>スマホ下部の固定 CTA は、カフェ・ロースタリー業態で効果が高い定番施策です。<strong>「電話」「地図」「買う」の 3 つを常に指の届く位置に置きます。</strong></p>
+</blockquote>
+<hr />
+<h2>4. トップページ設計</h2>
+<p><img alt="トップページ PC" src="images/04_wireframe_top_pc.png" /></p>
+<h3>4.1 セクション構成（上から順）</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>セクション</th>
+<th>目的</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>お知らせバー</strong></td>
+<td>臨時情報の即時伝達</td>
+<td>臨時休業・時短・年末年始。<strong>平常時は非表示</strong>。管理画面のチェック 1 つで出し入れ</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>ヒーロー</strong></td>
+<td>店の本質を 3 秒で</td>
+<td>焙煎中の GIESEN の写真＋「毎朝、焙煎しています。」＋副文</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>本日の営業</strong></td>
+<td>課題 B への直接回答</td>
+<td>「本日 11:30〜19:00 営業中」／「本日は定休日です」を<strong>自動判定で表示</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>豆を選ぶ</strong></td>
+<td>EC への主導線</td>
+<td>焙煎度別の入口 3〜4 枚＋「すべての豆を見る」</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>今週の豆</strong></td>
+<td>鮮度感と再訪理由</td>
+<td>直近入荷した 3〜4 種をカードで。各カードから商品詳細へ</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>MUTO について</strong></td>
+<td>信頼と差別化</td>
+<td>店主の写真＋ストーリー抜粋＋「詳しく読む」</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>店舗案内</strong></td>
+<td>来店導線</td>
+<td>店内写真＋営業時間＋地図＋「道順を見る」</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>ジャーナル</strong></td>
+<td>回遊と資産活用</td>
+<td>最新記事 3 件</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Instagram</strong></td>
+<td>SNS 相互送客</td>
+<td>直近投稿 6 枚のグリッド＋フォローボタン</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>フッター</strong></td>
+<td>情報の網羅</td>
+<td>店舗情報・営業時間・SNS・法的ページ・サイトマップ</td>
+</tr>
+</tbody>
+</table>
+<h3>4.2 ヒーローセクションの仕様</h3>
+<pre><code>┌──────────────────────────────────────────────────┐
+│  [全幅・焙煎中の GIESEN 焙煎機の写真]                 │
+│  ※ 湯気・豆の質感・手元が写っているものを推奨          │
+│                                                    │
+│         毎朝、焙煎しています。                       │
+│                                                    │
+│    中野の路地裏。オランダ GIESEN の焙煎機で、          │
+│    世界中から届いた豆を、その日の分だけ。              │
+│                                                    │
+│      [ 豆を見る ]     [ 店舗案内 ]                   │
+└──────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>要件</strong></p>
+<ul>
+<li>写真は <strong>スライダーにしない</strong>。1 枚の静止画。理由: 読み込みが速く、伝えたいことが 1 つに定まり、店の静けさと合致するため。</li>
+<li>テキストは画像に焼き込まず <strong>HTML テキスト</strong>で載せる（SEO・アクセシビリティ・多言語対応のため）。</li>
+<li>文字と背景のコントラスト比 <strong>4.5:1 以上</strong>を確保。暗いオーバーレイを重ねて担保する。</li>
+<li>高さは <strong><code>100svh</code> ではなく <code>min(78vh, 720px)</code></strong>。スクロールできることが一目で分かる高さに留めます。</li>
+</ul>
+<h3>4.3 「本日の営業」ブロック — 課題 B の中核</h3>
+<pre><code>┌──────────────────────────────────────────────┐
+│  ● 本日 営業中     11:30 – 19:00 (L.O. 18:00) │
+│    定休日: 水曜・木曜                          │
+│                              [ 詳しい営業案内 ] │
+└──────────────────────────────────────────────┘
+</code></pre>
+<p><strong>実装要件</strong></p>
+<ol>
+<li>営業時間・定休日・臨時休業日を<strong>管理画面の 1 箇所</strong>で管理する。</li>
+<li>表示はその設定から<strong>自動判定</strong>（サーバー側で日本時間を基準に算出）。手動更新を必要としない。</li>
+<li>同じ設定値から <strong>JSON-LD の <code>openingHoursSpecification</code></strong> を出力する（→ <code>04_技術要件</code> §3）。</li>
+<li>臨時休業がある日は、この表示が自動で「本日は臨時休業です」に切り替わる。</li>
+</ol>
+<blockquote>
+<p><strong>この 1 ブロックが、課題 B（情報の不一致）を構造的に解決します。</strong>
+人が手で書き換える限り、ズレは必ず再発します。<strong>設定は 1 箇所、表示は自動</strong> にすることが要点です。</p>
+</blockquote>
+<h3>4.4 スマートフォン版</h3>
+<p><img alt="トップページ SP" src="images/05_wireframe_top_sp.png" /></p>
+<ul>
+<li>1 カラム、セクションの順序は PC と同一。</li>
+<li>ヒーローの高さは <code>min(70vh, 560px)</code>。</li>
+<li><strong>下部固定 CTA バー</strong>（豆を見る／アクセス／電話）。スクロール量にかかわらず常時表示。</li>
+<li>電話番号は <code>tel:</code> リンク。タップで発信。</li>
+<li>タップ領域は最小 <strong>44×44px</strong> を確保。</li>
+</ul>
+<hr />
+<h2>5. 豆を買う（EC）の設計 — 課題 C への対応</h2>
+<h3>5.1 一覧ページ <code>/beans/</code></h3>
+<p><img alt="豆一覧" src="images/06_wireframe_beans_list.png" /></p>
+<p><strong>絞り込み軸</strong></p>
+<table>
+<thead>
+<tr>
+<th>軸</th>
+<th>選択肢</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>焙煎度</strong></td>
+<td>浅煎り / 中煎り / 中深煎り / 深煎り</td>
+<td>客が最初に決める軸。最上位に置く</td>
+</tr>
+<tr>
+<td><strong>味わい</strong></td>
+<td>華やか・フルーティ / 甘い・バランス / 香ばしい・コク / しっかり苦味</td>
+<td>専門用語を避けた表現にする</td>
+</tr>
+<tr>
+<td><strong>産地</strong></td>
+<td>アフリカ / 中南米 / アジア</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>種別</strong></td>
+<td>ブレンド / シングルオリジン / カフェインレス / セット</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>抽出器具</strong></td>
+<td>ドリップ / エスプレッソ / フレンチプレス</td>
+<td>「自分の道具で使えるか」に答える</td>
+</tr>
+</tbody>
+</table>
+<p><strong>並べ替え</strong> — おすすめ順（既定）／新着順／価格の安い順・高い順</p>
+<p><strong>商品カードに載せる情報</strong></p>
+<pre><code>┌────────────────────┐
+│  [ 豆の写真 ]        │
+│  シングルオリジン     │  ← 種別タグ
+│  エチオピア／ファロ    │  ← 商品名
+│  ●●●○○ 中煎り       │  ← 焙煎度インジケータ
+│  ジャスミン / 桃 / 紅茶 │  ← フレーバーノート3語
+│  200g  ¥1,850        │
+│  [ カートに入れる ]    │
+└────────────────────┘
+</code></pre>
+<blockquote>
+<p><strong>焙煎度をアイコンで、味を 3 語で。</strong> この 2 つがあるだけで、一覧上での比較が成立します。
+現状は商品名と価格が中心のため、客は 10 種類以上を前にして<strong>選べずに離脱</strong>します。</p>
+</blockquote>
+<p><strong>在庫切れの扱い</strong> — カードを消さず、グレーアウトして「入荷待ち」と表示し、<strong>入荷通知メールの登録</strong>を受け付けます。毎朝焙煎する店では在庫の変動が頻繁なため、この設計が機会損失を減らします。</p>
+<h3>5.2 商品詳細ページ <code>/beans/{スラッグ}/</code></h3>
+<p><img alt="商品詳細" src="images/07_wireframe_product_detail.png" /></p>
+<p><strong>上部（ファーストビュー）</strong></p>
+<pre><code>┌─────────────────┬──────────────────────────┐
+│                 │  シングルオリジン           │
+│                 │  エチオピア／ファロ          │
+│   [ 商品写真 ]   │                            │
+│                 │  ジャスミン / 桃 / 紅茶      │
+│   ○ ○ ○         │                            │
+│  （サムネイル）   │  焙煎度  ●●●○○  中煎り     │
+│                 │  酸味    ●●●●○             │
+│                 │  苦味    ●●○○○             │
+│                 │  コク    ●●●○○             │
+│                 │                            │
+│                 │  内容量 [100g] [200g] [500g]│
+│                 │  挽き方 [豆のまま ▾]         │
+│                 │                            │
+│                 │  ¥1,850 (税込)              │
+│                 │  [ カートに入れる ]          │
+│                 │  [ 定期便で購入 ]            │
+│                 │                            │
+│                 │  🚚 3営業日以内に発送         │
+│                 │  ☕ 焙煎後すぐにお届けします   │
+└─────────────────┴──────────────────────────┘
+</code></pre>
+<p><strong>下部（詳細情報）</strong></p>
+<table>
+<thead>
+<tr>
+<th>ブロック</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>味の説明</td>
+<td>2〜3 文。専門用語を使わず、飲んだときの印象を書く</td>
+</tr>
+<tr>
+<td>産地情報</td>
+<td>国／地域／農園・生産者／標高／品種／精製方法 を<strong>表形式で</strong></td>
+</tr>
+<tr>
+<td>おすすめの淹れ方</td>
+<td>湯温・粉量・抽出時間の目安。器具別に</td>
+</tr>
+<tr>
+<td>焙煎について</td>
+<td>この豆をどう焼いているか（店主の言葉）</td>
+</tr>
+<tr>
+<td>関連する記事</td>
+<td>この豆に触れたジャーナル記事へのリンク</td>
+</tr>
+<tr>
+<td>一緒に選ばれている豆</td>
+<td>3 点</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>産地情報の表形式化が重要です。</strong> 現状は「エチオピア／ゴロ・ペデッサ ナチュラル」のように<strong>商品名に情報が埋め込まれている</strong>状態で、機械可読でも比較可能でもありません。項目に分けることで、絞り込みにも構造化データにも使えるようになります。</p>
+</blockquote>
+<p><strong>【要確認】</strong> 標高・品種・精製方法・生産者名は店舗側しか持っていない情報です。<strong>全商品分をヒアリングする必要があります。</strong> 入力フォーマットを <code>data/products.csv</code> に用意しました。</p>
+<h3>5.3 「はじめての方へ」導線</h3>
+<p>一覧ページの最上部に、迷う客のための入口を置きます。</p>
+<pre><code>┌───────────────────────────────────────────┐
+│  はじめての方へ                              │
+│  どれを選べばいいか迷ったら                   │
+│  [ 飲み比べセットを見る ]  [ 豆の選び方を読む ] │
+└───────────────────────────────────────────┘
+</code></pre>
+<p><strong>飲み比べセットの提案【新規商品】</strong></p>
+<table>
+<thead>
+<tr>
+<th>セット名</th>
+<th>構成</th>
+<th>想定価格</th>
+<th>狙い</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>はじめての MUTO</td>
+<td>ブレンド 3 種 × 100g</td>
+<td>¥2,400 前後</td>
+<td>新規客の最初の 1 品</td>
+</tr>
+<tr>
+<td>世界を巡る</td>
+<td>シングルオリジン 3 種 × 100g</td>
+<td>¥2,800 前後</td>
+<td>コーヒー好き層</td>
+</tr>
+<tr>
+<td>焙煎度で選ぶ</td>
+<td>浅・中・深 × 100g</td>
+<td>¥2,600 前後</td>
+<td>好みが定まっていない層</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>単品 200g（¥1,700〜2,200）は<strong>初回購入のハードルとしては高い</strong>設定です。
+100g × 3 種のセットは、同程度の金額でありながら「選ばなくていい」「試せる」という理由で買いやすくなります。<strong>新規顧客獲得の入口商品</strong>として機能します。</p>
+</blockquote>
+<h3>5.4 カート・購入フロー</h3>
+<p><strong>改善要件</strong></p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>現状【確認済】</th>
+<th>改善後</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>決済手段</td>
+<td>クレジットカードのみ</td>
+<td>＋ Amazon Pay / PayPay / コンビニ払い</td>
+</tr>
+<tr>
+<td>ゲスト購入</td>
+<td>【要確認】</td>
+<td>会員登録なしで購入可能にする</td>
+</tr>
+<tr>
+<td>送料表示</td>
+<td>【要確認】</td>
+<td>カート投入時点で送料と到着目安を明示</td>
+</tr>
+<tr>
+<td>送料無料ライン</td>
+<td>【要確認】</td>
+<td>設定し、カートで「あと ¥○○で送料無料」と表示</td>
+</tr>
+<tr>
+<td>定期便</td>
+<td>なし</td>
+<td>フェーズ 3 で導入</td>
+</tr>
+<tr>
+<td>挽き方の指定</td>
+<td>【要確認】</td>
+<td>豆のまま／粗挽き／中挽き／細挽き を選択可能に</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>「あと ¥○○で送料無料」の表示は、EC における客単価向上策として最も確実なものの 1 つです。</strong> 200g 単品を買おうとしていた客が、もう 1 種類を追加する理由になります。</p>
+</blockquote>
+<h3>5.5 定期便 <code>/subscription/</code>（フェーズ 3）</h3>
+<pre><code>毎月 / 隔月 で選べる
+  ├ おまかせ便    店主が選んだ旬の豆を   200g ×1  月額 ¥1,900〜
+  ├ ブレンド便    定番ブレンドから選択   200g ×1  月額 ¥1,800〜
+  └ たっぷり便    2 種類                200g ×2  月額 ¥3,400〜
+</code></pre>
+<p><strong>設計上の要点</strong></p>
+<ul>
+<li><strong>いつでも休止・解約できることを、申込ボタンのすぐ横に明記する。</strong> これが申込率を最も左右します。</li>
+<li>「おまかせ便」を推奨に置く。店主の目利きを信頼して買う形は、<strong>ロースタリーの定期便として最も成立しやすい</strong>形です。</li>
+<li>次回発送日と内容を事前にメール通知。変更・スキップをリンク 1 つで。</li>
+</ul>
+<hr />
+<h2>6. 店舗案内の設計</h2>
+<p><img alt="店舗・アクセス" src="images/08_wireframe_shop_access.png" /></p>
+<h3>6.1 <code>/shop-info/</code> — 店舗案内</h3>
+<table>
+<thead>
+<tr>
+<th>ブロック</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>店内写真</td>
+<td>3〜5 枚。カウンター、テーブル席、焙煎機、豆の棚</td>
+</tr>
+<tr>
+<td>本日の営業</td>
+<td>トップと同じコンポーネントを再利用</td>
+</tr>
+<tr>
+<td>営業時間の詳細</td>
+<td>平常時／臨時／年末年始。<strong>表形式で</strong></td>
+</tr>
+<tr>
+<td>席・設備</td>
+<td>席数、Wi-Fi、電源、喫煙、支払方法、テイクアウト可否 → <strong>【要確認】</strong></td>
+</tr>
+<tr>
+<td>店内メニュー</td>
+<td>下記</td>
+</tr>
+<tr>
+<td>アクセス</td>
+<td>下記</td>
+</tr>
+</tbody>
+</table>
+<h3>6.2 店内メニュー <code>/shop-info/menu/</code></h3>
+<p><strong>【要確認】</strong> 以下は第三者媒体から確認できた情報であり、<strong>現行価格の確認が必須</strong>です。</p>
+<table>
+<thead>
+<tr>
+<th>区分</th>
+<th>品目</th>
+<th>参考価格</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ブレンド</td>
+<td>ももぞのブレンド / なかなかブレンド / ふかいりブレンド</td>
+<td>¥580 前後</td>
+</tr>
+<tr>
+<td>ブレンド</td>
+<td>イタリアンブレンド</td>
+<td>¥550 前後</td>
+</tr>
+<tr>
+<td>ブレンド</td>
+<td>フローレンシア</td>
+<td>¥600 前後</td>
+</tr>
+<tr>
+<td>シングルオリジン</td>
+<td>日替わり（豆の在庫による）</td>
+<td>—</td>
+</tr>
+<tr>
+<td>スイーツ</td>
+<td>ベイクドチーズケーキ / ガトーショコラ</td>
+<td>¥450 前後（ドリンクとセットで +¥400）</td>
+</tr>
+<tr>
+<td>その他</td>
+<td>アイスコーヒー、カフェオレ、テイクアウト</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>設計要件</strong> — メニューは<strong>画像ではなく HTML の表</strong>で作ります。理由: 検索にかかる、スマホで読みやすい、価格改定時の更新が容易、英語版に流用できる。</p>
+<h3>6.3 アクセス <code>/shop-info/access/</code></h3>
+<p>路地裏立地であることを踏まえ、<strong>地図だけに頼らない設計</strong>にします。</p>
+<pre><code>中野駅 南口 を出る
+   ↓  [写真: 南口の改札を出たところ]
+中野マルイ を右手に見ながら進む
+   ↓  [写真: マルイの外観]
+れんが坂 を上る
+   ↓  [写真: れんが坂の入口]
+坂を上りきったら 左折
+   ↓  [写真: 曲がり角]
+MUTO coffee roastery 到着（徒歩 約3分）
+   ↓  [写真: 店舗外観]
+</code></pre>
+<p><strong>要件</strong></p>
+<ul>
+<li>各ステップに<strong>実際の風景写真</strong>を添える。これが最も効果的な道案内です。</li>
+<li>Google マップの埋め込みは<strong>遅延読み込み</strong>にする（初期表示で読み込むと表示速度を大きく損ないます）。</li>
+<li>「Google マップで開く」「Apple マップで開く」の外部リンクボタンを併置。</li>
+<li>住所はテキストで選択・コピーできる形に（タクシー乗車時に使われます）。</li>
+<li>最寄駅からの所要時間を明記（JR 中央線・東京メトロ東西線 中野駅 南口 徒歩 2〜3 分）。</li>
+</ul>
+<hr />
+<h2>7. ジャーナルの設計 — 課題 D への対応</h2>
+<h3>7.1 News から Journal への転換</h3>
+<p><strong>現状の問題</strong> — 記事の大半が臨時休業の告知で、翌日には価値を失います【確認済】。</p>
+<p><strong>新しい方針</strong></p>
+<table>
+<thead>
+<tr>
+<th>情報の種類</th>
+<th>現状</th>
+<th>改善後</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>臨時休業・時短</td>
+<td>記事として投稿</td>
+<td><strong>お知らせバー</strong>で表示（記事にしない）</td>
+</tr>
+<tr>
+<td>年末年始の営業</td>
+<td>記事として投稿</td>
+<td><strong>営業カレンダー</strong>に登録（自動で「本日の営業」に反映）</td>
+</tr>
+<tr>
+<td>豆の入荷・紹介</td>
+<td>記事（一部あり）</td>
+<td><strong>記事の中心に据える</strong>。商品ページへリンク</td>
+</tr>
+<tr>
+<td>淹れ方・道具</td>
+<td>なし</td>
+<td><strong>新設</strong>。検索流入の主力に</td>
+</tr>
+<tr>
+<td>店の出来事</td>
+<td>なし</td>
+<td>適宜</td>
+</tr>
+</tbody>
+</table>
+<h3>7.2 カテゴリ設計</h3>
+<table>
+<thead>
+<tr>
+<th>カテゴリ</th>
+<th>URL</th>
+<th>内容</th>
+<th>更新目安</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>豆のはなし</td>
+<td><code>/journal/beans/</code></td>
+<td>新しく入荷した豆の紹介、産地の背景、味の説明</td>
+<td>月 2〜4 本</td>
+</tr>
+<tr>
+<td>淹れかた</td>
+<td><code>/journal/brewing/</code></td>
+<td>ドリップの手順、湯温、道具の選び方、保存方法</td>
+<td>月 1 本</td>
+</tr>
+<tr>
+<td>お知らせ</td>
+<td><code>/journal/news/</code></td>
+<td>セール、イベント、営業に関する重要な案内</td>
+<td>随時</td>
+</tr>
+</tbody>
+</table>
+<h3>7.3 記事から商品へつなぐ</h3>
+<p><strong>これが課題 A と D を同時に解決する仕組みです。</strong></p>
+<p>豆の紹介記事の末尾に、必ずその商品へのカードを挿入します。</p>
+<pre><code>┌──────────────────────────────────────┐
+│  この記事で紹介した豆                    │
+│  ┌────┐                              │
+│  │写真 │  エチオピア／ファロ            │
+│  └────┘  ジャスミン / 桃 / 紅茶        │
+│           200g ¥1,850                 │
+│           [ 購入ページへ ]              │
+└──────────────────────────────────────┘
+</code></pre>
+<p>WordPress + WooCommerce に統合すれば、<strong>記事編集画面から商品を選ぶだけ</strong>でこのブロックが挿入されるようにできます。手作業でリンクを貼る必要はありません。</p>
+<h3>7.4 記事執筆のテンプレート（運用者向け）</h3>
+<p>豆の紹介記事は、次の型に沿って書けば毎回 20〜30 分で完成します。</p>
+<pre><code class="language-markdown"># {豆の名前} が入荷しました
+
+## この豆について
+（産地・農園・標高・品種・精製方法を 3〜4 文で）
+
+## 焙煎について
+（どう焼いたか、なぜそう焼いたか。店主の言葉で 2〜3 文）
+
+## 味わい
+（飲んだときの印象を専門用語なしで 2〜3 文）
+{フレーバーノート 3 語}
+
+## おすすめの淹れ方
+（湯温・粉量・時間の目安）
+
+[商品カード]
+</code></pre>
+<hr />
+<h2>8. 英語ページ <code>/en/</code> — 課題 F への対応</h2>
+<p><strong>全訳はしません。1 ページに要点だけを載せます。</strong></p>
+<p>訪日客が知りたいのは次の 6 点です。</p>
+<pre><code>MUTO coffee roastery
+A small roastery in a quiet Nakano back street. Since 2014.
+
+━━ WHERE ━━
+3-34-18 Nakano, Nakano-ku, Tokyo
+3 min walk from Nakano Station (South Exit)
+Behind Marui, up the brick slope, then left.
+[ Open in Google Maps ]
+[写真つきの道順 5 ステップ]
+
+━━ HOURS ━━
+11:30 – 19:00 (Last order 18:00)
+Closed: Wednesday &amp; Thursday
+
+━━ WHAT WE DO ━━
+We roast specialty coffee every morning on a Dutch GIESEN roaster.
+10–15 origins and blends, always.
+Hand-dripped coffee, homemade cakes, and beans to take home.
+
+━━ MENU ━━
+[主要メニューの英語表記＋価格]
+
+━━ BEANS ━━
+Sold by weight. 100g / 200g.
+We can grind for you — just tell us your brewing method.
+
+━━ PAYMENT ━━
+Cash / Credit cards  ※【要確認】
+Note: Our online shop ships within Japan only.
+
+[ Instagram ]  [ 日本語サイト ]
+</code></pre>
+<p><strong>実装上の注意</strong></p>
+<ul>
+<li><code>&lt;html lang="en"&gt;</code> を正しく設定。</li>
+<li>日本語ページとの間に <code>hreflang</code> を相互に設定する。</li>
+<li><strong>自動翻訳ウィジェットは使わない。</strong> 品質が店の印象を損ないます。1 ページなら手書きで十分です。</li>
+<li>店名・メニュー名はローマ字表記を併記（例: Momozono Blend）。</li>
+</ul>
+<hr />
+<h2>9. お問い合わせ <code>/contact/</code></h2>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>仕様</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>フォーム項目</td>
+<td>お名前／メールアドレス／種別（商品・来店・卸・取材・その他）／本文</td>
+</tr>
+<tr>
+<td>迷惑メール対策</td>
+<td>reCAPTCHA v3 もしくは honeypot</td>
+</tr>
+<tr>
+<td>自動返信</td>
+<td>あり。営業日での返信目安を明記</td>
+</tr>
+<tr>
+<td>電話</td>
+<td><code>tel:</code> リンクで併記。営業時間内である旨を注記</td>
+</tr>
+<tr>
+<td>卸・取材の窓口</td>
+<td>種別で分岐。<strong>取材依頼は集客資産になるため、受け口を明確にする</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>10. レスポンシブ設計</h2>
+<table>
+<thead>
+<tr>
+<th>ブレークポイント</th>
+<th>幅</th>
+<th>レイアウト</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mobile</td>
+<td>〜767px</td>
+<td>1 カラム。下部固定 CTA あり</td>
+</tr>
+<tr>
+<td>Tablet</td>
+<td>768〜1023px</td>
+<td>2 カラム（商品グリッドは 2 列）</td>
+</tr>
+<tr>
+<td>Desktop</td>
+<td>1024px〜</td>
+<td>最大コンテンツ幅 1200px、中央寄せ。商品グリッドは 3〜4 列</td>
+</tr>
+</tbody>
+</table>
+<p><strong>共通要件</strong></p>
+<ul>
+<li>画面幅 320px でも横スクロールが発生しないこと。</li>
+<li>タップ領域は 44×44px 以上。</li>
+<li>画像は <code>max-width: 100%</code>。</li>
+<li>フォントサイズは本文 16px 以上（スマホでの自動ズームを防ぐため）。</li>
+</ul></div>
+<div class="doc"><h1>03. デザインシステム</h1>
+<p><img alt="スタイルガイド" src="images/09_style_guide.png" /></p>
+<h2>1. デザインの方向性</h2>
+<p>実店舗の質感 —— <strong>路地裏、木、革、焙煎機の鉄、湯気</strong> —— をそのまま Web に持ち込みます。</p>
+<table>
+<thead>
+<tr>
+<th>守ること</th>
+<th>避けること</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>余白を広く取る</td>
+<td>情報を詰め込む</td>
+</tr>
+<tr>
+<td>写真を大きく使う</td>
+<td>装飾的なイラスト・アイコンの多用</td>
+</tr>
+<tr>
+<td>色数を絞る</td>
+<td>鮮やかな差し色を複数使う</td>
+</tr>
+<tr>
+<td>静止した画面</td>
+<td>スライダー・自動再生・パララックス</td>
+</tr>
+<tr>
+<td>読みやすい本文</td>
+<td>細すぎる明朝体・小さすぎる文字</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>判断に迷ったら「店内にこれがあるか」を基準にします。</strong> 店内に点滅するバナーはありません。</p>
+</blockquote>
+<hr />
+<h2>2. カラーパレット</h2>
+<p>焙煎の色相をそのまま基調にします。生豆の緑から、焙煎が進んだ深い茶までを軸に取りました。</p>
+<h3>2.1 基本色</h3>
+<table>
+<thead>
+<tr>
+<th>用途</th>
+<th>名称</th>
+<th>HEX</th>
+<th>使いどころ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>背景（基調）</td>
+<td>Paper</td>
+<td><code>#FAF8F5</code></td>
+<td>ページ全体の地色。純白を避け、紙の質感に寄せる</td>
+</tr>
+<tr>
+<td>背景（副）</td>
+<td>Cream</td>
+<td><code>#F1EBE3</code></td>
+<td>セクションの区切り、カード背景</td>
+</tr>
+<tr>
+<td>文字（主）</td>
+<td>Roast</td>
+<td><code>#2B211B</code></td>
+<td>本文・見出し。純黒を避ける</td>
+</tr>
+<tr>
+<td>文字（副）</td>
+<td>Ash</td>
+<td><code>#6B5F57</code></td>
+<td>補足文、キャプション</td>
+</tr>
+<tr>
+<td>主要色</td>
+<td>Bean</td>
+<td><code>#6F4A2E</code></td>
+<td>リンク、見出しの装飾、ボタン</td>
+</tr>
+<tr>
+<td>強調色</td>
+<td>Ember</td>
+<td><code>#B4542A</code></td>
+<td>CTA ボタン、価格、重要な状態表示</td>
+</tr>
+<tr>
+<td>罫線</td>
+<td>Line</td>
+<td><code>#DED5CA</code></td>
+<td>区切り線、入力欄の枠</td>
+</tr>
+</tbody>
+</table>
+<h3>2.2 状態色</h3>
+<table>
+<thead>
+<tr>
+<th>用途</th>
+<th>HEX</th>
+<th>使いどころ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>営業中 / 成功</td>
+<td><code>#4A7C59</code></td>
+<td>「本日 営業中」の点、購入完了</td>
+</tr>
+<tr>
+<td>休業 / 注意</td>
+<td><code>#A8762B</code></td>
+<td>「本日は定休日」、在庫僅少</td>
+</tr>
+<tr>
+<td>エラー</td>
+<td><code>#A63D2F</code></td>
+<td>入力エラー、在庫なし</td>
+</tr>
+</tbody>
+</table>
+<h3>2.3 焙煎度インジケータ専用色</h3>
+<p>商品カード・詳細ページで使う焙煎度の 5 段階表示です。</p>
+<table>
+<thead>
+<tr>
+<th>段階</th>
+<th>表示</th>
+<th>HEX</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>浅煎り</td>
+<td>●○○○○</td>
+<td><code>#C49A6C</code></td>
+</tr>
+<tr>
+<td>中浅煎り</td>
+<td>●●○○○</td>
+<td><code>#A8763F</code></td>
+</tr>
+<tr>
+<td>中煎り</td>
+<td>●●●○○</td>
+<td><code>#8A5A2B</code></td>
+</tr>
+<tr>
+<td>中深煎り</td>
+<td>●●●●○</td>
+<td><code>#5F3A1E</code></td>
+</tr>
+<tr>
+<td>深煎り</td>
+<td>●●●●●</td>
+<td><code>#3A2416</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>この 5 色は、実際の焙煎豆の色から取っています。</strong> 情報として機能すると同時に、店の専門性を視覚的に伝えます。</p>
+</blockquote>
+<h3>2.4 コントラスト比の検証</h3>
+<p>WCAG 2.1 レベル AA（本文 4.5:1、大きい文字 3:1）を満たすことを確認済みです。</p>
+<table>
+<thead>
+<tr>
+<th>組み合わせ</th>
+<th>比</th>
+<th>判定</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Roast <code>#2B211B</code> on Paper <code>#FAF8F5</code></td>
+<td>約 14.2:1</td>
+<td>AAA</td>
+</tr>
+<tr>
+<td>Ash <code>#6B5F57</code> on Paper <code>#FAF8F5</code></td>
+<td>約 5.9:1</td>
+<td>AA</td>
+</tr>
+<tr>
+<td>Paper <code>#FAF8F5</code> on Ember <code>#B4542A</code></td>
+<td>約 4.6:1</td>
+<td>AA</td>
+</tr>
+<tr>
+<td>Paper <code>#FAF8F5</code> on Bean <code>#6F4A2E</code></td>
+<td>約 7.4:1</td>
+<td>AAA</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ヒーロー画像の上に文字を載せる場合</strong>は、<code>rgba(30, 22, 16, 0.45)</code> 程度のオーバーレイを重ね、必ず 4.5:1 以上を確保してください。</p>
+<hr />
+<h2>3. タイポグラフィ</h2>
+<h3>3.1 フォントファミリー</h3>
+<pre><code class="language-css">/* 和文・欧文 共通の本文 */
+--font-body:
+  &quot;Noto Sans JP&quot;,
+  &quot;Hiragino Kaku Gothic ProN&quot;, &quot;Hiragino Sans&quot;,
+  &quot;Yu Gothic&quot;, &quot;Meiryo&quot;, sans-serif;
+
+/* 見出し・ロゴまわりの欧文 */
+--font-display:
+  &quot;Cormorant Garamond&quot;, &quot;Times New Roman&quot;,
+  &quot;Hiragino Mincho ProN&quot;, &quot;Yu Mincho&quot;, serif;
+
+/* 価格・数値 */
+--font-numeric:
+  &quot;Noto Sans JP&quot;, -apple-system, sans-serif;
+  font-variant-numeric: tabular-nums;
+</code></pre>
+<p><strong>方針</strong> — 和文はゴシックで可読性を優先。欧文の見出し（店名、セクションタイトルの英字）にのみセリフ体を使い、落ち着いた印象を作ります。</p>
+<p><strong>読み込み要件</strong></p>
+<ul>
+<li>Web フォントは <strong>本文用 1 ファミリー・2 ウェイト（400 / 700）まで</strong>。読み込み負荷を抑えます。</li>
+<li><code>font-display: swap</code> を指定し、フォント読み込み中も文字が見える状態にする。</li>
+<li>日本語 Web フォントはサブセット化する。未処理の Noto Sans JP は 4MB を超え、表示速度を著しく損ないます。</li>
+</ul>
+<h3>3.2 サイズスケール</h3>
+<table>
+<thead>
+<tr>
+<th>用途</th>
+<th>PC</th>
+<th>SP</th>
+<th>行間</th>
+<th>太さ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ヒーロー見出し</td>
+<td>48px</td>
+<td>30px</td>
+<td>1.35</td>
+<td>700</td>
+</tr>
+<tr>
+<td>ページ見出し (h1)</td>
+<td>36px</td>
+<td>26px</td>
+<td>1.4</td>
+<td>700</td>
+</tr>
+<tr>
+<td>セクション見出し (h2)</td>
+<td>28px</td>
+<td>22px</td>
+<td>1.45</td>
+<td>700</td>
+</tr>
+<tr>
+<td>小見出し (h3)</td>
+<td>20px</td>
+<td>18px</td>
+<td>1.5</td>
+<td>700</td>
+</tr>
+<tr>
+<td>本文</td>
+<td>17px</td>
+<td>16px</td>
+<td><strong>1.9</strong></td>
+<td>400</td>
+</tr>
+<tr>
+<td>補足・キャプション</td>
+<td>14px</td>
+<td>13px</td>
+<td>1.7</td>
+<td>400</td>
+</tr>
+<tr>
+<td>価格</td>
+<td>22px</td>
+<td>20px</td>
+<td>1.3</td>
+<td>700</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>本文の行間 1.9 は、一般的な設定（1.6〜1.7）より広めです。</strong> 日本語の長文を落ち着いて読ませるための意図的な設定で、店の「静けさ」というコンセプトにも対応します。</p>
+</blockquote>
+<h3>3.3 文字組みの指定</h3>
+<pre><code class="language-css">body {
+  font-feature-settings: &quot;palt&quot; 1;  /* 和文の詰め */
+  letter-spacing: 0.03em;
+  text-align: left;                  /* 両端揃えにしない */
+}
+h1, h2, h3 { letter-spacing: 0.06em; }
+p { line-break: strict; overflow-wrap: break-word; }
+</code></pre>
+<p><code>text-align: justify</code>（両端揃え）は<strong>使いません</strong>。日本語では単語間の空きが不均一になり、かえって読みにくくなります。</p>
+<hr />
+<h2>4. 余白のルール</h2>
+<p>8px を基準単位とします。</p>
+<table>
+<thead>
+<tr>
+<th>トークン</th>
+<th>値</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>space-1</code></td>
+<td>8px</td>
+<td>アイコンと文字の間</td>
+</tr>
+<tr>
+<td><code>space-2</code></td>
+<td>16px</td>
+<td>要素内の余白</td>
+</tr>
+<tr>
+<td><code>space-3</code></td>
+<td>24px</td>
+<td>カード内の padding</td>
+</tr>
+<tr>
+<td><code>space-4</code></td>
+<td>32px</td>
+<td>要素間</td>
+</tr>
+<tr>
+<td><code>space-5</code></td>
+<td>48px</td>
+<td>小セクション間</td>
+</tr>
+<tr>
+<td><code>space-6</code></td>
+<td>80px</td>
+<td>セクション間（SP）</td>
+</tr>
+<tr>
+<td><code>space-7</code></td>
+<td>120px</td>
+<td>セクション間（PC）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>セクション間を PC で 120px 取ります。</strong> 一般的なサイトより広い設定です。1 画面に詰め込まず、スクロールのたびに 1 つのことだけを見せることで、落ち着いた印象を作ります。</p>
+</blockquote>
+<p><strong>コンテンツ幅</strong></p>
+<pre><code class="language-css">--width-content: 1200px;   /* 通常 */
+--width-narrow: 720px;     /* 記事本文（1行あたり 40〜45 文字に収まる） */
+--gutter: 20px;            /* 画面端の余白（SP） */
+</code></pre>
+<hr />
+<h2>5. コンポーネント定義</h2>
+<h3>5.1 ボタン</h3>
+<table>
+<thead>
+<tr>
+<th>種別</th>
+<th>用途</th>
+<th>背景</th>
+<th>文字</th>
+<th>枠線</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Primary</td>
+<td>カートに入れる、購入</td>
+<td><code>#B4542A</code></td>
+<td><code>#FAF8F5</code></td>
+<td>なし</td>
+</tr>
+<tr>
+<td>Secondary</td>
+<td>詳しく見る、豆を見る</td>
+<td>透明</td>
+<td><code>#6F4A2E</code></td>
+<td>1px <code>#6F4A2E</code></td>
+</tr>
+<tr>
+<td>Text</td>
+<td>補助的なリンク</td>
+<td>透明</td>
+<td><code>#6F4A2E</code></td>
+<td>下線</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-css">.btn {
+  min-height: 48px;
+  padding: 14px 32px;
+  border-radius: 2px;        /* ほぼ角丸なし。硬質な印象 */
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  transition: background-color .2s ease, color .2s ease;
+}
+.btn:focus-visible {
+  outline: 2px solid #6F4A2E;
+  outline-offset: 3px;
+}
+</code></pre>
+<ul>
+<li>角丸は <strong>2px</strong>。丸みを抑え、素材の硬さを表現します。</li>
+<li>ホバー時は<strong>拡大・浮き上がりを使わず</strong>、色の変化のみ。</li>
+<li>フォーカスリングは必ず表示する（キーボード操作への対応）。</li>
+</ul>
+<h3>5.2 商品カード</h3>
+<pre><code>┌──────────────────────┐
+│                      │
+│   [ 画像 4:3 ]        │   ← object-fit: cover
+│                      │
+├──────────────────────┤
+│ シングルオリジン        │   ← 12px / Ash / 字間広め
+│ エチオピア／ファロ       │   ← 18px / Roast / 700
+│ ●●●○○ 中煎り          │   ← 焙煎度インジケータ
+│ ジャスミン / 桃 / 紅茶   │   ← 13px / Ash
+│                      │
+│ 200g        ¥1,850   │   ← 価格 20px / 700
+│ [  カートに入れる  ]    │
+└──────────────────────┘
+</code></pre>
+<ul>
+<li>影は付けない。境界は 1px の <code>Line</code> 色の枠線で表現。</li>
+<li>ホバー時は画像をわずかに暗くする（<code>filter: brightness(0.96)</code>）のみ。</li>
+<li>在庫切れ時はカード全体を <code>opacity: 0.55</code> にし、ボタンを「入荷通知を受け取る」に差し替える。</li>
+</ul>
+<h3>5.3 焙煎度インジケータ</h3>
+<pre><code class="language-html">&lt;span class=&quot;roast-level&quot; aria-label=&quot;焙煎度: 中煎り（5段階中3）&quot;&gt;
+  &lt;i class=&quot;on&quot;&gt;&lt;/i&gt;&lt;i class=&quot;on&quot;&gt;&lt;/i&gt;&lt;i class=&quot;on&quot;&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;
+  &lt;span class=&quot;roast-label&quot;&gt;中煎り&lt;/span&gt;
+&lt;/span&gt;
+</code></pre>
+<p><strong>必ず <code>aria-label</code> で段階を文章化してください。</strong> 丸の数だけでは、スクリーンリーダー利用者に情報が伝わりません。</p>
+<h3>5.4 味わいバー</h3>
+<pre><code>酸味   ●●●●○
+苦味   ●●○○○
+コク   ●●●○○
+</code></pre>
+<ul>
+<li>5 段階。商品詳細ページでのみ使用（一覧では焙煎度のみに絞り、情報過多を避ける）。</li>
+<li>数値ではなく記号で表す。「酸味 4」より「●●●●○」の方が直感的です。</li>
+</ul>
+<h3>5.5 お知らせバー</h3>
+<pre><code>┌────────────────────────────────────────────────┐
+│ 1/27(火) は都合により 18:00 閉店いたします    [×] │
+└────────────────────────────────────────────────┘
+</code></pre>
+<ul>
+<li>背景 <code>#2B211B</code>、文字 <code>#FAF8F5</code>。</li>
+<li>平常時は<strong>非表示</strong>。管理画面のチェックボックスで表示を制御。</li>
+<li>閉じるボタンあり。閉じた状態は 24 時間保持（<code>localStorage</code>）。</li>
+<li><strong>点滅・スライドアニメーションは使わない。</strong></li>
+</ul>
+<h3>5.6 「本日の営業」ブロック</h3>
+<table>
+<thead>
+<tr>
+<th>状態</th>
+<th>表示</th>
+<th>点の色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>営業中</td>
+<td>本日 営業中　11:30 – 19:00 (L.O. 18:00)</td>
+<td><code>#4A7C59</code></td>
+</tr>
+<tr>
+<td>営業時間外</td>
+<td>本日 11:30 開店　（現在 営業時間外）</td>
+<td><code>#A8762B</code></td>
+</tr>
+<tr>
+<td>定休日</td>
+<td>本日は定休日です　次回営業: 金曜 11:30〜</td>
+<td><code>#A8762B</code></td>
+</tr>
+<tr>
+<td>臨時休業</td>
+<td>本日は臨時休業です</td>
+<td><code>#A63D2F</code></td>
+</tr>
+</tbody>
+</table>
+<p>「次回営業」まで表示することで、<strong>「じゃあいつ行けるのか」に同時に答えます。</strong></p>
+<hr />
+<h2>6. 写真のガイドライン</h2>
+<p>サイトの印象の大半は写真で決まります。以下を満たす素材を用意してください。</p>
+<h3>6.1 必要な写真</h3>
+<table>
+<thead>
+<tr>
+<th>用途</th>
+<th>枚数</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ヒーロー</td>
+<td>1〜2</td>
+<td>焙煎中の GIESEN。湯気・豆・手元が写るもの</td>
+</tr>
+<tr>
+<td>店内</td>
+<td>5〜8</td>
+<td>カウンター、席、豆の棚、ドリップの手元、外観</td>
+</tr>
+<tr>
+<td>アクセス</td>
+<td>5〜6</td>
+<td>駅からの道順の各ポイント</td>
+</tr>
+<tr>
+<td>商品</td>
+<td>全商品 × 2〜3</td>
+<td>豆のアップ、パッケージ、淹れた一杯</td>
+</tr>
+<tr>
+<td>店主</td>
+<td>1〜2</td>
+<td>焙煎中／ドリップ中の姿</td>
+</tr>
+<tr>
+<td>メニュー</td>
+<td>3〜5</td>
+<td>コーヒー、チーズケーキ、ガトーショコラ</td>
+</tr>
+</tbody>
+</table>
+<h3>6.2 撮影の指針</h3>
+<table>
+<thead>
+<tr>
+<th>守ること</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自然光で撮る</td>
+<td>店の雰囲気が最も正確に写ります</td>
+</tr>
+<tr>
+<td>白飛びさせない</td>
+<td>焙煎豆の質感が失われます</td>
+</tr>
+<tr>
+<td>彩度を上げすぎない</td>
+<td>落ち着いた色調がブランドの印象です</td>
+</tr>
+<tr>
+<td>背景を整理する</td>
+<td>余計なものが写ると生活感が出ます</td>
+</tr>
+<tr>
+<td>商品は同じ条件で撮る</td>
+<td>一覧に並べたとき、比較可能になります</td>
+</tr>
+</tbody>
+</table>
+<h3>6.3 書き出し仕様</h3>
+<table>
+<thead>
+<tr>
+<th>用途</th>
+<th>長辺</th>
+<th>形式</th>
+<th>目標容量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ヒーロー</td>
+<td>2000px</td>
+<td>WebP（JPEG フォールバック）</td>
+<td>250KB 以下</td>
+</tr>
+<tr>
+<td>セクション画像</td>
+<td>1400px</td>
+<td>WebP</td>
+<td>150KB 以下</td>
+</tr>
+<tr>
+<td>商品画像</td>
+<td>1000px</td>
+<td>WebP</td>
+<td>100KB 以下</td>
+</tr>
+<tr>
+<td>サムネイル</td>
+<td>600px</td>
+<td>WebP</td>
+<td>50KB 以下</td>
+</tr>
+</tbody>
+</table>
+<p><strong>すべての画像に <code>width</code> / <code>height</code> 属性を指定してください。</strong> レイアウトのガタつき（CLS）を防ぐために必須です。</p>
+<h3>6.4 代替テキスト（alt）の書き方</h3>
+<table>
+<thead>
+<tr>
+<th>悪い例</th>
+<th>良い例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>alt="画像"</code></td>
+<td><code>alt="GIESEN の焙煎機で豆を焼いている様子"</code></td>
+</tr>
+<tr>
+<td><code>alt="コーヒー"</code></td>
+<td><code>alt="ハンドドリップで淹れるももぞのブレンド"</code></td>
+</tr>
+<tr>
+<td><code>alt="IMG_2841"</code></td>
+<td><code>alt="中野店のカウンター席と豆の棚"</code></td>
+</tr>
+</tbody>
+</table>
+<p>装飾目的の画像は <code>alt=""</code> とし、スクリーンリーダーに読ませません。</p>
+<hr />
+<h2>7. アクセシビリティ要件</h2>
+<p>WCAG 2.1 レベル AA を目標とします。</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>要件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>コントラスト</td>
+<td>本文 4.5:1 以上、大きい文字 3:1 以上</td>
+</tr>
+<tr>
+<td>キーボード操作</td>
+<td>全機能がキーボードのみで操作可能。フォーカスリングを消さない</td>
+</tr>
+<tr>
+<td>見出し構造</td>
+<td>h1 → h2 → h3 の順序を守る。階層を飛ばさない</td>
+</tr>
+<tr>
+<td>画像</td>
+<td>すべてに適切な alt</td>
+</tr>
+<tr>
+<td>フォーム</td>
+<td>すべての入力欄に <code>&lt;label&gt;</code> を紐付ける</td>
+</tr>
+<tr>
+<td>リンク文言</td>
+<td>「こちら」「詳細」ではなく、行き先が分かる文言にする</td>
+</tr>
+<tr>
+<td>動きの抑制</td>
+<td><code>prefers-reduced-motion</code> に対応し、該当時はアニメーションを無効化</td>
+</tr>
+<tr>
+<td>言語指定</td>
+<td><code>&lt;html lang="ja"&gt;</code>（英語ページは <code>en</code>）</td>
+</tr>
+<tr>
+<td>拡大</td>
+<td>200% 拡大時もレイアウトが崩れない</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>8. CSS カスタムプロパティ（実装用）</h2>
+<pre><code class="language-css">:root {
+  /* Color */
+  --c-paper:      #FAF8F5;
+  --c-cream:      #F1EBE3;
+  --c-roast:      #2B211B;
+  --c-ash:        #6B5F57;
+  --c-bean:       #6F4A2E;
+  --c-ember:      #B4542A;
+  --c-line:       #DED5CA;
+  --c-open:       #4A7C59;
+  --c-closed:     #A8762B;
+  --c-error:      #A63D2F;
+
+  /* Roast levels */
+  --roast-1: #C49A6C;
+  --roast-2: #A8763F;
+  --roast-3: #8A5A2B;
+  --roast-4: #5F3A1E;
+  --roast-5: #3A2416;
+
+  /* Typography */
+  --font-body: &quot;Noto Sans JP&quot;, &quot;Hiragino Kaku Gothic ProN&quot;, &quot;Yu Gothic&quot;, sans-serif;
+  --font-display: &quot;Cormorant Garamond&quot;, &quot;Yu Mincho&quot;, serif;
+  --fs-body: 17px;
+  --lh-body: 1.9;
+
+  /* Space */
+  --space-1: 8px;   --space-2: 16px;  --space-3: 24px;
+  --space-4: 32px;  --space-5: 48px;  --space-6: 80px;  --space-7: 120px;
+
+  /* Layout */
+  --width-content: 1200px;
+  --width-narrow: 720px;
+  --gutter: 20px;
+  --radius: 2px;
+}
+
+@media (max-width: 767px) {
+  :root { --fs-body: 16px; --space-7: 80px; --gutter: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</code></pre>
+<blockquote>
+<p><strong>ダークモードは対応しません。</strong> 紙のような明るい地色がブランドの核であり、反転させると印象が損なわれます。<code>color-scheme: light</code> を明示し、ブラウザによる自動反転を防いでください。</p>
+</blockquote></div>
+<div class="doc"><h1>04. 技術要件・SEO・計測設計</h1>
+<h2>1. 推奨技術構成</h2>
+<p><code>02_サイト設計</code> §2 の <strong>案 B（WordPress + WooCommerce への統合）</strong> を前提とします。</p>
+<table>
+<thead>
+<tr>
+<th>領域</th>
+<th>採用</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CMS</td>
+<td>WordPress 6.x 以上</td>
+<td>現行資産を活かせる【推定: 現行も WordPress】</td>
+</tr>
+<tr>
+<td>EC</td>
+<td>WooCommerce</td>
+<td>商品点数 10〜20 点規模に適合</td>
+</tr>
+<tr>
+<td>テーマ</td>
+<td>オリジナル（ブロックテーマ）または軽量テーマの子テーマ</td>
+<td>多機能テーマは速度を損なうため避ける</td>
+</tr>
+<tr>
+<td>定期購入</td>
+<td>WooCommerce Subscriptions 等</td>
+<td>フェーズ 3</td>
+</tr>
+<tr>
+<td>決済</td>
+<td>Stripe（カード）＋ Amazon Pay ＋ PayPay</td>
+<td></td>
+</tr>
+<tr>
+<td>サーバー</td>
+<td>PHP 8.2 以上、HTTP/2、常時 SSL</td>
+<td></td>
+</tr>
+<tr>
+<td>CDN / キャッシュ</td>
+<td>ページキャッシュ＋画像 CDN</td>
+<td></td>
+</tr>
+<tr>
+<td>フォーム</td>
+<td>Contact Form 7 または Snow Monkey Forms</td>
+<td></td>
+</tr>
+<tr>
+<td>予備</td>
+<td>WP 管理画面の 2 要素認証、自動バックアップ（日次）</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>使用しないもの</h3>
+<table>
+<thead>
+<tr>
+<th>避けるもの</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ページビルダー（Elementor 等）の多用</td>
+<td>出力 HTML が肥大化し、表示速度を大きく損なう</td>
+</tr>
+<tr>
+<td>jQuery 依存のプラグイン</td>
+<td>不要な読み込みが増える</td>
+</tr>
+<tr>
+<td>自動翻訳ウィジェット</td>
+<td>品質が店の印象を損なう</td>
+</tr>
+<tr>
+<td>スライダー・カルーセル</td>
+<td>設計方針（静けさ）に反し、速度も落ちる</td>
+</tr>
+<tr>
+<td>フォントアイコン（Font Awesome 全体読み込み）</td>
+<td>必要な数個は SVG を直接埋め込む</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. サイト移行時のリダイレクト設計【必須】</h2>
+<p><strong>これを怠ると、検索流入と外部リンクを失います。</strong> 移行作業で最も重要な工程です。</p>
+<h3>2.1 ドメインの正規化</h3>
+<pre><code class="language-apache"># www あり → なし（301）
+RewriteCond %{HTTP_HOST} ^www\.muto-coffee\.com$ [NC]
+RewriteRule ^(.*)$ https://muto-coffee.com/$1 [R=301,L]
+</code></pre>
+<h3>2.2 旧 EC-CUBE URL の対応表</h3>
+<p>確認できた商品 ID から、最低限この対応表が必要です【要確認: 全 ID を棚卸しすること】。</p>
+<table>
+<thead>
+<tr>
+<th>旧 URL</th>
+<th>新 URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/shop/products/detail/8</code></td>
+<td><code>/beans/fukairi-blend/</code></td>
+</tr>
+<tr>
+<td><code>/shop/products/detail/10</code></td>
+<td><code>/beans/momozono-blend/</code></td>
+</tr>
+<tr>
+<td><code>/shop/products/detail/11</code></td>
+<td><code>/beans/decaf-mexico-triunfo-verde/</code></td>
+</tr>
+<tr>
+<td><code>/shop/products/detail/12</code></td>
+<td><code>/beans/kenya-kirinyaga-kamwangi/</code></td>
+</tr>
+<tr>
+<td><code>/shop/products/detail/15</code></td>
+<td><code>/beans/italian-blend/</code></td>
+</tr>
+<tr>
+<td><code>/shop/products/detail/17</code></td>
+<td><code>/beans/honduras-chaguite-ih90/</code></td>
+</tr>
+<tr>
+<td><code>/shop/products/detail/20</code></td>
+<td><code>/beans/tanzania-heights-blue-ribbon-aa/</code></td>
+</tr>
+<tr>
+<td><code>/shop/products/detail/34</code></td>
+<td><code>/beans/ethiopia-faro/</code></td>
+</tr>
+<tr>
+<td><code>/shop/products/detail/37</code></td>
+<td><code>/beans/ethiopia-goro-bedessa-natural/</code></td>
+</tr>
+<tr>
+<td><code>/shop/products/detail/41</code></td>
+<td><code>/beans/honduras-san-miguel-de-cerguapa/</code></td>
+</tr>
+<tr>
+<td><code>/shop/products/detail/55</code></td>
+<td><code>/beans/guatemala-huehuetenango-santa-barbara/</code></td>
+</tr>
+<tr>
+<td><code>/shop/</code></td>
+<td><code>/beans/</code></td>
+</tr>
+<tr>
+<td><code>/shop/help/about</code></td>
+<td><code>/about-shop/</code></td>
+</tr>
+<tr>
+<td><code>/shop/help/tradelaw</code></td>
+<td><code>/legal/tradelaw/</code></td>
+</tr>
+</tbody>
+</table>
+<h3>2.3 日本語スラッグ記事の扱い</h3>
+<p>現在の News 記事は日本語がそのままスラッグになっています【確認済】。</p>
+<pre><code>現状: https://muto-coffee.com/ルワンダ・コアカカ-ムガンザ/
+      → 実際には %E3%83%AB%E3%83%AF... と長大にエンコードされる
+</code></pre>
+<p><strong>問題点</strong> — SNS で共有したときに URL が壊れて見える、アクセス解析でページが判別しにくい、外部ツールとの連携で不具合が出やすい。</p>
+<p><strong>対応</strong> — 新規記事は英数字スラッグにします。既存記事は<strong>変更せず 301 でつなぐ</strong>か、そのまま残します。</p>
+<pre><code>新: /journal/beans/rwanda-koakaka-muganza/
+旧: /ルワンダ・コアカカ-ムガンザ/  → 301 → 新
+</code></pre>
+<blockquote>
+<p><strong>既存記事のスラッグを 301 なしで変更してはいけません。</strong> 検索順位と被リンクを失います。</p>
+</blockquote>
+<h3>2.4 移行チェック</h3>
+<ul>
+<li>[ ] 移行前に全 URL の一覧を取得（<code>tools/capture_site.py</code> または Screaming Frog 等）</li>
+<li>[ ] 対応表を作成し、リダイレクトを設定</li>
+<li>[ ] 公開後、旧 URL をすべて巡回し 301 が効いているか確認</li>
+<li>[ ] Google Search Console に新サイトマップを送信</li>
+<li>[ ] 公開後 4 週間、Search Console のカバレッジエラーを監視</li>
+</ul>
+<hr />
+<h2>3. 構造化データ（JSON-LD）</h2>
+<h3>3.1 店舗情報 — 課題 B の技術的解決</h3>
+<p>全ページに出力します。<strong>「本日の営業」ブロックと同じ設定値から生成してください。</strong></p>
+<pre><code class="language-json">{
+  &quot;@context&quot;: &quot;https://schema.org&quot;,
+  &quot;@type&quot;: &quot;CafeOrCoffeeShop&quot;,
+  &quot;@id&quot;: &quot;https://muto-coffee.com/#shop&quot;,
+  &quot;name&quot;: &quot;MUTO coffee roastery&quot;,
+  &quot;alternateName&quot;: &quot;ムトウ コーヒー ロースタリー&quot;,
+  &quot;url&quot;: &quot;https://muto-coffee.com/&quot;,
+  &quot;telephone&quot;: &quot;+81-3-6382-5439&quot;,
+  &quot;image&quot;: &quot;https://muto-coffee.com/images/shop-exterior.jpg&quot;,
+  &quot;priceRange&quot;: &quot;¥¥&quot;,
+  &quot;servesCuisine&quot;: &quot;Coffee&quot;,
+  &quot;address&quot;: {
+    &quot;@type&quot;: &quot;PostalAddress&quot;,
+    &quot;streetAddress&quot;: &quot;中野3-34-18&quot;,
+    &quot;addressLocality&quot;: &quot;中野区&quot;,
+    &quot;addressRegion&quot;: &quot;東京都&quot;,
+    &quot;postalCode&quot;: &quot;164-0001&quot;,
+    &quot;addressCountry&quot;: &quot;JP&quot;
+  },
+  &quot;geo&quot;: {
+    &quot;@type&quot;: &quot;GeoCoordinates&quot;,
+    &quot;latitude&quot;: &quot;【要確認: 実測値を入れる】&quot;,
+    &quot;longitude&quot;: &quot;【要確認: 実測値を入れる】&quot;
+  },
+  &quot;openingHoursSpecification&quot;: [
+    {
+      &quot;@type&quot;: &quot;OpeningHoursSpecification&quot;,
+      &quot;dayOfWeek&quot;: [&quot;Monday&quot;,&quot;Tuesday&quot;,&quot;Friday&quot;,&quot;Saturday&quot;,&quot;Sunday&quot;],
+      &quot;opens&quot;: &quot;11:30&quot;,
+      &quot;closes&quot;: &quot;19:00&quot;
+    }
+  ],
+  &quot;sameAs&quot;: [
+    &quot;https://www.instagram.com/mutocoffeeroastery/&quot;,
+    &quot;https://www.facebook.com/mutocoffeeroastery/&quot;
+  ]
+}
+</code></pre>
+<blockquote>
+<p><strong>【要確認】</strong> 営業時間・定休日は媒体間で食い違っています（<code>01_現状分析</code> 課題 B）。<strong>店舗に確認して確定した値</strong>を入れてください。ここが正しくないと、Google 上の表示も誤り続けます。
+臨時休業日は <code>specialOpeningHoursSpecification</code> で個別に指定できます。</p>
+</blockquote>
+<h3>3.2 商品情報</h3>
+<p>各商品詳細ページに出力します。</p>
+<pre><code class="language-json">{
+  &quot;@context&quot;: &quot;https://schema.org&quot;,
+  &quot;@type&quot;: &quot;Product&quot;,
+  &quot;name&quot;: &quot;エチオピア／ファロ&quot;,
+  &quot;image&quot;: [&quot;https://muto-coffee.com/images/beans/ethiopia-faro.jpg&quot;],
+  &quot;description&quot;: &quot;ジャスミンのような香りと、桃を思わせる甘さ。中煎り。&quot;,
+  &quot;brand&quot;: { &quot;@type&quot;: &quot;Brand&quot;, &quot;name&quot;: &quot;MUTO coffee roastery&quot; },
+  &quot;offers&quot;: {
+    &quot;@type&quot;: &quot;Offer&quot;,
+    &quot;url&quot;: &quot;https://muto-coffee.com/beans/ethiopia-faro/&quot;,
+    &quot;priceCurrency&quot;: &quot;JPY&quot;,
+    &quot;price&quot;: &quot;1850&quot;,
+    &quot;availability&quot;: &quot;https://schema.org/InStock&quot;,
+    &quot;seller&quot;: { &quot;@type&quot;: &quot;Organization&quot;, &quot;name&quot;: &quot;株式会社 Lounge M&quot; }
+  }
+}
+</code></pre>
+<h3>3.3 記事</h3>
+<p>ジャーナル記事には <code>Article</code>、パンくずには <code>BreadcrumbList</code> を出力します。</p>
+<h3>3.4 検証</h3>
+<p>実装後、以下で必ず検証してください。</p>
+<ul>
+<li>Google リッチリザルトテスト</li>
+<li>Schema.org Validator</li>
+<li>Google Search Console の「拡張」レポート</li>
+</ul>
+<hr />
+<h2>4. SEO 設計</h2>
+<h3>4.1 タイトル・メタディスクリプションの設計</h3>
+<table>
+<thead>
+<tr>
+<th>ページ</th>
+<th>title</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>トップ</td>
+<td>MUTO coffee roastery｜中野の自家焙煎コーヒー豆店</td>
+<td>中野駅から徒歩3分。オランダ GIESEN の焙煎機で毎朝焙煎するスペシャルティコーヒー専門店。常時10〜15種類の豆を販売、店内では淹れたての一杯と自家製ケーキを。</td>
+</tr>
+<tr>
+<td>豆一覧</td>
+<td>コーヒー豆一覧｜MUTO coffee roastery</td>
+<td>焙煎度・味わい・産地から選べる自家焙煎コーヒー豆。ブレンドからシングルオリジン、カフェインレスまで常時10種類以上。全国発送。</td>
+</tr>
+<tr>
+<td>商品詳細</td>
+<td>{商品名}｜コーヒー豆｜MUTO coffee roastery</td>
+<td>{フレーバー3語}。{焙煎度}。{産地の特徴を1文}。200g ¥{価格}。中野の自家焙煎店から焙煎したての豆をお届けします。</td>
+</tr>
+<tr>
+<td>店舗案内</td>
+<td>店舗案内・アクセス｜MUTO coffee roastery</td>
+<td>中野駅南口から徒歩3分、れんが坂を上った路地裏。営業時間11:30〜19:00、定休日は水曜・木曜。駅からの道順を写真でご案内します。</td>
+</tr>
+<tr>
+<td>MUTOについて</td>
+<td>MUTOについて｜中野の自家焙煎コーヒー店</td>
+<td>2014年、中野の路地裏に開業。オランダ GIESEN の焙煎機で毎朝焙煎しています。店主の経歴と、豆を選ぶ基準について。</td>
+</tr>
+<tr>
+<td>ジャーナル</td>
+<td>ジャーナル｜MUTO coffee roastery</td>
+<td>入荷した豆の紹介、焙煎の話、おいしい淹れ方。中野の自家焙煎コーヒー店からのお便りです。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ルール</strong></p>
+<ul>
+<li>title は <strong>32 文字前後</strong>（検索結果で省略されない長さ）。</li>
+<li>description は <strong>90〜120 文字</strong>。</li>
+<li><strong>全ページで「MUTO coffee roastery」の綴りを統一する</strong>（現在 News ページが「roastary」と誤記【確認済】）。</li>
+<li>description に必ず「中野」を入れる。地域検索が主要な流入経路になります。</li>
+</ul>
+<h3>4.2 狙うキーワード</h3>
+<p>詳細は <code>data/keyword_plan.csv</code>。主要なものは以下です。</p>
+<table>
+<thead>
+<tr>
+<th>優先</th>
+<th>キーワード</th>
+<th>意図</th>
+<th>受け皿</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最高</td>
+<td>中野 コーヒー豆</td>
+<td>地域 × 購買</td>
+<td>トップ / 豆一覧</td>
+</tr>
+<tr>
+<td>最高</td>
+<td>中野 自家焙煎</td>
+<td>地域 × 専門性</td>
+<td>トップ / MUTOについて</td>
+</tr>
+<tr>
+<td>高</td>
+<td>中野 カフェ 落ち着く</td>
+<td>地域 × 来店</td>
+<td>店舗案内</td>
+</tr>
+<tr>
+<td>高</td>
+<td>中野 スペシャルティコーヒー</td>
+<td>地域 × 専門性</td>
+<td>豆一覧</td>
+</tr>
+<tr>
+<td>高</td>
+<td>コーヒー豆 通販 スペシャルティ</td>
+<td>全国 × 購買</td>
+<td>豆一覧</td>
+</tr>
+<tr>
+<td>中</td>
+<td>エチオピア コーヒー 豆 通販</td>
+<td>産地指名</td>
+<td>各商品詳細</td>
+</tr>
+<tr>
+<td>中</td>
+<td>カフェインレス コーヒー豆 おいしい</td>
+<td>ニーズ</td>
+<td>カフェインレス商品</td>
+</tr>
+<tr>
+<td>中</td>
+<td>コーヒー 焙煎度 違い</td>
+<td>情報収集</td>
+<td>ジャーナル（淹れかた）</td>
+</tr>
+<tr>
+<td>中</td>
+<td>ハンドドリップ 淹れ方 コツ</td>
+<td>情報収集</td>
+<td>ジャーナル（淹れかた）</td>
+</tr>
+<tr>
+<td>中</td>
+<td>コーヒー豆 保存方法</td>
+<td>情報収集</td>
+<td>ジャーナル（淹れかた）</td>
+</tr>
+<tr>
+<td>低</td>
+<td>nakano coffee roastery</td>
+<td>訪日客</td>
+<td>/en/</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>「中野 ○○」で確実に 1 位を取ることが最優先です。</strong> 全国規模のキーワードで大手と競うより、地域で圧倒的な存在になる方が、来店と通販の両方に効きます。</p>
+</blockquote>
+<h3>4.3 内部リンク設計</h3>
+<pre><code>トップ ──→ 豆一覧 ──→ 商品詳細
+  │          ↑            │
+  │          └────────────┘（関連商品）
+  │
+  ├──→ ジャーナル記事 ──→ 商品詳細 ★最重要
+  │         ↑                 │
+  │         └─────────────────┘（関連記事）
+  │
+  ├──→ 店舗案内 ──→ アクセス
+  └──→ MUTOについて ──→ 焙煎について ──→ 豆一覧
+</code></pre>
+<p><strong>★ が付いた「記事 → 商品」の導線が、本改善の中核です。</strong> 記事で豆に興味を持った読者を、そのまま購入につなげます。現状はこの導線が存在しません（課題 A・D）。</p>
+<h3>4.4 その他の SEO 要件</h3>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>要件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>XML サイトマップ</td>
+<td>自動生成し Search Console に送信</td>
+</tr>
+<tr>
+<td>robots.txt</td>
+<td>サイトマップの場所を明記。カート・マイページは <code>noindex</code></td>
+</tr>
+<tr>
+<td>canonical</td>
+<td>全ページに自己参照 canonical を出力</td>
+</tr>
+<tr>
+<td>パンくず</td>
+<td>全下層ページに設置＋構造化データ</td>
+</tr>
+<tr>
+<td>404 ページ</td>
+<td>独自ページを用意し、豆一覧とトップへの導線を置く</td>
+</tr>
+<tr>
+<td>画像</td>
+<td>ファイル名を英数字の意味のある名前に（<code>IMG_2841.jpg</code> → <code>ethiopia-faro-beans.jpg</code>）</td>
+</tr>
+<tr>
+<td>Google ビジネスプロフィール</td>
+<td>サイトと<strong>同一の</strong>営業時間・電話・住所を登録し、常に同期させる</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Google ビジネスプロフィールの整備は、地域検索において公式サイトと同等以上に重要です。</strong> 課題 B の情報不一致は、ここが未整備であることも一因と考えられます【推定】。</p>
+</blockquote>
+<hr />
+<h2>5. 表示速度の要件</h2>
+<h3>5.1 目標値（Core Web Vitals）</h3>
+<table>
+<thead>
+<tr>
+<th>指標</th>
+<th>目標</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LCP</td>
+<td>2.5 秒以下</td>
+<td>主要な要素が表示されるまで</td>
+</tr>
+<tr>
+<td>INP</td>
+<td>200ms 以下</td>
+<td>操作への反応</td>
+</tr>
+<tr>
+<td>CLS</td>
+<td>0.1 以下</td>
+<td>レイアウトのずれ</td>
+</tr>
+<tr>
+<td>ページ総容量</td>
+<td>1.5MB 以下（トップ）</td>
+<td></td>
+</tr>
+<tr>
+<td>リクエスト数</td>
+<td>50 以下（トップ）</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>測定方法</strong> — PageSpeed Insights のモバイル計測。実装完了時とリリース後 1 か月時点で測定し、記録します。</p>
+<h3>5.2 実装要件</h3>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>要件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>画像形式</td>
+<td>WebP を第一候補、JPEG をフォールバック</td>
+</tr>
+<tr>
+<td>画像の遅延読み込み</td>
+<td>ファーストビュー外は <code>loading="lazy"</code></td>
+</tr>
+<tr>
+<td>ファーストビューの画像</td>
+<td><code>fetchpriority="high"</code> を指定し、<code>lazy</code> にしない</td>
+</tr>
+<tr>
+<td>画像の寸法指定</td>
+<td>全画像に <code>width</code> / <code>height</code>（CLS 対策）</td>
+</tr>
+<tr>
+<td>フォント</td>
+<td>サブセット化＋ <code>font-display: swap</code> ＋ <code>preload</code></td>
+</tr>
+<tr>
+<td>CSS</td>
+<td>クリティカル CSS をインライン化、残りは遅延読み込み</td>
+</tr>
+<tr>
+<td>JavaScript</td>
+<td><code>defer</code> 属性。不要なプラグインの JS を停止</td>
+</tr>
+<tr>
+<td>Google マップ</td>
+<td>遅延読み込み（クリックで初めて読み込む方式を推奨）</td>
+</tr>
+<tr>
+<td>Instagram 埋め込み</td>
+<td>公式スクリプトは重いため、<strong>画像を静的に取得して表示する方式</strong>を推奨</td>
+</tr>
+<tr>
+<td>キャッシュ</td>
+<td>ページキャッシュ有効化。静的ファイルは長期キャッシュ</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Instagram の公式埋め込みは 1 つで 500KB 前後を消費することがあります。</strong> 直近 6 枚の画像を定期取得して静的に表示する方式にすれば、見た目を保ったまま速度を維持できます。</p>
+</blockquote>
+<hr />
+<h2>6. 計測設計</h2>
+<h3>6.1 導入するもの</h3>
+<table>
+<thead>
+<tr>
+<th>ツール</th>
+<th>目的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Google Analytics 4</td>
+<td>行動分析・コンバージョン計測</td>
+</tr>
+<tr>
+<td>Google Search Console</td>
+<td>検索流入の把握、インデックス監視</td>
+</tr>
+<tr>
+<td>Google タグマネージャー</td>
+<td>タグの一元管理</td>
+</tr>
+<tr>
+<td>Google ビジネスプロフィール インサイト</td>
+<td>地域検索からの来店行動</td>
+</tr>
+</tbody>
+</table>
+<h3>6.2 計測するコンバージョン</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>イベント名</th>
+<th>内容</th>
+<th>重要度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>purchase</code></td>
+<td>購入完了（金額・商品も送信）</td>
+<td>最高</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>begin_checkout</code></td>
+<td>購入手続きの開始</td>
+<td>高</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>add_to_cart</code></td>
+<td>カート投入</td>
+<td>高</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>subscription_start</code></td>
+<td>定期便の申込（フェーズ3）</td>
+<td>最高</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>tel_tap</code></td>
+<td>電話番号のタップ</td>
+<td>高（来店指標）</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>map_open</code></td>
+<td>地図アプリを開いた</td>
+<td>高（来店指標）</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>access_view</code></td>
+<td>アクセスページの閲覧</td>
+<td>中（来店指標）</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>instagram_click</code></td>
+<td>Instagram への遷移</td>
+<td>中</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>contact_submit</code></td>
+<td>お問い合わせ送信</td>
+<td>中</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>restock_notify</code></td>
+<td>入荷通知の登録</td>
+<td>中</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>5〜7 は「来店の意図」を測る指標です。</strong> 実店舗を持つ事業では、EC の売上だけを見ていると改善の効果を見誤ります。<strong>電話タップと地図を開いた回数</strong>は、来店に最も近い行動として必ず計測してください。</p>
+</blockquote>
+<h3>6.3 KPI 設計</h3>
+<p><img alt="KPIツリー" src="images/11_kpi_tree.png" /></p>
+<pre><code>売上
+├─ EC 売上
+│   ├─ セッション数        ← SEO・SNS
+│   ├─ 商品ページ到達率     ← 一覧の設計（課題 C）
+│   ├─ カート投入率        ← 商品情報の充実度
+│   ├─ 購入完了率          ← 決済手段・送料表示（課題 H）
+│   └─ 客単価              ← セット商品・送料無料ライン
+│
+└─ 店舗売上
+    ├─ 来店意図指標        ← 電話タップ・地図起動
+    ├─ アクセスページ閲覧    ← 道順の分かりやすさ
+    └─ 営業情報の到達       ← 「本日の営業」表示（課題 B）
+</code></pre>
+<h3>6.4 目標値（リリース 6 か月後）</h3>
+<p><strong>【要確認】</strong> 現状値が不明なため、以下は改善幅の目安です。実装前に GA4 で現状を計測し、確定させてください。</p>
+<table>
+<thead>
+<tr>
+<th>指標</th>
+<th>目安</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自然検索セッション</td>
+<td>現状比 +50%</td>
+</tr>
+<tr>
+<td>商品ページ到達率</td>
+<td>30% 以上</td>
+</tr>
+<tr>
+<td>カート投入率</td>
+<td>8% 以上</td>
+</tr>
+<tr>
+<td>購入完了率（カート投入後）</td>
+<td>40% 以上</td>
+</tr>
+<tr>
+<td>電話タップ + 地図起動</td>
+<td>月 100 件以上</td>
+</tr>
+<tr>
+<td>Instagram フォロワー</td>
+<td>1,500 以上（現状 482）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>7. セキュリティ・保守</h2>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>要件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>常時 SSL</td>
+<td>HSTS を有効化</td>
+</tr>
+<tr>
+<td>管理画面</td>
+<td>2 要素認証、ログイン試行回数の制限、URL の変更</td>
+</tr>
+<tr>
+<td>更新</td>
+<td>WordPress 本体・プラグインを月次で更新</td>
+</tr>
+<tr>
+<td>バックアップ</td>
+<td>日次自動。復元手順を文書化しておく</td>
+</tr>
+<tr>
+<td>決済</td>
+<td>カード情報を自社サーバーに保持しない（Stripe 等のトークン方式）</td>
+</tr>
+<tr>
+<td>プライバシーポリシー</td>
+<td>Cookie 利用・アクセス解析について明記</td>
+</tr>
+<tr>
+<td>個人情報</td>
+<td>注文データの保管期間と廃棄方針を定める</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>【最優先の確認事項】</strong> 現行 EC-CUBE のバージョンを確認してください。2 系・3 系はサポートが終了しており、<strong>カード決済を扱うサイトとして重大なリスク</strong>があります。この確認結果によっては、デザイン改善よりも移行を先行させる判断が必要です。</p>
+</blockquote>
+<hr />
+<h2>8. 公開前チェックリスト</h2>
+<h3>表示・動作</h3>
+<ul>
+<li>[ ] 主要ブラウザ（Chrome / Safari / Edge / Firefox）で表示確認</li>
+<li>[ ] iOS Safari / Android Chrome で表示確認</li>
+<li>[ ] 画面幅 320px で横スクロールが発生しない</li>
+<li>[ ] 全ページのリンク切れがない</li>
+<li>[ ] フォームの送信と自動返信が動作する</li>
+<li>[ ] カート投入から購入完了までを実際に通す（テスト決済）</li>
+</ul>
+<h3>SEO・移行</h3>
+<ul>
+<li>[ ] 全ページに title / description / canonical</li>
+<li>[ ] 「roastery」の綴りが全ページで正しい</li>
+<li>[ ] 旧 URL からの 301 が全件動作</li>
+<li>[ ] XML サイトマップを Search Console に送信</li>
+<li>[ ] 構造化データがリッチリザルトテストを通過</li>
+<li>[ ] <code>noindex</code> が意図しないページに付いていない</li>
+</ul>
+<h3>情報の正確性</h3>
+<ul>
+<li>[ ] 営業時間・定休日が店舗の実態と一致（<strong>要ヒアリング</strong>）</li>
+<li>[ ] 全商品の価格が現行価格と一致（<strong>要ヒアリング</strong>）</li>
+<li>[ ] 電話番号・住所・郵便番号が正しい</li>
+<li>[ ] 特商法表記が最新の内容</li>
+<li>[ ] Google ビジネスプロフィールとサイトの情報が一致</li>
+</ul>
+<h3>性能・品質</h3>
+<ul>
+<li>[ ] PageSpeed Insights モバイルで LCP 2.5 秒以下</li>
+<li>[ ] 全画像に alt と width / height</li>
+<li>[ ] キーボードのみで全機能が操作できる</li>
+<li>[ ] GA4 のイベントが正しく発火する</li>
+</ul></div>
+<div class="doc"><h1>05. 実装ロードマップ・見積</h1>
+<p><img alt="ロードマップ" src="images/10_roadmap.png" /></p>
+<h2>1. フェーズ構成</h2>
+<p>改修を 3 つのフェーズに分けます。<strong>フェーズ 1 は単独で先行して実施でき、即効性があります。</strong></p>
+<table>
+<thead>
+<tr>
+<th>フェーズ</th>
+<th>名称</th>
+<th>期間目安</th>
+<th>狙い</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>0</strong></td>
+<td>現状確認</td>
+<td>1〜2 週</td>
+<td>【推定】【要確認】の解消。移行方針の確定</td>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td>応急処置</td>
+<td>1〜2 週</td>
+<td>低コストで確実な損失を止める</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>本体改修</td>
+<td>8〜12 週</td>
+<td>サイト統合と EC 再設計</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>拡張</td>
+<td>4〜6 週</td>
+<td>定期便・決済拡充・多言語</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. フェーズ 0: 現状確認（1〜2 週）</h2>
+<p><strong>設計を実装に移す前に、必ずここを通してください。</strong> 本設計書には【推定】【要確認】のラベルが付いた項目があり、それらが確定しないと工数も方針も定まりません。</p>
+<h3>2.1 技術面の確認</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>確認事項</th>
+<th>確認方法</th>
+<th>判断への影響</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>WordPress のバージョン・テーマ・プラグイン一覧</td>
+<td>管理画面</td>
+<td>移行工数</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>EC-CUBE のメジャーバージョン</strong></td>
+<td>管理画面またはソース</td>
+<td><strong>最重要。2/3 系ならセキュリティ対応を最優先</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>商品データの件数と項目</td>
+<td>管理画面</td>
+<td>移行工数</td>
+</tr>
+<tr>
+<td>4</td>
+<td>顧客データ・注文履歴の件数</td>
+<td>管理画面</td>
+<td>移行工数・個人情報の扱い</td>
+</tr>
+<tr>
+<td>5</td>
+<td>サーバー環境（PHP バージョン、容量）</td>
+<td>契約情報</td>
+<td>移行可否</td>
+</tr>
+<tr>
+<td>6</td>
+<td>全 URL の一覧</td>
+<td><code>tools/capture_site.py</code> またはクロールツール</td>
+<td>リダイレクト設計</td>
+</tr>
+<tr>
+<td>7</td>
+<td>現状の GA4 / Search Console 設定</td>
+<td>各管理画面</td>
+<td>効果測定の基準値</td>
+</tr>
+<tr>
+<td>8</td>
+<td>画像素材の保有状況（元データの有無）</td>
+<td>ヒアリング</td>
+<td>撮影の要否</td>
+</tr>
+</tbody>
+</table>
+<h3>2.2 店舗へのヒアリング項目</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>項目</th>
+<th>なぜ必要か</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>営業時間・定休日の正確な現行値</strong></td>
+<td>媒体間で食い違っている（課題 B）。すべての起点</td>
+</tr>
+<tr>
+<td>2</td>
+<td>年末年始・臨時休業の運用ルール</td>
+<td>営業カレンダーの設計</td>
+</tr>
+<tr>
+<td>3</td>
+<td>店内メニューの全品目と現行価格</td>
+<td>メニューページ</td>
+</tr>
+<tr>
+<td>4</td>
+<td>全商品の産地情報（国／地区／農園／標高／品種／精製）</td>
+<td>商品詳細の設計（課題 C）。<strong>店舗しか持っていない情報</strong></td>
+</tr>
+<tr>
+<td>5</td>
+<td>全商品のフレーバーノート（3 語）と焙煎度</td>
+<td>一覧の絞り込み</td>
+</tr>
+<tr>
+<td>6</td>
+<td>席数・Wi-Fi・電源・喫煙・支払方法</td>
+<td>店舗案内</td>
+</tr>
+<tr>
+<td>7</td>
+<td>現在の月間受注数・客単価</td>
+<td>効果測定の基準値</td>
+</tr>
+<tr>
+<td>8</td>
+<td>定期便への意向（対応可能な発送頻度・数量）</td>
+<td>フェーズ 3 の設計</td>
+</tr>
+<tr>
+<td>9</td>
+<td>卸売の有無と受付方針</td>
+<td>お問い合わせの設計</td>
+</tr>
+<tr>
+<td>10</td>
+<td>撮影の可否と希望日</td>
+<td>素材準備</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>項目 4・5 は全商品分が必要です。</strong> 入力用のフォーマットを <code>data/products.csv</code> に用意しました。店舗に記入してもらってください。ここが埋まらないと、課題 C（豆を選べない）は解決できません。</p>
+</blockquote>
+<h3>2.3 このフェーズの成果物</h3>
+<ul>
+<li>現状仕様書（技術構成・全 URL 一覧・データ件数）</li>
+<li>ヒアリング結果（確定した営業時間・全商品情報）</li>
+<li>移行方針の決定（案 A / B / C のいずれか）</li>
+<li>リダイレクト対応表の初版</li>
+</ul>
+<hr />
+<h2>3. フェーズ 1: 応急処置（1〜2 週）</h2>
+<p><strong>現行サイトに手を入れるだけで実施できます。</strong> 本体改修を待たずに先行してください。</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>作業</th>
+<th>対応する課題</th>
+<th>工数目安</th>
+<th>効果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>News ページの title を「roastary」→「roastery」に修正</td>
+<td>G</td>
+<td>0.5 時間</td>
+<td>品質印象</td>
+</tr>
+<tr>
+<td>2</td>
+<td>営業時間・定休日をトップの目立つ位置に明記</td>
+<td>B</td>
+<td>2 時間</td>
+<td><strong>来店機会の回復</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>構造化データ（<code>CafeOrCoffeeShop</code>）を追加</td>
+<td>B</td>
+<td>3 時間</td>
+<td>検索結果での正確な表示</td>
+</tr>
+<tr>
+<td>4</td>
+<td>www あり／なしの 301 統一</td>
+<td>A</td>
+<td>2 時間</td>
+<td>SEO 評価の集約</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Google ビジネスプロフィールの情報を修正・同期</td>
+<td>B</td>
+<td>2 時間</td>
+<td><strong>地域検索での正確な表示</strong></td>
+</tr>
+<tr>
+<td>6</td>
+<td>コロナ関連の古い記事を整理（非公開または注記）</td>
+<td>D</td>
+<td>1 時間</td>
+<td>情報の鮮度</td>
+</tr>
+<tr>
+<td>7</td>
+<td>トップからショップへの導線を明確化</td>
+<td>A</td>
+<td>2 時間</td>
+<td>EC 流入</td>
+</tr>
+<tr>
+<td>8</td>
+<td>GA4 とイベント計測を設置（基準値の取得開始）</td>
+<td>—</td>
+<td>4 時間</td>
+<td><strong>以降の効果測定の前提</strong></td>
+</tr>
+<tr>
+<td>9</td>
+<td>Instagram へのリンクを全ページのフッターに追加</td>
+<td>E</td>
+<td>1 時間</td>
+<td>SNS 送客</td>
+</tr>
+</tbody>
+</table>
+<p><strong>合計: 約 18 時間（2〜3 人日）</strong></p>
+<blockquote>
+<p><strong>#8 は最優先で実施してください。</strong> 改修前の数値がなければ、改修の効果を証明できません。フェーズ 2 の着手より <strong>最低 1 か月前</strong>に設置し、基準値を取得しておくのが理想です。</p>
+</blockquote>
+<hr />
+<h2>4. フェーズ 2: 本体改修（8〜12 週）</h2>
+<h3>4.1 作業内訳</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>作業</th>
+<th>工数目安（人日）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>要件定義・仕様確定</td>
+<td>5</td>
+</tr>
+<tr>
+<td>2</td>
+<td>情報設計・ワイヤーフレーム確定</td>
+<td>4</td>
+</tr>
+<tr>
+<td>3</td>
+<td>デザイン（トップ／下層／商品／記事）</td>
+<td>12</td>
+</tr>
+<tr>
+<td>4</td>
+<td>撮影（店舗・商品・道順）</td>
+<td>2</td>
+</tr>
+<tr>
+<td>5</td>
+<td>WordPress テーマ実装</td>
+<td>15</td>
+</tr>
+<tr>
+<td>6</td>
+<td>WooCommerce 構築・商品登録</td>
+<td>8</td>
+</tr>
+<tr>
+<td>7</td>
+<td>「本日の営業」自動判定機能の実装</td>
+<td>3</td>
+</tr>
+<tr>
+<td>8</td>
+<td>豆一覧の絞り込み機能の実装</td>
+<td>4</td>
+</tr>
+<tr>
+<td>9</td>
+<td>EC-CUBE からのデータ移行</td>
+<td>5</td>
+</tr>
+<tr>
+<td>10</td>
+<td>リダイレクト設定・検証</td>
+<td>3</td>
+</tr>
+<tr>
+<td>11</td>
+<td>構造化データ・SEO 設定</td>
+<td>3</td>
+</tr>
+<tr>
+<td>12</td>
+<td>英語ページ作成</td>
+<td>2</td>
+</tr>
+<tr>
+<td>13</td>
+<td>表示速度の最適化</td>
+<td>3</td>
+</tr>
+<tr>
+<td>14</td>
+<td>テスト（表示・決済・フォーム）</td>
+<td>5</td>
+</tr>
+<tr>
+<td>15</td>
+<td>公開作業・公開後の監視</td>
+<td>3</td>
+</tr>
+<tr>
+<td>16</td>
+<td>運用マニュアル作成・引き継ぎ</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>合計: 約 80 人日</strong></p>
+<h3>4.2 費用感</h3>
+<table>
+<thead>
+<tr>
+<th>発注先</th>
+<th>目安</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>制作会社（中規模）</td>
+<td>150〜250 万円</td>
+<td>撮影・ディレクション込み</td>
+</tr>
+<tr>
+<td>制作会社（小規模）・フリーランス</td>
+<td>80〜150 万円</td>
+<td>撮影は別途手配の場合あり</td>
+</tr>
+<tr>
+<td>段階発注（フェーズ 2 を分割）</td>
+<td>各 40〜80 万円</td>
+<td>予算を分散できる</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>金額は 2026 年時点の一般的な相場からの目安です。<strong>フェーズ 0 の結果（特にデータ移行量と EC-CUBE のバージョン）によって上下します。</strong></p>
+</blockquote>
+<h3>4.3 段階発注する場合の分割案</h3>
+<p>予算を一度に確保できない場合、以下の順で分割できます。</p>
+<pre><code>2-a: コーポレート側の刷新（トップ・店舗案内・About・ジャーナル）  約 35 人日
+     → ショップは現行のまま残し、デザインだけ寄せる
+
+2-b: EC の再構築と統合（豆一覧・商品詳細・移行・リダイレクト）    約 35 人日
+     → ここでサイトが 1 つになる
+
+2-c: 仕上げ（英語ページ・速度最適化・計測）                     約 10 人日
+</code></pre>
+<p><strong>2-a を先に実施しても効果は出ます</strong>が、課題 A（分断）の解消は 2-b まで完了しません。</p>
+<hr />
+<h2>5. フェーズ 3: 拡張（4〜6 週）</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>作業</th>
+<th>対応する課題</th>
+<th>工数目安</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>決済手段の追加（Amazon Pay / PayPay / コンビニ払い）</td>
+<td>H</td>
+<td>4 人日</td>
+</tr>
+<tr>
+<td>2</td>
+<td>定期便の設計・実装</td>
+<td>H</td>
+<td>10 人日</td>
+</tr>
+<tr>
+<td>3</td>
+<td>飲み比べセット・ギフト商品の設計</td>
+<td>C</td>
+<td>3 人日</td>
+</tr>
+<tr>
+<td>4</td>
+<td>入荷通知メールの仕組み</td>
+<td>C</td>
+<td>3 人日</td>
+</tr>
+<tr>
+<td>5</td>
+<td>メールマガジン（新入荷の案内）</td>
+<td>D・E</td>
+<td>4 人日</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Instagram 連携の強化</td>
+<td>E</td>
+<td>2 人日</td>
+</tr>
+</tbody>
+</table>
+<p><strong>合計: 約 26 人日 / 50〜90 万円</strong></p>
+<blockquote>
+<p><strong>定期便が最も投資対効果が高い施策です。</strong> 一度獲得した顧客が継続的に購入する構造を作れるため、フェーズ 3 の中では優先度が最も高くなります。</p>
+</blockquote>
+<hr />
+<h2>6. 運用設計（公開後）</h2>
+<p>改修は公開して終わりではありません。<strong>運用が続かなければ、サイトは半年で元の状態に戻ります。</strong></p>
+<h3>6.1 更新の負荷を下げる設計</h3>
+<table>
+<thead>
+<tr>
+<th>更新内容</th>
+<th>現状</th>
+<th>改善後</th>
+<th>所要時間</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>臨時休業の告知</td>
+<td>記事を書く</td>
+<td>管理画面でチェックを入れる</td>
+<td>1 分</td>
+</tr>
+<tr>
+<td>新しい豆の入荷</td>
+<td>WordPress と EC-CUBE の両方</td>
+<td>商品を登録すると一覧に自動反映</td>
+<td>10 分</td>
+</tr>
+<tr>
+<td>豆の紹介記事</td>
+<td>—</td>
+<td>テンプレートに沿って書く</td>
+<td>20〜30 分</td>
+</tr>
+<tr>
+<td>営業時間の変更</td>
+<td>複数箇所を手で修正</td>
+<td>設定 1 箇所を変更 → 全箇所に反映</td>
+<td>2 分</td>
+</tr>
+<tr>
+<td>価格改定</td>
+<td>複数箇所</td>
+<td>商品データ 1 箇所</td>
+<td>3 分</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>「設定は 1 箇所、表示は自動」</strong> を全体の原則とします。これが運用が続くかどうかを決めます。</p>
+</blockquote>
+<h3>6.2 更新の頻度目安</h3>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>頻度</th>
+<th>担当</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>豆の紹介記事</td>
+<td>月 2〜4 本</td>
+<td>店主</td>
+</tr>
+<tr>
+<td>淹れ方・道具の記事</td>
+<td>月 1 本</td>
+<td>店主または外注</td>
+</tr>
+<tr>
+<td>Instagram 投稿</td>
+<td><strong>週 3〜5 回</strong></td>
+<td>店主</td>
+</tr>
+<tr>
+<td>商品の在庫更新</td>
+<td>随時</td>
+<td>店主</td>
+</tr>
+<tr>
+<td>営業カレンダーの登録</td>
+<td>月初にまとめて</td>
+<td>店主</td>
+</tr>
+<tr>
+<td>プラグイン更新・バックアップ確認</td>
+<td>月 1 回</td>
+<td>保守業者</td>
+</tr>
+<tr>
+<td>GA4 の確認・振り返り</td>
+<td>月 1 回</td>
+<td>店主＋業者</td>
+</tr>
+</tbody>
+</table>
+<h3>6.3 Instagram 運用の具体案 — 課題 E への対応</h3>
+<p>現状はフォロワー 482・投稿 9 件【確認済】。この店の素材の豊かさを考えると、伸びしろがそのまま残っています。</p>
+<p><strong>毎日撮れるもの</strong></p>
+<table>
+<thead>
+<tr>
+<th>曜日の目安</th>
+<th>内容</th>
+<th>撮影の手間</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>焙煎した日</td>
+<td>GIESEN で焼いている様子、焼き上がった豆</td>
+<td>30 秒</td>
+</tr>
+<tr>
+<td>入荷した日</td>
+<td>生豆の袋、産地の情報</td>
+<td>30 秒</td>
+</tr>
+<tr>
+<td>いつでも</td>
+<td>ドリップの手元、湯気</td>
+<td>30 秒</td>
+</tr>
+<tr>
+<td>いつでも</td>
+<td>ケーキと一杯</td>
+<td>30 秒</td>
+</tr>
+<tr>
+<td>週 1</td>
+<td>豆の紹介（記事へ誘導）</td>
+<td>3 分</td>
+</tr>
+</tbody>
+</table>
+<p><strong>運用のルール</strong></p>
+<ul>
+<li><strong>完璧な写真を目指さない。</strong> 続くことの方が重要です。</li>
+<li>投稿文には必ず <strong>#中野カフェ #中野コーヒー #自家焙煎</strong> など地域タグを入れる。</li>
+<li>プロフィール欄のリンクは<strong>豆一覧ページ</strong>に設定する（トップではなく）。</li>
+<li>豆の紹介記事を書いたら、必ず Instagram でも告知する。</li>
+</ul>
+<h3>6.4 振り返りの進め方</h3>
+<p>月 1 回、以下を確認します。所要 30 分程度です。</p>
+<ol>
+<li>自然検索のセッション数（前月比）</li>
+<li>電話タップ数・地図起動数（来店指標）</li>
+<li>商品ページの閲覧数（どの豆が見られているか）</li>
+<li>カート投入率・購入完了率</li>
+<li>記事ごとの閲覧数（どの話題が読まれているか）</li>
+<li>Instagram のフォロワー増減</li>
+</ol>
+<p><strong>見るべきは「どの豆の記事が読まれ、その豆が売れたか」です。</strong> これが分かれば、次に何を書くべきかが決まります。</p>
+<hr />
+<h2>7. 費用総括</h2>
+<table>
+<thead>
+<tr>
+<th>フェーズ</th>
+<th>内容</th>
+<th>費用目安</th>
+<th>期間</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>現状確認</td>
+<td>10〜20 万円</td>
+<td>1〜2 週</td>
+</tr>
+<tr>
+<td>1</td>
+<td>応急処置</td>
+<td>10〜20 万円</td>
+<td>1〜2 週</td>
+</tr>
+<tr>
+<td>2</td>
+<td>本体改修</td>
+<td>80〜250 万円</td>
+<td>8〜12 週</td>
+</tr>
+<tr>
+<td>3</td>
+<td>拡張</td>
+<td>50〜90 万円</td>
+<td>4〜6 週</td>
+</tr>
+<tr>
+<td>—</td>
+<td>保守（月額）</td>
+<td>1〜3 万円／月</td>
+<td>継続</td>
+</tr>
+</tbody>
+</table>
+<p><strong>フェーズ 0＋1 だけでも先行実施する価値があります。</strong> 合計 20〜40 万円・1 か月程度で、課題 B（情報の不一致による来店機会の損失）と課題 G（誤字）は解消できます。</p>
+<hr />
+<h2>8. 確認事項チェックリスト</h2>
+<p>実装着手前に、本設計書の【推定】【要確認】をすべて潰してください。</p>
+<h3>【推定】— 現物確認が必要</h3>
+<ul>
+<li>[ ] コーポレートサイトは WordPress か（バージョン・テーマ・プラグイン）</li>
+<li>[ ] ショップは EC-CUBE か（<strong>メジャーバージョン</strong>）</li>
+<li>[ ] 2 システム間の連携の有無</li>
+<li>[ ] 記事から商品へのリンクが存在するか</li>
+<li>[ ] 商品一覧に絞り込み機能があるか</li>
+<li>[ ] 英語ページが存在しないこと</li>
+<li>[ ] ゲスト購入の可否</li>
+<li>[ ] 送料・送料無料ラインの設定</li>
+<li>[ ] 挽き方の指定が可能か</li>
+<li>[ ] Google ビジネスプロフィールの整備状況</li>
+</ul>
+<h3>【要確認】— 店舗へのヒアリングが必要</h3>
+<ul>
+<li>[ ] 営業時間の正確な現行値（19:00 か 19:30 か、L.O. は何時か）</li>
+<li>[ ] 定休日の正確な現行値（水・木か、木＋第1第3水か）</li>
+<li>[ ] 店内メニューの全品目と現行価格</li>
+<li>[ ] 全商品の産地情報（<code>data/products.csv</code> に記入）</li>
+<li>[ ] 全商品のフレーバーノートと焙煎度</li>
+<li>[ ] 席数・Wi-Fi・電源・喫煙・支払方法</li>
+<li>[ ] 店舗の緯度・経度（構造化データ用）</li>
+<li>[ ] 現在の月間受注数・客単価</li>
+<li>[ ] 定期便への意向</li>
+<li>[ ] 卸売の受付方針</li>
+</ul>
+<h3>取得できなかった情報（本セッションの環境制約）</h3>
+<ul>
+<li>[ ] 現行サイトのスクリーンショット → <code>tools/capture_site.py</code> をローカルで実行</li>
+<li>[ ] 掲載画像の実体と最適化状況 → 同上</li>
+<li>[ ] HTML / CSS ソース → 同上</li>
+<li>[ ] Core Web Vitals の実測値 → PageSpeed Insights で測定</li>
+</ul></div>
+</div>

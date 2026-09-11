@@ -1,0 +1,210 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<link rel="stylesheet" href="_base.css">
+<style>
+.sheet{width:1420px}
+.stage{display:grid;grid-template-columns:1fr 330px;gap:32px;align-items:start}
+.browser{border:2px solid var(--roast);border-radius:5px;overflow:hidden;background:#fff}
+.chrome{background:var(--cream);padding:9px 14px;display:flex;gap:8px;align-items:center;border-bottom:1.5px solid var(--line)}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.urlbar{flex:1;background:#fff;border:1px solid var(--line);border-radius:12px;padding:4px 12px;
+  font-family:monospace;font-size:11px;color:var(--ash);margin-left:8px}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--line)}
+.logo{font-size:15px;font-weight:700}
+.nav ul{display:flex;gap:18px;list-style:none;font-size:12px}
+.crumb{padding:10px 20px;font-size:11px;color:var(--ash);border-bottom:1px solid var(--line)}
+.fv{display:grid;grid-template-columns:1fr 1fr;gap:26px;padding:22px 20px 26px}
+.gal .ph{height:260px;font-size:11px}
+.thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
+.thumbs .ph{height:56px;font-size:9px}
+.info .tg{font-size:10px;color:var(--ash);letter-spacing:.12em;display:block;margin-bottom:6px}
+.info h1{font-size:26px;font-weight:700;line-height:1.35;margin-bottom:9px}
+.flavor{font-size:14px;color:var(--bean);letter-spacing:.06em;margin-bottom:18px}
+.bars{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:13px 0;margin-bottom:17px}
+.bar{display:flex;align-items:center;gap:12px;margin-bottom:8px;font-size:12px}
+.bar:last-child{margin-bottom:0}
+.bar>span:first-child{flex:0 0 52px;color:var(--ash)}
+.pips{display:flex;gap:4px}
+.pips i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.pips i.on{background:var(--r3)}
+.pips i.o2{background:var(--bean)}
+.bar em{font-style:normal;font-size:11.5px;color:var(--ash);margin-left:3px}
+.opt{margin-bottom:14px}
+.opt b{font-size:11.5px;display:block;margin-bottom:7px}
+.chips{display:flex;gap:8px}
+.chip{border:1.5px solid var(--line);border-radius:2px;padding:8px 17px;font-size:12.5px}
+.chip.on{border-color:var(--ember);background:#FDF4EF;font-weight:700;color:var(--ember)}
+.sel{border:1.5px solid var(--line);border-radius:2px;padding:9px 13px;font-size:12.5px;
+  display:flex;justify-content:space-between;align-items:center;width:220px}
+.price{font-size:28px;font-weight:700;margin:18px 0 13px}
+.price small{font-size:12px;font-weight:400;color:var(--ash);margin-left:7px}
+.cta{display:flex;flex-direction:column;gap:9px;margin-bottom:15px}
+.cta .btn{height:48px;font-size:14px}
+.cta .btn-p{background:var(--ember);color:#fff}
+.trust{font-size:11.5px;color:var(--ash);line-height:2}
+.trust span{display:block}
+.detail{border-top:1.5px solid var(--roast);padding:24px 20px}
+.blk{margin-bottom:26px}
+.blk h2{font-size:16px;font-weight:700;margin-bottom:11px;padding-left:11px;border-left:4px solid var(--bean)}
+.blk p{font-size:12px;color:var(--ash);line-height:2}
+table.o{width:100%;border-collapse:collapse;font-size:12px}
+table.o th,table.o td{border:1px solid var(--line);padding:9px 12px;text-align:left}
+table.o th{background:var(--cream);width:120px;font-weight:700}
+.brewing{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.brew{border:1.5px solid var(--line);border-radius:2px;padding:13px 14px}
+.brew b{font-size:12.5px;display:block;margin-bottom:8px}
+.brew dl{font-size:11.5px;line-height:1.9;color:var(--ash)}
+.brew dt{display:inline;font-weight:700;color:var(--roast)}
+.brew dd{display:inline;margin-left:5px}
+.brew dd::after{content:"";display:block}
+.relbox{border:2px solid var(--ember);border-radius:3px;background:#FDF4EF;padding:16px 18px}
+.relbox b{font-size:13.5px;color:var(--ember);display:block;margin-bottom:11px}
+.relart{display:flex;gap:13px;align-items:center;background:#fff;border:1.5px solid var(--line);
+  border-radius:2px;padding:11px 13px}
+.relart .ph{width:74px;height:56px;flex:0 0 auto;font-size:9px}
+.relart .t{font-size:12.5px;font-weight:700;margin-bottom:3px}
+.relart .d{font-size:10.5px;color:var(--ash)}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.mini{border:1.5px solid var(--line);border-radius:2px;overflow:hidden}
+.mini .ph{height:78px;font-size:9.5px}
+.mini .c{padding:10px 11px}
+.mini .nm{font-size:12px;font-weight:700;line-height:1.4;margin-bottom:5px}
+.mini .pr{font-size:13px;font-weight:700}
+/* spec */
+.spec h3{font-size:15px;border-bottom:2px solid var(--roast);padding-bottom:8px;margin-bottom:14px}
+.sp{border:1.5px solid var(--line);border-radius:3px;background:#fff;padding:13px 15px;margin-bottom:11px}
+.sp b{font-size:13px;display:block;margin-bottom:5px}
+.sp p{font-size:11px;color:var(--ash);line-height:1.85}
+.sp.key{border-color:var(--ember);border-left-width:5px;background:#FDF4EF}
+.sp.key b{color:var(--ember)}
+.sp.warn{border-color:var(--closed);border-left-width:5px;background:#FBF6EC}
+.sp.warn b{color:var(--closed)}
+</style></head><body><div class="sheet">
+<div class="doc-head">
+  <div><div class="doc-title">商品詳細ページ ワイヤーフレーム</div>
+  <div class="doc-sub">/beans/{スラッグ}/ ／ 味と産地を「見える」形にする</div></div>
+  <div class="doc-meta">図 07<br>2026-09-11</div>
+</div>
+
+<div class="stage">
+<div class="browser">
+  <div class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    <span class="urlbar">https://muto-coffee.com/beans/ethiopia-faro/</span></div>
+  <div class="nav"><span class="logo">MUTO coffee roastery</span>
+    <ul><li>豆を買う</li><li>店舗案内</li><li>MUTOについて</li><li>ジャーナル</li><li>EN</li><li>カート 1</li></ul></div>
+  <div class="crumb">ホーム ＞ 豆を買う ＞ シングルオリジン ＞ エチオピア／ファロ</div>
+
+  <div class="fv">
+    <div class="gal"><div class="ph">商品写真（豆のアップ）</div>
+      <div class="thumbs"><div class="ph">豆</div><div class="ph">パッケージ</div>
+        <div class="ph">淹れた一杯</div><div class="ph">産地</div></div></div>
+
+    <div class="info">
+      <span class="tg">シングルオリジン</span>
+      <h1>エチオピア／ファロ</h1>
+      <div class="flavor">ジャスミン ／ 桃 ／ 紅茶</div>
+
+      <div class="bars">
+        <div class="bar"><span>焙煎度</span>
+          <span class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
+          <em>中煎り</em></div>
+        <div class="bar"><span>酸味</span>
+          <span class="pips"><i class="o2"></i><i class="o2"></i><i class="o2"></i><i class="o2"></i><i></i></span></div>
+        <div class="bar"><span>苦味</span>
+          <span class="pips"><i class="o2"></i><i class="o2"></i><i></i><i></i><i></i></span></div>
+        <div class="bar"><span>コク</span>
+          <span class="pips"><i class="o2"></i><i class="o2"></i><i class="o2"></i><i></i><i></i></span></div>
+      </div>
+
+      <div class="opt"><b>内容量</b>
+        <div class="chips"><span class="chip">100g</span><span class="chip on">200g</span><span class="chip">500g</span></div></div>
+      <div class="opt"><b>挽き方</b>
+        <div class="sel"><span>豆のまま</span><span>▾</span></div></div>
+
+      <div class="price">¥1,850<small>税込</small></div>
+      <div class="cta"><span class="btn btn-p">カートに入れる</span>
+        <span class="btn btn-s">定期便で購入する</span></div>
+      <div class="trust">
+        <span>🚚　3 営業日以内に発送します（ヤマト運輸）</span>
+        <span>☕　焙煎したての豆をお届けします</span>
+        <span>💳　クレジットカード / Amazon Pay / PayPay</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail">
+    <div class="blk"><h2>味わい</h2>
+      <p>【要記入】飲んだときの印象を、専門用語を使わずに 2〜3 文で。<br>
+      例: 口に含むとジャスミンのような華やかな香りが立ちのぼり、飲み込んだあとに熟した桃のような甘さが残ります。
+      冷めるにつれて紅茶のような印象に変わっていきます。</p></div>
+
+    <div class="blk"><h2>産地について</h2>
+      <table class="o">
+        <tr><th>国</th><td>エチオピア</td></tr>
+        <tr><th>地域・農園</th><td>ファロ【要記入: 正式な農園名・地区名】</td></tr>
+        <tr><th>標高</th><td>【要記入】m</td></tr>
+        <tr><th>品種</th><td>【要記入】</td></tr>
+        <tr><th>精製方法</th><td>【要記入】ウォッシュト / ナチュラル など</td></tr>
+        <tr><th>生産者</th><td>【要記入】</td></tr>
+      </table></div>
+
+    <div class="blk"><h2>おすすめの淹れ方</h2>
+      <div class="brewing">
+        <div class="brew"><b>ハンドドリップ</b>
+          <dl><dt>湯温</dt><dd>【要記入】℃</dd><dt>粉量</dt><dd>【要記入】g / 湯【要記入】ml</dd>
+          <dt>挽き目</dt><dd>中挽き</dd><dt>時間</dt><dd>【要記入】</dd></dl></div>
+        <div class="brew"><b>フレンチプレス</b>
+          <dl><dt>湯温</dt><dd>【要記入】℃</dd><dt>粉量</dt><dd>【要記入】g</dd>
+          <dt>挽き目</dt><dd>粗挽き</dd><dt>時間</dt><dd>4 分</dd></dl></div>
+        <div class="brew"><b>エスプレッソ</b>
+          <dl><dt>適性</dt><dd>【要記入】</dd><dt>挽き目</dt><dd>細挽き</dd></dl></div>
+      </div></div>
+
+    <div class="blk"><h2>焙煎について</h2>
+      <p>【要記入】この豆をどう焼いているか、なぜそう焼いたか。店主の言葉で 2〜3 文。<br>
+      ここが他店との差別化になる部分です。GIESEN の焙煎機で毎朝焼いているという事実を、豆ごとの判断として語ります。</p></div>
+
+    <div class="blk"><div class="relbox"><b>この豆について書いた記事</b>
+      <div class="relart"><div class="ph">記事画像</div>
+        <div><div class="t">エチオピアの豆が届きました</div>
+        <div class="d">豆のはなし ／ 産地の背景と、今年の出来について</div></div></div></div></div>
+
+    <div class="blk"><h2>一緒に選ばれている豆</h2>
+      <div class="g3">
+        <div class="mini"><div class="ph">商品写真</div><div class="c">
+          <div class="nm">ケニア／キリニャガ</div><div class="pr">¥2,200</div></div></div>
+        <div class="mini"><div class="ph">商品写真</div><div class="c">
+          <div class="nm">ももぞのブレンド</div><div class="pr">¥1,800</div></div></div>
+        <div class="mini"><div class="ph">商品写真</div><div class="c">
+          <div class="nm">世界を巡る（飲み比べ）</div><div class="pr">¥2,800</div></div></div>
+      </div></div>
+  </div>
+</div>
+
+<div class="spec">
+  <h3>このページの要件</h3>
+  <div class="sp key"><b>味わいを 4 本のバーで見せる</b>
+    <p>焙煎度・酸味・苦味・コクの 4 軸を記号で表します。「酸味 4」と書くより「●●●●○」の方が直感的です。
+    一覧では焙煎度のみに絞り、詳細ページで全 4 軸を出します。</p></div>
+  <div class="sp key"><b>産地情報を表形式にする</b>
+    <p>現状は「エチオピア／ゴロ・ペデッサ ナチュラル」のように<b>商品名に情報が埋め込まれている</b>状態で、
+    機械可読でも比較可能でもありません。項目に分けることで、絞り込みにも構造化データにも使えるようになります。</p></div>
+  <div class="sp"><b>内容量の選択肢を増やす</b>
+    <p>100g を用意すると、初めての客が試しやすくなります。500g は常連のリピート単価を上げます。</p></div>
+  <div class="sp"><b>挽き方を指定できるように</b>
+    <p>店頭では「淹れ方を伝えれば挽いてくれる」体験があります。通販でも同じ体験を提供します。</p></div>
+  <div class="sp"><b>記事へのリンクを必ず置く</b>
+    <p>この豆に触れたジャーナル記事へつなぎます。記事 → 商品 の逆方向の導線です。</p></div>
+  <div class="sp"><b>構造化データ Product を出力</b>
+    <p>商品名・価格・在庫状況を JSON-LD で出力し、検索結果に価格が表示されるようにします。</p></div>
+
+  <div class="sp warn"><b>【要記入】は店舗しか持っていない情報です</b>
+    <p>標高・品種・精製方法・生産者名・淹れ方の目安は、店舗へのヒアリングでしか埋まりません。
+    <b>全商品分</b>が必要です。記入用のフォーマットを <b>data/products.csv</b> に用意しています。
+    ここが埋まらないと、課題 C（豆を選べない）は解決しません。</p></div>
+</div>
+</div>
+
+<div class="note">
+商品名と価格は検索結果および第三者媒体で確認できた値です【要確認】。改定されている可能性があるため、実装前に必ず店舗へ確認してください。
+</div>
+</div></body></html>

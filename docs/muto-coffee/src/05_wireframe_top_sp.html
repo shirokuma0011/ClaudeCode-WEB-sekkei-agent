@@ -1,0 +1,162 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<link rel="stylesheet" href="_base.css">
+<style>
+.sheet{width:1420px}
+.row{display:flex;gap:30px;align-items:flex-start}
+.row>div{flex:0 0 412px;width:412px}
+.row>div.spec{flex:1 1 auto;min-width:0}
+.phone{flex:0 0 390px;border:11px solid var(--roast);border-radius:32px;overflow:hidden;
+  background:#fff;position:relative}
+.notch{height:22px;background:var(--roast);position:relative}
+.notch::after{content:"";position:absolute;left:50%;transform:translateX(-50%);top:0;
+  width:120px;height:20px;background:var(--roast);border-radius:0 0 12px 12px}
+.scr{height:820px;overflow:hidden;position:relative}
+.cap{text-align:center;font-size:12px;color:var(--ash);margin-top:12px;line-height:1.7}
+.cap b{display:block;color:var(--roast);font-size:13px;margin-bottom:3px}
+.notice{background:var(--roast);color:var(--paper);font-size:10.5px;padding:8px 12px;line-height:1.5}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;
+  border-bottom:1px solid var(--line)}
+.nav .ham{font-size:19px}
+.nav .lg{font-size:13px;font-weight:700;letter-spacing:.03em}
+.hero{height:250px;position:relative}
+.hero .ph{position:absolute;inset:0;color:#8d8378;font-size:11px}
+.hero .ov{position:absolute;inset:0;background:rgba(30,22,16,.68);color:#fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:11px;padding:0 20px}
+.hero h1{font-size:25px;font-weight:700;letter-spacing:.08em;text-align:center;line-height:1.4}
+.hero p{font-size:11px;line-height:1.9;text-align:center;opacity:.92}
+.hero .bs{display:flex;gap:9px;margin-top:4px}
+.hero .btn{height:34px;padding:0 15px;font-size:11.5px}
+.hero .btn-p{background:var(--ember);color:#fff}
+.hero .btn-s{border:1.5px solid #fff;color:#fff}
+.today{background:var(--cream);padding:13px 14px;display:flex;flex-direction:column;gap:5px}
+.today .l{display:flex;align-items:center;gap:8px}
+.today .dg{width:9px;height:9px;border-radius:50%;background:var(--open);
+  box-shadow:0 0 0 3px rgba(74,124,89,.18)}
+.today b{font-size:14px}.today .hr{font-size:12.5px;font-family:monospace}
+.today .cl{font-size:10.5px;color:var(--ash);padding-left:17px}
+.bd{padding:18px 14px}
+.st{display:flex;align-items:baseline;gap:8px;margin-bottom:11px}
+.st h2{font-size:15px}.st span{font-size:9.5px;color:var(--ash);letter-spacing:.1em}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.mini{border:1.5px solid var(--line);border-radius:2px;overflow:hidden}
+.mini .ph{height:72px;font-size:9.5px}
+.mini .c{padding:8px 9px}
+.mini .tg{font-size:8.5px;color:var(--ash);letter-spacing:.1em;display:block;margin-bottom:3px}
+.mini .nm{font-size:11.5px;font-weight:700;line-height:1.4;margin-bottom:4px}
+.roast{display:flex;gap:2px;align-items:center;margin-bottom:4px}
+.roast i{width:6px;height:6px;border-radius:50%;background:var(--line)}
+.roast i.on{background:var(--r3)}
+.roast em{font-style:normal;font-size:8.5px;color:var(--ash);margin-left:3px}
+.mini .fl{font-size:8.5px;color:var(--ash);margin-bottom:5px;line-height:1.5}
+.mini .pr{display:flex;justify-content:space-between;align-items:baseline;font-size:8.5px;color:var(--ash)}
+.mini .pr b{font-size:12px;color:var(--roast)}
+.fixedcta{position:absolute;left:0;right:0;bottom:0;display:grid;grid-template-columns:1.4fr 1fr 1fr;
+  border-top:1.5px solid var(--roast);background:#fff;z-index:9}
+.fixedcta div{padding:13px 4px;text-align:center;font-size:12px;font-weight:700;
+  border-right:1px solid var(--line)}
+.fixedcta div:last-child{border-right:none}
+.fixedcta .p{background:var(--ember);color:#fff}
+.menu-ov{position:absolute;inset:0;background:rgba(43,33,27,.97);color:var(--paper);padding:20px 22px;z-index:20}
+.menu-ov .cl{text-align:right;font-size:20px;margin-bottom:22px}
+.menu-ov ul{list-style:none}
+.menu-ov li{font-size:17px;padding:14px 0;border-bottom:1px solid rgba(250,248,245,.2)}
+.menu-ov li small{display:block;font-size:10px;opacity:.55;margin-top:4px;letter-spacing:.1em}
+.menu-ov .sns{margin-top:26px;display:flex;gap:14px;font-size:12px;opacity:.8}
+/* spec */
+.spec{flex:1}
+.spec h3{font-size:15px;border-bottom:2px solid var(--roast);padding-bottom:8px;margin-bottom:14px}
+.sp{border:1.5px solid var(--line);border-radius:3px;background:#fff;padding:14px 16px;margin-bottom:12px}
+.sp b{font-size:13.5px;display:block;margin-bottom:6px}
+.sp p{font-size:11.5px;color:var(--ash);line-height:1.85}
+.sp.key{border-color:var(--ember);border-left-width:5px;background:#FDF4EF}
+.sp.key b{color:var(--ember)}
+table.bp{width:100%;border-collapse:collapse;font-size:11.5px;margin-top:6px}
+table.bp th,table.bp td{border:1px solid var(--line);padding:7px 9px;text-align:left}
+table.bp th{background:var(--cream);font-weight:700}
+</style></head><body><div class="sheet">
+<div class="doc-head">
+  <div><div class="doc-title">トップページ ワイヤーフレーム（スマートフォン）</div>
+  <div class="doc-sub">想定幅 390px ／ 下部固定 CTA とメニュー展開時</div></div>
+  <div class="doc-meta">図 05<br>2026-09-11</div>
+</div>
+
+<div class="row">
+  <div>
+    <div class="phone"><div class="notch"></div><div class="scr">
+      <div class="notice">1/27(火) は都合により 18:00 閉店いたします</div>
+      <div class="nav"><span class="ham">☰</span><span class="lg">MUTO coffee roastery</span><span>🛒</span></div>
+      <div class="hero"><div class="ph">焙煎中の GIESEN 焙煎機</div>
+        <div class="ov"><h1>毎朝、<br>焙煎しています。</h1>
+          <p>中野の路地裏。オランダ GIESEN の焙煎機で、<br>世界中から届いた豆を、その日の分だけ。</p>
+          <div class="bs"><span class="btn btn-p">豆を見る</span><span class="btn btn-s">店舗案内</span></div></div></div>
+      <div class="today"><div class="l"><span class="dg"></span><b>本日 営業中</b>
+        <span class="hr">11:30 – 19:00</span></div>
+        <span class="cl">L.O. 18:00 ／ 定休日 水曜・木曜</span></div>
+      <div class="bd">
+        <div class="st"><h2>今週の豆</h2><span>THIS WEEK</span></div>
+        <div class="g2">
+          <div class="mini"><div class="ph">商品写真</div><div class="c">
+            <span class="tg">シングルオリジン</span><div class="nm">エチオピア／ファロ</div>
+            <div class="roast"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><em>中煎り</em></div>
+            <div class="fl">ジャスミン / 桃 / 紅茶</div>
+            <div class="pr"><span>200g</span><b>¥1,850</b></div></div></div>
+          <div class="mini"><div class="ph">商品写真</div><div class="c">
+            <span class="tg">ブレンド</span><div class="nm">ももぞのブレンド</div>
+            <div class="roast"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><em>中煎り</em></div>
+            <div class="fl">【要記入】</div>
+            <div class="pr"><span>200g</span><b>¥1,800</b></div></div></div>
+        </div>
+      </div>
+      <div class="fixedcta"><div class="p">豆を見る</div><div>アクセス</div><div>電話</div></div>
+    </div></div>
+    <div class="cap"><b>通常時</b>下部固定 CTA が常に指の届く位置に</div>
+  </div>
+
+  <div>
+    <div class="phone"><div class="notch"></div><div class="scr">
+      <div class="menu-ov"><div class="cl">×</div>
+        <ul>
+          <li>豆を買う<small>BEANS</small></li>
+          <li>定期便<small>SUBSCRIPTION</small></li>
+          <li>店舗案内<small>SHOP INFO</small></li>
+          <li>MUTOについて<small>ABOUT</small></li>
+          <li>ジャーナル<small>JOURNAL</small></li>
+          <li>English<small>EN</small></li>
+          <li>お問い合わせ<small>CONTACT</small></li>
+        </ul>
+        <div class="sns"><span>Instagram</span><span>Facebook</span></div>
+      </div>
+    </div></div>
+    <div class="cap"><b>メニュー展開時</b>全ページへ 1 タップで到達</div>
+  </div>
+
+  <div class="spec">
+    <h3>スマートフォン版の要件</h3>
+    <div class="sp key"><b>下部固定 CTA バー</b>
+      <p>「豆を見る／アクセス／電話」の 3 つを常に指の届く位置に固定します。カフェ・ロースタリー業態で効果が高い定番施策です。
+      電話番号は <code>tel:</code> リンクにし、タップで発信できるようにします。</p></div>
+    <div class="sp"><b>セクション順序は PC と同一</b>
+      <p>1 カラムに積み替えるだけで、順序は変えません。運用者が「どこに何があるか」を 1 つ覚えれば済むようにします。</p></div>
+    <div class="sp"><b>ヒーローの高さ</b>
+      <p>min(70vh, 560px)。画面いっぱいにせず、スクロールできることが一目で分かる高さに留めます。</p></div>
+    <div class="sp"><b>タップ領域</b>
+      <p>最小 44×44px を確保します。リンクが密集する箇所は上下の余白で距離を取ります。</p></div>
+    <div class="sp"><b>本文サイズ</b>
+      <p>16px 以上。これを下回ると iOS Safari で入力時に自動ズームが発生し、表示が崩れます。</p></div>
+    <div class="sp"><b>横スクロールの禁止</b>
+      <p>画面幅 320px でも横スクロールが発生しないこと。テーブルと商品グリッドは個別に <code>overflow-x</code> で処理します。</p></div>
+
+    <h3 style="margin-top:24px">ブレークポイント</h3>
+    <table class="bp">
+      <tr><th>区分</th><th>幅</th><th>レイアウト</th></tr>
+      <tr><td>Mobile</td><td>〜767px</td><td>1 カラム。下部固定 CTA あり。商品グリッド 2 列</td></tr>
+      <tr><td>Tablet</td><td>768〜1023px</td><td>2 カラム。商品グリッド 2 列</td></tr>
+      <tr><td>Desktop</td><td>1024px〜</td><td>最大 1200px 中央寄せ。商品グリッド 3〜4 列</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="note">
+スマートフォンからの閲覧が大半を占める業態です。<b>PC 版のデザインを縮小するのではなく、スマートフォンでの体験を先に設計してください。</b>
+</div>
+</div></body></html>

@@ -1,0 +1,207 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<link rel="stylesheet" href="_base.css">
+<style>
+.sheet{width:1500px}
+.gantt{border:2px solid var(--roast);border-radius:3px;overflow:hidden;background:#fff;margin-bottom:30px}
+.gh{display:grid;grid-template-columns:250px repeat(26,1fr);background:var(--roast);color:var(--paper)}
+.gh div{padding:9px 0;font-size:10.5px;text-align:center;border-right:1px solid rgba(250,248,245,.14)}
+.gh div:first-child{text-align:left;padding-left:14px;font-size:12px;font-weight:700}
+.gh div.wk{font-family:monospace;opacity:.8}
+.gr{display:grid;grid-template-columns:250px repeat(26,1fr);border-bottom:1px solid var(--line);
+  align-items:center;min-height:42px;position:relative}
+.gr:last-child{border-bottom:none}
+.gr>.lb{padding:9px 12px;border-right:2px solid var(--roast);height:100%;display:flex;
+  flex-direction:column;justify-content:center}
+.gr>.lb b{font-size:12.5px;line-height:1.4}
+.gr>.lb span{font-size:10px;color:var(--ash);margin-top:2px}
+.gr>.cell{height:100%;border-right:1px solid #F2EDE7}
+.bar{position:absolute;height:24px;border-radius:2px;display:flex;align-items:center;
+  padding:0 9px;font-size:10.5px;font-weight:700;color:#fff;letter-spacing:.04em;white-space:nowrap;z-index:3}
+.aft{position:absolute;font-size:10.5px;color:var(--ash);white-space:nowrap;z-index:3;line-height:24px}
+.b0{background:#6B5F57}.b1{background:#4A7C59}.b2{background:#B4542A}.b3{background:#6F4A2E}
+.gr.ph0{background:#FAF8F5}
+.milestone{position:absolute;z-index:4;font-size:10px;color:var(--error);font-weight:700;
+  white-space:nowrap;top:4px}
+.phases{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+.pc{border:2px solid var(--line);border-radius:3px;background:#fff;overflow:hidden}
+.pc.p1{border-color:#4A7C59}.pc.p2{border-color:#B4542A}.pc.p3{border-color:#6F4A2E}
+.pc-h{padding:12px 15px;background:var(--cream)}
+.pc.p1 .pc-h{background:#4A7C59;color:#fff}.pc.p2 .pc-h{background:#B4542A;color:#fff}
+.pc.p3 .pc-h{background:#6F4A2E;color:#fff}
+.pc-h b{font-size:15px;display:block}
+.pc-h span{font-size:10.5px;opacity:.85;display:block;margin-top:2px}
+.pc-b{padding:13px 15px}
+.pc-b dl{font-size:11.5px;line-height:1.75}
+.pc-b dt{font-weight:700;color:var(--bean);margin-top:8px;font-size:11px}
+.pc-b dt:first-child{margin-top:0}
+.pc-b dd{color:var(--ash)}
+.pc-b .cost{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;font-size:11.5px}
+.pc-b .cost b{font-size:13.5px}
+.split{display:grid;grid-template-columns:1.25fr 1fr;gap:28px}
+.box{border:2px solid var(--roast);border-radius:3px;background:#fff;overflow:hidden}
+.box h3{background:var(--roast);color:var(--paper);padding:11px 16px;font-size:14px}
+.box .in{padding:15px 17px}
+table.f{width:100%;border-collapse:collapse;font-size:11.5px}
+table.f th,table.f td{border-bottom:1px solid var(--line);padding:8px 9px;text-align:left}
+table.f thead th{background:var(--cream);border-bottom:1.5px solid var(--roast);font-weight:700}
+table.f td.n{text-align:right;font-family:monospace}
+table.f tr.tot td,table.f tr.tot th{border-top:2px solid var(--roast);border-bottom:none;
+  font-weight:700;padding-top:10px}
+.q{border:1.5px solid var(--ember);border-left-width:5px;background:#FDF4EF;border-radius:3px;
+  padding:14px 17px;margin-top:15px;font-size:11.5px;line-height:1.9}
+.q b{display:block;color:var(--ember);font-size:13px;margin-bottom:6px}
+.ops{font-size:11.5px;line-height:1.9}
+.ops table{width:100%;border-collapse:collapse;margin-top:4px}
+.ops th,.ops td{border:1px solid var(--line);padding:7px 9px;text-align:left;font-size:11px}
+.ops th{background:var(--cream);font-weight:700}
+.ops td.t{font-family:monospace;text-align:right;white-space:nowrap}
+.ops td.t b{color:var(--open)}
+</style></head><body><div class="sheet">
+<div class="doc-head">
+  <div><div class="doc-title">実装ロードマップ</div>
+  <div class="doc-sub">フェーズ 0〜3 ／ 想定期間 約 6 か月</div></div>
+  <div class="doc-meta">図 10<br>2026-09-11</div>
+</div>
+
+<div class="gantt">
+  <div class="gh"><div>フェーズ / 作業</div>
+    <div class="wk" style="grid-column:span 4">1 か月目</div>
+    <div class="wk" style="grid-column:span 4">2 か月目</div>
+    <div class="wk" style="grid-column:span 5">3 か月目</div>
+    <div class="wk" style="grid-column:span 4">4 か月目</div>
+    <div class="wk" style="grid-column:span 4">5 か月目</div>
+    <div class="wk" style="grid-column:span 5">6 か月目</div></div>
+
+  <div class="gr ph0"><div class="lb"><b>フェーズ 0　現状確認</b><span>【推定】【要確認】の解消</span></div>
+    <div class="bar b0" style="left:250px;width:100px">P0</div>
+    <span class="aft" style="left:358px">技術調査・店舗ヒアリング・移行方針の決定</span>
+    <div class="cell" style="grid-column:2/28"></div></div>
+
+  <div class="gr"><div class="lb"><b>フェーズ 1　応急処置</b><span>現行サイトに手を入れるだけ</span></div>
+    <div class="bar b1" style="left:330px;width:100px">P1</div>
+    <span class="aft" style="left:438px">誤字修正・営業時間明示・301 統一・GA4 設置</span>
+    <div class="cell" style="grid-column:2/28"></div></div>
+
+  <div class="gr"><div class="lb"><b>　要件定義・設計</b><span>仕様確定・ワイヤー確定</span></div>
+    <div class="bar b2" style="left:442px;width:118px"></div>
+    <span class="aft" style="left:568px">要件定義・IA・ワイヤーフレーム確定</span>
+    <div class="cell" style="grid-column:2/28"></div></div>
+
+  <div class="gr"><div class="lb"><b>　デザイン・撮影</b><span>トップ / 下層 / 商品 / 記事</span></div>
+    <div class="bar b2" style="left:538px;width:175px"></div>
+    <span class="aft" style="left:721px">デザイン制作・店舗/商品の撮影</span>
+    <div class="cell" style="grid-column:2/28"></div></div>
+
+  <div class="gr"><div class="lb"><b>　テーマ実装</b><span>WordPress</span></div>
+    <div class="bar b2" style="left:673px;width:232px"></div>
+    <span class="aft" style="left:913px">WordPress テーマのフロント実装</span>
+    <div class="cell" style="grid-column:2/28"></div></div>
+
+  <div class="gr"><div class="lb"><b>　EC 構築・データ移行</b><span>WooCommerce</span></div>
+    <div class="bar b2" style="left:827px;width:175px"></div>
+    <span class="aft" style="left:1010px">商品登録・EC-CUBE からのデータ移行</span>
+    <div class="cell" style="grid-column:2/28"></div></div>
+
+  <div class="gr"><div class="lb"><b>　リダイレクト・SEO</b><span>301 / 構造化データ</span></div>
+    <div class="bar b2" style="left:981px;width:100px"></div>
+    <span class="aft" style="left:1089px">301 設計・JSON-LD</span>
+    <div class="cell" style="grid-column:2/28"></div></div>
+
+  <div class="gr"><div class="lb"><b>　テスト・公開</b><span>決済テスト含む</span></div>
+    <div class="bar b2" style="left:1058px;width:100px"></div>
+    <span class="aft" style="left:1166px">テスト・公開・公開後の監視</span>
+    <span class="milestone" style="left:1150px;top:-4px">▲ 公開</span>
+    <div class="cell" style="grid-column:2/28"></div></div>
+
+  <div class="gr"><div class="lb"><b>フェーズ 3　拡張</b><span>定期便・決済・メルマガ</span></div>
+    <div class="bar b3" style="left:1173px;width:212px"></div>
+    <span class="aft" style="right:239px">決済追加・定期便・セット商品・メルマガ　</span>
+    <div class="cell" style="grid-column:2/28"></div></div>
+
+  <div class="gr"><div class="lb"><b>運用（継続）</b><span>記事・Instagram・振り返り</span></div>
+    <div class="bar b1" style="left:423px;width:962px;opacity:.42">ジャーナル 月2〜4本　／　Instagram 週3〜5回　／　月次の振り返り</div>
+    <div class="cell" style="grid-column:2/28"></div></div>
+</div>
+
+<div class="phases">
+  <div class="pc"><div class="pc-h"><b>フェーズ 0</b><span>現状確認　1〜2 週</span></div>
+    <div class="pc-b"><dl>
+      <dt>技術面</dt><dd>WP / EC-CUBE のバージョン、データ件数、全 URL 一覧</dd>
+      <dt>ヒアリング</dt><dd>営業時間の確定、全商品の産地情報、メニュー価格</dd>
+      <dt>決定</dt><dd>移行方針（案 A / B / C）</dd></dl>
+      <div class="cost"><span>費用目安</span><b>10〜20 万円</b></div></div></div>
+
+  <div class="pc p1"><div class="pc-h"><b>フェーズ 1</b><span>応急処置　1〜2 週</span></div>
+    <div class="pc-b"><dl>
+      <dt>即効性のある 9 項目</dt>
+      <dd>title 誤字修正 / 営業時間の明示 / 構造化データ追加 / www 301 統一 /
+      Google ビジネスプロフィール修正 / 古い記事の整理 / EC 導線 / GA4 設置 / SNS リンク</dd></dl>
+      <div class="cost"><span>約 18 時間</span><b>10〜20 万円</b></div></div></div>
+
+  <div class="pc p2"><div class="pc-h"><b>フェーズ 2</b><span>本体改修　8〜12 週</span></div>
+    <div class="pc-b"><dl>
+      <dt>統合</dt><dd>WordPress + WooCommerce に一本化、1 ドメインに集約</dd>
+      <dt>EC 再設計</dt><dd>絞り込み一覧、味の見える化、商品詳細の充実</dd>
+      <dt>新設</dt><dd>アクセス（写真つき道順）、英語 1 ページ、ジャーナル</dd></dl>
+      <div class="cost"><span>約 80 人日</span><b>80〜250 万円</b></div></div></div>
+
+  <div class="pc p3"><div class="pc-h"><b>フェーズ 3</b><span>拡張　4〜6 週</span></div>
+    <div class="pc-b"><dl>
+      <dt>決済</dt><dd>Amazon Pay / PayPay / コンビニ払いの追加</dd>
+      <dt>定期便</dt><dd>おまかせ便・ブレンド便・たっぷり便</dd>
+      <dt>その他</dt><dd>飲み比べセット、入荷通知、メールマガジン</dd></dl>
+      <div class="cost"><span>約 26 人日</span><b>50〜90 万円</b></div></div></div>
+</div>
+
+<div class="split">
+  <div class="box"><h3>費用総括</h3><div class="in">
+    <table class="f">
+      <thead><tr><th>フェーズ</th><th>内容</th><th class="n">費用目安</th><th class="n">期間</th></tr></thead>
+      <tr><td>0</td><td>現状確認</td><td class="n">10〜20 万円</td><td class="n">1〜2 週</td></tr>
+      <tr><td>1</td><td>応急処置</td><td class="n">10〜20 万円</td><td class="n">1〜2 週</td></tr>
+      <tr><td>2</td><td>本体改修</td><td class="n">80〜250 万円</td><td class="n">8〜12 週</td></tr>
+      <tr><td>3</td><td>拡張</td><td class="n">50〜90 万円</td><td class="n">4〜6 週</td></tr>
+      <tr><td>—</td><td>保守（月額）</td><td class="n">1〜3 万円 / 月</td><td class="n">継続</td></tr>
+      <tr class="tot"><th colspan="2">合計（フェーズ 0〜3）</th><td class="n">150〜380 万円</td><td class="n">約 6 か月</td></tr>
+    </table>
+    <div class="q"><b>フェーズ 0＋1 だけでも先行する価値があります</b>
+      合計 20〜40 万円・1 か月程度で、課題 B（情報の不一致による来店機会の損失）と課題 G（誤字）は解消できます。
+      本体改修の予算が確保できなくても、ここは今すぐ着手できます。</div>
+    <div class="q" style="border-color:#A8762B;background:#FBF6EC">
+      <b style="color:#A8762B">【最優先の確認事項】</b>
+      現行 EC-CUBE のバージョンを確認してください。2 系・3 系はサポートが終了しており、
+      カード決済を扱うサイトとして重大なリスクがあります。この確認結果によっては、
+      デザイン改善よりも移行を先行させる判断が必要です。</div>
+  </div></div>
+
+  <div class="box"><h3>運用設計 — 更新の負荷を下げる</h3><div class="in">
+    <div class="ops">
+      改修は公開して終わりではありません。<b>運用が続かなければ、サイトは半年で元の状態に戻ります。</b>
+      <table>
+        <tr><th>更新内容</th><th>現状</th><th class="t">改善後</th></tr>
+        <tr><td>臨時休業の告知</td><td>記事を書く</td><td class="t"><b>1 分</b></td></tr>
+        <tr><td>新しい豆の入荷</td><td>2 システム両方</td><td class="t"><b>10 分</b></td></tr>
+        <tr><td>豆の紹介記事</td><td>—</td><td class="t"><b>20〜30 分</b></td></tr>
+        <tr><td>営業時間の変更</td><td>複数箇所を手で</td><td class="t"><b>2 分</b></td></tr>
+        <tr><td>価格改定</td><td>複数箇所</td><td class="t"><b>3 分</b></td></tr>
+      </table>
+      <div class="q" style="margin-top:13px"><b>原則: 設定は 1 箇所、表示は自動</b>
+        これが運用が続くかどうかを決めます。焙煎の合間に更新する以上、更新場所は 1 つでなければ続きません。</div>
+      <table style="margin-top:13px">
+        <tr><th>継続する運用</th><th class="t">頻度</th></tr>
+        <tr><td>豆の紹介記事</td><td class="t">月 2〜4 本</td></tr>
+        <tr><td>淹れ方・道具の記事</td><td class="t">月 1 本</td></tr>
+        <tr><td>Instagram 投稿</td><td class="t">週 3〜5 回</td></tr>
+        <tr><td>営業カレンダーの登録</td><td class="t">月初にまとめて</td></tr>
+        <tr><td>GA4 の振り返り</td><td class="t">月 1 回 / 30 分</td></tr>
+      </table>
+    </div>
+  </div></div>
+</div>
+
+<div class="note">
+期間と費用は 2026 年時点の一般的な相場からの目安です。<b>フェーズ 0 の結果（特にデータ移行量と EC-CUBE のバージョン）によって上下します。</b>
+予算を分割する場合の発注案は <b>05_実装ロードマップ・見積.md §4.3</b> に記載しています。
+</div>
+</div></body></html>

@@ -1,0 +1,238 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<link rel="stylesheet" href="_base.css">
+<style>
+.sheet{width:1460px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
+.blk{margin-bottom:32px}
+.blk h2{font-size:16px;font-weight:700;margin-bottom:4px;padding-bottom:7px;border-bottom:2px solid var(--roast)}
+.blk .lead{font-size:11.5px;color:var(--ash);line-height:1.8;margin:9px 0 14px}
+.sw{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+.chip{border:1.5px solid var(--line);border-radius:3px;overflow:hidden;background:#fff}
+.chip .c{height:62px}
+.chip .t{padding:8px 10px}
+.chip .t b{font-size:11.5px;display:block;margin-bottom:2px}
+.chip .t code{font-size:10px;color:var(--ash);font-family:monospace;display:block}
+.chip .t span{font-size:9.5px;color:var(--ash);display:block;margin-top:3px;line-height:1.5}
+.roastsw{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}
+.roastsw .c{height:48px}
+table.ct{width:100%;border-collapse:collapse;font-size:11.5px}
+table.ct th,table.ct td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+table.ct th{background:var(--cream);font-weight:700}
+table.ct td.ok{color:var(--open);font-weight:700}
+/* type */
+.tsample{border:1.5px solid var(--line);border-radius:3px;background:#fff;padding:18px 20px}
+.ts{padding:9px 0;border-bottom:1px dashed var(--line);display:flex;align-items:baseline;
+  justify-content:space-between;gap:16px}
+.ts:last-child{border:none}
+.ts .m{font-size:10px;color:var(--ash);font-family:monospace;white-space:nowrap;text-align:right;line-height:1.6}
+.h-hero{font-size:38px;font-weight:700;letter-spacing:.08em}
+.h-1{font-size:29px;font-weight:700;letter-spacing:.06em}
+.h-2{font-size:22px;font-weight:700;letter-spacing:.06em}
+.h-3{font-size:17px;font-weight:700}
+.p-b{font-size:15px;line-height:1.9}
+.p-s{font-size:12.5px;color:var(--ash)}
+.p-pr{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+/* buttons */
+.btns{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.b-txt{color:var(--bean);font-size:14px;text-decoration:underline;font-weight:700}
+.bspec{font-size:11px;color:var(--ash);line-height:1.9;margin-top:12px}
+.bspec code{background:var(--cream);padding:1px 6px;border-radius:2px;font-size:10.5px}
+/* card sample */
+.csample{width:240px;border:1.5px solid var(--line);border-radius:2px;overflow:hidden;background:#fff}
+.csample .ph{height:112px;font-size:10px}
+.csample .c{padding:12px 13px}
+.csample .tg{font-size:9.5px;color:var(--ash);letter-spacing:.12em;display:block;margin-bottom:5px}
+.csample .nm{font-size:14px;font-weight:700;margin-bottom:7px}
+.rl{display:flex;gap:4px;align-items:center;margin-bottom:6px}
+.rl i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.rl i.on{background:var(--r3)}
+.rl em{font-style:normal;font-size:10.5px;color:var(--ash);margin-left:4px}
+.csample .fl{font-size:11px;color:var(--ash);margin-bottom:10px}
+.csample .pr{display:flex;justify-content:space-between;align-items:baseline;font-size:10.5px;
+  color:var(--ash);margin-bottom:10px}
+.csample .pr b{font-size:16px;color:var(--roast)}
+.csample .cb{display:block;text-align:center;background:var(--ember);color:#fff;font-size:12.5px;
+  font-weight:700;padding:10px 0;border-radius:2px;letter-spacing:.05em}
+.cardrow{display:flex;gap:18px;align-items:flex-start}
+.cardnote{flex:1;font-size:11px;color:var(--ash);line-height:1.95}
+.cardnote b{color:var(--roast);display:block;margin-bottom:5px;font-size:12px}
+/* space */
+.spacer{display:flex;align-items:flex-end;gap:10px;height:132px}
+.sp{background:var(--bean);border-radius:2px 2px 0 0;width:52px;position:relative;opacity:.85}
+.sp span{position:absolute;bottom:-32px;left:50%;transform:translateX(-50%);font-size:9.5px;
+  color:var(--ash);text-align:center;white-space:nowrap;line-height:1.4}
+.sp span b{display:block;color:var(--roast);font-size:10.5px}
+/* status */
+.stbox{border:1.5px solid var(--line);border-radius:3px;background:#fff;padding:13px 16px;margin-bottom:9px;
+  display:flex;align-items:center;gap:11px}
+.stbox i{width:11px;height:11px;border-radius:50%;flex:0 0 auto}
+.stbox b{font-size:13px}
+.stbox span{font-size:11.5px;color:var(--ash);font-family:monospace;margin-left:auto}
+/* notice */
+.nbar{background:var(--roast);color:var(--paper);padding:11px 16px;border-radius:3px;
+  font-size:12.5px;display:flex;justify-content:space-between;align-items:center}
+.nbar em{font-style:normal;opacity:.6;font-size:11px}
+/* dont */
+.dont{border:1.5px solid var(--error);border-left-width:5px;border-radius:3px;background:#FBF0EE;
+  padding:14px 17px}
+.dont b{font-size:13px;color:var(--error);display:block;margin-bottom:8px}
+.dont ul{list-style:none;font-size:11.5px;color:var(--roast);line-height:2}
+.dont li{padding-left:17px;position:relative}
+.dont li::before{content:"×";position:absolute;left:0;color:var(--error);font-weight:700}
+</style></head><body><div class="sheet">
+<div class="doc-head">
+  <div><div class="doc-title">デザインシステム スタイルガイド</div>
+  <div class="doc-sub">焙煎の色相を基調に、余白を広く、装飾を削る</div></div>
+  <div class="doc-meta">図 09<br>2026-09-11</div>
+</div>
+
+<div class="cols">
+<div>
+  <div class="blk"><h2>カラーパレット</h2>
+    <p class="lead">生豆の緑から、焙煎が進んだ深い茶までを軸に取りました。純白と純黒は使いません。</p>
+    <div class="sw">
+      <div class="chip"><div class="c" style="background:#FAF8F5;border-bottom:1px solid var(--line)"></div>
+        <div class="t"><b>Paper</b><code>#FAF8F5</code><span>ページ全体の地色</span></div></div>
+      <div class="chip"><div class="c" style="background:#F1EBE3"></div>
+        <div class="t"><b>Cream</b><code>#F1EBE3</code><span>セクション区切り</span></div></div>
+      <div class="chip"><div class="c" style="background:#2B211B"></div>
+        <div class="t"><b>Roast</b><code>#2B211B</code><span>本文・見出し</span></div></div>
+      <div class="chip"><div class="c" style="background:#6B5F57"></div>
+        <div class="t"><b>Ash</b><code>#6B5F57</code><span>補足・キャプション</span></div></div>
+      <div class="chip"><div class="c" style="background:#6F4A2E"></div>
+        <div class="t"><b>Bean</b><code>#6F4A2E</code><span>リンク・副ボタン</span></div></div>
+      <div class="chip"><div class="c" style="background:#B4542A"></div>
+        <div class="t"><b>Ember</b><code>#B4542A</code><span>CTA・価格</span></div></div>
+      <div class="chip"><div class="c" style="background:#DED5CA"></div>
+        <div class="t"><b>Line</b><code>#DED5CA</code><span>罫線・枠</span></div></div>
+      <div class="chip"><div class="c" style="background:#4A7C59"></div>
+        <div class="t"><b>Open</b><code>#4A7C59</code><span>営業中・成功</span></div></div>
+    </div>
+
+    <p class="lead" style="margin-top:18px">焙煎度インジケータ専用色。実際の焙煎豆の色から取っています。</p>
+    <div class="roastsw">
+      <div class="chip"><div class="c" style="background:#C49A6C"></div>
+        <div class="t"><b>浅煎り</b><code>#C49A6C</code></div></div>
+      <div class="chip"><div class="c" style="background:#A8763F"></div>
+        <div class="t"><b>中浅煎り</b><code>#A8763F</code></div></div>
+      <div class="chip"><div class="c" style="background:#8A5A2B"></div>
+        <div class="t"><b>中煎り</b><code>#8A5A2B</code></div></div>
+      <div class="chip"><div class="c" style="background:#5F3A1E"></div>
+        <div class="t"><b>中深煎り</b><code>#5F3A1E</code></div></div>
+      <div class="chip"><div class="c" style="background:#3A2416"></div>
+        <div class="t"><b>深煎り</b><code>#3A2416</code></div></div>
+    </div>
+
+    <p class="lead" style="margin-top:18px">コントラスト比（WCAG 2.1 レベル AA: 本文 4.5:1 以上）</p>
+    <table class="ct">
+      <tr><th>組み合わせ</th><th>比</th><th>判定</th></tr>
+      <tr><td>Roast on Paper</td><td>約 14.2:1</td><td class="ok">AAA</td></tr>
+      <tr><td>Ash on Paper</td><td>約 5.9:1</td><td class="ok">AA</td></tr>
+      <tr><td>Paper on Ember</td><td>約 4.6:1</td><td class="ok">AA</td></tr>
+      <tr><td>Paper on Bean</td><td>約 7.4:1</td><td class="ok">AAA</td></tr>
+    </table>
+  </div>
+
+  <div class="blk"><h2>余白のルール</h2>
+    <p class="lead">8px を基準単位とします。セクション間は PC で 120px。一般的なサイトより広い設定です。
+    1 画面に詰め込まず、スクロールのたびに 1 つのことだけを見せます。</p>
+    <div class="spacer">
+      <div class="sp" style="height:8px"><span><b>8</b>space-1</span></div>
+      <div class="sp" style="height:16px"><span><b>16</b>space-2</span></div>
+      <div class="sp" style="height:24px"><span><b>24</b>space-3</span></div>
+      <div class="sp" style="height:32px"><span><b>32</b>space-4</span></div>
+      <div class="sp" style="height:48px"><span><b>48</b>space-5</span></div>
+      <div class="sp" style="height:80px"><span><b>80</b>space-6</span></div>
+      <div class="sp" style="height:120px"><span><b>120</b>space-7</span></div>
+    </div>
+  </div>
+
+  <div class="blk" style="margin-top:44px"><h2>状態表示</h2>
+    <p class="lead">「本日の営業」の 4 状態。設定 1 箇所から自動判定します。</p>
+    <div class="stbox"><i style="background:#4A7C59"></i><b>本日 営業中</b>
+      <span>11:30 – 19:00 (L.O. 18:00)</span></div>
+    <div class="stbox"><i style="background:#A8762B"></i><b>本日 11:30 開店</b>
+      <span>現在 営業時間外</span></div>
+    <div class="stbox"><i style="background:#A8762B"></i><b>本日は定休日です</b>
+      <span>次回営業: 金曜 11:30〜</span></div>
+    <div class="stbox"><i style="background:#A63D2F"></i><b>本日は臨時休業です</b><span></span></div>
+
+    <p class="lead" style="margin-top:14px">お知らせバー（平常時は非表示）</p>
+    <div class="nbar"><span>1/27(火) は都合により 18:00 閉店いたします</span><em>×</em></div>
+  </div>
+</div>
+
+<div>
+  <div class="blk"><h2>タイポグラフィ</h2>
+    <p class="lead">和文はゴシックで可読性を優先。欧文の見出しにのみセリフ体を使います。
+    本文の行間 1.9 は一般的な設定より広く、日本語の長文を落ち着いて読ませるための意図的な値です。</p>
+    <div class="tsample">
+      <div class="ts"><span class="h-hero">毎朝、焙煎しています。</span>
+        <span class="m">48 / 30px<br>700 / 1.35</span></div>
+      <div class="ts"><span class="h-1">豆を買う</span>
+        <span class="m">36 / 26px<br>700 / 1.4</span></div>
+      <div class="ts"><span class="h-2">エチオピア／ファロ</span>
+        <span class="m">28 / 22px<br>700 / 1.45</span></div>
+      <div class="ts"><span class="h-3">おすすめの淹れ方</span>
+        <span class="m">20 / 18px<br>700 / 1.5</span></div>
+      <div class="ts"><span class="p-b">口に含むとジャスミンのような香りが立ちのぼります。</span>
+        <span class="m">17 / 16px<br>400 / <b>1.9</b></span></div>
+      <div class="ts"><span class="p-s">※ 焙煎したての豆をお届けします</span>
+        <span class="m">14 / 13px<br>400 / 1.7</span></div>
+      <div class="ts"><span class="p-pr">¥1,850</span>
+        <span class="m">22 / 20px<br>tabular-nums</span></div>
+    </div>
+    <p class="lead">両端揃え（<code>text-align: justify</code>）は使いません。日本語では単語間の空きが不均一になり、かえって読みにくくなります。</p>
+  </div>
+
+  <div class="blk"><h2>ボタン</h2>
+    <div class="btns"><span class="btn btn-p">カートに入れる</span>
+      <span class="btn btn-s">詳しく見る</span><span class="b-txt">すべての豆を見る</span></div>
+    <div class="bspec">
+      高さ <code>48px</code>　角丸 <code>2px</code>（丸みを抑え、素材の硬さを表現）<br>
+      ホバー時は拡大・浮き上がりを使わず、<b>色の変化のみ</b><br>
+      <code>:focus-visible</code> のリングは必ず表示（キーボード操作への対応）<br>
+      タップ領域は最小 <code>44×44px</code>
+    </div>
+  </div>
+
+  <div class="blk"><h2>商品カード</h2>
+    <div class="cardrow">
+      <div class="csample"><div class="ph">商品写真 4:3</div><div class="c">
+        <span class="tg">シングルオリジン</span><div class="nm">エチオピア／ファロ</div>
+        <div class="rl"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><em>中煎り</em></div>
+        <div class="fl">ジャスミン / 桃 / 紅茶</div>
+        <div class="pr"><span>200g</span><b>¥1,850</b></div>
+        <span class="cb">カートに入れる</span></div></div>
+      <div class="cardnote">
+        <b>設計の要点</b>
+        影は付けません。境界は 1px の Line 色の枠線で表現します。<br>
+        ホバー時は画像をわずかに暗くする（<code>brightness(0.96)</code>）のみ。<br>
+        在庫切れ時は <code>opacity: 0.55</code> にし、ボタンを「入荷通知を受け取る」に差し替えます。<br><br>
+        <b>焙煎度インジケータ</b>
+        必ず <code>aria-label</code> で段階を文章化してください。
+        丸の数だけでは、スクリーンリーダー利用者に情報が伝わりません。
+      </div>
+    </div>
+  </div>
+
+  <div class="blk"><h2>使わないもの</h2>
+    <div class="dont"><b>店内にこれがあるか、を判断基準にします</b>
+      <ul>
+        <li>スライダー・カルーセル（速度を損ない、伝えたいことがぼやける）</li>
+        <li>自動再生の動画・パララックス</li>
+        <li>点滅するバナー・アニメーションするアイコン</li>
+        <li>影を多用したカード（ふわふわした印象になる）</li>
+        <li>鮮やかな差し色を複数（色数は絞る）</li>
+        <li>細すぎる明朝体の本文</li>
+        <li>ダークモード（紙のような明るい地色がブランドの核。<code>color-scheme: light</code> を明示）</li>
+      </ul></div>
+  </div>
+</div>
+</div>
+
+<div class="note">
+実装用の CSS カスタムプロパティは <b>03_デザインシステム.md §8</b> にまとめています。
+写真のガイドライン（必要な枚数・撮影の指針・書き出し仕様・alt の書き方）は同 §6 を参照してください。
+</div>
+</div></body></html>

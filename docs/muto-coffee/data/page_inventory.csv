@@ -1,0 +1,25 @@
+No,URL,ページ種別,確認できたtitle,システム推定,確度,備考
+1,https://muto-coffee.com/,トップ,MUTO coffee roastery - 中野 / 東京,WordPress,確認済,titleの綴りは正しい
+2,https://muto-coffee.com/news/,News一覧,News一覧 | MUTO coffee roastary,WordPress,確認済,titleが「roastary」と誤記
+3,https://muto-coffee.com/ルワンダ・コアカカ-ムガンザ/,News記事(豆紹介),ルワンダ・コアカカ ムガンザ | MUTO coffee roastary,WordPress,確認済,日本語スラッグ。資産性のある記事
+4,https://muto-coffee.com/オレンジのパウンドケーキ/,News記事(商品紹介),オレンジのパウンドケーキ | MUTO coffee roastary,WordPress,確認済,日本語スラッグ
+5,https://muto-coffee.com/年末・年始-営業日時のお知らせ-2/,News記事(告知),年末・年始 営業日時のお知らせ | MUTO coffee roastary,WordPress,確認済,毎年繰り返されるフロー情報
+6,https://muto-coffee.com/３周年ブレンド豆半額セール/,News記事(セール),３周年ブレンド豆半額セール | MUTO coffee roastary,WordPress,確認済,フロー情報
+7,https://muto-coffee.com/営業再開のお知らせ/,News記事(告知),営業再開のお知らせ | MUTO coffee roastary,WordPress,確認済,陳腐化済み
+8,https://muto-coffee.com/本日7月26日（火）18時で閉店いたします。/,News記事(臨時),本日7月26日（火）18時で閉店いたします。,WordPress,確認済,翌日に価値を失う情報
+9,https://muto-coffee.com/テイク・アウト-始めました。そしてお試しセール/,News記事(告知),テイク・アウト 始めました。そしてお試しセール！,WordPress,確認済,
+10,https://muto-coffee.com/営業時間変更（新型コロナウイルス感染拡大防止のため）/,News記事(告知),営業時間変更（新型コロナウイルス感染拡大防止のため）,WordPress,確認済,陳腐化済み。整理対象
+11,https://www.muto-coffee.com/shop/,ショップTOP,MUTO coffee roastery / TOPページ,EC-CUBE,推定,別ドメイン表記(www有)
+12,https://www.muto-coffee.com/shop/products/detail/8,商品詳細,MUTO coffee roastery / ふかいりブレンド,EC-CUBE,確認済,
+13,https://www.muto-coffee.com/shop/products/detail/10,商品詳細,MUTO coffee roastery / ももぞのブレンド,EC-CUBE,確認済,
+14,https://www.muto-coffee.com/shop/products/detail/11,商品詳細,MUTO coffee roastery / カフェインレス／メキシコ トリウンフォ・ベルデ,EC-CUBE,確認済,
+15,https://muto-coffee.com/shop/products/detail/12,商品詳細,MUTO coffee roastery / ケニア／キリニャガ カムワンギ・ファクトリー,EC-CUBE,確認済,www無しでも到達可能(URL重複)
+16,https://www.muto-coffee.com/shop/products/detail/15,商品詳細,MUTO coffee roastery / イタリアンブレンド,EC-CUBE,確認済,
+17,https://www.muto-coffee.com/shop/products/detail/17,商品詳細,MUTO coffee roastery / ホンジュラス／チャギテ IH-90,EC-CUBE,確認済,
+18,https://www.muto-coffee.com/shop/products/detail/20,商品詳細,MUTO coffee roastery / タンザニア／ハイツ農園 ブルーリボンAA,EC-CUBE,確認済,
+19,https://www.muto-coffee.com/shop/products/detail/34,商品詳細,MUTO coffee roastery / エチオピア／ファロ,EC-CUBE,確認済,
+20,https://muto-coffee.com/shop/products/detail/37,商品詳細,MUTO coffee roastery / エチオピア／ゴロ・ペデッサ ナチュラル,EC-CUBE,確認済,www無しでも到達可能(URL重複)
+21,https://muto-coffee.com/shop/products/detail/41,商品詳細,MUTO coffee roastery / ホンジュラス／サンミゲル・デ・セルグァパ,EC-CUBE,確認済,www無しでも到達可能(URL重複)
+22,https://www.muto-coffee.com/shop/products/detail/55,商品詳細,MUTO coffee roastery / グアテマラ／ウエウエテナンゴ サンタバルバラ,EC-CUBE,確認済,商品IDが55まで存在
+23,https://www.muto-coffee.com/shop/help/about,当サイトについて,MUTO coffee roastery / 当サイトについて,EC-CUBE,確認済,
+24,https://www.muto-coffee.com/shop/help/tradelaw,特商法表記,MUTO coffee roastery / 特定商取引に関する法律に基づく表記,EC-CUBE,確認済,運営: 株式会社Lounge M / 武藤修一郎

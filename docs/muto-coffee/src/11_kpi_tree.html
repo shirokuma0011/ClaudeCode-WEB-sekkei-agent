@@ -1,0 +1,165 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<link rel="stylesheet" href="_base.css">
+<style>
+.sheet{width:1500px}
+.top{display:flex;justify-content:center;margin-bottom:0}
+.root{background:var(--roast);color:var(--paper);border-radius:3px;padding:15px 46px;text-align:center}
+.root b{font-size:20px;display:block;letter-spacing:.1em}
+.root span{font-size:11px;opacity:.72;display:block;margin-top:3px}
+.stem{width:2px;height:22px;background:var(--roast);margin:0 auto}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:40px;position:relative}
+.two::before{content:"";position:absolute;top:-1px;left:25%;right:25%;height:2px;background:var(--roast)}
+.branch{padding-top:22px;position:relative}
+.branch::before{content:"";position:absolute;top:0;left:50%;width:2px;height:22px;background:var(--roast)}
+.bhead{border-radius:3px 3px 0 0;padding:12px 18px;color:#fff}
+.bhead.ec{background:var(--ember)}
+.bhead.shop{background:var(--bean)}
+.bhead b{font-size:16px;display:block}
+.bhead span{font-size:11px;opacity:.85;display:block;margin-top:2px}
+.bbody{border:2px solid var(--line);border-top:none;border-radius:0 0 3px 3px;background:#fff;padding:16px 18px}
+.kpi{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line)}
+.kpi:last-child{border-bottom:none}
+.kpi .ic{flex:0 0 30px;height:30px;border-radius:3px;background:var(--cream);
+  display:flex;align-items:center;justify-content:center;font-size:14px}
+.kpi .t{flex:1}
+.kpi .t b{font-size:13.5px;display:block;margin-bottom:3px}
+.kpi .t span{font-size:11px;color:var(--ash);line-height:1.7;display:block}
+.kpi .g{flex:0 0 auto;text-align:right;font-size:11px;color:var(--ash);line-height:1.5;white-space:nowrap}
+.kpi .g b{display:block;font-size:14px;color:var(--roast);font-family:monospace}
+.kpi .t span.lv{font-size:9.5px;color:#fff;background:var(--bean);border-radius:2px;padding:2px 7px;
+  display:inline-block;margin-top:4px;letter-spacing:.06em}
+.kpi .t span.lv.a{background:var(--ember)}
+.sec2{margin-top:34px;display:grid;grid-template-columns:1.1fr 1fr;gap:28px}
+.box{border:2px solid var(--roast);border-radius:3px;overflow:hidden;background:#fff}
+.box h3{background:var(--roast);color:var(--paper);padding:11px 16px;font-size:14px}
+.box .in{padding:15px 17px}
+table.e{width:100%;border-collapse:collapse;font-size:11.5px}
+table.e th,table.e td{border-bottom:1px solid var(--line);padding:8px 9px;text-align:left}
+table.e thead th{background:var(--cream);border-bottom:1.5px solid var(--roast);font-weight:700}
+table.e td code{font-family:monospace;font-size:11px;background:var(--cream);padding:1px 6px;border-radius:2px}
+table.e td.p{text-align:center;font-weight:700;font-size:10.5px}
+table.e td.p.h{color:var(--error)}
+table.e td.p.m{color:var(--closed)}
+.callout{border:1.5px solid var(--ember);border-left-width:5px;background:#FDF4EF;border-radius:3px;
+  padding:14px 17px;font-size:11.5px;line-height:1.9;margin-top:14px}
+.callout b{display:block;color:var(--ember);font-size:13px;margin-bottom:6px}
+.cycle{display:flex;align-items:center;gap:0;margin-top:6px}
+.cy{flex:1;border:1.5px solid var(--line);border-radius:3px;padding:12px 11px;text-align:center;background:var(--paper)}
+.cy b{display:block;font-size:12.5px;margin-bottom:4px}
+.cy span{font-size:10.5px;color:var(--ash);line-height:1.6;display:block}
+.cyarw{width:34px;text-align:center;font-size:17px;color:var(--bean);font-weight:700}
+</style></head><body><div class="sheet">
+<div class="doc-head">
+  <div><div class="doc-title">KPI ツリーと計測設計</div>
+  <div class="doc-sub">実店舗を持つ事業では、EC の売上だけを見ていると改善の効果を見誤ります</div></div>
+  <div class="doc-meta">図 11<br>2026-09-11</div>
+</div>
+
+<div class="top"><div class="root"><b>売上</b><span>EC ＋ 店舗</span></div></div>
+<div class="stem"></div>
+
+<div class="two">
+  <div class="branch">
+    <div class="bhead ec"><b>EC 売上</b><span>通販での購入</span></div>
+    <div class="bbody">
+      <div class="kpi"><span class="ic">🔍</span><div class="t"><b>セッション数</b>
+        <span>SEO・SNS からの流入。「中野 コーヒー豆」で 1 位を取ることが最優先</span></div>
+        <div class="g"><b>+50%</b>現状比</div></div>
+      <div class="kpi"><span class="ic">📋</span><div class="t"><b>商品ページ到達率</b>
+        <span>一覧の設計で決まる。絞り込み・焙煎度アイコン・フレーバー 3 語</span>
+        <span class="lv a">課題 C</span></div>
+        <div class="g"><b>30%</b>以上</div></div>
+      <div class="kpi"><span class="ic">🛒</span><div class="t"><b>カート投入率</b>
+        <span>商品情報の充実度。産地・味わい・淹れ方が揃っているか</span>
+        <span class="lv a">課題 C</span></div>
+        <div class="g"><b>8%</b>以上</div></div>
+      <div class="kpi"><span class="ic">💳</span><div class="t"><b>購入完了率</b>
+        <span>決済手段・送料表示・ゲスト購入の可否</span>
+        <span class="lv a">課題 H</span></div>
+        <div class="g"><b>40%</b>カート投入後</div></div>
+      <div class="kpi"><span class="ic">📦</span><div class="t"><b>客単価</b>
+        <span>飲み比べセット・「あと ¥○○で送料無料」の表示</span></div>
+        <div class="g"><b>—</b>要基準値</div></div>
+      <div class="kpi"><span class="ic">🔁</span><div class="t"><b>定期便の継続率</b>
+        <span>フェーズ 3。毎朝焙煎する店と定期便は構造的に相性が良い</span>
+        <span class="lv">フェーズ3</span></div>
+        <div class="g"><b>—</b>要基準値</div></div>
+    </div>
+  </div>
+
+  <div class="branch">
+    <div class="bhead shop"><b>店舗売上</b><span>来店による購入</span></div>
+    <div class="bbody">
+      <div class="kpi"><span class="ic">📞</span><div class="t"><b>電話タップ数</b>
+        <span>来店に最も近い行動。tel: リンクのタップを GA4 で計測</span>
+        <span class="lv a">最重要</span></div>
+        <div class="g"><b>月 100 件</b>地図起動と合算</div></div>
+      <div class="kpi"><span class="ic">🗺</span><div class="t"><b>地図アプリ起動数</b>
+        <span>Google / Apple マップを開いた回数。来店意図の直接指標</span>
+        <span class="lv a">最重要</span></div>
+        <div class="g"><b>以上</b></div></div>
+      <div class="kpi"><span class="ic">🚶</span><div class="t"><b>アクセスページ閲覧</b>
+        <span>写真つき道順が機能しているか。離脱率も併せて見る</span></div>
+        <div class="g"><b>—</b>要基準値</div></div>
+      <div class="kpi"><span class="ic">🕐</span><div class="t"><b>営業情報への到達</b>
+        <span>「本日の営業」が見られているか。課題 B の効果測定</span>
+        <span class="lv a">課題 B</span></div>
+        <div class="g"><b>—</b>要基準値</div></div>
+      <div class="kpi"><span class="ic">📷</span><div class="t"><b>Instagram フォロワー</b>
+        <span>現状 482。開業 11 年・毎朝焙煎する店としては伸びしろがそのまま残っている</span>
+        <span class="lv a">課題 E</span></div>
+        <div class="g"><b>1,500</b>以上</div></div>
+      <div class="kpi"><span class="ic">🌏</span><div class="t"><b>英語ページの閲覧</b>
+        <span>訪日客の受け皿。第三者媒体に英語レビューが実在する</span>
+        <span class="lv">課題 F</span></div>
+        <div class="g"><b>—</b>要基準値</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="sec2">
+  <div class="box"><h3>計測するコンバージョン（GA4 イベント）</h3><div class="in">
+    <table class="e">
+      <thead><tr><th>#</th><th>イベント名</th><th>内容</th><th>重要度</th></tr></thead>
+      <tr><td>1</td><td><code>purchase</code></td><td>購入完了（金額・商品も送信）</td><td class="p h">最高</td></tr>
+      <tr><td>2</td><td><code>subscription_start</code></td><td>定期便の申込（フェーズ3）</td><td class="p h">最高</td></tr>
+      <tr><td>3</td><td><code>begin_checkout</code></td><td>購入手続きの開始</td><td class="p m">高</td></tr>
+      <tr><td>4</td><td><code>add_to_cart</code></td><td>カート投入</td><td class="p m">高</td></tr>
+      <tr><td>5</td><td><code>tel_tap</code></td><td>電話番号のタップ</td><td class="p m">高（来店）</td></tr>
+      <tr><td>6</td><td><code>map_open</code></td><td>地図アプリを開いた</td><td class="p m">高（来店）</td></tr>
+      <tr><td>7</td><td><code>access_view</code></td><td>アクセスページの閲覧</td><td class="p">中（来店）</td></tr>
+      <tr><td>8</td><td><code>instagram_click</code></td><td>Instagram への遷移</td><td class="p">中</td></tr>
+      <tr><td>9</td><td><code>contact_submit</code></td><td>お問い合わせ送信</td><td class="p">中</td></tr>
+      <tr><td>10</td><td><code>restock_notify</code></td><td>入荷通知の登録</td><td class="p">中</td></tr>
+    </table>
+    <div class="callout"><b>5〜7 は「来店の意図」を測る指標です</b>
+      実店舗を持つ事業では、EC の売上だけを見ていると改善の効果を見誤ります。
+      電話タップと地図を開いた回数は、来店に最も近い行動として必ず計測してください。</div>
+  </div></div>
+
+  <div class="box"><h3>振り返りの進め方</h3><div class="in">
+    <p style="font-size:11.5px;color:var(--ash);line-height:1.9;margin-bottom:14px">
+      月 1 回、30 分程度で確認します。<b style="color:var(--roast)">見るべきは「どの豆の記事が読まれ、その豆が売れたか」です。</b>
+      これが分かれば、次に何を書くべきかが決まります。</p>
+    <div class="cycle">
+      <div class="cy"><b>1. 見る</b><span>検索流入<br>来店指標<br>商品別の閲覧</span></div>
+      <div class="cyarw">›</div>
+      <div class="cy"><b>2. 気づく</b><span>読まれた記事<br>売れた豆<br>離脱した箇所</span></div>
+      <div class="cyarw">›</div>
+      <div class="cy"><b>3. 書く</b><span>次の豆の記事<br>Instagram<br>商品情報の追記</span></div>
+      <div class="cyarw">›</div>
+      <div class="cy"><b>4. 直す</b><span>説明の不足<br>導線の詰まり<br>在庫の見せ方</span></div>
+    </div>
+    <div class="callout" style="border-color:#A8762B;background:#FBF6EC">
+      <b style="color:#A8762B">【最優先】基準値を先に取ってください</b>
+      現状値が不明なため、本設計書の目標値はすべて改善幅の目安です。
+      <b style="display:inline;color:var(--roast)">GA4 の設置は、本体改修の着手より最低 1 か月前に</b>行い、改修前の数値を取得しておいてください。
+      基準値がなければ、改修の効果を証明できません。フェーズ 1 の 9 項目のうち、これが最も重要です。</div>
+  </div></div>
+</div>
+
+<div class="note">
+目標値は 2026 年時点の一般的な水準からの目安です。現状値は本調査では取得できていないため【要確認】、
+フェーズ 0 で GA4 と Search Console の設定状況を確認し、基準値を確定させてください。
+</div>
+</div></body></html>

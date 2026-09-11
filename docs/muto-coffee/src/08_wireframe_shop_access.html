@@ -1,0 +1,189 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<link rel="stylesheet" href="_base.css">
+<style>
+.sheet{width:1420px}
+.stage{display:grid;grid-template-columns:1fr 330px;gap:32px;align-items:start}
+.browser{border:2px solid var(--roast);border-radius:5px;overflow:hidden;background:#fff}
+.chrome{background:var(--cream);padding:9px 14px;display:flex;gap:8px;align-items:center;border-bottom:1.5px solid var(--line)}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.urlbar{flex:1;background:#fff;border:1px solid var(--line);border-radius:12px;padding:4px 12px;
+  font-family:monospace;font-size:11px;color:var(--ash);margin-left:8px}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--line)}
+.logo{font-size:15px;font-weight:700}.nav ul{display:flex;gap:18px;list-style:none;font-size:12px}
+.crumb{padding:10px 20px;font-size:11px;color:var(--ash);border-bottom:1px solid var(--line)}
+.ttl{padding:22px 20px 14px}
+.ttl h1{font-size:24px;font-weight:700;margin-bottom:6px}
+.ttl p{font-size:12px;color:var(--ash);line-height:1.8}
+.today{margin:0 20px 20px;background:var(--cream);border-radius:3px;padding:14px 18px;
+  display:flex;align-items:center;justify-content:space-between}
+.today .l{display:flex;align-items:center;gap:11px}
+.today .dg{width:10px;height:10px;border-radius:50%;background:var(--open);box-shadow:0 0 0 4px rgba(74,124,89,.18)}
+.today b{font-size:15px}.today .hr{font-size:13px;font-family:monospace}
+.today .cl{font-size:11px;color:var(--ash)}
+.bd{padding:0 20px 22px}
+.st{display:flex;align-items:baseline;gap:10px;margin:24px 0 12px}
+.st h2{font-size:17px}.st span{font-size:10px;color:var(--ash);letter-spacing:.1em}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+.g3 .ph{height:130px;font-size:10px}
+table.i{width:100%;border-collapse:collapse;font-size:12px}
+table.i th,table.i td{border:1px solid var(--line);padding:9px 12px;text-align:left}
+table.i th{background:var(--cream);width:130px;font-weight:700}
+table.i td em{font-style:normal;color:var(--closed);font-size:11px}
+/* route */
+.route{border:2px solid var(--bean);border-radius:3px;padding:18px 20px;background:var(--paper)}
+.route h3{font-size:15px;margin-bottom:4px}
+.route .lead{font-size:11.5px;color:var(--ash);margin-bottom:16px;line-height:1.8}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;align-items:start}
+.stp{position:relative;padding-right:18px}
+.stp:last-child{padding-right:0}
+.stp .ph{height:104px;font-size:9.5px;margin-bottom:9px}
+.stp .n{position:absolute;top:-9px;left:-9px;width:26px;height:26px;border-radius:50%;
+  background:var(--bean);color:#fff;font-size:12px;font-weight:700;z-index:4;
+  display:flex;align-items:center;justify-content:center}
+.stp b{font-size:12.5px;display:block;margin-bottom:4px;line-height:1.45}
+.stp span{font-size:10.5px;color:var(--ash);line-height:1.7;display:block}
+.stp .arw{position:absolute;right:1px;top:44px;font-size:17px;color:var(--bean);font-weight:700}
+.maparea{display:grid;grid-template-columns:1fr 260px;gap:16px;margin-top:18px}
+.maparea .ph{height:200px;font-size:11px}
+.mapside{font-size:11.5px;line-height:2;color:var(--ash)}
+.mapside b{color:var(--roast);font-size:13px;display:block;margin-bottom:5px}
+.mapside .btn{height:38px;font-size:12px;width:100%;margin-top:9px}
+/* menu table */
+table.m{width:100%;border-collapse:collapse;font-size:12px}
+table.m th,table.m td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+table.m thead th{background:var(--roast);color:var(--paper);font-weight:700}
+table.m td.p{text-align:right;font-family:monospace;font-weight:700}
+table.m tbody th{background:var(--cream);font-weight:700;width:110px}
+/* spec */
+.spec h3{font-size:15px;border-bottom:2px solid var(--roast);padding-bottom:8px;margin-bottom:14px}
+.sp{border:1.5px solid var(--line);border-radius:3px;background:#fff;padding:13px 15px;margin-bottom:11px}
+.sp b{font-size:13px;display:block;margin-bottom:5px}
+.sp p{font-size:11px;color:var(--ash);line-height:1.85}
+.sp.key{border-color:var(--ember);border-left-width:5px;background:#FDF4EF}
+.sp.key b{color:var(--ember)}
+.sp.warn{border-color:var(--closed);border-left-width:5px;background:#FBF6EC}
+.sp.warn b{color:var(--closed)}
+.states{border:1.5px solid var(--line);border-radius:3px;background:#fff;padding:13px 15px;margin-top:16px}
+.states b{font-size:13px;display:block;margin-bottom:9px}
+.stt{display:flex;align-items:flex-start;gap:9px;font-size:11px;margin-bottom:8px;line-height:1.6}
+.stt i{width:10px;height:10px;border-radius:50%;flex:0 0 auto;margin-top:4px}
+</style></head><body><div class="sheet">
+<div class="doc-head">
+  <div><div class="doc-title">店舗案内・アクセス ワイヤーフレーム</div>
+  <div class="doc-sub">/shop-info/ と /shop-info/access/ ／ 課題 B「情報の不一致」への対応</div></div>
+  <div class="doc-meta">図 08<br>2026-09-11</div>
+</div>
+
+<div class="stage">
+<div class="browser">
+  <div class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    <span class="urlbar">https://muto-coffee.com/shop-info/</span></div>
+  <div class="nav"><span class="logo">MUTO coffee roastery</span>
+    <ul><li>豆を買う</li><li>店舗案内</li><li>MUTOについて</li><li>ジャーナル</li><li>EN</li><li>カート 0</li></ul></div>
+  <div class="crumb">ホーム ＞ 店舗案内</div>
+  <div class="ttl"><h1>店舗案内</h1>
+    <p>中野駅南口から徒歩3分。れんが坂を上った路地裏で、毎朝焙煎したコーヒーをお出ししています。</p></div>
+
+  <div class="today"><div class="l"><span class="dg"></span><b>本日 営業中</b>
+    <span class="hr">11:30 – 19:00 (L.O. 18:00)</span><span class="cl">定休日: 水曜・木曜</span></div>
+    <span style="font-size:10.5px;color:var(--ash)">トップと同じコンポーネントを再利用</span></div>
+
+  <div class="bd">
+    <div class="g3"><div class="ph">カウンター席</div><div class="ph">テーブル席と店内の様子</div>
+      <div class="ph">GIESEN 焙煎機と豆の棚</div></div>
+
+    <div class="st"><h2>店舗情報</h2><span>INFORMATION</span></div>
+    <table class="i">
+      <tr><th>住所</th><td>〒164-0001 東京都中野区中野3-34-18</td></tr>
+      <tr><th>電話</th><td>03-6382-5439（営業時間内にお願いします）</td></tr>
+      <tr><th>営業時間</th><td>11:30 – 19:00（L.O. 18:00）　<em>【要確認】媒体により 19:30 / L.O.19:00 の記載あり</em></td></tr>
+      <tr><th>定休日</th><td>水曜・木曜　<em>【要確認】媒体により「木曜＋第1・第3水曜」の記載あり</em></td></tr>
+      <tr><th>席数</th><td><em>【要確認】カウンター ○席 / テーブル ○席</em></td></tr>
+      <tr><th>設備</th><td><em>【要確認】Wi-Fi / 電源 / 喫煙 / テイクアウト可否</em></td></tr>
+      <tr><th>支払方法</th><td><em>【要確認】現金 / クレジットカード / QR 決済</em></td></tr>
+      <tr><th>開業</th><td>2014年10月</td></tr>
+    </table>
+
+    <div class="st"><h2>店内メニュー</h2><span>MENU</span></div>
+    <table class="m">
+      <thead><tr><th>区分</th><th>品目</th><th style="text-align:right">価格</th></tr></thead>
+      <tbody>
+        <tr><th rowspan="3">ブレンド</th><td>ももぞのブレンド</td><td class="p">¥580</td></tr>
+        <tr><td>なかなかブレンド</td><td class="p">¥580</td></tr>
+        <tr><td>ふかいりブレンド</td><td class="p">¥580</td></tr>
+        <tr><th rowspan="2">その他</th><td>イタリアンブレンド</td><td class="p">¥550</td></tr>
+        <tr><td>フローレンシア</td><td class="p">¥600</td></tr>
+        <tr><th>日替わり</th><td>シングルオリジン（豆の在庫による）</td><td class="p">—</td></tr>
+        <tr><th rowspan="2">スイーツ</th><td>ベイクドチーズケーキ</td><td class="p">¥450</td></tr>
+        <tr><td>ガトーショコラ</td><td class="p">¥450</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:10.5px;color:var(--closed);margin-top:7px;line-height:1.8">
+      【要確認】上記は第三者媒体で確認できた参考価格です。現行価格の確認が必須です。
+      メニューは画像ではなく HTML の表で作ります（検索にかかる・スマホで読みやすい・更新が容易・英語版に流用できる）。</p>
+
+    <div class="st"><h2>アクセス</h2><span>ACCESS</span></div>
+    <div class="route">
+      <h3>中野駅 南口から 徒歩約3分</h3>
+      <p class="lead">路地裏にあるため、地図だけでは分かりにくい立地です。実際の風景写真で道順をご案内します。</p>
+      <div class="steps">
+        <div class="stp"><span class="n">1</span><div class="ph">南口の改札を出たところ</div>
+          <b>中野駅 南口を出る</b><span>JR中央線・東京メトロ東西線</span><span class="arw">›</span></div>
+        <div class="stp"><span class="n">2</span><div class="ph">中野マルイの外観</div>
+          <b>中野マルイを右手に</b><span>マルイを見ながら進みます</span><span class="arw">›</span></div>
+        <div class="stp"><span class="n">3</span><div class="ph">れんが坂の入口</div>
+          <b>れんが坂を上る</b><span>小さな坂道です</span><span class="arw">›</span></div>
+        <div class="stp"><span class="n">4</span><div class="ph">曲がり角の風景</div>
+          <b>上りきったら左折</b><span>静かな路地に入ります</span><span class="arw">›</span></div>
+        <div class="stp"><span class="n">5</span><div class="ph">店舗外観</div>
+          <b>MUTO coffee roastery</b><span>到着です</span></div>
+      </div>
+
+      <div class="maparea">
+        <div class="ph">Google マップ（クリックで初めて読み込む方式）</div>
+        <div class="mapside"><b>〒164-0001<br>東京都中野区中野3-34-18</b>
+          JR中央線 中野駅 南口 徒歩3分<br>東京メトロ東西線 中野駅 南口 徒歩3分<br>中野マルイ裏、れんが坂上<br>
+          <span class="btn btn-s">Google マップで開く</span>
+          <span class="btn btn-s">Apple マップで開く</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="spec">
+  <h3>このページの要件</h3>
+  <div class="sp key"><b>写真つきの道順が最も効く</b>
+    <p>路地裏立地では、地図より「実際の風景」が役に立ちます。れんが坂・中野マルイという
+    <b>目印ベースの案内</b>にすることで、初めての客が迷わず辿り着けます。</p></div>
+  <div class="sp key"><b>営業時間は設定 1 箇所から自動表示</b>
+    <p>トップの「本日の営業」と同じコンポーネントを再利用します。人が手で書き換える限りズレは再発するため、
+    構造で防ぎます。同じ値から JSON-LD の openingHoursSpecification も出力します。</p></div>
+  <div class="sp"><b>メニューは HTML の表で</b>
+    <p>画像にすると検索にかからず、スマホで読みにくく、価格改定のたびに作り直しになります。</p></div>
+  <div class="sp"><b>地図は遅延読み込み</b>
+    <p>Google マップの埋め込みを初期表示で読み込むと、表示速度を大きく損ないます。
+    クリックで初めて読み込む方式にします。</p></div>
+  <div class="sp"><b>住所はテキストで</b>
+    <p>選択・コピーできる形にします。タクシー乗車時に実際に使われます。</p></div>
+  <div class="sp"><b>電話は tel: リンク</b>
+    <p>スマホからタップで発信。GA4 でタップ数を計測し、来店意図の指標とします。</p></div>
+
+  <div class="sp warn"><b>営業時間の確定が最優先</b>
+    <p>現在、営業時間と定休日は媒体によって記述が異なります。
+    「今日やってる？」を調べた客が閉まっている店に来る、あるいは開いている店を諦める。
+    どちらも直接の機会損失です。<b>店舗への確認が、本改修で最初にすべきこと</b>です。</p></div>
+
+  <div class="states"><b>「本日の営業」の 4 状態</b>
+    <div class="stt"><i style="background:#4A7C59"></i><span><b>営業中</b> 本日 営業中　11:30 – 19:00 (L.O. 18:00)</span></div>
+    <div class="stt"><i style="background:#A8762B"></i><span><b>営業時間外</b> 本日 11:30 開店（現在 営業時間外）</span></div>
+    <div class="stt"><i style="background:#A8762B"></i><span><b>定休日</b> 本日は定休日です　次回営業: 金曜 11:30〜</span></div>
+    <div class="stt"><i style="background:#A63D2F"></i><span><b>臨時休業</b> 本日は臨時休業です</span></div>
+    <p style="font-size:10.5px;color:var(--ash);line-height:1.8;margin-top:8px">
+      「次回営業」まで表示することで、「じゃあいつ行けるのか」に同時に答えます。</p></div>
+</div>
+</div>
+
+<div class="note">
+グレーの斜線部分は写真が入る箇所です。アクセス用の道順写真 5〜6 枚は新たに撮影が必要です（<b>03_デザインシステム.md §6.1</b>）。
+</div>
+</div></body></html>

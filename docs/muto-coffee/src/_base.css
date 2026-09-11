@@ -1,0 +1,36 @@
+/* MUTO coffee roastery 設計書 図版 共通スタイル */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --paper:#FAF8F5; --cream:#F1EBE3; --roast:#2B211B; --ash:#6B5F57;
+  --bean:#6F4A2E; --ember:#B4542A; --line:#DED5CA;
+  --open:#4A7C59; --closed:#A8762B; --error:#A63D2F;
+  --r1:#C49A6C; --r2:#A8763F; --r3:#8A5A2B; --r4:#5F3A1E; --r5:#3A2416;
+  --font:"IPAPGothic","IPAGothic","Noto Sans JP",sans-serif;
+}
+body{font-family:var(--font);background:var(--paper);color:var(--roast);
+  -webkit-font-smoothing:antialiased;letter-spacing:.02em}
+.sheet{padding:44px 48px}
+.doc-head{border-bottom:3px solid var(--roast);padding-bottom:16px;margin-bottom:32px;
+  display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.doc-title{font-size:28px;font-weight:700;letter-spacing:.04em}
+.doc-sub{font-size:14px;color:var(--ash);margin-top:6px;letter-spacing:.03em}
+.doc-meta{font-size:12px;color:var(--ash);text-align:right;line-height:1.8;white-space:nowrap}
+.note{font-size:12px;color:var(--ash);line-height:1.8;margin-top:22px;
+  border-left:3px solid var(--line);padding:6px 0 6px 14px}
+.legend{display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:var(--ash);margin-top:20px}
+.legend i{display:inline-block;width:13px;height:13px;margin-right:6px;vertical-align:-2px;border-radius:2px}
+/* wireframe primitives */
+.wf{border:1.5px solid var(--roast);background:#fff}
+.ph{background:repeating-linear-gradient(135deg,#E7DFD5,#E7DFD5 8px,#DED5CA 8px,#DED5CA 16px);
+  display:flex;align-items:center;justify-content:center;color:#6B5F57;font-size:13px;
+  font-weight:700;letter-spacing:.08em;text-align:center;line-height:1.7}
+.txtline{height:9px;background:var(--line);border-radius:2px;margin-bottom:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;
+  border-radius:2px;font-size:13px;font-weight:700;letter-spacing:.06em}
+.btn-p{background:var(--ember);color:#fff}
+.btn-s{background:transparent;color:var(--bean);border:1.5px solid var(--bean)}
+.tag{display:inline-block;font-size:10px;letter-spacing:.12em;color:var(--ash);
+  border:1px solid var(--line);padding:2px 8px;border-radius:2px}
+.sec-label{position:absolute;left:-34px;top:10px;width:26px;height:26px;border-radius:50%;
+  background:var(--roast);color:var(--paper);font-size:12px;font-weight:700;
+  display:flex;align-items:center;justify-content:center}

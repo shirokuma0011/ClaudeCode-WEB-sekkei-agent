@@ -1,0 +1,115 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<link rel="stylesheet" href="_base.css">
+<style>
+.sheet{width:1500px}
+.grid{display:grid;grid-template-columns:196px repeat(5,1fr);gap:0;border:2px solid var(--roast);
+  border-radius:3px;overflow:hidden;background:#fff;margin-bottom:26px}
+.hd{background:var(--roast);color:var(--paper);padding:12px 14px;font-size:13px;font-weight:700;
+  letter-spacing:.06em;text-align:center}
+.hd:first-child{text-align:left}
+.rowlabel{background:var(--cream);padding:16px 14px;border-bottom:1.5px solid var(--line);
+  border-right:2px solid var(--roast)}
+.rowlabel b{font-size:14px;display:block;margin-bottom:5px}
+.rowlabel span{font-size:11px;color:var(--ash);line-height:1.7;display:block}
+.cell{padding:14px 13px;border-bottom:1.5px solid var(--line);border-right:1px solid var(--line);
+  font-size:11.5px;line-height:1.75}
+.cell:last-child{border-right:none}
+.grid>div:nth-last-child(-n+6){border-bottom:none}
+.cell .q{color:var(--roast);display:block;margin-bottom:8px}
+.cell .bad{color:var(--error);display:block;padding-left:15px;position:relative;margin-bottom:7px}
+.cell .bad::before{content:"×";position:absolute;left:0;font-weight:700}
+.cell .good{color:var(--open);display:block;padding-left:15px;position:relative}
+.cell .good::before{content:"✓";position:absolute;left:0;font-weight:700}
+.pcard{border:2px solid var(--bean);border-radius:3px;background:#fff;padding:18px 20px}
+.pcards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:26px}
+.pcard b{font-size:15px;display:block;margin-bottom:3px}
+.pcard .who{font-size:11.5px;color:var(--ash);margin-bottom:12px;display:block}
+.pcard dl{font-size:11.5px;line-height:1.8}
+.pcard dt{font-weight:700;margin-top:9px;color:var(--bean)}
+.pcard dd{color:var(--ash)}
+</style></head><body><div class="sheet">
+<div class="doc-head">
+  <div><div class="doc-title">ユーザージャーニー</div>
+  <div class="doc-sub">3 つの利用者が、どこでつまずき、改善後はどうなるか</div></div>
+  <div class="doc-meta">図 03<br>2026-09-11</div>
+</div>
+
+<div class="pcards">
+  <div class="pcard"><b>近隣の常連予備軍</b><span class="who">30〜50代／中野在住・勤務</span>
+    <dl><dt>求めるもの</dt><dd>今日開いているか。落ち着いて座れるか。どんな豆があるか。</dd>
+    <dt>つまずき</dt><dd>営業時間が媒体ごとに違う。公式サイトが答えになっていない。</dd></dl></div>
+  <div class="pcard"><b>豆を買いたいコーヒー好き</b><span class="who">全国／通販</span>
+    <dl><dt>求めるもの</dt><dd>味の方向性、焙煎度、抽出器具との相性、どれを選べばいいか。</dd>
+    <dt>つまずき</dt><dd>商品が個別ページに散在し比較できない。記事から商品へ飛べない。</dd></dl></div>
+  <div class="pcard"><b>訪日客・遠方からの来訪者</b><span class="who">インバウンド／観光</span>
+    <dl><dt>求めるもの</dt><dd>場所、行き方、何が体験できるか、豆を持ち帰れるか、支払い方法。</dd>
+    <dt>つまずき</dt><dd>英語情報がない。路地裏立地のため地図だけでは迷う。</dd></dl></div>
+</div>
+
+<div class="grid">
+  <div class="hd">段階</div>
+  <div class="hd">1. 知る</div><div class="hd">2. 調べる</div><div class="hd">3. 迷う</div>
+  <div class="hd">4. 決める</div><div class="hd">5. 続ける</div>
+
+  <div class="rowlabel"><b>近隣の常連予備軍</b><span>来店が目的</span></div>
+  <div class="cell"><span class="q">近所に自家焙煎の店があるらしい</span>
+    <span class="bad">Instagram の投稿が 9 件で店の様子が分からない</span>
+    <span class="good">週 3〜5 回の投稿で焙煎の様子が伝わる</span></div>
+  <div class="cell"><span class="q">今日はやっている？</span>
+    <span class="bad">媒体ごとに営業時間が違い、判断できない</span>
+    <span class="good">トップの「本日 営業中 11:30–19:00」で即答</span></div>
+  <div class="cell"><span class="q">どんな雰囲気？座れる？</span>
+    <span class="bad">店内写真・席数・電源の情報が乏しい</span>
+    <span class="good">店内写真と席・設備情報を店舗案内に掲載</span></div>
+  <div class="cell"><span class="q">行ってみよう</span>
+    <span class="bad">閉まっていた／開いているのに諦めた</span>
+    <span class="good">臨時休業もお知らせバーに即時反映</span></div>
+  <div class="cell"><span class="q">豆も買って帰ろう</span>
+    <span class="bad">次に何が入荷するか分からない</span>
+    <span class="good">ジャーナルと Instagram で入荷を告知</span></div>
+
+  <div class="rowlabel"><b>豆を買いたいコーヒー好き</b><span>通販が目的</span></div>
+  <div class="cell"><span class="q">エチオピアの豆を探している</span>
+    <span class="bad">産地名で検索しても商品ページに届きにくい</span>
+    <span class="good">産地情報を構造化し、産地名検索の受け皿に</span></div>
+  <div class="cell"><span class="q">どんな豆があるのか</span>
+    <span class="bad">商品が個別ページに散在。一覧で比較できない</span>
+    <span class="good">焙煎度・味わい・産地で絞り込める一覧</span></div>
+  <div class="cell"><span class="q">10 種類以上あってどれか選べない</span>
+    <span class="bad">商品名と価格が中心で、味が想像できない</span>
+    <span class="good">焙煎度インジケータとフレーバー 3 語で比較可能に</span></div>
+  <div class="cell"><span class="q">200g は多い。まず試したい</span>
+    <span class="bad">単品 200g のみ。初回のハードルが高い</span>
+    <span class="good">100g×3 の飲み比べセットを用意</span></div>
+  <div class="cell"><span class="q">また切らした。買い直すのが面倒</span>
+    <span class="bad">都度購入のみ。買い忘れて他店へ流れる</span>
+    <span class="good">定期便（おまかせ便）で継続購入</span></div>
+
+  <div class="rowlabel"><b>訪日客・遠方からの来訪者</b><span>体験が目的</span></div>
+  <div class="cell"><span class="q">Nakano で良いコーヒーを飲みたい</span>
+    <span class="bad">英語の情報が第三者媒体にしかない</span>
+    <span class="good">/en/ が検索の受け皿になる</span></div>
+  <div class="cell"><span class="q">Where is it? When is it open?</span>
+    <span class="bad">公式サイトが日本語のみで読めない</span>
+    <span class="good">場所・時間・メニューを 1 ページに英語で</span></div>
+  <div class="cell"><span class="q">路地裏で見つけられない</span>
+    <span class="bad">地図だけでは目印が分からない</span>
+    <span class="good">駅からの写真つき道順 5 ステップ</span></div>
+  <div class="cell"><span class="q">支払いはカードで大丈夫？</span>
+    <span class="bad">支払方法の記載がない</span>
+    <span class="good">店頭の支払方法を明記</span></div>
+  <div class="cell"><span class="q">豆を国に持ち帰りたい</span>
+    <span class="bad">通販は国内配送のみと知らずに問い合わせ</span>
+    <span class="good">店頭購入を案内し、配送範囲も明記</span></div>
+</div>
+
+<div class="legend">
+  <span><i style="background:#A63D2F"></i>現状のつまずき</span>
+  <span><i style="background:#4A7C59"></i>改善後の状態</span>
+</div>
+
+<div class="note">
+現状の記述は、公開情報から観測できた範囲に基づく評価です。営業時間の不一致（課題 B）は本調査の時点で
+実際に外部から観測できており、<b>今まさに発生している機会損失</b>です。
+</div>
+</div></body></html>

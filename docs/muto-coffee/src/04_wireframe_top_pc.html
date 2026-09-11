@@ -1,0 +1,250 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<link rel="stylesheet" href="_base.css">
+<style>
+.sheet{width:1360px}
+.stage{display:grid;grid-template-columns:1fr 340px;gap:34px;align-items:start}
+.browser{border:2px solid var(--roast);border-radius:5px;overflow:hidden;background:#fff}
+.chrome{background:var(--cream);padding:9px 14px;display:flex;align-items:center;gap:8px;
+  border-bottom:1.5px solid var(--line)}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.urlbar{flex:1;background:#fff;border:1px solid var(--line);border-radius:12px;padding:4px 12px;
+  font-family:monospace;font-size:11px;color:var(--ash);margin-left:8px}
+.page{position:relative}
+.sec{position:relative;padding:0 0 0 0;border-bottom:1px dashed var(--line)}
+.num{position:absolute;left:10px;top:10px;width:24px;height:24px;border-radius:50%;
+  background:var(--roast);color:var(--paper);font-size:11px;font-weight:700;z-index:5;
+  display:flex;align-items:center;justify-content:center}
+/* 1 notice */
+.notice{background:var(--roast);color:var(--paper);font-size:12px;padding:9px 16px 9px 46px;
+  display:flex;justify-content:space-between;align-items:center}
+.notice em{font-style:normal;opacity:.6;font-size:10.5px}
+/* nav */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;
+  border-bottom:1px solid var(--line)}
+.logo{font-size:17px;font-weight:700;letter-spacing:.06em}
+.nav ul{display:flex;gap:22px;list-style:none;font-size:12.5px;align-items:center}
+.cartbtn{border:1.5px solid var(--bean);color:var(--bean);border-radius:2px;padding:5px 13px;font-size:12px}
+/* hero */
+.hero{height:300px;position:relative;padding-left:32px}
+.hero .ph{position:absolute;inset:0;color:#8d8378;font-size:12px}
+.hero .ov{position:absolute;inset:0;background:rgba(30,22,16,.68);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#fff}
+.hero h1{font-size:38px;font-weight:700;letter-spacing:.1em;text-shadow:0 2px 10px rgba(0,0,0,.4)}
+.hero p{font-size:13.5px;line-height:2;text-align:center;opacity:.94}
+.hero .btns{display:flex;gap:14px;margin-top:6px}
+.hero .btn-p{background:var(--ember)}
+.hero .btn-s{border-color:#fff;color:#fff}
+/* today */
+.today{margin:0;padding:16px 22px 16px 46px;background:var(--cream);display:flex;
+  align-items:center;justify-content:space-between;gap:16px}
+.today .l{display:flex;align-items:center;gap:12px}
+.today .dotg{width:11px;height:11px;border-radius:50%;background:var(--open);
+  box-shadow:0 0 0 4px rgba(74,124,89,.18)}
+.today b{font-size:16px}
+.today .hrs{font-size:14px;color:var(--roast);font-family:monospace}
+.today .cl{font-size:11.5px;color:var(--ash)}
+.body{padding:26px 22px 26px 46px}
+.sec-t{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+.sec-t h2{font-size:17px;font-weight:700}
+.sec-t span{font-size:11px;color:var(--ash);letter-spacing:.1em}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g6{display:grid;grid-template-columns:repeat(6,1fr);gap:9px}
+.mini{border:1.5px solid var(--line);border-radius:2px;overflow:hidden;background:#fff}
+.mini .ph{height:74px;font-size:10px}
+.mini .c{padding:9px 10px}
+.mini .tg{font-size:9px;color:var(--ash);letter-spacing:.1em;display:block;margin-bottom:4px}
+.mini .nm{font-size:12px;font-weight:700;margin-bottom:5px;line-height:1.4}
+.roast{display:flex;gap:2.5px;align-items:center;margin-bottom:5px}
+.roast i{width:7px;height:7px;border-radius:50%;background:var(--line)}
+.roast i.on{background:var(--r3)}
+.roast em{font-style:normal;font-size:9.5px;color:var(--ash);margin-left:4px}
+.mini .fl{font-size:9.5px;color:var(--ash);margin-bottom:7px;line-height:1.5}
+.mini .pr{display:flex;justify-content:space-between;align-items:baseline;font-size:9.5px;color:var(--ash)}
+.mini .pr b{font-size:13px;color:var(--roast)}
+.about{display:grid;grid-template-columns:190px 1fr;gap:18px;align-items:center}
+.about .ph{height:130px}
+.shopinfo{display:grid;grid-template-columns:1fr 240px;gap:18px}
+.shopinfo .ph{height:118px}
+.igrid .ph{aspect-ratio:1;height:auto;font-size:9px}
+.foot{background:var(--roast);color:var(--paper);padding:20px 22px 20px 46px;font-size:11px;
+  display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:22px;line-height:1.9}
+.foot b{display:block;font-size:12.5px;margin-bottom:7px}
+.foot span{opacity:.75}
+/* spec panel */
+.spec{position:sticky;top:0}
+.spec h3{font-size:15px;font-weight:700;border-bottom:2px solid var(--roast);
+  padding-bottom:8px;margin-bottom:14px}
+.srow{display:flex;gap:11px;margin-bottom:13px;font-size:11.5px;line-height:1.7}
+.sn{flex:0 0 24px;height:24px;border-radius:50%;background:var(--roast);color:var(--paper);
+  font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.srow b{display:block;font-size:12.5px;margin-bottom:2px}
+.srow span{color:var(--ash);display:block}
+.kbox{border:1.5px solid var(--ember);border-radius:3px;background:#FDF4EF;padding:13px 15px;
+  font-size:11px;line-height:1.85;margin-top:16px}
+.kbox b{display:block;font-size:12.5px;color:var(--ember);margin-bottom:6px}
+</style></head><body><div class="sheet">
+<div class="doc-head">
+  <div><div class="doc-title">トップページ ワイヤーフレーム（PC）</div>
+  <div class="doc-sub">想定幅 1440px ／ コンテンツ最大幅 1200px</div></div>
+  <div class="doc-meta">図 04<br>2026-09-11</div>
+</div>
+
+<div class="stage">
+<div class="browser">
+  <div class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    <span class="urlbar">https://muto-coffee.com/</span></div>
+  <div class="page">
+
+    <div class="sec"><span class="num">1</span>
+      <div class="notice"><span>1/27(火) は都合により 18:00 閉店いたします</span><em>平常時は非表示 ×</em></div>
+    </div>
+
+    <div class="sec">
+      <div class="nav"><span class="logo">MUTO coffee roastery</span>
+        <ul><li>豆を買う</li><li>店舗案内</li><li>MUTOについて</li><li>ジャーナル</li><li>EN</li>
+          <li><span class="cartbtn">カート 0</span></li></ul></div>
+    </div>
+
+    <div class="sec"><span class="num">2</span>
+      <div class="hero"><div class="ph">焙煎中の GIESEN 焙煎機<br>（湯気・豆・手元が写るもの／1枚の静止画）</div>
+        <div class="ov"><h1>毎朝、焙煎しています。</h1>
+          <p>中野の路地裏。オランダ GIESEN の焙煎機で、<br>世界中から届いた豆を、その日の分だけ。</p>
+          <div class="btns"><span class="btn btn-p">豆を見る</span><span class="btn btn-s">店舗案内</span></div>
+        </div></div>
+    </div>
+
+    <div class="sec"><span class="num">3</span>
+      <div class="today"><div class="l"><span class="dotg"></span>
+        <b>本日 営業中</b><span class="hrs">11:30 – 19:00 (L.O. 18:00)</span>
+        <span class="cl">定休日: 水曜・木曜</span></div>
+        <span class="btn btn-s" style="height:32px;font-size:11px;padding:0 14px">詳しい営業案内</span></div>
+    </div>
+
+    <div class="sec"><span class="num">4</span><div class="body">
+      <div class="sec-t"><h2>豆を選ぶ</h2><span>CHOOSE YOUR BEANS</span></div>
+      <div class="g4">
+        <div class="mini"><div class="ph">浅煎り</div><div class="c"><div class="nm">浅煎り</div>
+          <div class="fl">華やか・フルーティ</div></div></div>
+        <div class="mini"><div class="ph">中煎り</div><div class="c"><div class="nm">中煎り</div>
+          <div class="fl">甘い・バランス</div></div></div>
+        <div class="mini"><div class="ph">中深煎り</div><div class="c"><div class="nm">中深煎り</div>
+          <div class="fl">香ばしい・コク</div></div></div>
+        <div class="mini"><div class="ph">深煎り</div><div class="c"><div class="nm">深煎り</div>
+          <div class="fl">しっかり苦味</div></div></div>
+      </div></div>
+    </div>
+
+    <div class="sec"><span class="num">5</span><div class="body">
+      <div class="sec-t"><h2>今週の豆</h2><span>THIS WEEK</span></div>
+      <div class="g4">
+        <div class="mini"><div class="ph">商品写真 4:3</div><div class="c">
+          <span class="tg">シングルオリジン</span><div class="nm">エチオピア／ファロ</div>
+          <div class="roast"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><em>中煎り</em></div>
+          <div class="fl">ジャスミン / 桃 / 紅茶</div>
+          <div class="pr"><span>200g</span><b>¥1,850</b></div></div></div>
+        <div class="mini"><div class="ph">商品写真 4:3</div><div class="c">
+          <span class="tg">ブレンド</span><div class="nm">ももぞのブレンド</div>
+          <div class="roast"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><em>中煎り</em></div>
+          <div class="fl">【要記入】フレーバー3語</div>
+          <div class="pr"><span>200g</span><b>¥1,800</b></div></div></div>
+        <div class="mini"><div class="ph">商品写真 4:3</div><div class="c">
+          <span class="tg">シングルオリジン</span><div class="nm">ケニア／キリニャガ</div>
+          <div class="roast"><i class="on"></i><i class="on"></i><i></i><i></i><i></i><em>中浅煎り</em></div>
+          <div class="fl">【要記入】フレーバー3語</div>
+          <div class="pr"><span>200g</span><b>¥2,200</b></div></div></div>
+        <div class="mini"><div class="ph">商品写真 4:3</div><div class="c">
+          <span class="tg">カフェインレス</span><div class="nm">メキシコ トリウンフォ・ベルデ</div>
+          <div class="roast"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><em>中深煎り</em></div>
+          <div class="fl">【要記入】フレーバー3語</div>
+          <div class="pr"><span>200g</span><b>¥2,000</b></div></div></div>
+      </div></div>
+    </div>
+
+    <div class="sec"><span class="num">6</span><div class="body">
+      <div class="sec-t"><h2>MUTO について</h2><span>ABOUT</span></div>
+      <div class="about"><div class="ph">店主が焙煎する姿</div>
+        <div><div class="txtline" style="width:88%"></div><div class="txtline" style="width:95%"></div>
+        <div class="txtline" style="width:72%"></div>
+        <div style="font-size:11.5px;color:var(--ash);line-height:1.9;margin:8px 0 12px">
+        2014年、中野の路地裏に開業。元 CM プロデューサーの店主が、堀口珈琲での修業を経て地元で独立。<br>
+        オランダ GIESEN の焙煎機で、常時 10〜15 種類の豆を毎朝焙煎しています。</div>
+        <span class="btn btn-s" style="height:34px;font-size:12px">詳しく読む</span></div></div></div>
+    </div>
+
+    <div class="sec"><span class="num">7</span><div class="body">
+      <div class="sec-t"><h2>店舗案内</h2><span>SHOP</span></div>
+      <div class="shopinfo">
+        <div class="g3"><div class="ph" style="height:118px">カウンター</div>
+          <div class="ph" style="height:118px">テーブル席</div><div class="ph" style="height:118px">豆の棚</div></div>
+        <div style="font-size:11.5px;line-height:2;color:var(--ash)">
+          <b style="color:var(--roast);font-size:12.5px">中野3-34-18</b><br>
+          JR・東西線 中野駅 南口 徒歩3分<br>11:30 – 19:00 (L.O. 18:00)<br>定休日 水曜・木曜<br>
+          <span class="btn btn-s" style="height:32px;font-size:11px;margin-top:8px">道順を見る</span></div>
+      </div></div>
+    </div>
+
+    <div class="sec"><span class="num">8</span><div class="body">
+      <div class="sec-t"><h2>ジャーナル</h2><span>JOURNAL</span></div>
+      <div class="g3">
+        <div class="mini"><div class="ph" style="height:66px">記事画像</div><div class="c">
+          <span class="tg">豆のはなし</span><div class="nm">ルワンダ・コアカカ ムガンザ</div></div></div>
+        <div class="mini"><div class="ph" style="height:66px">記事画像</div><div class="c">
+          <span class="tg">淹れかた</span><div class="nm">ドリップの湯温と粉量</div></div></div>
+        <div class="mini"><div class="ph" style="height:66px">記事画像</div><div class="c">
+          <span class="tg">豆のはなし</span><div class="nm">エチオピアの豆が届きました</div></div></div>
+      </div></div>
+    </div>
+
+    <div class="sec"><span class="num">9</span><div class="body">
+      <div class="sec-t"><h2>Instagram</h2><span>@mutocoffeeroastery</span></div>
+      <div class="g6 igrid"><div class="ph"></div><div class="ph"></div><div class="ph"></div>
+        <div class="ph"></div><div class="ph"></div><div class="ph"></div></div></div>
+    </div>
+
+    <div class="sec" style="border:none"><span class="num">10</span>
+      <div class="foot">
+        <div><b>MUTO coffee roastery</b><span>〒164-0001 東京都中野区中野3-34-18<br>
+          TEL 03-6382-5439<br>11:30 – 19:00 (L.O. 18:00) / 定休日 水曜・木曜</span></div>
+        <div><b>サイトマップ</b><span>豆を買う / 定期便 / 店舗案内<br>MUTOについて / ジャーナル / English</span></div>
+        <div><b>ご利用について</b><span>特定商取引法に基づく表記<br>送料・配送について / プライバシーポリシー<br>Instagram / Facebook</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="spec">
+  <h3>セクション仕様</h3>
+  <div class="srow"><span class="sn">1</span><div><b>お知らせバー</b>
+    <span>臨時休業・時短を即時伝達。平常時は非表示。管理画面のチェック 1 つで出し入れ</span></div></div>
+  <div class="srow"><span class="sn">2</span><div><b>ヒーロー</b>
+    <span>高さ min(78vh, 720px)。スライダーにしない。文字は画像に焼き込まずHTMLで。コントラスト 4.5:1 以上</span></div></div>
+  <div class="srow"><span class="sn">3</span><div><b>本日の営業</b>
+    <span>設定値から自動判定。同じ値から JSON-LD も出力。課題 B の中核</span></div></div>
+  <div class="srow"><span class="sn">4</span><div><b>豆を選ぶ</b>
+    <span>焙煎度別の入口。客が最初に決める軸を最上位に置く</span></div></div>
+  <div class="srow"><span class="sn">5</span><div><b>今週の豆</b>
+    <span>直近入荷の 3〜4 種。焙煎度インジケータとフレーバー 3 語で比較可能に</span></div></div>
+  <div class="srow"><span class="sn">6</span><div><b>MUTO について</b>
+    <span>店主の物語。第三者媒体で繰り返し語られている強みをサイトでも同じ強度で</span></div></div>
+  <div class="srow"><span class="sn">7</span><div><b>店舗案内</b>
+    <span>店内写真＋営業時間＋道順への導線</span></div></div>
+  <div class="srow"><span class="sn">8</span><div><b>ジャーナル</b>
+    <span>最新 3 件。記事→商品の導線の入口</span></div></div>
+  <div class="srow"><span class="sn">9</span><div><b>Instagram</b>
+    <span>直近 6 枚。公式埋め込みは重いため画像を静的取得して表示</span></div></div>
+  <div class="srow"><span class="sn">10</span><div><b>フッター</b>
+    <span>店舗情報・SNS・法的ページ</span></div></div>
+
+  <div class="kbox"><b>このページで最も重要なのは 3</b>
+    営業時間が媒体ごとに食い違っている状態（課題 B）は、今まさに来店機会を失わせています。
+    人が手で書き換える限りズレは再発するため、<b>設定は 1 箇所・表示は自動</b>の構造にします。</div>
+</div>
+</div>
+
+<div class="note">
+グレーの斜線部分は写真が入る箇所です。必要な写真の一覧と撮影・書き出しの指針は
+<b>03_デザインシステム.md §6</b> に記載しています。【要記入】は店舗へのヒアリングが必要な項目です。
+</div>
+</div></body></html>
