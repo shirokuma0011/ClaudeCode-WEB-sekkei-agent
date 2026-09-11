@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="1242" viewBox="0 0 980 1242" font-family="'Noto Sans JP','Hiragino Kaku Gothic ProN','IPAGothic',Meiryo,system-ui,sans-serif">
+<rect width="980" height="1242" fill="#FFFFFF"/>
+<text x="40" y="44" font-size="22" font-weight="700" fill="#14332A">新サイトマップ（IA）</text>
+<text x="40" y="68" font-size="13" fill="#5C5C5C">協進建設・協進住宅 Webサイト リニューアル設計書 03章 ／ ★ = 新設する中核機能</text>
+<line x1="40" y1="84" x2="940" y2="84" stroke="#B9B4AA" stroke-width="1"/><rect x="40" y="613" width="150" height="40" rx="6" fill="#14332A"/>
+<text x="115" y="632" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">トップ</text>
+<text x="115" y="647" font-size="11" fill="#C9D8D1" text-anchor="middle">/</text><path d="M190 633 H210 V210 H230" fill="none" stroke="#B9B4AA" stroke-width="1.2"/><rect x="230" y="191" width="225" height="38" rx="6" fill="#E8F0EC" stroke="#1F4A3D" stroke-width="1.4"/>
+<text x="242" y="207" font-size="13.5" font-weight="700" fill="#1F4A3D">注文住宅</text>
+<text x="242" y="222" font-size="10.5" fill="#5C5C5C">/custom-home/</text><path d="M455 210 H472.5 V126 H490" fill="none" stroke="#B9B4AA" stroke-width="1"/><rect x="490" y="110" width="300" height="32" rx="5" fill="#FFFFFF" stroke="#B9B4AA" stroke-width="1"/>
+<text x="500" y="124" font-size="12" fill="#1A1A1A" font-weight="400">性能・断熱</text>
+<text x="500" y="136" font-size="10" fill="#5C5C5C">/custom-home/performance/</text><path d="M455 210 H472.5 V168 H490" fill="none" stroke="#B9B4AA" stroke-width="1"/><rect x="490" y="152" width="300" height="32" rx="5" fill="#FFFFFF" stroke="#B9B4AA" stroke-width="1"/>
+<text x="500" y="166" font-size="12" fill="#1A1A1A" font-weight="400">ZEH・BELS・補助金</text>
+<text x="500" y="178" font-size="10" fill="#5C5C5C">/custom-home/zeh-bels/</text><path d="M455 210 H472.5 V210 H490" fill="none" stroke="#B9B4AA" stroke-width="1"/><rect x="490" y="194" width="300" height="32" rx="5" fill="#FFFFFF" stroke="#B9B4AA" stroke-width="1"/>
+<text x="500" y="208" font-size="12" fill="#1A1A1A" font-weight="400">PLAN集（間取り）</text>
+<text x="500" y="220" font-size="10" fill="#5C5C5C">/custom-home/plans/</text><path d="M455 210 H472.5 V252 H490" fill="none" stroke="#B9B4AA" stroke-width="1"/><rect x="490" y="236" width="300" height="32" rx="5" fill="#FFFFFF" stroke="#B9B4AA" stroke-width="1"/>
+<text x="500" y="250" font-size="12" fill="#1A1A1A" font-weight="400">家づくりの流れ</text>
+<text x="500" y="262" font-size="10" fill="#5C5C5C">/custom-home/flow/</text><path d="M455 210 H472.5 V294 H490" fill="none" stroke="#B9B4AA" stroke-width="1"/><rect x="490" y="278" width="300" height="32" rx="5" fill="#FFFFFF" stroke="#B9B4AA" stroke-width="1"/>
+<text x="500" y="292" font-size="12" fill="#1A1A1A" font-weight="400">費用・資金計画</text>
+<text x="500" y="304" font-size="10" fill="#5C5C5C">/custom-home/price/</text><path d="M190 633 H210 V405 H230" fill="none" stroke="#B9B4AA" stroke-width="1.2"/><rect x="230" y="386" width="225" height="38" rx="6" fill="#E8F0EC" stroke="#1F4A3D" stroke-width="1.4"/>
+<text x="242" y="402" font-size="13.5" font-weight="700" fill="#1F4A3D">分譲・土地</text>
+<text x="242" y="417" font-size="10.5" fill="#5C5C5C">/property/</text><path d="M455 405 H472.5 V342 H490" fill="none" stroke="#B9B4AA" stroke-width="1"/><rect x="490" y="326" width="300" height="32" rx="5" fill="#FFFFFF" stroke="#B9B4AA" stroke-width="1"/>
+<text x="500" y="340" font-size="12" fill="#1A1A1A" font-weight="400">新築分譲住宅 一覧</text>
+<text x="500" y="352" font-size="10" fill="#5C5C5C">/property/new-house/</text><path d="M455 405 H472.5 V384 H490" fill="none" stroke="#B9B4AA" stroke-width="1"/><rect x="490" y="368" width="300" height="32" rx="5" fill="#FFFFFF" stroke="#B9B4AA" stroke-width="1"/>
+<text x="500" y="382" font-size="12" fill="#1A1A1A" font-weight="400">売地・建築条件付 一覧</text>
+<text x="500" y="394" font-size="10" fill="#5C5C5C">/property/land/</text><path d="M455 405 H472.5 V426 H490" fill="none" stroke="#B9B4AA" stroke-width="1"/><rect x="490" y="410" width="300" height="32" rx="5" fill="#FFFFFF" stroke="#B9B4AA" stroke-width="1"/>
+<text x="500" y="424" font-size="12" fill="#1A1A1A" font-weight="400">駐車場</text>
+<text x="500" y="436" font-size="10" fill="#5C5C5C">/property/parking/</text><path d="M455 405 H472.5 V468 H490" fill="none" stroke="#B9B4AA" stroke-width="1"/><rect x="490" y="452" width="300" height="32" rx="5" fill="#FBF1EA" stroke="#A8481F" stroke-width="1.6"/>
+<text x="500" y="466" font-size="12" fill="#A8481F" font-weight="700">物件詳細 ★1件1ページ</text>
+<text x="500" y="478" font-size="10" fill="#5C5C5C">/property/{id}-{slug}/</text><path d="M190 633 H210 V558 H230" fill="none" stroke="#B9B4AA" stroke-width="1.2"/><rect x="230" y="539" width="225" height="38" rx="6" fill="#E8F0EC" stroke="#1F4A3D" stroke-width="1.4"/>
+<text x="242" y="555" font-size="13.5" font-weight="700" fill="#1F4A3D">リフォーム</text>
+<text x="242" y="570" font-size="10.5" fill="#5C5C5C">/renovation/</text><path d="M455 558 H472.5 V516 H490" fill="none" stroke="#B9B4AA" stroke-width="1"/><rect x="490" y="500" width="300" height="32" rx="5" fill="#FFFFFF" stroke="#B9B4AA" stroke-width="1"/>
+<text x="500" y="514" font-size="12" fill="#1A1A1A" font-weight="400">戸建リフォーム</text>
+<text x="500" y="526" font-size="10" fill="#5C5C5C">/renovation/house/</text><path d="M455 558 H472.5 V558 H490" fill="none" stroke="#B9B4AA" stroke-width="1"/><rect x="490" y="542" width="300" height="32" rx="5" fill="#FFFFFF" stroke="#B9B4AA" stroke-width="1"/>
+<text x="500" y="556" font-size="12" fill="#1A1A1A" font-weight="400">マンションリノベ</text>
+<text x="500" y="568" font-size="10" fill="#5C5C5C">/renovation/mansion/</text><path d="M455 558 H472.5 V600 H490" fill="none" stroke="#B9B4AA" stroke-width="1"/><rect x="490" y="584" width="300" height="32" rx="5" fill="#FFFFFF" stroke="#B9B4AA" stroke-width="1"/>
+<text x="500" y="598" font-size="12" fill="#1A1A1A" font-weight="400">費用の目安</text>
+<text x="500" y="610" font-size="10" fill="#5C5C5C">/renovation/price/</text><path d="M190 633 H210 V648 H230" fill="none" stroke="#B9B4AA" stroke-width="1.2"/><rect x="230" y="629" width="225" height="38" rx="6" fill="#E8F0EC" stroke="#1F4A3D" stroke-width="1.4"/>
+<text x="242" y="645" font-size="13.5" font-weight="700" fill="#1F4A3D">施工事例</text>
+<text x="242" y="660" font-size="10.5" fill="#5C5C5C">/works/</text><path d="M455 648 H472.5 V648 H490" fill="none" stroke="#B9B4AA" stroke-width="1"/><rect x="490" y="632" width="300" height="32" rx="5" fill="#FFFFFF" stroke="#B9B4AA" stroke-width="1"/>
+<text x="500" y="646" font-size="12" fill="#1A1A1A" font-weight="400">事例詳細</text>
+<text x="500" y="658" font-size="10" fill="#5C5C5C">/works/{id}-{slug}/</text><path d="M190 633 H210 V780 H230" fill="none" stroke="#B9B4AA" stroke-width="1.2"/><rect x="230" y="761" width="225" height="38" rx="6" fill="#E8F0EC" stroke="#1F4A3D" stroke-width="1.4"/>
+<text x="242" y="777" font-size="13.5" font-weight="700" fill="#1F4A3D">会社情報</text>
+<text x="242" y="792" font-size="10.5" fill="#5C5C5C">/about/</text><path d="M455 780 H472.5 V696 H490" fill="none" stroke="#B9B4AA" stroke-width="1"/><rect x="490" y="680" width="300" height="32" rx="5" fill="#FFFFFF" stroke="#B9B4AA" stroke-width="1"/>
+<text x="500" y="694" font-size="12" fill="#1A1A1A" font-weight="400">会社概要（許可番号）</text>
+<text x="500" y="706" font-size="10" fill="#5C5C5C">/about/company/</text><path d="M455 780 H472.5 V738 H490" fill="none" stroke="#B9B4AA" stroke-width="1"/><rect x="490" y="722" width="300" height="32" rx="5" fill="#FFFFFF" stroke="#B9B4AA" stroke-width="1"/>
+<text x="500" y="736" font-size="12" fill="#1A1A1A" font-weight="400">沿革</text>
+<text x="500" y="748" font-size="10" fill="#5C5C5C">/about/history/</text><path d="M455 780 H472.5 V780 H490" fill="none" stroke="#B9B4AA" stroke-width="1"/><rect x="490" y="764" width="300" height="32" rx="5" fill="#FFFFFF" stroke="#B9B4AA" stroke-width="1"/>
+<text x="500" y="778" font-size="12" fill="#1A1A1A" font-weight="400">品質への取り組み</text>
+<text x="500" y="790" font-size="10" fill="#5C5C5C">/about/quality/</text><path d="M455 780 H472.5 V822 H490" fill="none" stroke="#B9B4AA" stroke-width="1"/><rect x="490" y="806" width="300" height="32" rx="5" fill="#FFFFFF" stroke="#B9B4AA" stroke-width="1"/>
+<text x="500" y="820" font-size="12" fill="#1A1A1A" font-weight="400">スタッフ紹介</text>
+<text x="500" y="832" font-size="10" fill="#5C5C5C">/about/staff/</text><path d="M455 780 H472.5 V864 H490" fill="none" stroke="#B9B4AA" stroke-width="1"/><rect x="490" y="848" width="300" height="32" rx="5" fill="#FFFFFF" stroke="#B9B4AA" stroke-width="1"/>
+<text x="500" y="862" font-size="12" fill="#1A1A1A" font-weight="400">アクセス</text>
+<text x="500" y="874" font-size="10" fill="#5C5C5C">/about/access/</text><path d="M190 633 H210 V954 H230" fill="none" stroke="#B9B4AA" stroke-width="1.2"/><rect x="230" y="935" width="225" height="38" rx="6" fill="#E8F0EC" stroke="#1F4A3D" stroke-width="1.4"/>
+<text x="242" y="951" font-size="13.5" font-weight="700" fill="#1F4A3D">お問い合わせ</text>
+<text x="242" y="966" font-size="10.5" fill="#5C5C5C">/contact/</text><path d="M455 954 H472.5 V912 H490" fill="none" stroke="#B9B4AA" stroke-width="1"/><rect x="490" y="896" width="300" height="32" rx="5" fill="#FFFFFF" stroke="#B9B4AA" stroke-width="1"/>
+<text x="500" y="910" font-size="12" fill="#1A1A1A" font-weight="400">資料請求</text>
+<text x="500" y="922" font-size="10" fill="#5C5C5C">/contact/document/</text><path d="M455 954 H472.5 V954 H490" fill="none" stroke="#B9B4AA" stroke-width="1"/><rect x="490" y="938" width="300" height="32" rx="5" fill="#FFFFFF" stroke="#B9B4AA" stroke-width="1"/>
+<text x="500" y="952" font-size="12" fill="#1A1A1A" font-weight="400">来場・見学予約</text>
+<text x="500" y="964" font-size="10" fill="#5C5C5C">/contact/visit/</text><path d="M455 954 H472.5 V996 H490" fill="none" stroke="#B9B4AA" stroke-width="1"/><rect x="490" y="980" width="300" height="32" rx="5" fill="#FFFFFF" stroke="#B9B4AA" stroke-width="1"/>
+<text x="500" y="994" font-size="12" fill="#1A1A1A" font-weight="400">リフォーム相談</text>
+<text x="500" y="1006" font-size="10" fill="#5C5C5C">/contact/renovation/</text><path d="M190 633 H210 V1044 H230" fill="none" stroke="#B9B4AA" stroke-width="1.2"/><rect x="230" y="1025" width="225" height="38" rx="6" fill="#E8F0EC" stroke="#1F4A3D" stroke-width="1.4"/>
+<text x="242" y="1041" font-size="13.5" font-weight="700" fill="#1F4A3D">お知らせ</text>
+<text x="242" y="1056" font-size="10.5" fill="#5C5C5C">/news/</text><path d="M455 1044 H472.5 V1044 H490" fill="none" stroke="#B9B4AA" stroke-width="1"/><rect x="490" y="1028" width="300" height="32" rx="5" fill="#FFFFFF" stroke="#B9B4AA" stroke-width="1"/>
+<text x="500" y="1042" font-size="12" fill="#1A1A1A" font-weight="400">記事詳細</text>
+<text x="500" y="1054" font-size="10" fill="#5C5C5C">/news/{id}-{slug}/</text><path d="M190 633 H210 V1092 H230" fill="none" stroke="#B9B4AA" stroke-width="1.2"/><rect x="230" y="1073" width="225" height="38" rx="6" fill="#F7F5F1" stroke="#B9B4AA" stroke-width="1.4"/>
+<text x="242" y="1089" font-size="13.5" font-weight="700" fill="#5C5C5C">採用情報 ［Phase2］</text>
+<text x="242" y="1104" font-size="10.5" fill="#5C5C5C">/recruit/</text><path d="M190 633 H210 V1140 H230" fill="none" stroke="#B9B4AA" stroke-width="1.2"/><rect x="230" y="1121" width="225" height="38" rx="6" fill="#F7F5F1" stroke="#B9B4AA" stroke-width="1.4"/>
+<text x="242" y="1137" font-size="13.5" font-weight="700" fill="#5C5C5C">エリア別 ［Phase2］</text>
+<text x="242" y="1152" font-size="10.5" fill="#5C5C5C">/area/{city}/</text><rect x="40" y="1198" width="14" height="14" rx="3" fill="#E8F0EC" stroke="#1F4A3D" stroke-width="1.4"/>
+<text x="60" y="1209" font-size="11" fill="#1A1A1A">第1階層（グローバルナビ 6項目＋補助）</text>
+<rect x="320" y="1198" width="14" height="14" rx="3" fill="#FBF1EA" stroke="#A8481F" stroke-width="1.6"/>
+<text x="340" y="1209" font-size="11" fill="#1A1A1A">★ 新設する中核機能（物件DB化）</text>
+<rect x="610" y="1198" width="14" height="14" rx="3" fill="#F7F5F1" stroke="#B9B4AA"/>
+<text x="630" y="1209" font-size="11" fill="#5C5C5C">Phase 2 で追加</text></svg>

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="658" viewBox="0 0 1400 658" font-family="'Noto Sans JP','Hiragino Kaku Gothic ProN','IPAGothic',Meiryo,system-ui,sans-serif">
+<rect width="1400" height="658" fill="#FFFFFF"/>
+<text x="40" y="46" font-size="22" font-weight="700" fill="#14332A">目的別ユーザー導線（カスタマージャーニー）</text>
+<text x="40" y="70" font-size="13" fill="#5C5C5C">協進建設・協進住宅 Webサイト リニューアル設計書 03章6節 ／ ペルソナごとの最短経路と設計上の要点</text>
+<line x1="40" y1="88" x2="1360" y2="88" stroke="#B9B4AA"/><rect x="40" y="118" width="1320" height="152" rx="8" fill="#FCFBF9" stroke="#B9B4AA" stroke-width="1"/><rect x="40" y="118" width="160" height="152" rx="8" fill="#E8F0EC"/>
+<rect x="192" y="118" width="8" height="152" fill="#E8F0EC"/>
+<text x="56" y="146" font-size="16" font-weight="700" fill="#1F4A3D">P1</text><text x="56" y="168" font-size="12.5" font-weight="700" fill="#1A1A1A">土地から探す一次取</text><text x="56" y="185" font-size="12.5" font-weight="700" fill="#1A1A1A">得層</text><text x="56" y="206" font-size="10.5" fill="#5C5C5C">32〜42歳／夫婦＋子</text><text x="56" y="220" font-size="10.5" fill="#5C5C5C">／土地なし</text><rect x="210" y="140" width="170" height="58" rx="6" fill="#FFFFFF" stroke="#1F4A3D" stroke-width="1.2"/>
+<text x="295" y="162" font-size="12.5" font-weight="600" fill="#1A1A1A" text-anchor="middle">トップ</text>
+<text x="295" y="178" font-size="9.5" fill="#5C5C5C" text-anchor="middle">/</text><path d="M384 169 H395" stroke="#1F4A3D" stroke-width="1.6" fill="none"/>
+<path d="M394 164.5 l5.5 4.5 l-5.5 4.5 z" fill="#1F4A3D"/><rect x="404" y="140" width="170" height="58" rx="6" fill="#FFFFFF" stroke="#1F4A3D" stroke-width="1.2"/>
+<text x="489" y="162" font-size="12.5" font-weight="600" fill="#1A1A1A" text-anchor="middle">注文住宅</text>
+<text x="489" y="178" font-size="9.5" fill="#5C5C5C" text-anchor="middle">/custom-home/</text><path d="M578 169 H589" stroke="#1F4A3D" stroke-width="1.6" fill="none"/>
+<path d="M588 164.5 l5.5 4.5 l-5.5 4.5 z" fill="#1F4A3D"/><rect x="598" y="140" width="170" height="58" rx="6" fill="#FFFFFF" stroke="#1F4A3D" stroke-width="1.2"/>
+<text x="683" y="162" font-size="12.5" font-weight="600" fill="#1A1A1A" text-anchor="middle">性能・断熱</text>
+<text x="683" y="178" font-size="9.5" fill="#5C5C5C" text-anchor="middle">/performance/</text><path d="M772 169 H783" stroke="#1F4A3D" stroke-width="1.6" fill="none"/>
+<path d="M782 164.5 l5.5 4.5 l-5.5 4.5 z" fill="#1F4A3D"/><rect x="792" y="140" width="170" height="58" rx="6" fill="#FFFFFF" stroke="#1F4A3D" stroke-width="1.2"/>
+<text x="877" y="162" font-size="12.5" font-weight="600" fill="#1A1A1A" text-anchor="middle">施工事例（新築）</text>
+<text x="877" y="178" font-size="9.5" fill="#5C5C5C" text-anchor="middle">/works/?category=new</text><path d="M966 169 H977" stroke="#1F4A3D" stroke-width="1.6" fill="none"/>
+<path d="M976 164.5 l5.5 4.5 l-5.5 4.5 z" fill="#1F4A3D"/><rect x="986" y="140" width="170" height="58" rx="6" fill="#FFFFFF" stroke="#1F4A3D" stroke-width="1.2"/>
+<text x="1071" y="162" font-size="12.5" font-weight="600" fill="#1A1A1A" text-anchor="middle">費用・資金計画</text>
+<text x="1071" y="178" font-size="9.5" fill="#5C5C5C" text-anchor="middle">/price/</text><path d="M1160 169 H1171" stroke="#1F4A3D" stroke-width="1.6" fill="none"/>
+<path d="M1170 164.5 l5.5 4.5 l-5.5 4.5 z" fill="#1F4A3D"/><rect x="1180" y="140" width="170" height="58" rx="6" fill="#FBF1EA" stroke="#A8481F" stroke-width="1.8"/>
+<text x="1265" y="162" font-size="12.5" font-weight="700" fill="#A8481F" text-anchor="middle">資料請求</text>
+<text x="1265" y="178" font-size="9.5" fill="#5C5C5C" text-anchor="middle">/contact/document/</text><text x="1346" y="134" font-size="10" font-weight="700" fill="#A8481F" text-anchor="end">▼ コンバージョン</text><text x="210" y="218" font-size="11" font-weight="700" fill="#1F4A3D">設計上の要点</text><text x="286" y="218" font-size="11" fill="#1A1A1A">各ページ下部に「次に見るページ」を1〜2件だけ提示。CTAは常に軽い（資料請求）／重い（来場予約）の2段階</text><text x="56" y="248" font-size="10" fill="#A8481F">最重要。不安は「総額」と「土地」</text><rect x="40" y="288" width="1320" height="152" rx="8" fill="#F7F5F1" stroke="#B9B4AA" stroke-width="1"/><rect x="40" y="288" width="160" height="152" rx="8" fill="#E8F0EC"/>
+<rect x="192" y="288" width="8" height="152" fill="#E8F0EC"/>
+<text x="56" y="316" font-size="16" font-weight="700" fill="#1F4A3D">P2</text><text x="56" y="338" font-size="12.5" font-weight="700" fill="#1A1A1A">建売・土地を探す層</text><text x="56" y="359" font-size="10.5" fill="#5C5C5C">30〜45歳／ポータル</text><text x="56" y="373" font-size="10.5" fill="#5C5C5C">併用／スピード重視</text><rect x="210" y="310" width="170" height="58" rx="6" fill="#FFFFFF" stroke="#1F4A3D" stroke-width="1.2"/>
+<text x="295" y="332" font-size="12.5" font-weight="600" fill="#1A1A1A" text-anchor="middle">トップ</text>
+<text x="295" y="348" font-size="9.5" fill="#5C5C5C" text-anchor="middle">/</text><path d="M384 339 H395" stroke="#1F4A3D" stroke-width="1.6" fill="none"/>
+<path d="M394 334.5 l5.5 4.5 l-5.5 4.5 z" fill="#1F4A3D"/><rect x="404" y="310" width="170" height="58" rx="6" fill="#FFFFFF" stroke="#1F4A3D" stroke-width="1.2"/>
+<text x="489" y="332" font-size="12.5" font-weight="600" fill="#1A1A1A" text-anchor="middle">物件一覧</text>
+<text x="489" y="348" font-size="9.5" fill="#5C5C5C" text-anchor="middle">/property/</text><path d="M578 339 H589" stroke="#1F4A3D" stroke-width="1.6" fill="none"/>
+<path d="M588 334.5 l5.5 4.5 l-5.5 4.5 z" fill="#1F4A3D"/><rect x="598" y="310" width="170" height="58" rx="6" fill="#FFFFFF" stroke="#1F4A3D" stroke-width="1.2"/>
+<text x="683" y="332" font-size="12.5" font-weight="600" fill="#1A1A1A" text-anchor="middle">絞込み（エリア・価格）</text>
+<text x="683" y="348" font-size="9.5" fill="#5C5C5C" text-anchor="middle">?area=&amp;price=</text><path d="M772 339 H783" stroke="#1F4A3D" stroke-width="1.6" fill="none"/>
+<path d="M782 334.5 l5.5 4.5 l-5.5 4.5 z" fill="#1F4A3D"/><rect x="792" y="310" width="170" height="58" rx="6" fill="#FFFFFF" stroke="#1F4A3D" stroke-width="1.2"/>
+<text x="877" y="332" font-size="12.5" font-weight="600" fill="#1A1A1A" text-anchor="middle">物件詳細</text>
+<text x="877" y="348" font-size="9.5" fill="#5C5C5C" text-anchor="middle">/property/{id}/</text><path d="M966 339 H977" stroke="#1F4A3D" stroke-width="1.6" fill="none"/>
+<path d="M976 334.5 l5.5 4.5 l-5.5 4.5 z" fill="#1F4A3D"/><rect x="986" y="310" width="170" height="58" rx="6" fill="#FBF1EA" stroke="#A8481F" stroke-width="1.8"/>
+<text x="1071" y="332" font-size="12.5" font-weight="700" fill="#A8481F" text-anchor="middle">この物件を問い合わせ</text>
+<text x="1071" y="348" font-size="9.5" fill="#5C5C5C" text-anchor="middle">/contact/</text><text x="1152" y="304" font-size="10" font-weight="700" fill="#A8481F" text-anchor="end">▼ コンバージョン</text><text x="210" y="388" font-size="11" font-weight="700" fill="#1F4A3D">設計上の要点</text><text x="286" y="388" font-size="11" fill="#1A1A1A">物件詳細 →「この家の性能について」→ /custom-home/performance/ の橋渡しリンクが決定打になる</text><text x="56" y="418" font-size="10" fill="#A8481F">不安は「まだ売れていないか」</text><rect x="40" y="458" width="1320" height="152" rx="8" fill="#FCFBF9" stroke="#B9B4AA" stroke-width="1"/><rect x="40" y="458" width="160" height="152" rx="8" fill="#E8F0EC"/>
+<rect x="192" y="458" width="8" height="152" fill="#E8F0EC"/>
+<text x="56" y="486" font-size="16" font-weight="700" fill="#1F4A3D">P3</text><text x="56" y="508" font-size="12.5" font-weight="700" fill="#1A1A1A">リフォーム検討層</text><text x="56" y="529" font-size="10.5" fill="#5C5C5C">45〜65歳／築15〜</text><text x="56" y="543" font-size="10.5" fill="#5C5C5C">30年の持ち家</text><rect x="210" y="480" width="170" height="58" rx="6" fill="#FFFFFF" stroke="#1F4A3D" stroke-width="1.2"/>
+<text x="295" y="502" font-size="12.5" font-weight="600" fill="#1A1A1A" text-anchor="middle">トップ</text>
+<text x="295" y="518" font-size="9.5" fill="#5C5C5C" text-anchor="middle">/</text><path d="M384 509 H395" stroke="#1F4A3D" stroke-width="1.6" fill="none"/>
+<path d="M394 504.5 l5.5 4.5 l-5.5 4.5 z" fill="#1F4A3D"/><rect x="404" y="480" width="170" height="58" rx="6" fill="#FFFFFF" stroke="#1F4A3D" stroke-width="1.2"/>
+<text x="489" y="502" font-size="12.5" font-weight="600" fill="#1A1A1A" text-anchor="middle">リフォーム</text>
+<text x="489" y="518" font-size="9.5" fill="#5C5C5C" text-anchor="middle">/renovation/</text><path d="M578 509 H589" stroke="#1F4A3D" stroke-width="1.6" fill="none"/>
+<path d="M588 504.5 l5.5 4.5 l-5.5 4.5 z" fill="#1F4A3D"/><rect x="598" y="480" width="170" height="58" rx="6" fill="#FFFFFF" stroke="#1F4A3D" stroke-width="1.2"/>
+<text x="683" y="502" font-size="12.5" font-weight="600" fill="#1A1A1A" text-anchor="middle">費用の目安</text>
+<text x="683" y="518" font-size="9.5" fill="#5C5C5C" text-anchor="middle">/renovation/price/</text><path d="M772 509 H783" stroke="#1F4A3D" stroke-width="1.6" fill="none"/>
+<path d="M782 504.5 l5.5 4.5 l-5.5 4.5 z" fill="#1F4A3D"/><rect x="792" y="480" width="170" height="58" rx="6" fill="#FFFFFF" stroke="#1F4A3D" stroke-width="1.2"/>
+<text x="877" y="502" font-size="12.5" font-weight="600" fill="#1A1A1A" text-anchor="middle">Before/After事例</text>
+<text x="877" y="518" font-size="9.5" fill="#5C5C5C" text-anchor="middle">/works/?category=reno</text><path d="M966 509 H977" stroke="#1F4A3D" stroke-width="1.6" fill="none"/>
+<path d="M976 504.5 l5.5 4.5 l-5.5 4.5 z" fill="#1F4A3D"/><rect x="986" y="480" width="170" height="58" rx="6" fill="#FBF1EA" stroke="#A8481F" stroke-width="1.8"/>
+<text x="1071" y="502" font-size="12.5" font-weight="700" fill="#A8481F" text-anchor="middle">リフォーム相談</text>
+<text x="1071" y="518" font-size="9.5" fill="#5C5C5C" text-anchor="middle">/contact/renovation/</text><text x="1152" y="474" font-size="10" font-weight="700" fill="#A8481F" text-anchor="end">▼ コンバージョン</text><text x="210" y="558" font-size="11" font-weight="700" fill="#1F4A3D">設計上の要点</text><text x="286" y="558" font-size="11" fill="#1A1A1A">ページ内に創業1998年・建設業許可番号を明示し、訪問販売業者との差を可視化する</text><text x="56" y="588" font-size="10" fill="#A8481F">不安は「相場」と「訪問販売との違い」</text></svg>

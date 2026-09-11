@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>八王子の注文住宅・分譲住宅なら協進建設 | ステイブルハウス</title>
+<meta name="description" content="八王子市で創業1998年。ZEHビルダー・BELS★★★★の高気密高断熱住宅「ステイブルハウス」。土地探しから新築・分譲・リフォームまで一貫対応します。資料請求は無料です。">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">本文へスキップ</a>
+
+<div class="protonote">
+  <div class="wrap"><b>［プロトタイプ］</b> 設計書 04章・05章の実装例です。写真はローカルSVGのプレースホルダ、数値・物件情報はダミーです。実装時の参照用としてご覧ください。</div>
+</div>
+
+<header class="hdr on-dark">
+  <div class="wrap hdr__in">
+    <a class="hdr__logo" href="#">協進建設<small>KYOUSHIN KENSETSU</small></a>
+    <nav class="gnav" aria-label="メインメニュー">
+      <ul>
+        <li><a href="#custom">注文住宅</a></li>
+        <li><a href="#property">分譲・土地</a></li>
+        <li><a href="#renovation">リフォーム</a></li>
+        <li><a href="#works">施工事例</a></li>
+        <li><a href="#about">会社情報</a></li>
+      </ul>
+    </nav>
+    <div class="hdr__side">
+      <a class="hdr__tel" href="tel:042-000-0000"><b>042-000-0000</b><span>受付 9:00–18:00 ／ 水曜定休</span></a>
+      <a class="btn btn--primary" href="#contact">お問い合わせ</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="gnav-sp">
+        <span></span><span class="vh">メニューを開く</span>
+      </button>
+    </div>
+  </div>
+  <nav id="gnav-sp" aria-label="メインメニュー（モバイル）" hidden>
+    <a href="#custom">注文住宅</a><a href="#property">分譲・土地</a><a href="#renovation">リフォーム</a>
+    <a href="#works">施工事例</a><a href="#about">会社情報</a><a href="#contact">お問い合わせ</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- ── ヒーロー（LCP要素） ── -->
+  <section class="hero on-dark">
+    <div class="hero__bg" aria-hidden="true">
+      <img src="img/hero.svg" width="1600" height="900" alt="" fetchpriority="high" decoding="async">
+    </div>
+    <div class="wrap hero__in">
+      <h1>次世代まで住み継ぐ家を。</h1>
+      <p class="lead">八王子で27年。土地探しから、建てたあとのお付き合いまで。<br>夏涼しく冬あたたかい、住むほどに価値が残る家をつくります。</p>
+      <ul class="badges">
+        <li class="badge-trust">ZEHビルダー登録</li>
+        <li class="badge-trust">BELS ★★★★</li>
+        <li class="badge-trust">創業 1998年</li>
+        <li class="badge-trust">宅建業・建設業許可</li>
+      </ul>
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="#contact">資料請求（無料）</a>
+        <a class="btn btn--ghost" href="#contact">来場・相談を予約</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 目的別ナビ ── -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec__head">
+        <h2>ご希望に合わせてお選びください</h2>
+        <p>「家を建てる」「家を買う」「家を直す」— すべて当社で対応しています。</p>
+      </div>
+      <div class="grid grid--4">
+        <a class="purpose" href="#custom">
+          <div class="purpose__fig"><img src="img/purpose-1.svg" width="640" height="400" alt="" loading="lazy"></div>
+          <div class="purpose__body"><strong>注文住宅を建てたい</strong>
+            <span>土地探しから設計・施工まで</span><em>ステイブルハウス ▸</em></div>
+        </a>
+        <a class="purpose" href="#property">
+          <div class="purpose__fig"><img src="img/purpose-2.svg" width="640" height="400" alt="" loading="lazy"></div>
+          <div class="purpose__body"><strong>分譲住宅・土地を買いたい</strong>
+            <span>八王子市を中心とした物件情報</span><em>物件を探す ▸</em></div>
+        </a>
+        <a class="purpose" href="#renovation">
+          <div class="purpose__fig"><img src="img/purpose-3.svg" width="640" height="400" alt="" loading="lazy"></div>
+          <div class="purpose__body"><strong>リフォームしたい</strong>
+            <span>小さな工事から全面リノベまで</span><em>費用の目安を見る ▸</em></div>
+        </a>
+        <a class="purpose" href="#works">
+          <div class="purpose__fig"><img src="img/purpose-4.svg" width="640" height="400" alt="" loading="lazy"></div>
+          <div class="purpose__body"><strong>施工事例を見たい</strong>
+            <span>価格帯つきで公開しています</span><em>事例を見る ▸</em></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 性能訴求（最大の差別化） ── -->
+  <section class="sec sec--tint" id="custom">
+    <div class="wrap">
+      <div class="sec__head">
+        <h2>性能は、数値でお見せします</h2>
+        <p>「高気密・高断熱」という言葉ではなく、実測値でご判断ください。</p>
+      </div>
+      <div class="grid grid--3">
+        <div class="metric">
+          <b>UA値 0.46</b><small>W/(m²·K)　断熱性能</small>
+          <span><a href="#custom">断熱の仕組みを見る ▸</a></span>
+        </div>
+        <div class="metric">
+          <b>C値 0.9</b><small>cm²/m²　気密性能（全棟実測）</small>
+          <span><a href="#custom">気密測定について ▸</a></span>
+        </div>
+        <div class="metric">
+          <b>一次エネ −19%</b><small>日野市の実邸／BELS★★★★</small>
+          <span><a href="#custom">BELS評価とは ▸</a></span>
+        </div>
+      </div>
+      <div class="translate">
+        <p>「冬の朝、廊下もトイレも寒くない家」です。</p>
+        <small>部屋ごとの温度差が小さくなることで、ヒートショックや結露のリスクを抑えられます。年間の光熱費の目安もご相談時にお出しします。　※数値はプロトタイプ用のダミーです。実測値に差し替えてください。</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 新着物件 ── -->
+  <section class="sec" id="property">
+    <div class="wrap">
+      <div class="sec__bar">
+        <div class="sec__head" style="margin:0">
+          <h2>新着物件</h2>
+          <p>八王子市を中心とした新築分譲住宅・売地。情報は随時更新しています。</p>
+        </div>
+        <a class="link-more" href="property.html">物件一覧を見る ▸</a>
+      </div>
+      <div class="grid grid--prop">
+
+        <article class="pcard">
+          <div class="pcard__fig">
+            <img src="img/property-1.svg" width="800" height="600" alt="八王子市八木町の新築分譲住宅の外観" loading="lazy">
+            <span class="badge badge--sale">販売中</span>
+          </div>
+          <div class="pcard__body">
+            <p class="pcard__price">3,480<small>万円</small></p>
+            <h3><a href="property.html">【新築分譲】八王子市八木町 3LDK</a></h3>
+            <dl>
+              <dt>交通</dt><dd>西八王子駅 徒歩12分</dd>
+              <dt>土地</dt><dd>105.20m²（31.82坪）</dd>
+              <dt>建物</dt><dd>98.54m²</dd>
+            </dl>
+          </div>
+        </article>
+
+        <article class="pcard">
+          <div class="pcard__fig">
+            <img src="img/property-2.svg" width="800" height="600" alt="八王子市散田町の新築分譲住宅の外観" loading="lazy">
+            <span class="badge badge--sale">販売中</span>
+          </div>
+          <div class="pcard__body">
+            <p class="pcard__price">4,180<small>万円</small></p>
+            <h3><a href="property.html">【新築分譲】八王子市散田町 4LDK</a></h3>
+            <dl>
+              <dt>交通</dt><dd>西八王子駅 徒歩8分</dd>
+              <dt>土地</dt><dd>118.40m²（35.81坪）</dd>
+              <dt>建物</dt><dd>104.32m²</dd>
+            </dl>
+          </div>
+        </article>
+
+        <article class="pcard">
+          <div class="pcard__fig">
+            <img src="img/property-3.svg" width="800" height="600" alt="八王子市元八王子町の建築条件付売地" loading="lazy">
+            <span class="badge badge--talk">商談中</span>
+          </div>
+          <div class="pcard__body">
+            <p class="pcard__price">2,280<small>万円</small></p>
+            <h3><a href="property.html">【建築条件付売地】八王子市元八王子町</a></h3>
+            <dl>
+              <dt>交通</dt><dd>バス停「元八王子」徒歩3分</dd>
+              <dt>土地</dt><dd>132.06m²（39.94坪）</dd>
+              <dt>用途</dt><dd>第一種低層住居専用地域</dd>
+            </dl>
+          </div>
+        </article>
+
+        <article class="pcard">
+          <div class="pcard__fig">
+            <img src="img/property-4.svg" width="800" height="600" alt="日野市の新築分譲住宅の外観" loading="lazy">
+            <span class="badge badge--sold">成約済</span>
+          </div>
+          <div class="pcard__body">
+            <p class="pcard__price pcard__price--ask">成約済（価格は非表示）</p>
+            <h3><a href="property.html">【新築分譲】日野市万願寺 3LDK</a></h3>
+            <dl>
+              <dt>交通</dt><dd>万願寺駅 徒歩9分</dd>
+              <dt>土地</dt><dd>101.88m²（30.81坪）</dd>
+              <dt>備考</dt><dd>2026年8月 引渡済</dd>
+            </dl>
+          </div>
+        </article>
+
+      </div>
+      <p style="margin-top:var(--space-5);font-size:13.5px;color:var(--color-ink-muted)">
+        ※ 成約済の物件も実績として掲載しています（一覧では後方に表示されます）。
+        ご希望の条件に合う物件が見つからない場合は、<a href="#contact">希望条件をご登録</a>いただければ、公開前の情報をご案内できることがあります。
+      </p>
+    </div>
+  </section>
+
+  <!-- ── 施工事例 ── -->
+  <section class="sec sec--subtle" id="works">
+    <div class="wrap">
+      <div class="sec__bar">
+        <div class="sec__head" style="margin:0">
+          <h2>施工事例</h2>
+          <p>価格帯を添えて公開しています。ご予算の参考にしてください。</p>
+        </div>
+        <a class="link-more" href="#works">事例一覧を見る ▸</a>
+      </div>
+      <div class="grid grid--3">
+        <article class="wcard">
+          <div class="wcard__fig"><img src="img/works-1.svg" width="900" height="600" alt="八王子市I様邸の外観。白い外壁に木製の玄関ドア" loading="lazy"></div>
+          <div class="wcard__body">
+            <h3><a href="#works">八王子市I様邸 — 共働き夫婦の「帰るのが楽しい家」</a></h3>
+            <p class="wcard__meta">新築 ／ 4LDK ／ 延床 112.6m² ／ 2025年竣工</p>
+            <p class="wcard__price">価格帯 2,800〜3,200万円</p>
+          </div>
+        </article>
+        <article class="wcard">
+          <div class="wcard__fig"><img src="img/works-2.svg" width="900" height="600" alt="日野市T様邸の外観。片流れ屋根と木調の外壁" loading="lazy"></div>
+          <div class="wcard__body">
+            <h3><a href="#works">日野市T様邸 — 平屋で暮らす、二人の終の住処</a></h3>
+            <p class="wcard__meta">新築（平屋）／ 2LDK ／ 延床 82.4m² ／ 2024年竣工</p>
+            <p class="wcard__price">価格帯 2,400〜2,700万円</p>
+          </div>
+        </article>
+        <article class="wcard">
+          <div class="wcard__fig"><img src="img/works-3.svg" width="900" height="600" alt="多摩市M様邸のマンションリノベーション後のリビング" loading="lazy"></div>
+          <div class="wcard__body">
+            <h3><a href="#works">多摩市M様邸 — 築28年マンションの断熱リノベ</a></h3>
+            <p class="wcard__meta">リノベーション ／ 3LDK ／ 68.2m² ／ 工期8週</p>
+            <p class="wcard__price">価格帯 780〜950万円</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 選ばれる理由 ── -->
+  <section class="sec" id="about">
+    <div class="wrap">
+      <div class="sec__head">
+        <h2>協進建設が選ばれる理由</h2>
+        <p>大手にはできない距離の近さと、地元でしか積めない実績があります。</p>
+      </div>
+      <div class="grid grid--4">
+        <div class="reason"><b>創業1998年・八王子</b>
+          <p>地元で27年。近所に建てた家が、そのまま実績です。</p></div>
+        <div class="reason"><b>土地探しから一貫</b>
+          <p>不動産部門があるため、土地と建物を同じ担当が通しで見ます。</p></div>
+        <div class="reason"><b>協力業者への定期研修</b>
+          <p>毎回テーマを変えた勉強会と、現場の安全パトロールを実施。</p></div>
+        <div class="reason"><b>建てたあとも近い</b>
+          <p>引渡し後の点検・小さな修繕も、同じ会社が伺います。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 家づくりの流れ ── -->
+  <section class="sec sec--subtle" id="renovation">
+    <div class="wrap">
+      <div class="sec__head">
+        <h2>家づくりの流れ</h2>
+        <p>初回のご相談から引渡しまで、目安として8〜14ヶ月です。</p>
+      </div>
+      <ol class="flow">
+        <li>ご相談</li><li>土地探し</li><li>プラン提案</li><li>ご契約</li><li>着工・施工</li><li>お引渡し</li>
+      </ol>
+      <p style="margin-top:var(--space-5);font-size:14px;color:var(--color-ink-muted)">
+        リフォームの場合は、現地調査 → お見積り → ご契約 → 施工 → 引渡し → アフター点検 の流れです。現地調査とお見積りは無料です。
+      </p>
+    </div>
+  </section>
+
+  <!-- ── お知らせ ── -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec__bar">
+        <div class="sec__head" style="margin:0"><h2>お知らせ</h2></div>
+        <a class="link-more" href="#">お知らせ一覧 ▸</a>
+      </div>
+      <ul class="news">
+        <li><a href="#"><time datetime="2026-09-05">2026.09.05</time><span class="tag">物件情報</span><span>八王子市八木町に新築分譲住宅2棟を公開しました</span></a></li>
+        <li><a href="#"><time datetime="2026-08-22">2026.08.22</time><span class="tag">お知らせ</span><span>2026年度の省エネ住宅補助金についてご案内します</span></a></li>
+        <li><a href="#"><time datetime="2026-08-01">2026.08.01</time><span class="tag">施工事例</span><span>日野市T様邸（平屋）の施工事例を追加しました</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="sec cta on-dark" id="contact">
+    <div class="wrap">
+      <h2>八王子で家を建てる・買う・直すなら</h2>
+      <p>まずは資料をご覧ください。しつこい営業はいたしません。<br>ご相談だけでも構いませんので、お気軽にどうぞ。</p>
+      <div class="cta__btns">
+        <a class="btn btn--primary" href="#contact">資料請求（無料）</a>
+        <a class="btn btn--ghost" href="#contact">来場・相談を予約</a>
+      </div>
+      <p class="cta__tel">お電話でも承ります　<a href="tel:042-000-0000" style="color:#fff;font-weight:700">042-000-0000</a>（受付 9:00–18:00 ／ 水曜定休）</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr__nav">
+      <div><h2>注文住宅</h2>
+        <a href="#custom">ステイブルハウス</a><a href="#custom">性能・断熱</a>
+        <a href="#custom">ZEH・BELS・補助金</a><a href="#custom">PLAN集</a><a href="#custom">費用・資金計画</a></div>
+      <div><h2>分譲・土地</h2>
+        <a href="property.html">新築分譲住宅</a><a href="property.html">売地・建築条件付売地</a>
+        <a href="property.html">駐車場</a></div>
+      <div><h2>リフォーム</h2>
+        <a href="#renovation">戸建リフォーム</a><a href="#renovation">マンションリノベ</a>
+        <a href="#renovation">費用の目安</a></div>
+      <div><h2>会社情報</h2>
+        <a href="#about">会社概要</a><a href="#about">沿革</a><a href="#about">品質への取り組み</a>
+        <a href="#about">スタッフ紹介</a><a href="#about">アクセス</a></div>
+    </div>
+    <div class="ftr__info">
+      <b>株式会社協進建設</b>
+      <p>〒192-0000 東京都八王子市○○町0-0-0<br>
+         TEL 042-000-0000 ／ FAX 042-000-0000 ／ 受付 9:00–18:00（水曜定休）</p>
+      <p class="ftr__lic">
+        宅地建物取引業 東京都知事免許（00）第00000号　／　建設業許可 東京都知事（般-0）第000000号
+      </p>
+      <div class="ftr__badges"><span>ZEHビルダー</span><span>BELS ★★★★</span><span>創業1998年</span></div>
+      <p style="font-size:12px;margin-top:var(--space-4)">
+        ※ 住所・電話番号・免許番号は設計書 07章5節「NAP統一」の確定後に差し替えてください（現在はダミーです）。
+      </p>
+    </div>
+  </div>
+  <div class="ftr__btm on-dark">
+    <div class="wrap">
+      <span>© 株式会社協進建設</span>
+      <span><a href="#">プライバシーポリシー</a>　<a href="#">サイトマップ</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="spbar-spacer"></div>
+<nav class="spbar" aria-label="お問い合わせ">
+  <a class="tel" href="tel:042-000-0000">☎ 電話する</a>
+  <a class="doc" href="#contact">資料請求（無料）</a>
+</nav>
+
+<script>
+  // ハンバーガーメニュー（aria-expanded / hidden を正しく切り替える）
+  var t=document.querySelector('.menu-toggle'), n=document.getElementById('gnav-sp');
+  t.addEventListener('click',function(){
+    var open = t.getAttribute('aria-expanded')==='true';
+    t.setAttribute('aria-expanded', String(!open));
+    n.hidden = open;
+    t.querySelector('.vh').textContent = open ? 'メニューを開く' : 'メニューを閉じる';
+  });
+</script>
+</body>
+</html>
