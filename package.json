@@ -1,0 +1,17 @@
+{
+  "name": "claudecode-web-sekkei-agent",
+  "version": "2.0.0",
+  "description": "全業種対応のWebサイト設計・実装スターター・画像プロンプト・ZIP生成用Claude Codeエージェント群",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "generate": "node scripts/generate-deliverables.mjs",
+    "validate": "node scripts/validate-package.mjs",
+    "zip": "node scripts/generate-zip.mjs",
+    "check:config": "node tests/check-claude-config.mjs",
+    "test": "node tests/smoke.mjs && node tests/check-claude-config.mjs"
+  }
+}

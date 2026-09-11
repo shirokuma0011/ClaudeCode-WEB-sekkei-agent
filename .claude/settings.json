@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run generate:*)",
+      "Bash(npm run validate:*)",
+      "Bash(npm run zip:*)",
+      "Bash(npm run check:config)",
+      "Bash(npm test)",
+      "Bash(node scripts/generate-deliverables.mjs:*)",
+      "Bash(node scripts/validate-package.mjs:*)",
+      "Bash(node scripts/generate-zip.mjs:*)",
+      "Bash(node tests/smoke.mjs)",
+      "Bash(node tests/check-claude-config.mjs)",
+      "Bash(ls:*)",
+      "Bash(find output:*)",
+      "Bash(grep:*)",
+      "Bash(wc:*)",
+      "Read(./docs/**)",
+      "Read(./examples/**)",
+      "Read(./output/**)",
+      "Read(./scripts/**)",
+      "Read(./.claude/**)",
+      "Edit(./output/**)",
+      "Write(./output/**)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)",
+      "Write(./.env)",
+      "Write(./.env.*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)"
+    ]
+  }
+}
