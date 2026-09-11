@@ -1,0 +1,5386 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>重光建設株式会社 Webサイト改善設計書 v1.0</title>
+<style>
+:root{--pri:#2F5D4B;--pri-d:#1E3F33;--acc:#C4933F;--base:#F6F2EA;--txt:#2B2B2B;--sub:#6B6B6B;--bd:#D9D2C5}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP","IPAPGothic",sans-serif;
+     color:var(--txt);line-height:1.9;font-size:15px;background:#fff}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px 120px}
+header.doc{background:var(--pri-d);color:#fff;padding:56px 24px;margin-bottom:40px}
+header.doc .inner{max-width:1000px;margin:0 auto}
+header.doc h1{font-size:30px;margin:0 0 10px;font-weight:700;letter-spacing:.04em;color:#fff}
+header.doc p{margin:4px 0;opacity:.9;font-size:14px}
+nav.toc{background:var(--base);border:1px solid var(--bd);padding:24px 28px;margin:0 0 48px;border-radius:3px}
+nav.toc h2{margin:0 0 12px;font-size:17px;color:var(--pri-d)}
+nav.toc ol{margin:0;padding-left:22px}
+nav.toc li{margin:5px 0}
+nav.toc a{color:var(--pri);text-decoration:none}
+nav.toc a:hover{text-decoration:underline}
+section.chapter{margin:0 0 72px;padding-top:24px;border-top:3px solid var(--pri);}
+h1,h2,h3,h4{line-height:1.45;letter-spacing:.03em}
+h1{font-size:26px;color:var(--pri-d);margin:16px 0 20px}
+h2{font-size:21px;color:var(--pri-d);margin:40px 0 14px;padding-left:12px;border-left:5px solid var(--acc)}
+h3{font-size:17px;margin:28px 0 10px;color:var(--pri)}
+h4{font-size:15px;margin:20px 0 8px}
+.tw{overflow-x:auto;margin:16px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;margin:0;font-size:13.5px}
+th,td{border:1px solid var(--bd);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--base);font-weight:700;white-space:nowrap}
+td code,th code{white-space:nowrap}
+code{background:#F2F0EB;padding:2px 5px;border-radius:2px;font-size:.9em;
+     font-family:"SF Mono",Consolas,"Courier New",monospace}
+pre{background:#1E2320;color:#E8E6E1;padding:16px 18px;border-radius:3px;overflow-x:auto;font-size:12.5px;line-height:1.65}
+pre code{background:none;color:inherit;padding:0}
+blockquote{margin:16px 0;padding:12px 18px;background:#FFF8E9;border-left:4px solid var(--acc);color:#5A4520}
+blockquote p{margin:4px 0}
+ul,ol{padding-left:26px}
+li{margin:5px 0}
+hr{border:0;border-top:1px solid var(--bd);margin:40px 0}
+a{color:var(--pri)}
+img{max-width:100%;height:auto;border:1px solid var(--bd);border-radius:2px;display:block;margin:12px 0}
+figure{margin:24px 0;padding:16px;background:var(--base);border:1px solid var(--bd);border-radius:3px}
+figure figcaption{font-size:13px;color:var(--sub);margin-bottom:8px;font-weight:700}
+.figs{margin:32px 0}
+strong{font-weight:700}
+@media print{header.doc{background:#1E3F33 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  section.chapter{page-break-before:always}
+  nav.toc{page-break-after:always}}
+@media (max-width:767px){.wrap{padding:0 16px 60px}header.doc{padding:32px 16px}header.doc h1{font-size:22px}
+  h1{font-size:21px}h2{font-size:18px}table{font-size:12px;min-width:520px}th,td{padding:6px 7px;white-space:normal}
+  .tw{border:1px solid var(--bd);border-radius:2px}}
+</style>
+</head>
+<body>
+<header class="doc"><div class="inner">
+<h1>重光建設株式会社　Webサイト改善設計書</h1>
+<p>対象サイト: https://www.juko-kensetsu.co.jp/　／　バージョン 1.0　／　作成日 2026-09-11</p>
+<p>設計事務所が原点という強みを、施工事例と第三者の声で裏づけ、スマートフォンから相談できる状態にする。</p>
+</div></header>
+<div class="wrap">
+<nav class="toc"><h2>目次</h2><ol><li><a href="#ch00">00. エグゼクティブサマリー</a></li>
+<li><a href="#ch01">01. 現状分析</a></li>
+<li><a href="#ch02">02. ターゲットとゴール設計</a></li>
+<li><a href="#ch03">03. サイト構成・URL設計</a></li>
+<li><a href="#ch04">04. ページ別設計</a></li>
+<li><a href="#ch05">05. デザインガイドライン</a></li>
+<li><a href="#ch06">06. SEO・集客設計</a></li>
+<li><a href="#ch07">07. 技術要件・実装仕様</a></li>
+<li><a href="#ch08">08. コンテンツ制作計画</a></li>
+<li><a href="#ch09">09. 計測設計とKPI</a></li>
+<li><a href="#ch10">10. 実施計画・体制・概算費用</a></li>
+<li><a href="#ch11">11. 前提条件と要確認事項</a></li><li><a href="#figs">付録. 図版一覧</a></li></ol></nav>
+<blockquote><p><strong>重要な前提</strong>：本設計書の作成環境ではネットワーク制限により対象サイト本体へアクセスできませんでした。
+現状分析は公開情報からの推定を含みます。事実確認が必要な項目は第11章に一覧化しています。実装着手前に必ず実機で照合してください。</p></blockquote>
+<section class="chapter" id="ch00"><h1>00. エグゼクティブサマリー</h1><h2>1. 結論</h2>
+<p>重光建設のサイトは、<strong>「良い会社であること」は書かれているが、「問い合わせしたくなる状態」にはなっていない</strong>というのが最大の課題です。
+改善の方向は次の一文に集約されます。</p>
+<blockquote>
+<p><strong>設計事務所が原点であるという他社にない強みを、施工事例の写真と第三者の声で裏づけ、スマートフォンから電話1タップで相談できる状態にする。</strong></p>
+</blockquote>
+<h2>2. 現状サイトの主要課題（詳細は 01章）</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>課題</th>
+<th>影響</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C-1</td>
+<td>スマートフォン最適化が不十分と推定される</td>
+<td>住宅検討層の7〜8割はスマホ経由。ここで離脱すると他は何をしても効かない</td>
+</tr>
+<tr>
+<td>C-2</td>
+<td>施工事例が一覧的で、1事例＝1ページになっていない</td>
+<td>工務店サイトで最も見られるコンテンツが検索にも説得にも使えていない</td>
+</tr>
+<tr>
+<td>C-3</td>
+<td>問い合わせ導線が弱い（電話番号・CTAが常時見えない）</td>
+<td>訪問しても行動に至らない</td>
+</tr>
+<tr>
+<td>C-4</td>
+<td>会社情報が「会社概要／沿革／アクセス」の3ページに分散</td>
+<td>回遊が増えるだけで信頼形成が分断される</td>
+</tr>
+<tr>
+<td>C-5</td>
+<td><code>www</code>有無・<code>http</code>/<code>https</code> が混在して索引されている</td>
+<td>検索評価が分散し、鍵マークなしの表示は不信感につながる</td>
+</tr>
+<tr>
+<td>C-6</td>
+<td>ページタイトルが「ア ク セ ス」「沿 革」のように分かち書き</td>
+<td>検索結果での可読性とキーワード評価を損ねる</td>
+</tr>
+<tr>
+<td>C-7</td>
+<td>価格・期間・流れの情報がない</td>
+<td>「問い合わせる前に知りたいこと」が解消されず、比較検討で脱落</td>
+</tr>
+<tr>
+<td>C-8</td>
+<td>更新される情報がない（お知らせ・ブログ不在）</td>
+<td>稼働中の会社かどうかが訪問者に伝わらない</td>
+</tr>
+</tbody>
+</table></div>
+<h2>3. 改善の柱（5本）</h2>
+<h3>柱1: スマートフォンファーストへの全面刷新</h3>
+<p>レスポンシブ化、画面下部の固定CTAバー（電話／お問い合わせ）、タップしやすい入力欄。<strong>これだけで問い合わせ数は変わります。</strong></p>
+<h3>柱2: 施工事例のデータベース化</h3>
+<p>1事例＝1ページ。カテゴリ（注文住宅／リノベーション／医院・店舗／公共施設）と地域名で構造化。
+「八王子市 注文住宅」のような検索の受け皿を、事例の数だけ用意することになります。</p>
+<h3>柱3: 「設計事務所が原点」というストーリーの前面化</h3>
+<p>関連会社に重光企画設計株式会社を持ち、設計から施工まで一貫できる体制は、地域の同業他社に対する明確な差別化要素です。
+これをトップのファーストビューと「家づくりのこだわり」で語りきります。</p>
+<h3>柱4: 不安の先回り解消（新設ページ）</h3>
+<p>「家づくりの流れ・費用」ページを新設。期間の目安、費用の内訳、FAQ、保証・アフターを提示し、問い合わせのハードルを下げます。</p>
+<h3>柱5: 信頼の可視化</h3>
+<p>建設業許可番号（東京都知事許可 第063975号）、宅地建物取引業免許、代表挨拶、有資格スタッフ、お客様の声。
+「誠実な対応、任せて安心」を、言葉ではなく事実で示します。</p>
+<h2>4. 想定効果</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>指標</th>
+<th>現状（推定）</th>
+<th>6ヶ月後の目標</th>
+<th>12ヶ月後の目標</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>月間セッション</td>
+<td>300〜600</td>
+<td>1,200</td>
+<td>2,500</td>
+</tr>
+<tr>
+<td>スマホ直帰率</td>
+<td>70%以上</td>
+<td>55%以下</td>
+<td>50%以下</td>
+</tr>
+<tr>
+<td>月間問い合わせ（フォーム＋電話）</td>
+<td>1〜3件</td>
+<td>6件</td>
+<td>12件</td>
+</tr>
+<tr>
+<td>施工事例ページ数</td>
+<td>0（一覧のみ）</td>
+<td>20</td>
+<td>40</td>
+</tr>
+<tr>
+<td>「八王子市 注文住宅」等の地域KWでの表示回数</td>
+<td>—</td>
+<td>月3,000回</td>
+<td>月8,000回</td>
+</tr>
+</tbody>
+</table></div>
+<p>※現状値は実測ができていないため推定です。Google Analytics / Search Console を導入し、初月の実測値をベースラインとして目標を再設定してください。</p>
+<h2>5. 進め方と費用感（詳細は 10章）</h2>
+<p>3フェーズに分けます。<strong>フェーズ1だけでも効果は出ます。</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>フェーズ</th>
+<th>期間</th>
+<th>主な内容</th>
+<th>概算費用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Phase 1: 土台</strong></td>
+<td>1〜2ヶ月</td>
+<td>レスポンシブ化、URL正規化・常時SSL、CTA常設、タイトル・メタ整備、GA4/Search Console導入、Googleビジネスプロフィール整備</td>
+<td>60〜120万円</td>
+</tr>
+<tr>
+<td><strong>Phase 2: 主戦力</strong></td>
+<td>2〜4ヶ月</td>
+<td>施工事例のCMS化と詳細ページ制作、流れ・費用ページ新設、会社案内統合、フォーム刷新、写真撮影</td>
+<td>120〜250万円</td>
+</tr>
+<tr>
+<td><strong>Phase 3: 育てる</strong></td>
+<td>継続</td>
+<td>事例・お知らせの追加、お客様の声の収集、効果測定と改善</td>
+<td>月額 3〜8万円</td>
+</tr>
+</tbody>
+</table></div>
+<p>写真撮影費（1現場あたり5〜10万円）とライティング費は別途見込んでください。<strong>写真への投資が最も費用対効果が高い項目です。</strong></p>
+<h2>6. 最初の30日にやること</h2>
+<ol>
+<li>Google Analytics 4 と Search Console を設置し、現状を数値で把握する（費用ゼロ）</li>
+<li>Googleビジネスプロフィールを整備する（費用ゼロ、地域検索で即効性あり）</li>
+<li>常時SSL化とURL正規化（<code>https://www.juko-kensetsu.co.jp/</code> に301統一）</li>
+<li>全ページのタイトル・ディスクリプションを書き直す（分かち書きをやめ、地域名と業種を入れる）</li>
+<li>既存施工写真を棚卸しし、事例ページ化できる案件を20件リストアップする</li>
+</ol></section><section class="chapter" id="ch01"><h1>01. 現状分析</h1><h2>0. 本章の情報源と確度</h2>
+<p>本設計書の作成環境からは対象サイトへ直接アクセスできませんでした（ネットワークの外部接続制限）。
+本章は以下から再構成しています。確度を三段階で明示します。</p>
+<ul>
+<li><strong>[確認済]</strong> 複数の独立した公開情報源で一致した事実</li>
+<li><strong>[推定]</strong> 検索索引の情報・業界の一般的傾向から導いた推定。実機確認が必要</li>
+<li><strong>[要確認]</strong> 情報が得られず、ヒアリングまたは実機確認が必須</li>
+</ul>
+<p>情報源: 検索エンジンの索引情報、ツクリンク、Baseconnect、SalesNow、建設マップ、いえらぶ、まいぷれ、Yahoo!マップ、東京都建築士事務所協会の会員情報。</p>
+<hr />
+<h2>1. 企業プロフィール</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>内容</th>
+<th>確度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>会社名</td>
+<td>重光建設株式会社</td>
+<td>[確認済]</td>
+</tr>
+<tr>
+<td>所在地</td>
+<td>〒192-0045 東京都八王子市大和田町1丁目32番1号</td>
+<td>[確認済]</td>
+</tr>
+<tr>
+<td>電話</td>
+<td>042-642-8180（受付 9:00〜17:00、日曜・祝日を除く）</td>
+<td>[確認済]</td>
+</tr>
+<tr>
+<td>資本金</td>
+<td>3,300万円</td>
+<td>[推定]（企業情報サイト1件の記載。要確認）</td>
+</tr>
+<tr>
+<td>建設業許可</td>
+<td>東京都知事許可 第063975号（建築工事業）</td>
+<td>[確認済]</td>
+</tr>
+<tr>
+<td>宅地建物取引業免許</td>
+<td>保有（番号は未確認）</td>
+<td>[推定]</td>
+</tr>
+<tr>
+<td>従業員数</td>
+<td>4〜30名（情報源により差あり。小規模）</td>
+<td>[推定]</td>
+</tr>
+<tr>
+<td>関連会社</td>
+<td>重光企画設計株式会社（同一住所、TEL 042-642-8181、建築設計業）</td>
+<td>[確認済]</td>
+</tr>
+<tr>
+<td>代表者</td>
+<td>—</td>
+<td>[要確認]</td>
+</tr>
+<tr>
+<td>設立年</td>
+<td>—</td>
+<td>[要確認]</td>
+</tr>
+<tr>
+<td>最寄駅</td>
+<td>京王八王子駅 徒歩約20分</td>
+<td>[推定]</td>
+</tr>
+</tbody>
+</table></div>
+<h3>事業の特徴</h3>
+<ul>
+<li><strong>設計事務所として創業し、より良い家をつくるために施工にも携わるようになった</strong>という成り立ち [確認済]</li>
+<li>事業領域: 注文住宅、リノベーション・リフォーム、医院・店舗、公共施設（中学校・公民館・木造県営住宅などの実績） [確認済]</li>
+<li>設計・調査から施工まで一貫対応 [確認済]</li>
+<li>訴求メッセージ: 「誠実な対応、任せて安心」「本物の素材に触れ、品質を見極め、本物の職人技にこだわる」「流行に流されないオーダーメイドの手づくりの家」「時と共に価値と愛着が増す、次の世代に誇れる家」 [確認済]</li>
+</ul>
+<h3>第三者評価（口コミ）</h3>
+<p>公開されている口コミには次のような記述があります [確認済]。</p>
+<ul>
+<li>「社員も社長も対応が早く親切」「真面目で誠実、仕事に対する姿勢が真剣」</li>
+<li>「施工品質が良く、仕上がりがきれい、仕事が早い」</li>
+<li>「14年ほど前、多摩地域で薦められる唯一の工務店として紹介された」「建てた建物・建築中の建物が魅力的で素敵だった」</li>
+</ul>
+<p><strong>これは極めて重要な資産です。</strong> 現在この評価はサイト上でほとんど活かされていません。
+「地域で紹介され続けている工務店」という事実は、広告費では買えない信頼の証拠であり、サイトの中心に据えるべき素材です。</p>
+<hr />
+<h2>2. 現行サイトの構成（推定）</h2>
+<p>図版: <code>images/01_sitemap_current.png</code></p>
+<p>検索索引から確認できたページは以下の8ページです [確認済（URLの存在）]。</p>
+<pre><code>トップページ                    /  (index.html)
+├─ 家づくりのこだわり           /iedukuri.html
+├─ 施工事例                     （URL要確認）
+├─ お客様の声                   /voice.html
+├─ 会社概要                     /company.html
+│   ├─ 沿革                     /company_history.html
+│   └─ アクセス                 /company_access.html
+└─ お問い合わせ                 （URL要確認）
+</code></pre>
+<p>ページ数はおよそ8〜12ページ程度の小規模サイトと推定されます [推定]。</p>
+<hr />
+<h2>3. 課題の詳細</h2>
+<h3>C-1. スマートフォン最適化【最優先】</h3>
+<p><strong>状況</strong> [推定]
+<code>.html</code> 拡張子の静的HTML構成、ページタイトルの体裁、サイト規模から、<strong>数年以上前に制作され、レスポンシブ対応されていない可能性が高い</strong>と判断します。</p>
+<p><strong>なぜ最優先か</strong>
+住宅の検討者は、通勤中・就寝前・打ち合わせの合間にスマートフォンで情報収集します。業種平均でモバイル比率は70〜80%です。
+スマホで文字が小さく、横スクロールが発生し、電話番号がタップできないサイトは、<strong>内容の良し悪しを評価される前に閉じられます。</strong>
+SEOもモバイルファーストインデックスで評価されるため、モバイル対応の不備は検索順位にも直接響きます。</p>
+<p><strong>確認方法</strong>
+実機（iPhone / Android）で全ページを確認。加えて PageSpeed Insights と Search Console の「モバイル ユーザビリティ」を参照。</p>
+<hr />
+<h3>C-2. 施工事例が資産になっていない【最優先】</h3>
+<p><strong>状況</strong> [推定]
+施工事例ページは存在するものの、1ページに写真が並ぶ一覧形式で、<strong>個別事例のページが存在しない</strong>と推定されます。</p>
+<p><strong>何が問題か</strong></p>
+<ol>
+<li><strong>検索の受け皿がない</strong> — 「八王子市 注文住宅 平屋」「多摩 リノベーション 事例」のような検索語に対して、応えるページが1枚もありません。事例を個別ページ化すれば、事例の数だけ検索接点が生まれます。</li>
+<li><strong>説得材料にならない</strong> — 写真だけでは「なぜそうしたか」が伝わりません。お客様の要望 → 設計の判断 → 結果、という物語がないと、設計力は伝わりません。</li>
+<li><strong>回遊が起きない</strong> — 関連事例へのリンクがないため、1枚見て終わりになります。</li>
+</ol>
+<p><strong>工務店サイトにおける位置づけ</strong>
+施工事例は工務店サイトで最も閲覧されるコンテンツです。ここを整備せずに他を改善しても効果は限定的です。</p>
+<hr />
+<h3>C-3. 問い合わせ導線の不足【最優先】</h3>
+<p><strong>状況</strong> [推定]
+電話番号・問い合わせボタンが画面内に常時表示されておらず、各ページ末尾にCTA（行動喚起）が置かれていないと推定されます。</p>
+<p><strong>何が問題か</strong>
+「良さそうだ」と思った瞬間に行動できる場所がないと、その気持ちは冷めます。
+特に住宅業界では<strong>電話での問い合わせが依然として多い</strong>ため、スマホでタップできる電話番号の常時表示は必須です。
+受付時間（9:00〜17:00、日祝除く）を併記することで、「今かけていいのか」の迷いも消えます。</p>
+<hr />
+<h3>C-4. 会社情報の分散</h3>
+<p><strong>状況</strong> [確認済]
+「会社概要」「沿革」「アクセス」が3ページに分かれています。</p>
+<p><strong>何が問題か</strong>
+小規模サイトで会社情報を分割すると、訪問者は3回クリックしなければ会社の全体像をつかめません。
+1ページに統合し、ページ内アンカーで移動する構成のほうが、信頼形成の観点でも、SEOの観点（ページの内容が薄くならない）でも有利です。</p>
+<hr />
+<h3>C-5. URL正規化の不備【即対応】</h3>
+<p><strong>状況</strong> [確認済]
+検索索引に <code>http://juko-kensetsu.co.jp/</code>（www無し・http）と <code>https://www.juko-kensetsu.co.jp/</code>（www有り・https）の両方が存在します。</p>
+<p><strong>何が問題か</strong></p>
+<ul>
+<li>検索エンジンから見て同じ内容のページが複数のURLで存在し、<strong>評価が分散</strong>します</li>
+<li>httpでアクセスされた場合、ブラウザに「保護されていない通信」と表示されます。問い合わせフォームを持つサイトでこの表示は致命的です</li>
+</ul>
+<p><strong>対応</strong>
+<code>https://www.juko-kensetsu.co.jp/</code> を正規URLとし、他のすべてのパターンから301リダイレクト。加えて canonical タグを全ページに設置。</p>
+<hr />
+<h3>C-6. ページタイトルの設計不備【即対応】</h3>
+<p><strong>状況</strong> [確認済]
+「ア ク セ ス | 重光建設株式会社」「沿 革 | 重光建設株式会社」のように、<strong>全角スペースによる分かち書き</strong>が使われています。</p>
+<p><strong>何が問題か</strong>
+これは紙面デザインの手法であり、Webでは弊害しかありません。</p>
+<ul>
+<li>検索結果で不自然に見える</li>
+<li>検索エンジンが「アクセス」「沿革」という語として認識しにくい</li>
+<li>音声読み上げで不自然に区切られる（アクセシビリティ低下）</li>
+</ul>
+<p><strong>対応</strong>
+分かち書きを廃止。さらに、タイトルには<strong>地域名と業種を入れる</strong>べきです。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>現状（推定）</th>
+<th>改善案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ア ク セ ス | 重光建設株式会社</td>
+<td>アクセス・会社案内 | 八王子市の工務店 重光建設株式会社</td>
+</tr>
+<tr>
+<td>沿 革 | 重光建設株式会社</td>
+<td>（会社案内ページへ統合）</td>
+</tr>
+<tr>
+<td>家づくりのこだわり | 重光建設株式会社</td>
+<td>家づくりのこだわり｜設計事務所が原点の家づくり | 重光建設株式会社</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h3>C-7. 検討に必要な情報の欠落</h3>
+<p><strong>状況</strong> [推定]
+「家づくりの流れ」「費用の考え方」「工期の目安」「保証・アフターサービス」「よくある質問」に相当するページがありません。</p>
+<p><strong>何が問題か</strong>
+住宅の検討者が問い合わせ前に最も知りたいのは、<strong>「いくらかかるか」「どれくらいかかるか」「何から始めるか」</strong>の3点です。
+これに答えないサイトは、答えている競合に比較検討で負けます。
+金額を明示できなくても、「費用の内訳の考え方」「過去事例の規模感」「相談は無料である」ことを示すだけで、心理的ハードルは大きく下がります。</p>
+<hr />
+<h3>C-8. 更新性の欠如</h3>
+<p><strong>状況</strong> [推定]
+お知らせ・ブログなど、更新される領域がありません。</p>
+<p><strong>何が問題か</strong>
+最終更新日が数年前のサイトは、訪問者に「今も営業しているのか」という疑念を抱かせます。
+月1〜2回の更新でも、「動いている会社」という印象は保てます。無理のない運用設計（8章）を前提に、更新領域を持つべきです。</p>
+<hr />
+<h3>C-9. その他の技術的課題 [要確認]</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>確認内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>画像の最適化</td>
+<td>撮影データをそのまま掲載していないか。WebP化、適切なサイズへのリサイズ</td>
+</tr>
+<tr>
+<td>alt属性</td>
+<td>画像に代替テキストが設定されているか</td>
+</tr>
+<tr>
+<td>見出し構造</td>
+<td>h1〜h3が意味に沿って使われているか。装飾目的の見出しがないか</td>
+</tr>
+<tr>
+<td>構造化データ</td>
+<td>LocalBusiness / HomeAndConstructionBusiness の実装有無</td>
+</tr>
+<tr>
+<td>OGP</td>
+<td>SNS共有時のカード表示設定</td>
+</tr>
+<tr>
+<td>favicon</td>
+<td>ブラウザタブのアイコン</td>
+</tr>
+<tr>
+<td>サイトマップ</td>
+<td>sitemap.xml / robots.txt の有無</td>
+</tr>
+<tr>
+<td>フォーム</td>
+<td>SSL、送信確認画面、自動返信、スパム対策、送信完了ページの有無</td>
+</tr>
+<tr>
+<td>表示速度</td>
+<td>Core Web Vitals（LCP / INP / CLS）</td>
+</tr>
+<tr>
+<td>保守体制</td>
+<td>更新を誰が行っているか、CMSの有無、ドメイン・サーバーの契約状況</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>4. 競合環境</h2>
+<p>八王子市には注文住宅を手がける工務店が複数あり、Webでの情報発信を積極的に行っている競合が存在します（例: 一級建築士と工務店を組み合わせた訴求を行う事業者、建築家紹介型のフランチャイズ事業者など）。</p>
+<p><strong>これらの競合サイトに共通する特徴</strong></p>
+<ul>
+<li>施工事例が個別ページで多数公開されている</li>
+<li>写真がプロ品質で、点数が多い</li>
+<li>価格帯・性能値（断熱等級など）が明示されている</li>
+<li>スマートフォンでの閲覧が快適</li>
+</ul>
+<p><strong>重光建設の勝ち筋</strong></p>
+<p>価格や規模で競うのではなく、次の3点で差別化します。</p>
+<ol>
+<li><strong>設計事務所が原点</strong>（重光企画設計との一体運営）— 「工務店に設計を任せる」でも「設計事務所に施工を任せる」でもない、両方を自社で持つ体制</li>
+<li><strong>公共施設・木造建築の実績</strong> — 中学校・公民館・木造県営住宅などを手がけた技術的信頼性は、住宅専業の工務店にはない裏づけ</li>
+<li><strong>地域での紹介実績</strong> — 「多摩地域で薦められる唯一の工務店」と評された事実</li>
+</ol>
+<hr />
+<h2>5. 現状分析のまとめ</h2>
+<p>重光建設のサイトは、<strong>素材はあるのに調理されていない状態</strong>です。
+設計事務所発という独自性、公共建築の実績、地域での紹介評価、誠実な仕事ぶりに対する口コミ。これらはすべて存在しています。</p>
+<p>問題は、それらが<strong>スマートフォンで読めず、検索で見つからず、見つけても問い合わせる場所がない</strong>ことです。
+次章以降で、この状態を解消する設計を示します。</p></section><section class="chapter" id="ch02"><h1>02. ターゲットとゴール設計</h1><h2>1. サイトの役割定義</h2>
+<p>このサイトは<strong>カタログではなく、相談のきっかけをつくる場所</strong>です。
+重光建設のような小規模・高付加価値の工務店において、サイトが担う役割は次の3つです。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>役割</th>
+<th>内容</th>
+<th>主な受け皿ページ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>見つけてもらう</strong></td>
+<td>地域＋用途の検索で接点をつくる</td>
+<td>施工事例詳細、トップ、流れ・費用</td>
+</tr>
+<tr>
+<td><strong>信じてもらう</strong></td>
+<td>会ったことのない相手に、任せられると思わせる</td>
+<td>家づくりのこだわり、お客様の声、会社案内</td>
+</tr>
+<tr>
+<td><strong>動いてもらう</strong></td>
+<td>電話・フォームでの相談につなげる</td>
+<td>全ページのCTA、お問い合わせ</td>
+</tr>
+</tbody>
+</table></div>
+<p>「見つけてもらう」だけでは意味がなく、「信じてもらう」だけでも問い合わせは来ません。<strong>3つが一本の線でつながっている必要があります。</strong></p>
+<hr />
+<h2>2. ターゲット像</h2>
+<h3>ペルソナ1: 注文住宅の検討者（主要ターゲット・想定60%）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>像</td>
+<td>八王子市・日野市・多摩市・昭島市在住、30代後半〜40代の共働き世帯、子ども1〜2人</td>
+</tr>
+<tr>
+<td>状況</td>
+<td>土地を探している、または実家の土地に建てる。住宅展示場を数社回ったが画一的で決めきれない</td>
+</tr>
+<tr>
+<td>求めるもの</td>
+<td>大手ハウスメーカーではない、素材と造りにこだわった家。設計の自由度。予算3,000〜5,000万円</td>
+</tr>
+<tr>
+<td>不安</td>
+<td>小さい会社で大丈夫か／費用が青天井にならないか／完成までどれくらいか／アフターは</td>
+</tr>
+<tr>
+<td>行動</td>
+<td>スマホで「八王子 注文住宅 工務店」「八王子 木の家」と検索。施工事例の写真をまず見る。会社概要で規模と許可を確認。口コミを別途検索する</td>
+</tr>
+<tr>
+<td>刺さるもの</td>
+<td><strong>設計事務所が原点であること</strong>、事例写真の質と点数、お客様の声、費用の考え方の透明性</td>
+</tr>
+</tbody>
+</table></div>
+<h3>ペルソナ2: リノベーション検討者（想定25%）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>像</td>
+<td>40〜60代、築25〜40年の持ち家。子どもの独立や親との同居がきっかけ</td>
+</tr>
+<tr>
+<td>求めるもの</td>
+<td>建て替えかリフォームかの判断そのものへの助言。耐震・断熱の改善</td>
+</tr>
+<tr>
+<td>不安</td>
+<td>開けてみないと分からないと言われて追加費用が出ないか／どこまでできるのか</td>
+</tr>
+<tr>
+<td>行動</td>
+<td>「八王子 リフォーム 工務店」「多摩 リノベーション 実績」で検索。before/after写真を見る</td>
+</tr>
+<tr>
+<td>刺さるもの</td>
+<td>before/after付き事例、構造を理解した提案ができるという説明、地元で長く営業している事実</td>
+</tr>
+</tbody>
+</table></div>
+<h3>ペルソナ3: 事業用建築の検討者（想定10%）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>像</td>
+<td>開業予定の医師・歯科医師、店舗オーナー、既存施設の建て替えを検討する法人・自治体担当者</td>
+</tr>
+<tr>
+<td>求めるもの</td>
+<td>用途に応じた法規対応、工期の確実性、実績</td>
+</tr>
+<tr>
+<td>行動</td>
+<td>「八王子 クリニック 設計施工」「多摩 木造 公共施設」などで検索。会社概要・許可・実績を重点確認</td>
+</tr>
+<tr>
+<td>刺さるもの</td>
+<td><strong>公共施設・木造建築の実績</strong>、設計と施工を一社で完結できる体制、建設業許可・資本金</td>
+</tr>
+</tbody>
+</table></div>
+<h3>ペルソナ4: 紹介・口コミ経由の来訪者（想定5%、ただし成約率は最高）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>状況</td>
+<td>知人から「重光建設がいい」と聞き、社名で検索した</td>
+</tr>
+<tr>
+<td>求めるもの</td>
+<td>紹介内容の裏取り。「本当にきちんとした会社か」の確認</td>
+</tr>
+<tr>
+<td>行動</td>
+<td>社名検索 → トップ → 会社案内・お客様の声 → 電話</td>
+</tr>
+<tr>
+<td>刺さるもの</td>
+<td>会社情報の網羅性、代表の顔と言葉、施工事例の実在感、電話番号の見つけやすさ</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>設計上の含意</strong>: ペルソナ4は最も成約に近い層です。<strong>社名で検索した人が3クリック以内に電話をかけられる</strong>構造を必ず担保します。</p>
+</blockquote>
+<hr />
+<h2>3. ユーザー導線設計</h2>
+<p>図版: <code>images/03_user_flow.png</code></p>
+<h3>導線A: 地域＋用途検索からの新規（ペルソナ1・2・3）</h3>
+<pre><code>「八王子 注文住宅 工務店」で検索
+  ↓
+施工事例詳細ページ または トップページに着地
+  ↓
+施工事例をもう2〜3件見る（写真で惹きつける）
+  ↓
+家づくりのこだわり（なぜこの会社か を理解する）
+  ↓
+家づくりの流れ・費用（不安を解消する）
+  ↓
+お問い合わせ（フォーム）／電話
+</code></pre>
+<p><strong>この導線の設計要点</strong></p>
+<ul>
+<li>施工事例詳細に着地した人が、そのページだけで会社の全体像をつかめること（事例詳細にも会社紹介とCTAを置く）</li>
+<li>「もっと見る」導線を各事例の末尾に置き、回遊を促す</li>
+<li>流れ・費用ページは導線の最終手前。ここで離脱させない</li>
+</ul>
+<h3>導線B: 社名検索からの指名（ペルソナ4）</h3>
+<pre><code>「重光建設」で検索 → トップページ
+  ↓
+会社案内（許可・沿革・代表・スタッフ）／お客様の声
+  ↓
+電話（ヘッダー・固定バーから1タップ）
+</code></pre>
+<p><strong>設計要点</strong>: ヘッダーとスマホ固定バーに電話番号を常時表示。会社案内は1ページに統合し、一度で全情報が得られること。</p>
+<h3>導線C: 再訪・比較検討中（全ペルソナ共通）</h3>
+<pre><code>ブックマーク／再検索で再訪
+  ↓
+お知らせ（動いている会社だと確認）／新しい事例
+  ↓
+お問い合わせ
+</code></pre>
+<p><strong>設計要点</strong>: 更新されている実感を与えること。事例とお知らせの新着をトップに出す。</p>
+<hr />
+<h2>4. コンバージョン（成果）の定義</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>優先度</th>
+<th>コンバージョン</th>
+<th>計測方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主</td>
+<td>お問い合わせフォーム送信</td>
+<td>サンクスページ到達をGA4イベント化</td>
+</tr>
+<tr>
+<td>主</td>
+<td>電話番号のタップ（スマホ）</td>
+<td><code>tel:</code> リンクのクリックをGA4イベント化</td>
+</tr>
+<tr>
+<td>副</td>
+<td>資料請求</td>
+<td>フォームの種別で識別</td>
+</tr>
+<tr>
+<td>参考</td>
+<td>施工事例詳細ページの閲覧3ページ以上</td>
+<td>GA4のエンゲージメント指標</td>
+</tr>
+<tr>
+<td>参考</td>
+<td>流れ・費用ページの到達</td>
+<td>GA4イベント</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>電話を主コンバージョンに含めることが重要です。</strong> 工務店では電話問い合わせが半数以上を占めることも珍しくなく、フォームだけを計測していると施策の効果を大幅に過小評価します。</p>
+<hr />
+<h2>5. トーン＆マナー</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>軸</th>
+<th>方針</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全体の印象</td>
+<td>落ち着き、実直、木と土の質感。<strong>華美にしない</strong></td>
+</tr>
+<tr>
+<td>避けるもの</td>
+<td>派手なアニメーション、過度なキャッチコピー、「業界No.1」的な誇張、スライドショーの自動再生</td>
+</tr>
+<tr>
+<td>写真</td>
+<td>加工しすぎない。自然光。生活感のある引きの写真と、素材が分かる寄りの写真を組み合わせる</td>
+</tr>
+<tr>
+<td>文章</td>
+<td>一人称は「私たち」。専門用語には短い補足を添える。<strong>職人・現場の言葉をそのまま使う</strong>（信頼につながる）</td>
+</tr>
+<tr>
+<td>色</td>
+<td>深い緑（信頼・自然）＋木の金茶（温かみ）＋生成り（余白）。詳細は05章</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>基準となる問い</strong>: 「この文章・この写真を、実際にお客様の家で、施主の前で見せられるか」
+見せられないものは載せません。この会社の価値は誠実さにあり、サイトもそれを裏切らないことが最大の設計方針です。</p></section><section class="chapter" id="ch03"><h1>03. サイト構成・URL設計</h1><p>図版: <code>images/01_sitemap_current.png</code>（現行・推定） / <code>images/02_sitemap_proposed.png</code>（提案）</p>
+<h2>1. 全体方針</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>方針</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>階層は2階層まで</td>
+<td>トップ → カテゴリ → 詳細。それ以上は深くしない</td>
+</tr>
+<tr>
+<td>ディレクトリ型URL</td>
+<td><code>.html</code> をやめ <code>/works/</code> 形式に。将来のCMS化と拡張に対応</td>
+</tr>
+<tr>
+<td>会社情報は1ページ統合</td>
+<td>分散していた3ページをアンカーリンクで1ページに</td>
+</tr>
+<tr>
+<td>事例は1件1ページ</td>
+<td>検索接点と説得力の源泉</td>
+</tr>
+<tr>
+<td>新設は2ページのみ</td>
+<td>「流れ・費用」と「お知らせ」。増やしすぎない</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>2. 提案サイトマップ</h2>
+<pre><code>/                          トップページ
+├─ /concept/               家づくりのこだわり          ← 既存 iedukuri.html を刷新
+├─ /works/                 施工事例 一覧               ← カテゴリ絞り込み付き
+│   ├─ /works/{slug}/      施工事例 詳細【新規・複数】
+│   └─ カテゴリ: 注文住宅 / リノベーション / 医院・店舗 / 公共施設
+├─ /voice/                 お客様の声                  ← 既存 voice.html を刷新
+├─ /flow/                  家づくりの流れ・費用【新規】
+├─ /company/               会社案内【統合】
+│      #message 代表挨拶 / #outline 会社概要 / #history 沿革
+│      #staff スタッフ紹介 / #access アクセス
+├─ /news/                  お知らせ・ブログ【新規】
+│   └─ /news/{slug}/       記事詳細
+├─ /contact/               お問い合わせ
+│   └─ /contact/thanks/    送信完了（コンバージョン計測用）
+└─ /privacy/               プライバシーポリシー
+
+＜Phase 2 で検討＞
+├─ /land/                  土地探し・不動産（宅建業免許の活用）
+└─ /recruit/               採用情報
+</code></pre>
+<h3>ページ数</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>区分</th>
+<th>ページ数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>固定ページ</td>
+<td>9</td>
+</tr>
+<tr>
+<td>施工事例詳細</td>
+<td>20（初期）→ 40（1年後）</td>
+</tr>
+<tr>
+<td>お知らせ記事</td>
+<td>12（初期）→ 36（1年後）</td>
+</tr>
+<tr>
+<td><strong>合計</strong></td>
+<td><strong>41 → 85</strong></td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>3. URL設計と301リダイレクト</h2>
+<h3>正規URL</h3>
+<pre><code>https://www.juko-kensetsu.co.jp/
+</code></pre>
+<p>以下すべてから301リダイレクト:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>リダイレクト元</th>
+<th>リダイレクト先</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>http://juko-kensetsu.co.jp/*</code></td>
+<td><code>https://www.juko-kensetsu.co.jp/*</code></td>
+</tr>
+<tr>
+<td><code>http://www.juko-kensetsu.co.jp/*</code></td>
+<td><code>https://www.juko-kensetsu.co.jp/*</code></td>
+</tr>
+<tr>
+<td><code>https://juko-kensetsu.co.jp/*</code></td>
+<td><code>https://www.juko-kensetsu.co.jp/*</code></td>
+</tr>
+</tbody>
+</table></div>
+<h3>旧URL → 新URL 対応表</h3>
+<p><strong>この表のとおりに301リダイレクトを設定してください。</strong> 設定を怠ると、既存の検索評価と外部リンクをすべて失います。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>旧URL</th>
+<th>新URL</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/index.html</code></td>
+<td><code>/</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>/iedukuri.html</code></td>
+<td><code>/concept/</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>/voice.html</code></td>
+<td><code>/voice/</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>/company.html</code></td>
+<td><code>/company/</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>/company_history.html</code></td>
+<td><code>/company/#history</code></td>
+<td>統合</td>
+</tr>
+<tr>
+<td><code>/company_access.html</code></td>
+<td><code>/company/#access</code></td>
+<td>統合</td>
+</tr>
+<tr>
+<td>（施工事例の旧URL）</td>
+<td><code>/works/</code></td>
+<td>要確認</td>
+</tr>
+<tr>
+<td>（お問い合わせの旧URL）</td>
+<td><code>/contact/</code></td>
+<td>要確認</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>注意</strong>: アンカー（<code>#history</code>）付きのリダイレクトはサーバー側では指定できますが、検索エンジンはアンカーを無視して <code>/company/</code> を評価します。それで問題ありません。ユーザーの利便のために設定します。</p>
+</blockquote>
+<h3>.htaccess 実装例（Apacheの場合）</h3>
+<pre><code class="language-apache">RewriteEngine On
+
+# https + www に統一
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^(.*)$ https://www.juko-kensetsu.co.jp/$1 [R=301,L]
+
+# 旧URL → 新URL
+RewriteRule ^index\.html$            /                  [R=301,L]
+RewriteRule ^iedukuri\.html$         /concept/          [R=301,L]
+RewriteRule ^voice\.html$            /voice/            [R=301,L]
+RewriteRule ^company\.html$          /company/          [R=301,L]
+RewriteRule ^company_history\.html$  /company/#history  [R=301,L]
+RewriteRule ^company_access\.html$   /company/#access   [R=301,L]
+</code></pre>
+<blockquote>
+<p>WordPressで構築する場合、上記は <code># BEGIN WordPress</code> ブロックより<strong>前</strong>に記述してください。</p>
+</blockquote>
+<hr />
+<h2>4. 施工事例のURLとカテゴリ設計</h2>
+<h3>URL形式</h3>
+<pre><code>/works/{slug}/
+</code></pre>
+<p><strong>slugは英数字とハイフンで、内容が分かるもの</strong>にします。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>事例</th>
+<th>slug例</th>
+<th>完成URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>八王子市 K様邸 平屋</td>
+<td><code>hachioji-hiraya-k</code></td>
+<td><code>/works/hachioji-hiraya-k/</code></td>
+</tr>
+<tr>
+<td>日野市 内科クリニック</td>
+<td><code>hino-clinic</code></td>
+<td><code>/works/hino-clinic/</code></td>
+</tr>
+<tr>
+<td>多摩市 戸建てフルリノベーション</td>
+<td><code>tama-renovation-full</code></td>
+<td><code>/works/tama-renovation-full/</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>避けるべき形式: <code>/works/1/</code>、<code>/works/post-123/</code>、<code>/works/%E5%85%AB%E7%8E%8B%E5%AD%90/</code>（日本語URLはコピー時に長大化するため使わない）</p>
+<h3>分類（タクソノミー）</h3>
+<p><strong>カテゴリ（1事例1つ）</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>カテゴリ</th>
+<th>slug</th>
+<th>想定件数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>注文住宅</td>
+<td><code>custom-home</code></td>
+<td>15</td>
+</tr>
+<tr>
+<td>リノベーション・リフォーム</td>
+<td><code>renovation</code></td>
+<td>12</td>
+</tr>
+<tr>
+<td>医院・店舗</td>
+<td><code>clinic-shop</code></td>
+<td>6</td>
+</tr>
+<tr>
+<td>公共施設・木造建築</td>
+<td><code>public</code></td>
+<td>7</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>タグ（複数可）</strong> — 検索接点を増やす目的</p>
+<ul>
+<li>エリア: 八王子市 / 日野市 / 多摩市 / 昭島市 / あきる野市 / 立川市</li>
+<li>構造・形式: 木造 / 平屋 / 2階建 / 二世帯 / 店舗併用</li>
+<li>特徴: 無垢材 / 自然素材 / 高断熱 / 耐震改修 / 中庭 / 薪ストーブ</li>
+</ul>
+<blockquote>
+<p>タグページ（<code>/works/tag/hachioji/</code> など）は、件数が5件以上になったものだけをインデックス対象にします。件数の少ないタグページは内容が薄く、検索評価上マイナスになります。<code>noindex</code> で制御してください。</p>
+</blockquote>
+<hr />
+<h2>5. グローバルナビゲーション</h2>
+<h3>PC（6項目 + CTA）</h3>
+<pre><code>[ロゴ] 家づくりのこだわり | 施工事例 | お客様の声 | 家づくりの流れ | 会社案内 | お知らせ
+                                      [TEL 042-642-8180 受付9:00-17:00] [無料相談・お問い合わせ]
+</code></pre>
+<p><strong>設計意図</strong></p>
+<ul>
+<li>7項目以上にしない（選択肢が多いと選べなくなる）</li>
+<li>「施工事例」を左から2番目に置く（最も見られるため）</li>
+<li>電話番号と受付時間をセットで常時表示</li>
+<li>CTAボタンはナビゲーションと明確に色分け</li>
+</ul>
+<h3>スマートフォン</h3>
+<pre><code>[ロゴ]                                    [☎] [☰]
+</code></pre>
+<ul>
+<li>ハンバーガーメニュー内: 上記6項目 + お問い合わせ + プライバシーポリシー</li>
+<li>ヘッダーの電話アイコンは常時タップ可能</li>
+<li><strong>画面下部に固定バー</strong>: <code>[☎ 電話する]</code> <code>[✉ お問い合わせ]</code> の2分割（高さ64px）</li>
+</ul>
+<h3>フッター（全ページ共通）</h3>
+<pre><code>重光建設株式会社
+〒192-0045 東京都八王子市大和田町1-32-1
+TEL 042-642-8180 / FAX (要確認)
+受付時間 9:00〜17:00（日曜・祝日を除く）
+東京都知事許可（般-XX）第063975号
+関連会社: 重光企画設計株式会社
+
+[サイトマップ的リンク一覧]
+[プライバシーポリシー]
+© 2026 重光建設株式会社
+</code></pre>
+<hr />
+<h2>6. パンくずリスト</h2>
+<p>全ページ（トップ以外）に設置し、構造化データ（BreadcrumbList）も実装します。</p>
+<pre><code>ホーム &gt; 施工事例 &gt; 注文住宅 &gt; 八王子市 K様邸｜木の温もりを感じる平屋
+ホーム &gt; 会社案内
+ホーム &gt; お知らせ &gt; 上棟式を行いました
+</code></pre>
+<hr />
+<h2>7. 内部リンク設計</h2>
+<p>検索評価とユーザーの回遊は、内部リンクの張り方で大きく変わります。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>リンク元</th>
+<th>リンク先</th>
+<th>目的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>施工事例詳細</td>
+<td>同カテゴリの他事例3件</td>
+<td>回遊</td>
+</tr>
+<tr>
+<td>施工事例詳細</td>
+<td>該当するお客様の声</td>
+<td>信頼</td>
+</tr>
+<tr>
+<td>施工事例詳細</td>
+<td>家づくりの流れ・費用</td>
+<td>検討促進</td>
+</tr>
+<tr>
+<td>お客様の声</td>
+<td>該当する施工事例詳細</td>
+<td>実物の確認</td>
+</tr>
+<tr>
+<td>家づくりのこだわり</td>
+<td>該当する施工事例</td>
+<td>抽象の具体化</td>
+</tr>
+<tr>
+<td>家づくりの流れ</td>
+<td>お問い合わせ</td>
+<td>転換</td>
+</tr>
+<tr>
+<td>お知らせ記事</td>
+<td>関連する事例・ページ</td>
+<td>回遊</td>
+</tr>
+<tr>
+<td>全ページ末尾</td>
+<td>お問い合わせ</td>
+<td>転換</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>ルール</strong>: アンカーテキストに「こちら」を使わない。「八王子市の平屋の事例を見る」のように、リンク先の内容が分かる言葉にします。</p></section><section class="chapter" id="ch04"><h1>04. ページ別設計</h1><p>各ページの目的・構成・掲載要素・原稿方針を定義します。ワイヤーフレーム図版と対で参照してください。</p>
+<hr />
+<h2>4-1. トップページ <code>/</code></h2>
+<p>図版: <code>images/10_wf_top_pc.png</code>（PC） / <code>images/11_wf_top_sp.png</code>（スマートフォン）</p>
+<h3>目的</h3>
+<p>3秒で「どこの、何をする会社で、何が違うのか」を伝え、施工事例へ送り込む。</p>
+<h3>セクション構成</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>セクション</th>
+<th>内容</th>
+<th>意図</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>ヘッダー</td>
+<td>ロゴ＋「設計事務所が原点の工務店｜東京都八王子市」／ナビ／TEL／CTA</td>
+<td>業種と地域を即座に提示</td>
+</tr>
+<tr>
+<td>2</td>
+<td>ヒーロー</td>
+<td>大判写真＋キャッチコピー＋2つのボタン</td>
+<td>第一印象。写真の質がすべて</td>
+</tr>
+<tr>
+<td>3</td>
+<td>選ばれる3つの理由</td>
+<td>3カード</td>
+<td>差別化を端的に</td>
+</tr>
+<tr>
+<td>4</td>
+<td>施工事例</td>
+<td>4件のカード＋一覧へのボタン</td>
+<td>最重要コンテンツへ送客</td>
+</tr>
+<tr>
+<td>5</td>
+<td>お客様の声</td>
+<td>2件の抜粋＋一覧へのボタン</td>
+<td>第三者による裏づけ</td>
+</tr>
+<tr>
+<td>6</td>
+<td>家づくりの流れ</td>
+<td>7ステップの横並び＋詳細へのボタン</td>
+<td>不安の先回り</td>
+</tr>
+<tr>
+<td>7</td>
+<td>事業領域</td>
+<td>4タイル</td>
+<td>住宅以外の受け皿</td>
+</tr>
+<tr>
+<td>8</td>
+<td>会社案内</td>
+<td>概要テキスト＋地図</td>
+<td>実在性・信頼性</td>
+</tr>
+<tr>
+<td>9</td>
+<td>お知らせ</td>
+<td>3件</td>
+<td>稼働している証明</td>
+</tr>
+<tr>
+<td>10</td>
+<td>CTAバンド</td>
+<td>大きな電話番号＋フォームボタン</td>
+<td>最後の転換点</td>
+</tr>
+<tr>
+<td>11</td>
+<td>フッター</td>
+<td>会社情報・リンク・許可番号</td>
+<td>信頼の担保</td>
+</tr>
+</tbody>
+</table></div>
+<h3>ヒーローの原稿案</h3>
+<blockquote>
+<p><strong>設計事務所が原点。</strong>
+<strong>本物の素材と職人技で、次の世代に誇れる家を。</strong></p>
+<p>東京都八王子市で、注文住宅・リノベーション・医院/店舗建築を手がけています。
+設計から施工まで、私たちが最後まで責任を持ちます。</p>
+<p><code>[ 施工事例を見る ]</code> <code>[ 家づくりの相談をする ]</code></p>
+</blockquote>
+<p><strong>推奨する写真</strong>: 竣工した住宅の外観、または木の質感が伝わる室内の引き。人物が写っていると温度が伝わります。<strong>イメージ素材（ストックフォト）は使わないでください。</strong> 自社施工の実物であることが、この会社の価値そのものです。</p>
+<h3>「選ばれる3つの理由」の原稿案</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>見出し</th>
+<th>本文</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>①</td>
+<td>設計事務所から始まった会社です</td>
+<td>私たちはもともと設計事務所でした。より良い家をつくるために、自ら施工にも携わるようになりました。図面を引いた人間が現場に立つ。だから、意図が最後まで通ります。</td>
+</tr>
+<tr>
+<td>②</td>
+<td>本物の素材と、本物の職人技</td>
+<td>実際に手で触れ、品質を見極めた素材だけを使います。流行に流されないオーダーメイドの手づくりの家は、時と共に価値と愛着が増していきます。</td>
+</tr>
+<tr>
+<td>③</td>
+<td>誠実な対応、任せて安心</td>
+<td>中学校や公民館、木造の公営住宅も手がけてきました。公共建築で求められる確かさを、住宅づくりにも持ち込んでいます。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>実装上の注意</h3>
+<ul>
+<li>ヒーロー画像は LCP（表示速度の主要指標）に直結します。WebP化し、<code>fetchpriority="high"</code> を指定。自動再生スライドショーは使わない</li>
+<li>スマートフォンでは固定フッターバー（高さ64px）を常設。本文末尾に同じ高さの余白を確保し、コンテンツが隠れないようにする</li>
+<li>「お知らせ」が3ヶ月以上更新されない場合は、セクションごと非表示にする運用ルールを設ける（古い更新日を晒すより良い）</li>
+</ul>
+<hr />
+<h2>4-2. 家づくりのこだわり <code>/concept/</code></h2>
+<p>図版: <code>images/12_wf_concept_pc.png</code></p>
+<h3>目的</h3>
+<p>「なぜこの会社に頼むのか」を納得させる。抽象的な理念を、写真と具体例で裏づける。</p>
+<h3>構成</h3>
+<ol>
+<li><strong>ページヒーロー</strong> — タイトル＋リード文</li>
+<li><strong>創業ストーリー</strong> — 「設計事務所として設立し、より良い家をつくるために施工にも携わるようになりました」を軸に展開</li>
+<li><strong>4つのこだわり</strong>（写真＋文章の交互レイアウト）
+   - 本物の素材に触れる
+   - 品質を見極める目
+   - 本物の職人技
+   - 流行に流されない、オーダーメイドの手づくりの家</li>
+<li><strong>設計→施工→アフターの一貫体制図</strong> — 関連会社 重光企画設計株式会社との関係を図示</li>
+<li><strong>締め</strong> — 「時と共に価値と愛着が増す、次の世代に誇れる家」</li>
+<li><strong>関連する施工事例</strong> 3件</li>
+<li><strong>CTA</strong></li>
+</ol>
+<h3>原稿方針</h3>
+<p>理念を語るページは、抽象論だけで終わると読まれません。<strong>各こだわりに必ず1つ、具体を添えます。</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>悪い例</th>
+<th>良い例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>「本物の素材にこだわっています」</td>
+<td>「床材は実際に工場へ足を運び、木目と含水率を確認してから仕入れています。○○様邸では、無垢の栗材を使いました」</td>
+</tr>
+<tr>
+<td>「職人技を大切にしています」</td>
+<td>「造作家具は、20年以上一緒に仕事をしている家具職人に依頼しています。既製品では入らない寸法にも対応できます」</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>ヒアリング推奨</strong>: 実際にどの素材を、どこから、どう選んでいるか。長年組んでいる職人は誰か。この具体性が、そのまま差別化になります。</p>
+<hr />
+<h2>4-3. 施工事例 一覧 <code>/works/</code></h2>
+<p>図版: <code>images/13_wf_works_list_pc.png</code></p>
+<h3>目的</h3>
+<p>見たい事例に最短でたどり着かせ、詳細ページへ送る。</p>
+<h3>構成</h3>
+<ul>
+<li><strong>絞り込みタブ</strong>: すべて / 注文住宅 / リノベーション / 医院・店舗 / 公共施設</li>
+<li><strong>カードグリッド</strong>: PC 3列 / タブレット 2列 / スマートフォン 1列</li>
+<li>1枚目の写真（外観または主要空間で統一）</li>
+<li>タグ（エリア・構造・延床面積）</li>
+<li>タイトル</li>
+<li><strong>ページネーション</strong>: 12件ごと</li>
+<li><strong>CTA</strong></li>
+</ul>
+<h3>仕様</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>仕様</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>カード画像</td>
+<td>アスペクト比 4:3 に統一。<code>object-fit: cover</code></td>
+</tr>
+<tr>
+<td>遅延読み込み</td>
+<td>初期表示3枚以外は <code>loading="lazy"</code></td>
+</tr>
+<tr>
+<td>並び順</td>
+<td>竣工日の新しい順。「おすすめ」フラグで上位固定も可能に</td>
+</tr>
+<tr>
+<td>絞り込み</td>
+<td>URLパラメータではなくカテゴリページ（<code>/works/custom-home/</code>）として実装し、検索対象にする</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>4-4. 施工事例 詳細 <code>/works/{slug}/</code></h2>
+<p>図版: <code>images/14_wf_works_detail_pc.png</code></p>
+<p><strong>このページが、サイト全体で最も重要です。</strong> 検索流入の受け皿であり、最大の説得材料です。</p>
+<h3>構成</h3>
+<ol>
+<li>パンくず</li>
+<li>タイトル（例: 八王子市 K様邸｜木の温もりを感じる平屋）</li>
+<li>メイン写真＋サムネイル（<strong>10枚以上を目標</strong>）</li>
+<li>物件データ表</li>
+<li>「お客様のご要望」</li>
+<li>「設計・施工のポイント」</li>
+<li>「担当者より」</li>
+<li>before / after（リノベーション事例のみ）</li>
+<li>関連事例 3件</li>
+<li>CTA「同じような家づくりを相談する」</li>
+</ol>
+<h3>物件データ表の項目</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>所在地</td>
+<td>東京都八王子市</td>
+</tr>
+<tr>
+<td>用途</td>
+<td>専用住宅（平屋）</td>
+</tr>
+<tr>
+<td>構造・規模</td>
+<td>木造 平屋建て</td>
+</tr>
+<tr>
+<td>延床面積</td>
+<td>92.75㎡（28.06坪）</td>
+</tr>
+<tr>
+<td>敷地面積</td>
+<td>165.29㎡</td>
+</tr>
+<tr>
+<td>竣工</td>
+<td>2024年3月</td>
+</tr>
+<tr>
+<td>工期</td>
+<td>約5ヶ月</td>
+</tr>
+<tr>
+<td>設計</td>
+<td>重光企画設計株式会社</td>
+</tr>
+<tr>
+<td>施工</td>
+<td>重光建設株式会社</td>
+</tr>
+<tr>
+<td>主な仕様</td>
+<td>無垢フローリング（栗）、珪藻土壁、造作キッチン</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>所在地は市区町村まで</strong>とし、番地は掲載しません。施主の許諾範囲を明記した掲載同意書を取得してください（8章にひな形の要件を記載）。</p>
+</blockquote>
+<h3>本文の書き方</h3>
+<p>事例ページの本文は<strong>物語の構造</strong>で書きます。</p>
+<pre><code>【ご要望】 何に困っていたか、何を望んでいたか
+   ↓
+【課題】  それを実現する上で何が難しかったか（敷地、予算、法規、構造）
+   ↓
+【提案】  どう解決したか。設計上の判断
+   ↓
+【結果】  住んでみてどうか。施主の言葉
+</code></pre>
+<p><strong>この「課題」を書けるかどうかが、設計力の証明になります。</strong> 難しさに触れずに「素敵な家ができました」と書くページは、どの会社のものとも区別がつきません。</p>
+<h3>文字数の目安</h3>
+<p>1事例あたり本文800〜1,500字。写真10〜20枚。これを下回ると検索でも説得でも力を持ちません。</p>
+<hr />
+<h2>4-5. お客様の声 <code>/voice/</code></h2>
+<p>図版: <code>images/15_wf_voice_pc.png</code></p>
+<h3>目的</h3>
+<p>第三者の言葉で信頼を補強する。</p>
+<h3>構成</h3>
+<ul>
+<li>絞り込み: すべて / 新築 / リノベーション / 医院・店舗</li>
+<li>2カラムのカード</li>
+<li>写真（お客様の許諾があれば顔出し、なければ竣工写真や後ろ姿）</li>
+<li>属性（例: 八王子市 K様｜新築｜2024年）</li>
+<li>本文 3〜5行</li>
+<li>「担当者より」1〜2行</li>
+<li>該当する施工事例へのリンク</li>
+<li>CTA</li>
+</ul>
+<h3>方針</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>方針</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>星評価</td>
+<td><strong>使わない。</strong> 自社サイトの星は信憑性を持たず、かえって作り物に見える</td>
+</tr>
+<tr>
+<td>表記</td>
+<td>実名（許諾があれば）またはイニシャル＋市区町村。「A様」のみは避ける</td>
+</tr>
+<tr>
+<td>文章</td>
+<td>手を入れすぎない。話し言葉の揺らぎを残したほうが本物らしさが出る</td>
+</tr>
+<tr>
+<td>ネガティブ</td>
+<td>「工期が延びたが丁寧に説明してくれた」のような記述も、対応の説明とセットなら掲載して良い。むしろ信頼が増す</td>
+</tr>
+<tr>
+<td>収集方法</td>
+<td>引き渡し時にアンケート用紙を渡す（8章に設問案）</td>
+</tr>
+</tbody>
+</table></div>
+<h3>既存資産の活用</h3>
+<p>公開されている口コミに「14年ほど前、多摩地域で薦められる唯一の工務店として紹介された」という記述があります。<strong>このような紹介の連鎖は、この会社の最大の資産です。</strong>
+掲載許諾を得られるお客様に、「どうして当社を知りましたか」を必ず聞き、紹介経由であればその経緯を掲載してください。</p>
+<hr />
+<h2>4-6. 家づくりの流れ・費用 <code>/flow/</code>【新規】</h2>
+<p>図版: <code>images/16_wf_flow_pc.png</code></p>
+<h3>目的</h3>
+<p>問い合わせ前の不安（期間・費用・手順）を解消し、最後のひと押しをする。</p>
+<h3>構成</h3>
+<ol>
+<li>ページヒーロー</li>
+<li><strong>7ステップのタイムライン</strong>（各ステップに目安期間）</li>
+</ol>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>ステップ</th>
+<th>目安期間</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>ご相談</td>
+<td>—</td>
+<td>ご要望・ご予算・土地の状況をうかがいます。相談は無料です</td>
+</tr>
+<tr>
+<td>2</td>
+<td>現地調査・プラン提案</td>
+<td>2〜4週間</td>
+<td>敷地を確認し、プランと概算をご提示します</td>
+</tr>
+<tr>
+<td>3</td>
+<td>お見積り</td>
+<td>1〜2週間</td>
+<td>仕様を詰め、詳細な見積書を作成します</td>
+</tr>
+<tr>
+<td>4</td>
+<td>ご契約</td>
+<td>—</td>
+<td>内容にご納得いただいてからのご契約です</td>
+</tr>
+<tr>
+<td>5</td>
+<td>着工・工事</td>
+<td>4〜6ヶ月</td>
+<td>定期的に進捗をご報告。現場はいつでもご覧いただけます</td>
+</tr>
+<tr>
+<td>6</td>
+<td>完成・お引渡し</td>
+<td>—</td>
+<td>社内検査・お施主様検査を経てお引渡し</td>
+</tr>
+<tr>
+<td>7</td>
+<td>アフターフォロー</td>
+<td>引渡し後</td>
+<td>定期点検と、お困りごとへの対応</td>
+</tr>
+</tbody>
+</table></div>
+<ol start="3">
+<li><strong>費用の考え方</strong> — 積み上げ棒グラフで「本体工事 / 付帯工事 / 諸経費」の内訳と一般的な比率を図示</li>
+<li><strong>よくあるご質問</strong>（アコーディオン）</li>
+<li><strong>保証・アフターサポート</strong></li>
+<li>CTA</li>
+</ol>
+<h3>FAQ 設問案（各150〜250字で回答）</h3>
+<ol>
+<li>土地探しから相談できますか？ →（宅地建物取引業免許を保有している点を明記）</li>
+<li>相談や見積りは無料ですか？</li>
+<li>予算はどのくらいから対応できますか？</li>
+<li>完成までどれくらいかかりますか？</li>
+<li>リノベーションだけの相談も可能ですか？</li>
+<li>建てた後の点検や修繕はどうなりますか？</li>
+<li>遠方でも対応できますか？（対応エリアの明記）</li>
+<li>住宅ローンの相談にはのってもらえますか？</li>
+</ol>
+<h3>費用表示についての判断</h3>
+<p>「金額を出すと安売り競争になる」という懸念はもっともです。ただし<strong>何も書かないと、検討者は比較の土俵にすら乗れません。</strong>
+以下の折衷案を推奨します。</p>
+<ul>
+<li>坪単価は出さない（仕様で大きく変わるため、誤解を生む）</li>
+<li>代わりに<strong>施工事例に「延床面積」を必ず記載</strong>し、規模感を伝える</li>
+<li>「費用の内訳の考え方」と「何で金額が変わるか」を文章で説明する</li>
+<li>「ご予算に合わせたご提案が可能です。まずはご相談ください」で締める</li>
+</ul>
+<p>FAQ部分には FAQPage 構造化データを実装し、検索結果での占有面積を広げます。</p>
+<hr />
+<h2>4-7. 会社案内 <code>/company/</code>【統合】</h2>
+<p>図版: <code>images/17_wf_company_pc.png</code></p>
+<h3>目的</h3>
+<p>分散していた会社情報を1ページに集約し、「実在する、きちんとした会社である」ことを一度で伝える。</p>
+<h3>構成（アンカーナビ付き）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>アンカー</th>
+<th>セクション</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>#message</code></td>
+<td>代表挨拶</td>
+<td>顔写真＋400〜600字。創業の経緯と家づくりへの考え</td>
+</tr>
+<tr>
+<td><code>#outline</code></td>
+<td>会社概要</td>
+<td>下記の表</td>
+</tr>
+<tr>
+<td><code>#history</code></td>
+<td>沿革</td>
+<td>縦型タイムライン</td>
+</tr>
+<tr>
+<td><code>#staff</code></td>
+<td>スタッフ紹介</td>
+<td>顔写真＋氏名＋資格＋一言</td>
+</tr>
+<tr>
+<td><code>#access</code></td>
+<td>アクセス</td>
+<td>地図＋公共交通／車でのルート＋駐車場</td>
+</tr>
+</tbody>
+</table></div>
+<h3>会社概要の表</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>会社名</td>
+<td>重光建設株式会社</td>
+</tr>
+<tr>
+<td>所在地</td>
+<td>〒192-0045 東京都八王子市大和田町1丁目32番1号</td>
+</tr>
+<tr>
+<td>TEL / FAX</td>
+<td>042-642-8180 / （要確認）</td>
+</tr>
+<tr>
+<td>受付時間</td>
+<td>9:00〜17:00（日曜・祝日を除く）</td>
+</tr>
+<tr>
+<td>設立</td>
+<td>（要確認）</td>
+</tr>
+<tr>
+<td>資本金</td>
+<td>3,300万円（要確認）</td>
+</tr>
+<tr>
+<td>代表者</td>
+<td>（要確認）</td>
+</tr>
+<tr>
+<td>従業員数</td>
+<td>（要確認）</td>
+</tr>
+<tr>
+<td>事業内容</td>
+<td>建築工事の設計・施工、注文住宅、リノベーション・リフォーム、医院・店舗建築、公共施設建築、不動産売買・仲介</td>
+</tr>
+<tr>
+<td>建設業許可</td>
+<td>東京都知事許可 第063975号（建築工事業）</td>
+</tr>
+<tr>
+<td>宅地建物取引業免許</td>
+<td>（番号を要確認）</td>
+</tr>
+<tr>
+<td>関連会社</td>
+<td>重光企画設計株式会社（一級建築士事務所）</td>
+</tr>
+<tr>
+<td>加盟団体</td>
+<td>（要確認）</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>許可番号の掲載は必須です。</strong> 検討者は必ずここを見ます。宅建業免許番号も同様に、番号まで明記してください。</p>
+</blockquote>
+<h3>沿革の書き方</h3>
+<p>年表は事実の羅列で終わらせず、<strong>転機に一言を添えます。</strong></p>
+<pre><code>19XX年  設計事務所として創業
+19XX年  より良い家をつくるため、施工部門を開始
+        ── 図面だけでは伝わらないことがある、という実感から
+19XX年  重光建設株式会社を設立
+20XX年  ○○中学校 新築工事を施工
+20XX年  木造県営住宅を施工
+現在    八王子・多摩地域を中心に、注文住宅からリノベーション、公共建築まで
+</code></pre>
+<h3>スタッフ紹介</h3>
+<p>小規模な会社ほど、<strong>誰がやるのかが見えることが決定打になります。</strong>
+氏名・顔写真・保有資格（一級/二級建築士、施工管理技士など）・担当・一言を掲載してください。
+顔出しが難しい場合は、現場での後ろ姿や手元の写真でも構いません。</p>
+<hr />
+<h2>4-8. お知らせ・ブログ <code>/news/</code>【新規】</h2>
+<h3>目的</h3>
+<p>稼働している会社であることを示し、事例にならない小さな話題の受け皿をつくる。</p>
+<h3>カテゴリ</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>カテゴリ</th>
+<th>内容</th>
+<th>頻度目安</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>お知らせ</td>
+<td>休業日、見学会、メディア掲載</td>
+<td>随時</td>
+</tr>
+<tr>
+<td>現場レポート</td>
+<td>上棟、構造見学会、進行中の現場</td>
+<td>月1〜2</td>
+</tr>
+<tr>
+<td>家づくりのコラム</td>
+<td>素材の話、法規の話、費用の考え方</td>
+<td>月1</td>
+</tr>
+</tbody>
+</table></div>
+<h3>運用の現実的な設計</h3>
+<p><strong>「毎日更新」は続きません。</strong> 月2本を下限とし、以下のルールで負担を減らします。</p>
+<ul>
+<li>現場写真1枚＋200字でも記事として成立させる</li>
+<li>テンプレートを用意する（上棟、地鎮祭、完成見学会など）</li>
+<li>書き手を1人に固定せず、現場担当者がスマホから写真を送れる仕組みにする</li>
+</ul>
+<hr />
+<h2>4-9. お問い合わせ <code>/contact/</code></h2>
+<p>図版: <code>images/18_wf_contact_pc.png</code>（PC） / <code>images/19_wf_contact_sp.png</code>（スマートフォン）</p>
+<h3>目的</h3>
+<p>離脱させずに送信まで完了させる。</p>
+<h3>構成</h3>
+<ol>
+<li><strong>2つの窓口を同格で提示</strong>
+   - お電話: 042-642-8180（受付 9:00〜17:00、日曜・祝日を除く）
+   - フォーム: 24時間受付、2営業日以内に返信</li>
+<li>フォーム本体</li>
+<li>個人情報の取り扱いについて</li>
+<li>（送信後）<code>/contact/thanks/</code></li>
+</ol>
+<h3>フォーム項目</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>必須</th>
+<th>形式</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>お問い合わせ種別</td>
+<td>○</td>
+<td>ラジオ</td>
+<td>新築 / リノベーション・リフォーム / 医院・店舗 / 公共・その他 / 資料請求</td>
+</tr>
+<tr>
+<td>お名前</td>
+<td>○</td>
+<td>テキスト</td>
+<td></td>
+</tr>
+<tr>
+<td>ふりがな</td>
+<td></td>
+<td>テキスト</td>
+<td></td>
+</tr>
+<tr>
+<td>電話番号</td>
+<td></td>
+<td>tel</td>
+<td><code>inputmode="tel"</code></td>
+</tr>
+<tr>
+<td>メールアドレス</td>
+<td>○</td>
+<td>email</td>
+<td><code>inputmode="email"</code></td>
+</tr>
+<tr>
+<td>ご住所（市区町村まで）</td>
+<td></td>
+<td>テキスト</td>
+<td></td>
+</tr>
+<tr>
+<td>建築予定地</td>
+<td></td>
+<td>テキスト</td>
+<td></td>
+</tr>
+<tr>
+<td>ご予算</td>
+<td></td>
+<td>セレクト</td>
+<td>未定 / 〜2,500万 / 2,500〜3,500万 / 3,500〜4,500万 / 4,500万〜</td>
+</tr>
+<tr>
+<td>ご希望時期</td>
+<td></td>
+<td>セレクト</td>
+<td>未定 / 3ヶ月以内 / 半年以内 / 1年以内 / 1年以上先</td>
+</tr>
+<tr>
+<td>ご相談内容</td>
+<td>○</td>
+<td>テキストエリア</td>
+<td></td>
+</tr>
+<tr>
+<td>プライバシーポリシーへの同意</td>
+<td>○</td>
+<td>チェックボックス</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>必須は4項目のみ。</strong> 項目を増やすほど送信率は下がります。必要な情報は返信時に聞けば十分です。</p>
+<h3>実装要件</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>要件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>通信</td>
+<td>常時SSL（必須）</td>
+</tr>
+<tr>
+<td>入力欄の高さ</td>
+<td>48px以上（スマートフォンでタップしやすい）</td>
+</tr>
+<tr>
+<td>入力支援</td>
+<td><code>autocomplete</code> 属性を適切に設定（<code>name</code>, <code>tel</code>, <code>email</code>, <code>postal-code</code>）</td>
+</tr>
+<tr>
+<td>エラー表示</td>
+<td>入力欄の直下に赤字で具体的に表示。送信後にまとめて出さない</td>
+</tr>
+<tr>
+<td>確認画面</td>
+<td>あり（または入力内容のインライン確認）</td>
+</tr>
+<tr>
+<td>自動返信メール</td>
+<td>あり。受付内容と「2営業日以内に返信します」を明記</td>
+</tr>
+<tr>
+<td>管理者通知</td>
+<td>複数アドレスへ送信。迷惑メールフォルダに入らないようSPF/DKIMを設定</td>
+</tr>
+<tr>
+<td>スパム対策</td>
+<td>reCAPTCHA v3 またはハニーポット方式（ユーザーの手間が少ない後者を推奨）</td>
+</tr>
+<tr>
+<td>送信完了</td>
+<td><code>/contact/thanks/</code> へ遷移（コンバージョン計測のため必須）</td>
+</tr>
+<tr>
+<td>ログ保存</td>
+<td>送信内容をデータベースにも保存（メール事故対策）</td>
+</tr>
+</tbody>
+</table></div>
+<h3>サンクスページの内容</h3>
+<p>送信して終わり、にしません。</p>
+<pre><code>お問い合わせありがとうございました。
+
+2営業日以内に、担当者よりご連絡いたします。
+お急ぎの場合は、お電話（042-642-8180）でもご相談を承ります。
+
+── ご連絡をお待ちいただく間に
+
+[ 施工事例を見る ]  [ 家づくりの流れを見る ]
+</code></pre>
+<hr />
+<h2>4-10. プライバシーポリシー <code>/privacy/</code></h2>
+<p>フォームを設置する以上、必須です。以下を記載します。</p>
+<ul>
+<li>事業者名・所在地・連絡先</li>
+<li>取得する個人情報の項目と利用目的</li>
+<li>第三者提供の有無</li>
+<li>委託の有無（メール配信・アクセス解析ツール）</li>
+<li>開示・訂正・削除請求の窓口</li>
+<li>Cookie・アクセス解析ツール（Google Analytics）の利用について</li>
+<li>制定日・改定日</li>
+</ul>
+<blockquote>
+<p>個人情報保護委員会のガイドラインに沿って記載してください。ひな形をそのまま使う場合も、社名・連絡先・利用目的は必ず実態に合わせて修正します。</p>
+</blockquote></section><section class="chapter" id="ch05"><h1>05. デザインガイドライン</h1><p>図版: <code>images/04_design_tokens.png</code>（カラー・タイポグラフィ） / <code>images/06_layout_grid.png</code>（レイアウト仕様）</p>
+<h2>1. デザインコンセプト</h2>
+<blockquote>
+<p><strong>「木と土と、誠実さ」</strong></p>
+</blockquote>
+<p>華やかさではなく、素材の質感と余白で品格を出します。
+重光建設の価値は「本物の素材」「職人技」「誠実な対応」にあり、デザインもそれを裏切らないものにします。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>する</th>
+<th>しない</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>大きな余白、少ない要素</td>
+<td>情報を詰め込む</td>
+</tr>
+<tr>
+<td>写真を主役にする</td>
+<td>装飾で飾る</td>
+</tr>
+<tr>
+<td>落ち着いた低彩度の色</td>
+<td>原色・グラデーション多用</td>
+</tr>
+<tr>
+<td>静かな動き（フェード程度）</td>
+<td>自動再生スライド、パララックス、派手なアニメーション</td>
+</tr>
+<tr>
+<td>明朝体の見出しで品格を出す</td>
+<td>装飾書体・毛筆体</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>2. カラーパレット</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>役割</th>
+<th>名称</th>
+<th>HEX</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Primary</td>
+<td>深緑</td>
+<td><code>#2F5D4B</code></td>
+<td>主要ボタン、見出しアクセント、リンク</td>
+</tr>
+<tr>
+<td>Primary Dark</td>
+<td>濃深緑</td>
+<td><code>#1E3F33</code></td>
+<td>ヘッダー、フッター、ホバー時</td>
+</tr>
+<tr>
+<td>Accent</td>
+<td>木・金茶</td>
+<td><code>#C4933F</code></td>
+<td>強調、区切り線、タグ</td>
+</tr>
+<tr>
+<td>Base</td>
+<td>生成り</td>
+<td><code>#F6F2EA</code></td>
+<td>セクション背景（交互配置）</td>
+</tr>
+<tr>
+<td>Surface</td>
+<td>白</td>
+<td><code>#FFFFFF</code></td>
+<td>カード、本文背景</td>
+</tr>
+<tr>
+<td>Text</td>
+<td>墨</td>
+<td><code>#2B2B2B</code></td>
+<td>本文</td>
+</tr>
+<tr>
+<td>Text Sub</td>
+<td>灰</td>
+<td><code>#6B6B6B</code></td>
+<td>補足、キャプション</td>
+</tr>
+<tr>
+<td>Border</td>
+<td>淡砂</td>
+<td><code>#D9D2C5</code></td>
+<td>罫線、枠線</td>
+</tr>
+<tr>
+<td>Error</td>
+<td>朱</td>
+<td><code>#B4432F</code></td>
+<td>エラー、必須マーク</td>
+</tr>
+</tbody>
+</table></div>
+<h3>コントラスト比（WCAG 2.1 AA 準拠）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>組み合わせ</th>
+<th>比率</th>
+<th>判定</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>#2B2B2B</code> on <code>#FFFFFF</code></td>
+<td>14.9:1</td>
+<td>AAA</td>
+</tr>
+<tr>
+<td><code>#2B2B2B</code> on <code>#F6F2EA</code></td>
+<td>13.1:1</td>
+<td>AAA</td>
+</tr>
+<tr>
+<td><code>#FFFFFF</code> on <code>#2F5D4B</code></td>
+<td>7.2:1</td>
+<td>AAA</td>
+</tr>
+<tr>
+<td><code>#FFFFFF</code> on <code>#1E3F33</code></td>
+<td>11.4:1</td>
+<td>AAA</td>
+</tr>
+<tr>
+<td><code>#6B6B6B</code> on <code>#FFFFFF</code></td>
+<td>5.4:1</td>
+<td>AA</td>
+</tr>
+<tr>
+<td><code>#C4933F</code> on <code>#FFFFFF</code></td>
+<td>2.6:1</td>
+<td><strong>本文には使用不可</strong>（大きな装飾文字・罫線のみ）</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>アクセントカラー <code>#C4933F</code> を小さな文字に使わないでください。罫線・アイコン・大見出しの装飾に限定します。</p>
+</blockquote>
+<h3>CSS カスタムプロパティ</h3>
+<pre><code class="language-css">:root {
+  --color-primary:      #2F5D4B;
+  --color-primary-dark: #1E3F33;
+  --color-accent:       #C4933F;
+  --color-base:         #F6F2EA;
+  --color-surface:      #FFFFFF;
+  --color-text:         #2B2B2B;
+  --color-text-sub:     #6B6B6B;
+  --color-border:       #D9D2C5;
+  --color-error:        #B4432F;
+}
+</code></pre>
+<hr />
+<h2>3. タイポグラフィ</h2>
+<h3>書体</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>用途</th>
+<th>書体</th>
+<th>ウェイト</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>見出し（h1〜h3）</td>
+<td>Noto Serif JP</td>
+<td>700</td>
+</tr>
+<tr>
+<td>本文・UI</td>
+<td>Noto Sans JP</td>
+<td>400 / 700</td>
+</tr>
+<tr>
+<td>数字（電話番号など）</td>
+<td>Noto Sans JP</td>
+<td>700</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>明朝体を見出しに使う理由</strong>: 工務店サイトの多くはゴシック体一辺倒です。明朝体の見出しは、素材と手仕事を扱う会社に合い、かつ差別化になります。ただし本文に明朝体を使うと可読性が落ちるため、本文はゴシック体にします。</p>
+<h3>サイズ体系</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>要素</th>
+<th>PC</th>
+<th>スマートフォン</th>
+<th>行間</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H1</td>
+<td>40px</td>
+<td>32px</td>
+<td>1.4</td>
+</tr>
+<tr>
+<td>H2</td>
+<td>32px</td>
+<td>26px</td>
+<td>1.5</td>
+</tr>
+<tr>
+<td>H3</td>
+<td>22px</td>
+<td>20px</td>
+<td>1.5</td>
+</tr>
+<tr>
+<td>本文</td>
+<td>16px</td>
+<td>16px</td>
+<td>1.8</td>
+</tr>
+<tr>
+<td>小文字・注記</td>
+<td>14px</td>
+<td>13px</td>
+<td>1.7</td>
+</tr>
+<tr>
+<td>ボタン</td>
+<td>16px</td>
+<td>16px</td>
+<td>1.4</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>字送り（letter-spacing）: 見出し <code>0.06em</code> / 本文 <code>0.04em</code></li>
+<li><strong>スマートフォンの本文を16px未満にしないこと。</strong> iOSで入力欄が16px未満だと、フォーカス時に画面が自動ズームし、使い勝手が著しく悪化します</li>
+<li>1行あたりの文字数は35〜45字を目安に。本文の最大幅は <code>720px</code> 程度に制限</li>
+</ul>
+<h3>Webフォントの読み込み</h3>
+<pre><code class="language-html">&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&amp;family=Noto+Serif+JP:wght@700&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+</code></pre>
+<p>日本語Webフォントは容量が大きいため、以下を必ず行ってください。</p>
+<ul>
+<li><code>display=swap</code> を指定（読み込み中も文字が見える）</li>
+<li>使用ウェイトを最小限に（本文400・700、見出し700の計3種）</li>
+<li>サブセット版の利用を検討（表示速度が問題になる場合）</li>
+</ul>
+<hr />
+<h2>4. レイアウト</h2>
+<h3>ブレークポイント</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>区分</th>
+<th>幅</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SP（スマートフォン）</td>
+<td>〜767px</td>
+</tr>
+<tr>
+<td>TB（タブレット）</td>
+<td>768px〜1023px</td>
+</tr>
+<tr>
+<td>PC</td>
+<td>1024px〜</td>
+</tr>
+</tbody>
+</table></div>
+<h3>グリッド</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>PC</th>
+<th>SP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>コンテナ幅</td>
+<td>1120px（左右auto）</td>
+<td>100%（左右余白16px）</td>
+</tr>
+<tr>
+<td>カラム数</td>
+<td>12</td>
+<td>1（一部2）</td>
+</tr>
+<tr>
+<td>ガター</td>
+<td>32px</td>
+<td>16px</td>
+</tr>
+<tr>
+<td>ヘッダー高</td>
+<td>80px</td>
+<td>60px</td>
+</tr>
+<tr>
+<td>セクション上下余白</td>
+<td>96px</td>
+<td>56px</td>
+</tr>
+<tr>
+<td>固定フッターバー</td>
+<td>なし</td>
+<td>64px</td>
+</tr>
+</tbody>
+</table></div>
+<h3>余白スケール（8pxベース）</h3>
+<pre><code>8 / 16 / 24 / 32 / 48 / 64 / 96 (px)
+</code></pre>
+<p>これ以外の値を使わないでください。余白が揃うだけで、サイト全体の完成度は上がります。</p>
+<h3>セクションの区切り</h3>
+<p>背景色を <code>#FFFFFF</code> と <code>#F6F2EA</code> で交互に切り替えます。罫線での区切りは最小限に。</p>
+<hr />
+<h2>5. コンポーネント仕様</h2>
+<h3>ボタン</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>種別</th>
+<th>背景</th>
+<th>文字</th>
+<th>枠線</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Primary</td>
+<td><code>#2F5D4B</code></td>
+<td>白</td>
+<td>なし</td>
+<td>問い合わせ、相談する</td>
+</tr>
+<tr>
+<td>Secondary</td>
+<td>透明</td>
+<td><code>#2F5D4B</code></td>
+<td>1px <code>#2F5D4B</code></td>
+<td>一覧を見る、詳細を見る</td>
+</tr>
+<tr>
+<td>Tel</td>
+<td><code>#1E3F33</code></td>
+<td>白</td>
+<td>なし</td>
+<td>電話する（電話アイコン付き）</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>高さ: PC 56px / SP 52px</li>
+<li>最小幅: 220px</li>
+<li>角丸: 2px（ほぼ角。柔らかくしすぎない）</li>
+<li>ホバー: 背景を10%暗く、0.2秒でトランジション</li>
+<li>フォーカス: <code>outline: 2px solid #C4933F; outline-offset: 2px;</code>（<strong>キーボード操作のため必須</strong>）</li>
+</ul>
+<h3>カード（施工事例・お客様の声）</h3>
+<ul>
+<li>背景 <code>#FFFFFF</code>、枠線 <code>1px #D9D2C5</code>、角丸 2px</li>
+<li>影は使わない（フラットに保つ）</li>
+<li>ホバー: 画像を1.03倍に拡大、0.3秒。カード自体は動かさない</li>
+<li>画像アスペクト比: 4:3 固定</li>
+</ul>
+<h3>タグ</h3>
+<ul>
+<li>背景 <code>#F6F2EA</code>、文字 <code>#6B6B6B</code>、13px、上下4px/左右10px、角丸2px</li>
+</ul>
+<h3>フォーム入力欄</h3>
+<ul>
+<li>高さ48px以上、枠線 <code>1px #D9D2C5</code>、背景白、内側余白12px</li>
+<li>フォーカス時: 枠線 <code>2px #2F5D4B</code></li>
+<li>エラー時: 枠線 <code>2px #B4432F</code> ＋ 直下にエラーメッセージ</li>
+<li>必須マーク: 赤字の「必須」バッジ（<code>※</code>だけで示さない）</li>
+</ul>
+<hr />
+<h2>6. 画像の扱い</h2>
+<h3>写真の基準</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>基準</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>撮影</td>
+<td><strong>プロカメラマンを推奨。</strong> ここへの投資が最も効きます</td>
+</tr>
+<tr>
+<td>光</td>
+<td>自然光。フラッシュ直当ては避ける</td>
+</tr>
+<tr>
+<td>内容</td>
+<td>竣工写真だけでなく、施工中・職人の手元・素材の寄りも撮る</td>
+</tr>
+<tr>
+<td>加工</td>
+<td>彩度を上げすぎない。実物と違う色にしない</td>
+</tr>
+<tr>
+<td>人物</td>
+<td>施主の許諾があれば入れる。温度が伝わる</td>
+</tr>
+<tr>
+<td>禁止</td>
+<td>ストックフォト（他社の家の写真を使うのは論外）</td>
+</tr>
+</tbody>
+</table></div>
+<h3>技術仕様</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>仕様</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>形式</td>
+<td>WebP（<code>&lt;picture&gt;</code> でJPEGをフォールバック）</td>
+</tr>
+<tr>
+<td>最大幅</td>
+<td>ヒーロー 1920px / 本文 1200px / サムネイル 600px</td>
+</tr>
+<tr>
+<td>圧縮品質</td>
+<td>80前後</td>
+</tr>
+<tr>
+<td>1枚あたり</td>
+<td>200KB以下を目標、ヒーローは400KB以下</td>
+</tr>
+<tr>
+<td>遅延読み込み</td>
+<td>ファーストビュー外は <code>loading="lazy"</code></td>
+</tr>
+<tr>
+<td>サイズ指定</td>
+<td><code>width</code> / <code>height</code> を必ず指定（レイアウトのガタつき＝CLS防止）</td>
+</tr>
+<tr>
+<td>alt属性</td>
+<td><strong>全画像に必須。</strong>「八王子市K様邸の外観。無垢の杉板張りの平屋」のように内容を説明する。「画像」「写真1」は不可</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>7. アクセシビリティ</h2>
+<p>WCAG 2.1 レベルAA 相当を目標とします。<strong>高齢の施主も多い業種であり、実利があります。</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>要件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>コントラスト</td>
+<td>本文4.5:1以上、大きな文字3:1以上（上記パレットで担保済み）</td>
+</tr>
+<tr>
+<td>キーボード操作</td>
+<td>すべての操作をTab/Enterで完結可能に。フォーカスリングを消さない</td>
+</tr>
+<tr>
+<td>見出し構造</td>
+<td>h1は1ページ1つ。h1→h2→h3の順を飛ばさない</td>
+</tr>
+<tr>
+<td>画像</td>
+<td>alt属性を全画像に。装飾画像は <code>alt=""</code></td>
+</tr>
+<tr>
+<td>リンク</td>
+<td>「こちら」を使わない。リンク先が分かる文言に</td>
+</tr>
+<tr>
+<td>フォーム</td>
+<td><code>&lt;label&gt;</code> と入力欄を <code>for</code> / <code>id</code> で関連付ける</td>
+</tr>
+<tr>
+<td>動き</td>
+<td><code>prefers-reduced-motion</code> に対応し、アニメーションを無効化できるように</td>
+</tr>
+<tr>
+<td>文字サイズ</td>
+<td>ブラウザの拡大（200%）でレイアウトが崩れないこと</td>
+</tr>
+<tr>
+<td>言語</td>
+<td><code>&lt;html lang="ja"&gt;</code></td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>8. マイクロコピー</h2>
+<p>細かい言葉づかいが、問い合わせのしやすさを左右します。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>場面</th>
+<th>避ける</th>
+<th>推奨</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CTAボタン</td>
+<td>「送信」</td>
+<td>「この内容で相談する」</td>
+</tr>
+<tr>
+<td>CTAボタン</td>
+<td>「お問い合わせ」（重い）</td>
+<td>「まずは話を聞いてみる」「家づくりの相談をする」</td>
+</tr>
+<tr>
+<td>フォーム冒頭</td>
+<td>（なし）</td>
+<td>「しつこい営業はいたしません。ご相談だけでも歓迎です」</td>
+</tr>
+<tr>
+<td>電話番号の横</td>
+<td>（なし）</td>
+<td>「受付 9:00〜17:00（日曜・祝日を除く）」</td>
+</tr>
+<tr>
+<td>必須項目</td>
+<td>「※印は必須」</td>
+<td>各項目に「必須」バッジ</td>
+</tr>
+<tr>
+<td>エラー</td>
+<td>「入力エラー」</td>
+<td>「メールアドレスの形式をご確認ください」</td>
+</tr>
+<tr>
+<td>事例一覧が少ないとき</td>
+<td>（空欄）</td>
+<td>「順次追加しています。ご覧になりたい事例があればお問い合わせください」</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>「しつこい営業はいたしません」の一文は、実際に問い合わせ率を上げます。</strong> 住宅業界に対する警戒心を、先回りして解くためです。</p></section><section class="chapter" id="ch06"><h1>06. SEO・集客設計</h1><h2>1. 基本方針</h2>
+<p>重光建設が戦うべき場所は、<strong>「八王子・多摩エリア × 住宅/建築」の地域検索</strong>です。
+「注文住宅」のような全国規模のキーワードで大手と競っても勝てませんし、勝つ必要もありません。
+<strong>商圏内の人にだけ、確実に見つかること。</strong> これが目標です。</p>
+<p>打ち手は3つ。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>施策</th>
+<th>効果が出るまで</th>
+<th>費用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>地域＋用途のキーワードで施工事例を積む</td>
+<td>3〜6ヶ月</td>
+<td>制作費のみ</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Googleビジネスプロフィールの整備</td>
+<td>2週間〜1ヶ月</td>
+<td>無料</td>
+</tr>
+<tr>
+<td>3</td>
+<td>技術的な土台の整備（SSL・正規化・構造化データ・速度）</td>
+<td>1〜2ヶ月</td>
+<td>制作費のみ</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>2. キーワード設計</h2>
+<h3>主要キーワード（トップページ・主要ページで狙う）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>キーワード</th>
+<th>想定意図</th>
+<th>対応ページ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>八王子 工務店</td>
+<td>地域の施工会社を探している</td>
+<td>トップ</td>
+</tr>
+<tr>
+<td>八王子 注文住宅</td>
+<td>家を建てたい</td>
+<td>トップ / 施工事例一覧</td>
+</tr>
+<tr>
+<td>八王子市 注文住宅 工務店</td>
+<td>同上、具体的</td>
+<td>トップ</td>
+</tr>
+<tr>
+<td>八王子 リノベーション</td>
+<td>既存住宅の改修</td>
+<td>施工事例（リノベカテゴリ）</td>
+</tr>
+<tr>
+<td>多摩 工務店 木の家</td>
+<td>自然素材志向</td>
+<td>家づくりのこだわり</td>
+</tr>
+<tr>
+<td>八王子 設計事務所 施工</td>
+<td>設計と施工を一貫で頼みたい</td>
+<td>家づくりのこだわり</td>
+</tr>
+<tr>
+<td>重光建設</td>
+<td>指名検索</td>
+<td>トップ / 会社案内</td>
+</tr>
+</tbody>
+</table></div>
+<h3>ロングテールキーワード（施工事例詳細で狙う）</h3>
+<p><strong>事例ページ1本ごとに、1つのロングテールを狙います。</strong> これが最も効率的です。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>キーワード例</th>
+<th>対応する事例ページ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>八王子 平屋 注文住宅 事例</td>
+<td>八王子市 K様邸 平屋</td>
+</tr>
+<tr>
+<td>八王子 無垢材 家</td>
+<td>無垢材を使った事例</td>
+</tr>
+<tr>
+<td>日野市 クリニック 設計施工</td>
+<td>内科クリニック新築</td>
+</tr>
+<tr>
+<td>多摩市 中古住宅 フルリノベーション</td>
+<td>戸建てフルリノベ事例</td>
+</tr>
+<tr>
+<td>八王子 二世帯住宅</td>
+<td>二世帯住宅の事例</td>
+</tr>
+<tr>
+<td>八王子 耐震リフォーム 費用</td>
+<td>耐震改修の事例</td>
+</tr>
+<tr>
+<td>木造 公民館 施工</td>
+<td>公共施設の事例</td>
+</tr>
+</tbody>
+</table></div>
+<h3>対応エリアのキーワード展開</h3>
+<p>八王子市を中心に、<strong>実際に施工実績のある市区町村のみ</strong>を対象にします。実績のない地名を並べるのは逆効果です。</p>
+<p>八王子市 / 日野市 / 多摩市 / 昭島市 / 立川市 / あきる野市 / 町田市 / 相模原市（緑区）</p>
+<hr />
+<h2>3. ページ別 title / meta description 設計</h2>
+<h3>設計ルール</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>ルール</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td>30〜35文字。<strong>地域名 → 業種 → 社名</strong> の順。分かち書きは絶対にしない</td>
+</tr>
+<tr>
+<td>description</td>
+<td>80〜120文字。検索結果に表示される「説明文」。クリックしたくなる文章にする</td>
+</tr>
+<tr>
+<td>区切り</td>
+<td><code>｜</code>（全角パイプ）で統一</td>
+</tr>
+</tbody>
+</table></div>
+<h3>全ページの設定表</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ページ</th>
+<th>title</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>トップ <code>/</code></td>
+<td>八王子市の工務店｜注文住宅・リノベーション｜重光建設株式会社</td>
+<td>東京都八王子市で注文住宅・リノベーション・医院/店舗建築を手がける工務店です。設計事務所が原点。本物の素材と職人技で、次の世代に誇れる家をつくります。相談無料、TEL 042-642-8180。</td>
+</tr>
+<tr>
+<td>家づくりのこだわり <code>/concept/</code></td>
+<td>家づくりのこだわり｜設計から施工まで一貫｜重光建設株式会社</td>
+<td>私たちは設計事務所として創業し、より良い家をつくるために施工にも携わるようになりました。本物の素材、品質を見極める目、職人技へのこだわりをご紹介します。</td>
+</tr>
+<tr>
+<td>施工事例一覧 <code>/works/</code></td>
+<td>施工事例｜八王子市の注文住宅・リノベーション｜重光建設株式会社</td>
+<td>八王子市・多摩エリアで手がけた注文住宅、リノベーション、医院・店舗、公共施設の施工事例を写真とともにご紹介します。用途別に絞り込んでご覧いただけます。</td>
+</tr>
+<tr>
+<td>施工事例詳細 <code>/works/{slug}/</code></td>
+<td>八王子市 K様邸｜木の温もりを感じる平屋｜施工事例｜重光建設</td>
+<td>八王子市に建てた木造平屋の注文住宅。無垢の栗材のフローリングと珪藻土の壁で仕上げました。ご要望から設計の工夫、完成までを写真20点でご紹介します。</td>
+</tr>
+<tr>
+<td>お客様の声 <code>/voice/</code></td>
+<td>お客様の声｜八王子市の工務店｜重光建設株式会社</td>
+<td>重光建設で家を建てられたお客様、リノベーションをされたお客様の声をご紹介します。八王子・多摩エリアで実際に工事をご依頼いただいた方の率直な感想です。</td>
+</tr>
+<tr>
+<td>流れ・費用 <code>/flow/</code></td>
+<td>家づくりの流れと費用｜ご相談から引き渡しまで｜重光建設株式会社</td>
+<td>ご相談から現地調査、お見積り、着工、お引渡し、アフターフォローまでの流れと目安期間、費用の考え方をご説明します。よくあるご質問もまとめました。相談は無料です。</td>
+</tr>
+<tr>
+<td>会社案内 <code>/company/</code></td>
+<td>会社案内・アクセス｜八王子市の工務店｜重光建設株式会社</td>
+<td>重光建設株式会社の会社概要、代表挨拶、沿革、スタッフ、アクセスをご紹介します。東京都八王子市大和田町。東京都知事許可 第063975号。TEL 042-642-8180。</td>
+</tr>
+<tr>
+<td>お知らせ <code>/news/</code></td>
+<td>お知らせ・現場レポート｜重光建設株式会社</td>
+<td>見学会のご案内、現場の進捗、家づくりに役立つ情報をお届けします。</td>
+</tr>
+<tr>
+<td>お問い合わせ <code>/contact/</code></td>
+<td>お問い合わせ・相談予約｜八王子市の工務店｜重光建設株式会社</td>
+<td>家づくり、リノベーション、店舗・医院の建築のご相談を承ります。ご相談・お見積りは無料です。お電話（042-642-8180／9:00〜17:00）でも受け付けています。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>施工事例詳細の title テンプレート</h3>
+<pre><code>{市区町村} {施主名}邸｜{特徴を表す一言}｜施工事例｜重光建設
+</code></pre>
+<p>例:
+- 八王子市 K様邸｜木の温もりを感じる平屋｜施工事例｜重光建設
+- 多摩市 S様邸｜築35年の家を全面改装｜施工事例｜重光建設
+- 日野市｜木造平屋の内科クリニック新築｜施工事例｜重光建設</p>
+<hr />
+<h2>4. 構造化データ（schema.org）</h2>
+<p>検索結果でのリッチな表示を得るために実装します。JSON-LDで記述してください。</p>
+<h3>全ページ共通: LocalBusiness</h3>
+<pre><code class="language-json">{
+  &quot;@context&quot;: &quot;https://schema.org&quot;,
+  &quot;@type&quot;: &quot;GeneralContractor&quot;,
+  &quot;name&quot;: &quot;重光建設株式会社&quot;,
+  &quot;url&quot;: &quot;https://www.juko-kensetsu.co.jp/&quot;,
+  &quot;telephone&quot;: &quot;+81-42-642-8180&quot;,
+  &quot;address&quot;: {
+    &quot;@type&quot;: &quot;PostalAddress&quot;,
+    &quot;postalCode&quot;: &quot;192-0045&quot;,
+    &quot;addressRegion&quot;: &quot;東京都&quot;,
+    &quot;addressLocality&quot;: &quot;八王子市&quot;,
+    &quot;streetAddress&quot;: &quot;大和田町1-32-1&quot;,
+    &quot;addressCountry&quot;: &quot;JP&quot;
+  },
+  &quot;geo&quot;: { &quot;@type&quot;: &quot;GeoCoordinates&quot;, &quot;latitude&quot;: 0, &quot;longitude&quot;: 0 },
+  &quot;openingHoursSpecification&quot;: [{
+    &quot;@type&quot;: &quot;OpeningHoursSpecification&quot;,
+    &quot;dayOfWeek&quot;: [&quot;Monday&quot;,&quot;Tuesday&quot;,&quot;Wednesday&quot;,&quot;Thursday&quot;,&quot;Friday&quot;,&quot;Saturday&quot;],
+    &quot;opens&quot;: &quot;09:00&quot;, &quot;closes&quot;: &quot;17:00&quot;
+  }],
+  &quot;areaServed&quot;: [
+    {&quot;@type&quot;:&quot;City&quot;,&quot;name&quot;:&quot;八王子市&quot;},
+    {&quot;@type&quot;:&quot;City&quot;,&quot;name&quot;:&quot;日野市&quot;},
+    {&quot;@type&quot;:&quot;City&quot;,&quot;name&quot;:&quot;多摩市&quot;},
+    {&quot;@type&quot;:&quot;City&quot;,&quot;name&quot;:&quot;昭島市&quot;}
+  ],
+  &quot;priceRange&quot;: &quot;$$&quot;,
+  &quot;image&quot;: &quot;https://www.juko-kensetsu.co.jp/images/ogp.jpg&quot;
+}
+</code></pre>
+<blockquote>
+<p><code>geo</code> の緯度経度は実際の値に置き換えてください。<code>areaServed</code> は実績のある市区町村のみ記載します。</p>
+</blockquote>
+<h3>施工事例詳細: Article + ImageObject</h3>
+<p>各事例ページに <code>Article</code>（<code>headline</code>, <code>image</code>, <code>datePublished</code>, <code>author</code>）を実装。写真が多いページでは画像検索からの流入も見込めます。</p>
+<h3>流れ・費用ページ: FAQPage</h3>
+<p>FAQセクションに <code>FAQPage</code> を実装すると、検索結果にQ&amp;Aが展開表示される場合があります。<strong>占有面積が増え、クリック率が上がります。</strong></p>
+<h3>全ページ: BreadcrumbList</h3>
+<p>パンくずリストに対応する構造化データ。検索結果のURL表示がパンくず形式になります。</p>
+<h3>検証方法</h3>
+<p>Google の「リッチリザルトテスト」と Search Console の「拡張」レポートで、エラーがないことを確認してください。</p>
+<hr />
+<h2>5. Googleビジネスプロフィール【最優先・無料】</h2>
+<p><strong>費用ゼロで最も早く効果が出る施策です。</strong>
+「八王子 工務店」とスマートフォンで検索すると、地図付きの枠が検索結果の最上部に出ます。ここに表示されるかどうかは、Webサイトとは別の要因で決まります。</p>
+<h3>実施項目</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>項目</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>オーナー確認</td>
+<td>未登録・未確認なら最優先で実施</td>
+</tr>
+<tr>
+<td>2</td>
+<td>カテゴリ</td>
+<td>主: 建設会社／副: 住宅建設業者、リフォーム業者、建築設計事務所</td>
+</tr>
+<tr>
+<td>3</td>
+<td>基本情報</td>
+<td>住所、電話、営業時間（9:00〜17:00、日曜・祝日定休）、ウェブサイトURL</td>
+</tr>
+<tr>
+<td>4</td>
+<td>説明文</td>
+<td>750字。「設計事務所が原点」「八王子・多摩」「注文住宅・リノベーション・医院/店舗・公共施設」を含める</td>
+</tr>
+<tr>
+<td>5</td>
+<td>写真</td>
+<td><strong>20枚以上。</strong> 外観、施工事例、スタッフ、現場。定期的に追加</td>
+</tr>
+<tr>
+<td>6</td>
+<td>サービス</td>
+<td>注文住宅、リノベーション、店舗設計施工、耐震改修など</td>
+</tr>
+<tr>
+<td>7</td>
+<td>投稿</td>
+<td>月1〜2回。完成見学会、施工事例の更新など</td>
+</tr>
+<tr>
+<td>8</td>
+<td>口コミ</td>
+<td>引き渡し時にお願いする。<strong>すべてに返信する</strong>（返信率は評価に影響）</td>
+</tr>
+<tr>
+<td>9</td>
+<td>属性</td>
+<td>「オンライン見積もり可」「バリアフリー対応」など該当するものを設定</td>
+</tr>
+</tbody>
+</table></div>
+<h3>口コミ依頼の進め方</h3>
+<p>引き渡し時に、口コミ投稿用のQRコードを印刷したカードを渡すのが最も確実です。
+「よろしければGoogleに感想をお寄せください」と一言添えるだけで、投稿率は大きく変わります。
+<strong>すでに良い口コミが複数ある会社です。</strong> 継続的に集める仕組みを作れば、地域検索での優位は揺るぎません。</p>
+<hr />
+<h2>6. 技術的SEOのチェックリスト</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>項目</th>
+<th>優先度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>常時SSL（https）</td>
+<td>最優先</td>
+</tr>
+<tr>
+<td>2</td>
+<td>URL正規化（www有無・http/https の301統一）</td>
+<td>最優先</td>
+</tr>
+<tr>
+<td>3</td>
+<td>canonical タグの全ページ設置</td>
+<td>最優先</td>
+</tr>
+<tr>
+<td>4</td>
+<td>title / description の全ページ個別設定</td>
+<td>最優先</td>
+</tr>
+<tr>
+<td>5</td>
+<td>レスポンシブ対応（viewport メタタグ含む）</td>
+<td>最優先</td>
+</tr>
+<tr>
+<td>6</td>
+<td>XMLサイトマップ生成と Search Console への送信</td>
+<td>高</td>
+</tr>
+<tr>
+<td>7</td>
+<td>robots.txt の設置（sitemap の場所を記載）</td>
+<td>高</td>
+</tr>
+<tr>
+<td>8</td>
+<td>見出し構造（h1は1つ、階層を飛ばさない）</td>
+<td>高</td>
+</tr>
+<tr>
+<td>9</td>
+<td>画像のalt属性</td>
+<td>高</td>
+</tr>
+<tr>
+<td>10</td>
+<td>構造化データ（LocalBusiness / BreadcrumbList / FAQPage）</td>
+<td>高</td>
+</tr>
+<tr>
+<td>11</td>
+<td>パンくずリスト</td>
+<td>中</td>
+</tr>
+<tr>
+<td>12</td>
+<td>404ページのカスタマイズ</td>
+<td>中</td>
+</tr>
+<tr>
+<td>13</td>
+<td>OGP / Twitter Card</td>
+<td>中</td>
+</tr>
+<tr>
+<td>14</td>
+<td>favicon（複数サイズ）とWebアプリマニフェスト</td>
+<td>中</td>
+</tr>
+<tr>
+<td>15</td>
+<td>表示速度（Core Web Vitals）</td>
+<td>中</td>
+</tr>
+<tr>
+<td>16</td>
+<td>内部リンクの整備</td>
+<td>中</td>
+</tr>
+<tr>
+<td>17</td>
+<td>薄いページの <code>noindex</code>（件数の少ないタグページなど）</td>
+<td>低</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Core Web Vitals の目標値</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>指標</th>
+<th>目標</th>
+<th>主な対策</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LCP（最大コンテンツの描画）</td>
+<td>2.5秒以内</td>
+<td>ヒーロー画像のWebP化・<code>fetchpriority="high"</code>・サーバー応答改善</td>
+</tr>
+<tr>
+<td>INP（操作への応答）</td>
+<td>200ms以内</td>
+<td>JavaScriptの削減。不要なライブラリを読まない</td>
+</tr>
+<tr>
+<td>CLS（レイアウトのずれ）</td>
+<td>0.1以下</td>
+<td>画像に <code>width</code>/<code>height</code> 指定。Webフォントの <code>display: swap</code></td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>7. 検索以外の集客経路</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>経路</th>
+<th>施策</th>
+<th>優先度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>紹介・口コミ</td>
+<td><strong>最大の経路。</strong> サイトを紹介しやすい状態にする（社名検索で即到達、事例が見せられる）</td>
+<td>最高</td>
+</tr>
+<tr>
+<td>Googleビジネスプロフィール</td>
+<td>上記5参照</td>
+<td>最高</td>
+</tr>
+<tr>
+<td>完成見学会</td>
+<td>お知らせページで告知。申込フォームを用意</td>
+<td>高</td>
+</tr>
+<tr>
+<td>ポータルサイト掲載</td>
+<td>SUUMO、ホームズ等。費用対効果を測ってから判断</td>
+<td>中</td>
+</tr>
+<tr>
+<td>Instagram</td>
+<td>施工写真との相性が良い。<strong>運用できる人がいる場合のみ。</strong> サイトへの導線を設置</td>
+<td>中</td>
+</tr>
+<tr>
+<td>チラシ・地域広報</td>
+<td>サイトURLとQRコードを必ず記載。オフラインからオンラインへ</td>
+<td>中</td>
+</tr>
+<tr>
+<td>リスティング広告</td>
+<td>「八王子 注文住宅」等。月5〜10万円から。サイト改善後に実施</td>
+<td>低（後回し）</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>広告は、サイトが整ってから。</strong> 受け皿が不十分なまま広告を出すのは、穴の空いたバケツに水を注ぐのと同じです。Phase 1・2 の完了後に検討してください。</p>
+</blockquote>
+<hr />
+<h2>8. やってはいけないこと</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>禁止事項</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>実績のない地名を大量に並べる</td>
+<td>検索エンジンに低品質と判断される。ユーザーも不信感を持つ</td>
+</tr>
+<tr>
+<td>他社サイトの文章をコピーする</td>
+<td>著作権侵害。検索評価も下がる</td>
+</tr>
+<tr>
+<td>被リンクの購入</td>
+<td>ペナルティの対象</td>
+</tr>
+<tr>
+<td>中身のないページを量産する</td>
+<td>サイト全体の評価を下げる</td>
+</tr>
+<tr>
+<td>キーワードの詰め込み</td>
+<td>読みにくく、評価も上がらない</td>
+</tr>
+<tr>
+<td>実績を誇張する</td>
+<td>この会社の最大の資産である「誠実さ」を毀損する</td>
+</tr>
+</tbody>
+</table></div></section><section class="chapter" id="ch07"><h1>07. 技術要件・実装仕様</h1><h2>1. 構築方式の選定</h2>
+<h3>推奨: WordPress</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>観点</th>
+<th>評価</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>施工事例の追加を社内で行える</td>
+<td>◎ カスタム投稿タイプで管理画面から追加可能</td>
+</tr>
+<tr>
+<td>お知らせの更新</td>
+<td>◎</td>
+</tr>
+<tr>
+<td>制作会社の選択肢</td>
+<td>◎ 対応できる会社が最も多く、乗り換えも容易</td>
+</tr>
+<tr>
+<td>費用</td>
+<td>○ 中程度</td>
+</tr>
+<tr>
+<td>保守の手間</td>
+<td>△ 更新作業とセキュリティ対策が必要</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>選定理由</strong>: 施工事例を継続的に増やすことが今回の改善の核心です。<strong>社内で更新できる仕組みでなければ、事例は増えません。</strong>
+制作会社に依頼するたびに費用が発生する構成では、更新が止まります。</p>
+<h3>代替案の評価</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>適する場合</th>
+<th>注意点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>静的サイト（HTML手書き）</td>
+<td>更新をすべて外注する前提なら</td>
+<td>事例追加のたびに費用が発生。推奨しない</td>
+</tr>
+<tr>
+<td>Jamstack（Next.js + microCMS 等）</td>
+<td>表示速度を最優先する場合</td>
+<td>対応できる制作会社が限られ、保守を引き継げないリスク</td>
+</tr>
+<tr>
+<td>ノーコード（STUDIO、Wix等）</td>
+<td>予算が特に限られる場合</td>
+<td>事例のカテゴリ分けとSEO制御に制約。将来の移行が困難</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>2. WordPress 実装仕様</h2>
+<h3>テーマ</h3>
+<p>オリジナルテーマ、またはブロックテーマをベースにした子テーマ。
+<strong>既製の有料テーマをそのまま使う場合</strong>は、デザインガイドライン（05章）に沿ったカスタマイズが可能なものを選定してください。</p>
+<h3>カスタム投稿タイプ</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>投稿タイプ</th>
+<th>スラッグ</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>施工事例</td>
+<td><code>works</code></td>
+<td>1事例1投稿</td>
+</tr>
+<tr>
+<td>お客様の声</td>
+<td><code>voice</code></td>
+<td>1件1投稿</td>
+</tr>
+<tr>
+<td>お知らせ</td>
+<td><code>news</code>（標準の投稿を使用しても可）</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h3>タクソノミー</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>スラッグ</th>
+<th>対象</th>
+<th>階層</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>事例カテゴリ</td>
+<td><code>works_category</code></td>
+<td>works</td>
+<td>あり</td>
+</tr>
+<tr>
+<td>事例タグ</td>
+<td><code>works_tag</code></td>
+<td>works</td>
+<td>なし</td>
+</tr>
+<tr>
+<td>声カテゴリ</td>
+<td><code>voice_category</code></td>
+<td>voice</td>
+<td>あり</td>
+</tr>
+<tr>
+<td>お知らせカテゴリ</td>
+<td><code>news_category</code></td>
+<td>news</td>
+<td>あり</td>
+</tr>
+</tbody>
+</table></div>
+<h3>カスタムフィールド（施工事例）</h3>
+<p>ACF（Advanced Custom Fields）等で実装します。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>フィールド名</th>
+<th>キー</th>
+<th>型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>所在地（市区町村）</td>
+<td><code>location</code></td>
+<td>テキスト</td>
+</tr>
+<tr>
+<td>用途</td>
+<td><code>building_use</code></td>
+<td>テキスト</td>
+</tr>
+<tr>
+<td>構造・規模</td>
+<td><code>structure</code></td>
+<td>テキスト</td>
+</tr>
+<tr>
+<td>延床面積</td>
+<td><code>floor_area</code></td>
+<td>テキスト</td>
+</tr>
+<tr>
+<td>敷地面積</td>
+<td><code>site_area</code></td>
+<td>テキスト</td>
+</tr>
+<tr>
+<td>竣工年月</td>
+<td><code>completion_date</code></td>
+<td>日付</td>
+</tr>
+<tr>
+<td>工期</td>
+<td><code>construction_period</code></td>
+<td>テキスト</td>
+</tr>
+<tr>
+<td>主な仕様</td>
+<td><code>specs</code></td>
+<td>テキストエリア</td>
+</tr>
+<tr>
+<td>ご要望</td>
+<td><code>request_text</code></td>
+<td>リッチテキスト</td>
+</tr>
+<tr>
+<td>設計・施工のポイント</td>
+<td><code>point_text</code></td>
+<td>リッチテキスト</td>
+</tr>
+<tr>
+<td>担当者より</td>
+<td><code>staff_comment</code></td>
+<td>テキストエリア</td>
+</tr>
+<tr>
+<td>写真ギャラリー</td>
+<td><code>gallery</code></td>
+<td>ギャラリー（複数画像）</td>
+</tr>
+<tr>
+<td>before写真</td>
+<td><code>before_images</code></td>
+<td>ギャラリー</td>
+</tr>
+<tr>
+<td>after写真</td>
+<td><code>after_images</code></td>
+<td>ギャラリー</td>
+</tr>
+<tr>
+<td>関連するお客様の声</td>
+<td><code>related_voice</code></td>
+<td>投稿オブジェクト</td>
+</tr>
+</tbody>
+</table></div>
+<h3>推奨プラグイン</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>用途</th>
+<th>プラグイン</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>カスタムフィールド</td>
+<td>Advanced Custom Fields</td>
+<td>標準的</td>
+</tr>
+<tr>
+<td>SEO</td>
+<td>SEO SIMPLE PACK または Yet Another SEO Pack</td>
+<td>軽量なものを選ぶ</td>
+</tr>
+<tr>
+<td>フォーム</td>
+<td>Contact Form 7 + Flamingo（送信ログ保存）</td>
+<td>または Snow Monkey Forms</td>
+</tr>
+<tr>
+<td>スパム対策</td>
+<td>reCAPTCHA v3 連携、またはハニーポット</td>
+<td>ユーザー負担の少ない方式を</td>
+</tr>
+<tr>
+<td>画像最適化</td>
+<td>EWWW Image Optimizer 等（WebP変換）</td>
+<td></td>
+</tr>
+<tr>
+<td>キャッシュ</td>
+<td>WP Super Cache 等</td>
+<td>サーバー側の機能で代替可なら不要</td>
+</tr>
+<tr>
+<td>バックアップ</td>
+<td>UpdraftPlus 等</td>
+<td>サーバーの自動バックアップでも可</td>
+</tr>
+<tr>
+<td>セキュリティ</td>
+<td>SiteGuard WP Plugin</td>
+<td>ログインURL変更、画像認証</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>プラグインは入れすぎないこと。</strong> 数が増えるほど表示速度が落ち、更新の手間と脆弱性のリスクが増えます。上記程度に留めてください。</p>
+</blockquote>
+<hr />
+<h2>3. サーバー・ドメイン要件</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>要件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ドメイン</td>
+<td><code>juko-kensetsu.co.jp</code>（既存を継続使用）</td>
+</tr>
+<tr>
+<td>正規URL</td>
+<td><code>https://www.juko-kensetsu.co.jp/</code></td>
+</tr>
+<tr>
+<td>SSL証明書</td>
+<td>無料のLet's Encryptで十分。自動更新設定を必ず確認</td>
+</tr>
+<tr>
+<td>PHP</td>
+<td>8.1以上</td>
+</tr>
+<tr>
+<td>データベース</td>
+<td>MySQL 5.7以上 / MariaDB 10.3以上</td>
+</tr>
+<tr>
+<td>ディスク</td>
+<td>10GB以上（写真が多いため）</td>
+</tr>
+<tr>
+<td>推奨サーバー</td>
+<td>エックスサーバー、ConoHa WING、さくらのレンタルサーバ等の共用サーバーで十分</td>
+</tr>
+<tr>
+<td>バックアップ</td>
+<td>日次自動、14日分保持</td>
+</tr>
+<tr>
+<td>メール</td>
+<td>独自ドメインメール。SPF・DKIM・DMARC を設定（フォーム通知が迷惑メール扱いされないため）</td>
+</tr>
+</tbody>
+</table></div>
+<h3>移行時の注意</h3>
+<ol>
+<li>新サイトはテスト環境（<code>stg.juko-kensetsu.co.jp</code> 等、<code>noindex</code> 設定必須）で構築・検証する</li>
+<li>公開前に301リダイレクト設定（03章の対応表）を必ず実装する</li>
+<li>公開直後にSearch Consoleで「インデックス登録をリクエスト」</li>
+<li>公開後2週間はSearch Consoleの「カバレッジ」でエラーを監視する</li>
+<li><strong>旧サイトのデータは最低6ヶ月保管</strong>（万一の切り戻しのため）</li>
+</ol>
+<hr />
+<h2>4. コーディング要件</h2>
+<h3>基本</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>要件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HTML</td>
+<td>HTML5。セマンティックな要素（<code>header</code>, <code>nav</code>, <code>main</code>, <code>article</code>, <code>section</code>, <code>footer</code>）を使用</td>
+</tr>
+<tr>
+<td>CSS</td>
+<td>カスタムプロパティで色・余白を定義。BEMなどの命名規則を統一</td>
+</tr>
+<tr>
+<td>JavaScript</td>
+<td>素のJavaScriptで実装可能な範囲はライブラリを使わない。jQueryへの依存を減らす</td>
+</tr>
+<tr>
+<td>ビューポート</td>
+<td><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</code></td>
+</tr>
+<tr>
+<td>文字コード</td>
+<td>UTF-8</td>
+</tr>
+<tr>
+<td>言語</td>
+<td><code>&lt;html lang="ja"&gt;</code></td>
+</tr>
+</tbody>
+</table></div>
+<h3>対応ブラウザ</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ブラウザ</th>
+<th>バージョン</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chrome / Edge</td>
+<td>最新2バージョン</td>
+</tr>
+<tr>
+<td>Safari（macOS / iOS）</td>
+<td>最新2バージョン</td>
+</tr>
+<tr>
+<td>Firefox</td>
+<td>最新2バージョン</td>
+</tr>
+<tr>
+<td>Android Chrome</td>
+<td>最新2バージョン</td>
+</tr>
+</tbody>
+</table></div>
+<p>Internet Explorer は対応不要です。</p>
+<h3>実装時の必須事項</h3>
+<ul>
+<li><strong>画像には必ず <code>width</code> と <code>height</code> を指定</strong>（レイアウトのずれを防ぐ）</li>
+<li>フォーカスリング（<code>:focus-visible</code>）を消さない</li>
+<li><code>tel:</code> リンクは電話番号全体をリンクにする（<code>tel:0426428180</code>）</li>
+<li>外部リンクには <code>rel="noopener"</code> を付与</li>
+<li>スマートフォンの固定バーぶんの余白を <code>body</code> 下部に確保</li>
+</ul>
+<hr />
+<h2>5. パフォーマンス要件</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>指標</th>
+<th>目標値</th>
+<th>測定ツール</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LCP</td>
+<td>2.5秒以下</td>
+<td>PageSpeed Insights</td>
+</tr>
+<tr>
+<td>INP</td>
+<td>200ms以下</td>
+<td>PageSpeed Insights</td>
+</tr>
+<tr>
+<td>CLS</td>
+<td>0.1以下</td>
+<td>PageSpeed Insights</td>
+</tr>
+<tr>
+<td>PageSpeed スコア（モバイル）</td>
+<td>70以上</td>
+<td>PageSpeed Insights</td>
+</tr>
+<tr>
+<td>ページ総容量</td>
+<td>2MB以下（トップは3MB以下）</td>
+<td>ブラウザの開発者ツール</td>
+</tr>
+<tr>
+<td>リクエスト数</td>
+<td>60以下</td>
+<td>同上</td>
+</tr>
+</tbody>
+</table></div>
+<h3>主な対策</h3>
+<ol>
+<li>画像のWebP化と適切なサイズへのリサイズ（最も効果が大きい）</li>
+<li>ファーストビュー外の画像に <code>loading="lazy"</code></li>
+<li>CSS/JSの圧縮と結合</li>
+<li>Webフォントのウェイトを最小限に、<code>display: swap</code> 指定</li>
+<li>不要なプラグインの削除</li>
+<li>サーバーのキャッシュ機能を有効化</li>
+</ol>
+<hr />
+<h2>6. セキュリティ要件</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>常時SSL</td>
+<td>全ページhttps。HSTSヘッダーの設定を推奨</td>
+</tr>
+<tr>
+<td>管理画面</td>
+<td>ログインURLの変更、IP制限（可能なら）、二段階認証</td>
+</tr>
+<tr>
+<td>パスワード</td>
+<td>管理者アカウントは推測困難なものに。共有しない</td>
+</tr>
+<tr>
+<td>更新</td>
+<td>WordPress本体・テーマ・プラグインを月次で更新</td>
+</tr>
+<tr>
+<td>バックアップ</td>
+<td>日次自動。復元手順を文書化し、一度は実際に試す</td>
+</tr>
+<tr>
+<td>フォーム</td>
+<td>入力値のサニタイズ、CSRFトークン、送信回数制限</td>
+</tr>
+<tr>
+<td>ファイル権限</td>
+<td><code>wp-config.php</code> は 600 または 640</td>
+</tr>
+<tr>
+<td>不要ファイル</td>
+<td>インストール時の不要ファイル、テスト用ファイルを残さない</td>
+</tr>
+<tr>
+<td>セキュリティヘッダー</td>
+<td><code>X-Content-Type-Options: nosniff</code>、<code>X-Frame-Options: SAMEORIGIN</code>、<code>Referrer-Policy: strict-origin-when-cross-origin</code></td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>7. 個人情報の取り扱い</h2>
+<p>フォームで個人情報を取得するため、以下を整備します。</p>
+<ul>
+<li>プライバシーポリシーの掲載（04-10参照）</li>
+<li>フォームに同意チェックボックスを設置</li>
+<li>送信データの保管期間と削除ルールを社内で定める</li>
+<li>アクセス解析ツール（Google Analytics）の利用をプライバシーポリシーに明記</li>
+<li>施工事例・お客様の声の掲載は、書面での掲載許諾を取得（8章参照）</li>
+</ul>
+<hr />
+<h2>8. 納品物リスト</h2>
+<p>制作会社に依頼する場合、以下を納品物として明記してください。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>納品物</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>公開済みのWebサイト一式</td>
+</tr>
+<tr>
+<td>2</td>
+<td>ソースコード（テーマファイル一式）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>デザインデータ（Figma / Adobe XD等、編集可能な形式）</td>
+</tr>
+<tr>
+<td>4</td>
+<td>サーバー・ドメイン・管理画面のアカウント情報一式</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>更新マニュアル</strong>（施工事例・お知らせの追加手順を画面写真付きで）</td>
+</tr>
+<tr>
+<td>6</td>
+<td>301リダイレクト設定の一覧と実装内容</td>
+</tr>
+<tr>
+<td>7</td>
+<td>GA4・Search Console の設定内容と閲覧権限</td>
+</tr>
+<tr>
+<td>8</td>
+<td>撮影した写真の原本データ（著作権の帰属を契約書で明記）</td>
+</tr>
+<tr>
+<td>9</td>
+<td>保守内容と連絡先の一覧</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>5番の更新マニュアルと8番の写真原本は、必ず取得してください。</strong> これがないと、制作会社を変更した際に何もできなくなります。</p>
+</blockquote></section><section class="chapter" id="ch08"><h1>08. コンテンツ制作計画</h1><p><strong>このサイト改善の成否は、コンテンツ（特に写真）で決まります。</strong>
+デザインと技術は制作会社が用意できますが、写真・事例・お客様の声は重光建設にしか用意できません。本章はその段取りです。</p>
+<hr />
+<h2>1. 必要なコンテンツの全体量</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>種別</th>
+<th>初期公開時</th>
+<th>1年後</th>
+<th>誰が用意するか</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>施工事例</td>
+<td>20件</td>
+<td>40件</td>
+<td>重光建設（写真・情報）＋ライター（文章）</td>
+</tr>
+<tr>
+<td>お客様の声</td>
+<td>6件</td>
+<td>15件</td>
+<td>重光建設（収集）＋ライター</td>
+</tr>
+<tr>
+<td>会社案内用の写真</td>
+<td>15枚</td>
+<td>—</td>
+<td>カメラマン</td>
+</tr>
+<tr>
+<td>代表挨拶</td>
+<td>1本（500字）</td>
+<td>—</td>
+<td>代表＋ライター</td>
+</tr>
+<tr>
+<td>スタッフ紹介</td>
+<td>全員分</td>
+<td>—</td>
+<td>重光建設＋カメラマン</td>
+</tr>
+<tr>
+<td>家づくりの流れ・FAQ</td>
+<td>1ページ</td>
+<td>—</td>
+<td>重光建設＋ライター</td>
+</tr>
+<tr>
+<td>お知らせ記事</td>
+<td>3件</td>
+<td>27件</td>
+<td>重光建設</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>2. 写真撮影計画</h2>
+<h3>優先順位</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>優先</th>
+<th>対象</th>
+<th>枚数目安</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>トップページのヒーロー用</td>
+<td>5〜10枚</td>
+<td>最も印象を左右する。最高の1枚を確保する</td>
+</tr>
+<tr>
+<td>2</td>
+<td>施工事例（新しい案件から）</td>
+<td>1件あたり15〜25枚</td>
+<td>外観、玄関、LDK、水回り、寝室、素材の寄り、細部</td>
+</tr>
+<tr>
+<td>3</td>
+<td>代表・スタッフの人物写真</td>
+<td>各2〜3枚</td>
+<td>自然な表情。スタジオ撮影でなくてよい</td>
+</tr>
+<tr>
+<td>4</td>
+<td>会社の外観・事務所</td>
+<td>5枚</td>
+<td>実在性の証明</td>
+</tr>
+<tr>
+<td>5</td>
+<td>現場・職人の作業風景</td>
+<td>10〜20枚</td>
+<td><strong>他社が持っていない素材。差別化に最も効く</strong></td>
+</tr>
+<tr>
+<td>6</td>
+<td>素材・材料の寄り</td>
+<td>10枚</td>
+<td>「本物の素材」という主張の裏づけ</td>
+</tr>
+</tbody>
+</table></div>
+<h3>撮影の進め方</h3>
+<p><strong>プロカメラマンへの依頼を強く推奨します。</strong>
+理由は単純で、住宅サイトの訪問者は<strong>写真だけで会社を判断する</strong>からです。良い家を建てていても、写真が悪ければ伝わりません。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>費用目安</td>
+<td>1現場あたり5〜10万円（半日〜1日、20〜40カット）</td>
+</tr>
+<tr>
+<td>依頼先</td>
+<td>建築写真の経験があるカメラマン。ポートフォリオで住宅の作例を確認</td>
+</tr>
+<tr>
+<td>時間帯</td>
+<td>午前中の自然光が入る時間。曇天でも室内撮影は問題ない</td>
+</tr>
+<tr>
+<td>準備</td>
+<td>事前に片付け。生活用品は最小限に。施主の許諾を取得</td>
+</tr>
+<tr>
+<td>著作権</td>
+<td><strong>Web掲載・印刷物への使用を含む利用許諾を契約書で明記。</strong> 買い取りが望ましい</td>
+</tr>
+<tr>
+<td>データ</td>
+<td>現像済みJPEG（長辺3000px以上）と、可能ならRAWも受領</td>
+</tr>
+</tbody>
+</table></div>
+<h3>過去物件の撮り直しについて</h3>
+<p>竣工から年数が経った物件も、施主の許諾が得られれば撮影の価値があります。
+むしろ<strong>「10年経った家」の写真は、「時と共に価値と愛着が増す」という同社の主張を証明する最強の材料</strong>です。
+新築時の写真と並べて掲載できれば、他社には真似のできないページになります。</p>
+<h3>自社撮影で済ませる場合の最低限</h3>
+<p>予算の都合でカメラマンを使えない場合、以下を守れば大きく外しません。</p>
+<ol>
+<li>スマートフォンでよいが、<strong>必ず横向きで撮る</strong></li>
+<li>晴れた日の午前中、窓からの光を活かす。室内の照明はつけない</li>
+<li>三脚を使い、カメラを水平に保つ（垂直の線が傾かないように）</li>
+<li>広角で部屋全体を1枚、そのあと素材や造作の寄りを数枚</li>
+<li>撮影後に加工しすぎない（明るさの微調整程度）</li>
+</ol>
+<hr />
+<h2>3. 施工事例の制作フロー</h2>
+<h3>ステップ</h3>
+<pre><code>1. 案件の選定        →  掲載する20件を決める
+2. 許諾の取得        →  施主に掲載同意書をもらう
+3. 情報の整理        →  面積・工期・仕様などのデータをまとめる
+4. 撮影              →  カメラマン手配、または既存写真の選定
+5. ヒアリング        →  担当者から「要望」「課題」「工夫」を聞き取る
+6. 執筆              →  800〜1,500字
+7. 入稿・公開        →  WordPressに登録
+</code></pre>
+<h3>案件選定の基準</h3>
+<p>20件を選ぶ際は、<strong>バランス</strong>を意識してください。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>カテゴリ</th>
+<th>件数</th>
+<th>選定の観点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>注文住宅</td>
+<td>8件</td>
+<td>平屋・2階建・二世帯など多様性を持たせる。規模も大小混ぜる</td>
+</tr>
+<tr>
+<td>リノベーション</td>
+<td>6件</td>
+<td>before/afterが撮れているもの、耐震・断熱改修を含むもの</td>
+</tr>
+<tr>
+<td>医院・店舗</td>
+<td>3件</td>
+<td>用途の異なるもの</td>
+</tr>
+<tr>
+<td>公共施設</td>
+<td>3件</td>
+<td><strong>技術力の証明になる。必ず入れる</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h3>ヒアリングシート（社内用）</h3>
+<p>各事例について、担当者に以下を聞き取ってください。</p>
+<pre><code>■ 基本情報
+  所在地（市区町村）／用途／構造／延床面積／敷地面積／竣工年月／工期
+
+■ お客様について
+  どのようなきっかけで当社を知ったか
+  最初に何を求めていたか
+  家族構成・ライフスタイルで配慮した点
+
+■ 設計・施工について
+  この案件で最も難しかったことは何か        ← 最重要
+  それをどう解決したか
+  こだわった素材・工法とその理由
+  施主に特に喜ばれた部分
+
+■ 担当者の言葉
+  この家づくりで印象に残っていること（3〜4行）
+</code></pre>
+<p><strong>「最も難しかったこと」を必ず聞いてください。</strong> ここが書けている事例ページだけが、他社と差別化できます。</p>
+<hr />
+<h2>4. お客様の声の収集</h2>
+<h3>収集のタイミング</h3>
+<p>引き渡し時、または引き渡しから1〜3ヶ月後（住んでみた実感が語れる時期）。</p>
+<h3>アンケート設問案</h3>
+<pre><code>1. 当社をどのようにしてお知りになりましたか
+2. 他社ではなく当社にご依頼いただいた決め手は何でしたか
+3. 打ち合わせから工事中、実際に住まわれてみて、いかがでしたか
+4. 完成した住まいで、特にお気に入りの場所を教えてください
+5. これから家づくりを検討される方へ、ひとことお願いします
+6. 改善すべき点があればお聞かせください（※これは非掲載でも構いません）
+
+【掲載について】
+□ 実名での掲載を許可します
+□ イニシャルでの掲載を許可します
+□ 写真の掲載を許可します（□ 顔出し可 / □ 顔出し不可）
+□ 掲載を希望しません
+
+お名前（              ）  ご署名（              ）  日付（     年   月   日）
+</code></pre>
+<h3>掲載許諾書に含めるべき項目</h3>
+<ul>
+<li>掲載媒体（自社Webサイト、パンフレット、SNS など具体的に）</li>
+<li>掲載内容（写真、文章、氏名の表記方法）</li>
+<li>掲載期間（「掲載の取りやめを申し出るまで」等）</li>
+<li>取りやめの申し出方法と連絡先</li>
+<li>所在地の表記範囲（市区町村まで、番地は非掲載）</li>
+</ul>
+<blockquote>
+<p>施工事例と合わせて、<strong>1枚の書面で両方の許諾を取得</strong>すると手間が減ります。</p>
+</blockquote>
+<hr />
+<h2>5. 文章作成の方針</h2>
+<h3>全体のトーン</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>方針</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一人称</td>
+<td>「私たち」（「弊社」は硬すぎる）</td>
+</tr>
+<tr>
+<td>語尾</td>
+<td>です・ます調</td>
+</tr>
+<tr>
+<td>専門用語</td>
+<td>使ってよいが、初出時に短い補足を（例: 「真壁（柱を見せる納まり）」）</td>
+</tr>
+<tr>
+<td>誇張</td>
+<td>しない。「最高品質」「業界随一」は使わない</td>
+</tr>
+<tr>
+<td>数字</td>
+<td>具体的に（「多くの実績」ではなく「年間○棟」「創業から○年」）</td>
+</tr>
+</tbody>
+</table></div>
+<h3>避けるべき常套句</h3>
+<p>以下はどの工務店サイトにも書いてあり、読み飛ばされます。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>避ける</th>
+<th>代わりに</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>「お客様第一主義」</td>
+<td>実際に何をしているかを書く（現場をいつでも公開している、など）</td>
+</tr>
+<tr>
+<td>「安心・安全な家づくり」</td>
+<td>何をもって安心なのかを具体的に（検査体制、保証内容）</td>
+</tr>
+<tr>
+<td>「地域密着」</td>
+<td>どの地域で何件やってきたかを書く</td>
+</tr>
+<tr>
+<td>「豊富な経験と実績」</td>
+<td>年数と件数を書く</td>
+</tr>
+<tr>
+<td>「自然素材にこだわり」</td>
+<td>どの素材を、どこから、なぜ選んでいるかを書く</td>
+</tr>
+</tbody>
+</table></div>
+<h3>外注する場合</h3>
+<p>ライターに依頼する場合、<strong>建築・住宅分野の実績があるライターを選んでください。</strong>
+費用目安: 施工事例1本 1.5〜3万円 / 固定ページ1本 3〜5万円。
+担当者への電話ヒアリング（30分程度）を含む契約にすると、質が大きく上がります。</p>
+<hr />
+<h2>6. お知らせの運用設計</h2>
+<h3>現実的な目標</h3>
+<p><strong>月2本。</strong> これ以上は続きません。続かない計画は立てないでください。</p>
+<h3>記事のパターン（テンプレート化する）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>パターン</th>
+<th>内容</th>
+<th>所要時間</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>現場レポート</td>
+<td>上棟、基礎工事、内装工事の進捗。写真2〜3枚＋200字</td>
+<td>15分</td>
+</tr>
+<tr>
+<td>完成見学会の告知</td>
+<td>日時、場所、申込方法</td>
+<td>20分</td>
+</tr>
+<tr>
+<td>素材・仕様の紹介</td>
+<td>使っている材料の紹介。写真1枚＋300字</td>
+<td>20分</td>
+</tr>
+<tr>
+<td>家づくりの豆知識</td>
+<td>補助金、法改正、季節の手入れ</td>
+<td>40分</td>
+</tr>
+<tr>
+<td>会社のお知らせ</td>
+<td>休業日、資格取得、メディア掲載</td>
+<td>10分</td>
+</tr>
+</tbody>
+</table></div>
+<h3>運用の仕組み</h3>
+<ol>
+<li>現場担当者がスマートフォンで写真を撮り、社内チャットに投稿</li>
+<li>週1回、担当者がまとめて2本分を選び、200字程度を添えて投稿</li>
+<li><strong>完璧を求めない。</strong> 誤字があっても、更新が止まるより遥かに良い</li>
+</ol>
+<hr />
+<h2>7. 制作スケジュール</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>週</th>
+<th>作業</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1〜2週</td>
+<td>掲載事例20件の選定、施主への許諾依頼</td>
+</tr>
+<tr>
+<td>3〜4週</td>
+<td>カメラマン選定・日程調整、既存写真の棚卸し</td>
+</tr>
+<tr>
+<td>5〜8週</td>
+<td>撮影（5〜8現場）、担当者ヒアリング</td>
+</tr>
+<tr>
+<td>7〜10週</td>
+<td>執筆（事例20本、固定ページ5本）</td>
+</tr>
+<tr>
+<td>9〜11週</td>
+<td>原稿確認・修正</td>
+</tr>
+<tr>
+<td>11〜12週</td>
+<td>入稿・最終確認</td>
+</tr>
+</tbody>
+</table></div>
+<p>写真撮影は天候に左右されるため、<strong>余裕を持った日程</strong>を組んでください。
+サイトの公開日を先に決めてしまうと、写真の質を妥協することになります。<strong>公開を1ヶ月遅らせてでも、良い写真を揃えるべきです。</strong></p></section><section class="chapter" id="ch09"><h1>09. 計測設計とKPI</h1><h2>1. 前提</h2>
+<p><strong>現状、数値が把握できていない可能性が高い</strong>ため、まず計測環境を整えます。
+これは費用ゼロででき、改善の効果を判断する唯一の根拠になります。<strong>最初の30日で必ず実施してください。</strong></p>
+<hr />
+<h2>2. 導入するツール</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ツール</th>
+<th>用途</th>
+<th>費用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Google Analytics 4</td>
+<td>訪問者数、流入経路、行動、コンバージョン</td>
+<td>無料</td>
+</tr>
+<tr>
+<td>Google Search Console</td>
+<td>検索クエリ、掲載順位、インデックス状況、技術的エラー</td>
+<td>無料</td>
+</tr>
+<tr>
+<td>Googleビジネスプロフィール インサイト</td>
+<td>地図検索での表示回数、電話タップ数、経路検索数</td>
+<td>無料</td>
+</tr>
+<tr>
+<td>PageSpeed Insights</td>
+<td>表示速度</td>
+<td>無料</td>
+</tr>
+<tr>
+<td>Microsoft Clarity（任意）</td>
+<td>画面録画・ヒートマップ。どこで離脱しているかが見える</td>
+<td>無料</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>Google Tag Manager を使うと計測タグの管理が楽になりますが、運用できる人がいない場合は、GA4を直接設置するほうが確実です。</p>
+</blockquote>
+<hr />
+<h2>3. コンバージョン計測の設計</h2>
+<h3>GA4 で設定するイベント</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>イベント名</th>
+<th>発火条件</th>
+<th>主要CV</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>contact_submit</code></td>
+<td><code>/contact/thanks/</code> へ到達</td>
+<td>○</td>
+</tr>
+<tr>
+<td><code>tel_tap</code></td>
+<td><code>tel:</code> リンクのクリック</td>
+<td>○</td>
+</tr>
+<tr>
+<td><code>document_request</code></td>
+<td>フォームの種別「資料請求」で送信</td>
+<td>○</td>
+</tr>
+<tr>
+<td><code>works_detail_view</code></td>
+<td>施工事例詳細の閲覧</td>
+<td></td>
+</tr>
+<tr>
+<td><code>flow_page_view</code></td>
+<td>流れ・費用ページの閲覧</td>
+<td></td>
+</tr>
+<tr>
+<td><code>map_click</code></td>
+<td>地図・経路案内のクリック</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h3>電話タップの計測が重要な理由</h3>
+<p>工務店では<strong>電話問い合わせが半数以上</strong>を占めることも珍しくありません。
+フォーム送信だけを計測していると、施策の効果を半分以下に見誤ります。</p>
+<p><code>tel:</code> リンクのクリックは、スマートフォンでは「実際に電話をかけた」に近い行動です。必ず計測対象に含めてください。
+（PCからのクリックはノイズになるため、デバイス別に分けて見るとより正確です）</p>
+<h3>実装例（GA4 直接設置の場合）</h3>
+<pre><code class="language-html">&lt;a href=&quot;tel:0426428180&quot;
+   onclick=&quot;gtag('event','tel_tap',{'location':'header'});&quot;&gt;
+  042-642-8180
+&lt;/a&gt;
+</code></pre>
+<p><code>location</code> に <code>header</code> / <code>footer</code> / <code>sp_fixed_bar</code> / <code>contact_page</code> などを入れると、<strong>どこの電話番号が押されているか</strong>が分かり、配置の改善につながります。</p>
+<hr />
+<h2>4. KPI ツリー</h2>
+<pre><code>【最終目標】 受注数・売上
+      ↑
+【中間目標】 問い合わせ数（フォーム＋電話）
+      ↑
+   ┌──────────────┴──────────────┐
+【集客】 セッション数           【転換】 コンバージョン率
+   ↑                                 ↑
+・検索表示回数                    ・直帰率
+・検索順位                        ・平均エンゲージメント時間
+・事例ページ数                    ・事例詳細の閲覧数/人
+・Googleビジネスプロフィール表示   ・フォーム到達率／完了率
+</code></pre>
+<hr />
+<h2>5. 目標値</h2>
+<h3>全体指標</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>指標</th>
+<th>公開前（推定）</th>
+<th>3ヶ月後</th>
+<th>6ヶ月後</th>
+<th>12ヶ月後</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>月間セッション</td>
+<td>300〜600</td>
+<td>800</td>
+<td>1,200</td>
+<td>2,500</td>
+</tr>
+<tr>
+<td>月間ユーザー</td>
+<td>250〜500</td>
+<td>650</td>
+<td>950</td>
+<td>2,000</td>
+</tr>
+<tr>
+<td>モバイル比率</td>
+<td>—</td>
+<td>70%</td>
+<td>72%</td>
+<td>75%</td>
+</tr>
+<tr>
+<td>直帰率（全体）</td>
+<td>70%以上</td>
+<td>60%</td>
+<td>55%</td>
+<td>50%</td>
+</tr>
+<tr>
+<td>平均エンゲージメント時間</td>
+<td>—</td>
+<td>60秒</td>
+<td>80秒</td>
+<td>100秒</td>
+</tr>
+<tr>
+<td><strong>月間問い合わせ（フォーム）</strong></td>
+<td>1〜2</td>
+<td>3</td>
+<td>5</td>
+<td>8</td>
+</tr>
+<tr>
+<td><strong>月間電話タップ</strong></td>
+<td>計測なし</td>
+<td>5</td>
+<td>8</td>
+<td>15</td>
+</tr>
+<tr>
+<td>コンバージョン率</td>
+<td>—</td>
+<td>1.0%</td>
+<td>1.1%</td>
+<td>1.2%</td>
+</tr>
+</tbody>
+</table></div>
+<h3>コンテンツ指標</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>指標</th>
+<th>公開時</th>
+<th>6ヶ月後</th>
+<th>12ヶ月後</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>施工事例ページ数</td>
+<td>20</td>
+<td>30</td>
+<td>40</td>
+</tr>
+<tr>
+<td>お客様の声</td>
+<td>6</td>
+<td>10</td>
+<td>15</td>
+</tr>
+<tr>
+<td>お知らせ記事</td>
+<td>3</td>
+<td>15</td>
+<td>27</td>
+</tr>
+</tbody>
+</table></div>
+<h3>検索指標（Search Console）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>指標</th>
+<th>3ヶ月後</th>
+<th>6ヶ月後</th>
+<th>12ヶ月後</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>月間表示回数</td>
+<td>3,000</td>
+<td>6,000</td>
+<td>15,000</td>
+</tr>
+<tr>
+<td>月間クリック数</td>
+<td>150</td>
+<td>350</td>
+<td>900</td>
+</tr>
+<tr>
+<td>平均CTR</td>
+<td>5%</td>
+<td>5.8%</td>
+<td>6%</td>
+</tr>
+<tr>
+<td>「八王子 工務店」の順位</td>
+<td>30位圏</td>
+<td>15位圏</td>
+<td>10位以内</td>
+</tr>
+<tr>
+<td>「八王子 注文住宅」の順位</td>
+<td>圏外</td>
+<td>30位圏</td>
+<td>20位圏</td>
+</tr>
+<tr>
+<td>指名検索（重光建設）の順位</td>
+<td>1位</td>
+<td>1位</td>
+<td>1位</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>これらは目安です。</strong> 公開後3ヶ月の実測値をもとに、現実的な数値へ必ず再設定してください。
+特にセッション数の現状値が不明なため、初月の実測をベースラインとします。</p>
+</blockquote>
+<hr />
+<h2>6. 定例レビュー</h2>
+<h3>月次（毎月第1営業日、30分）</h3>
+<p>確認する項目は5つだけに絞ります。多く見すぎると続きません。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>確認項目</th>
+<th>見る場所</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>問い合わせ数（フォーム＋電話タップ）</td>
+<td>GA4 コンバージョン</td>
+</tr>
+<tr>
+<td>2</td>
+<td>セッション数と流入経路</td>
+<td>GA4 集客</td>
+</tr>
+<tr>
+<td>3</td>
+<td>よく見られたページ トップ10</td>
+<td>GA4 エンゲージメント</td>
+</tr>
+<tr>
+<td>4</td>
+<td>検索クエリ トップ20と順位変動</td>
+<td>Search Console</td>
+</tr>
+<tr>
+<td>5</td>
+<td>今月追加したコンテンツ数</td>
+<td>自社確認</td>
+</tr>
+</tbody>
+</table></div>
+<h3>四半期（3ヶ月ごと、2時間）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>作業</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>KPIの達成状況を評価し、未達の原因を特定</td>
+</tr>
+<tr>
+<td>2</td>
+<td>反応の良かった事例・記事の傾向を分析し、次の制作に反映</td>
+</tr>
+<tr>
+<td>3</td>
+<td>離脱の多いページを特定し、改善案を出す</td>
+</tr>
+<tr>
+<td>4</td>
+<td>検索順位が上がってきたキーワードに対し、コンテンツを追加</td>
+</tr>
+<tr>
+<td>5</td>
+<td>表示速度とモバイルユーザビリティの再測定</td>
+</tr>
+<tr>
+<td>6</td>
+<td>問い合わせの内容を振り返り、FAQに追加すべき質問を洗い出す</td>
+</tr>
+</tbody>
+</table></div>
+<h3>年次</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>作業</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>年間のKPI総括と次年度目標の設定</td>
+</tr>
+<tr>
+<td>2</td>
+<td>競合サイトの変化を確認</td>
+</tr>
+<tr>
+<td>3</td>
+<td>デザイン・構成の見直し要否を判断</td>
+</tr>
+<tr>
+<td>4</td>
+<td>サーバー・ドメイン契約の更新確認</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>7. 問い合わせの質を追う</h2>
+<p>数だけを追うと、質の低い問い合わせが増えても「成功」に見えてしまいます。
+<strong>社内で問い合わせ台帳をつけてください。</strong> 表計算ソフトで十分です。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>日付</th>
+<th>経路</th>
+<th>種別</th>
+<th>地域</th>
+<th>予算帯</th>
+<th>商談化</th>
+<th>受注</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026/10/03</td>
+<td>フォーム</td>
+<td>新築</td>
+<td>八王子市</td>
+<td>3,500〜4,500万</td>
+<td>○</td>
+<td>—</td>
+<td>事例ページから</td>
+</tr>
+<tr>
+<td>2026/10/11</td>
+<td>電話</td>
+<td>リフォーム</td>
+<td>日野市</td>
+<td>未定</td>
+<td>—</td>
+<td>—</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>3ヶ月分たまると、<strong>「どのページを見た人が商談になりやすいか」</strong>が見えます。
+それが分かれば、次にどのコンテンツを増やすべきかが決まります。</p>
+<h3>問い合わせ時に必ず聞くこと</h3>
+<pre><code>「差し支えなければ、当社をどちらでお知りになったか教えていただけますか」
+</code></pre>
+<p>この一言で、Webの効果とそれ以外（紹介・看板・チラシ）を切り分けられます。
+GA4では分からない、紹介経由の実態を把握する唯一の方法です。</p></section><section class="chapter" id="ch10"><h1>10. 実施計画・体制・概算費用</h1><p>図版: <code>images/05_priority_matrix.png</code>（優先度マトリクス）</p>
+<h2>1. 優先順位の考え方</h2>
+<p>施策を「効果」と「実装コスト」の2軸で整理します。</p>
+<h3>効果 高 × コスト 低 —— 最優先で即実施</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>施策</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>スマートフォン対応（レスポンシブ化）</td>
+<td>これがないと他のすべてが効かない</td>
+</tr>
+<tr>
+<td>電話・問い合わせCTAの常時表示</td>
+<td>実装は容易、効果は直接的</td>
+</tr>
+<tr>
+<td>URL正規化（https + www 統一、301）</td>
+<td>検索評価の分散を止める</td>
+</tr>
+<tr>
+<td>title / description の全面見直し</td>
+<td>1日で終わり、検索結果の見え方が変わる</td>
+</tr>
+<tr>
+<td>GA4・Search Console の導入</td>
+<td>無料。これがないと改善の判断ができない</td>
+</tr>
+<tr>
+<td>Googleビジネスプロフィールの整備</td>
+<td>無料。地域検索で最も早く効く</td>
+</tr>
+<tr>
+<td>施工事例のカテゴリ分け</td>
+<td>既存写真の再整理だけでも効果あり</td>
+</tr>
+</tbody>
+</table></div>
+<h3>効果 高 × コスト 高 —— 計画的に実施</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>施策</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>施工事例の個別ページ化・CMS化</td>
+<td>最重要施策。時間がかかるが必ずやる</td>
+</tr>
+<tr>
+<td>プロカメラマンによる写真撮影</td>
+<td><strong>最も費用対効果が高い投資</strong></td>
+</tr>
+<tr>
+<td>家づくりの流れ・費用ページの新設</td>
+<td>問い合わせのハードルを下げる</td>
+</tr>
+<tr>
+<td>問い合わせフォームの刷新</td>
+<td>自動返信・スパム対策・サンクスページ</td>
+</tr>
+<tr>
+<td>代表挨拶・スタッフ紹介の制作</td>
+<td>小規模工務店では決定打になる</td>
+</tr>
+</tbody>
+</table></div>
+<h3>効果 低 × コスト 低 —— 余力があれば</h3>
+<p>favicon、OGP設定、SNSリンク、お知らせの運用開始</p>
+<h3>効果 低 × コスト 高 —— 実施しない</h3>
+<p>多言語対応、会員機能、3Dウォークスルー、チャットボット</p>
+<hr />
+<h2>2. フェーズ計画</h2>
+<h3>Phase 1: 土台をつくる（1〜2ヶ月）</h3>
+<p><strong>目的</strong>: 今あるものを、正しく見られる状態にする</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>作業</th>
+<th>担当</th>
+<th>期間</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>GA4・Search Console 設置、現状の数値把握</td>
+<td>制作会社</td>
+<td>1週</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Googleビジネスプロフィール整備</td>
+<td>重光建設</td>
+<td>1週</td>
+</tr>
+<tr>
+<td>3</td>
+<td>常時SSL化・URL正規化・301リダイレクト</td>
+<td>制作会社</td>
+<td>1週</td>
+</tr>
+<tr>
+<td>4</td>
+<td>全ページのtitle/description書き直し</td>
+<td>制作会社＋重光建設</td>
+<td>1週</td>
+</tr>
+<tr>
+<td>5</td>
+<td>レスポンシブ対応（既存ページの改修 or 新サイト構築開始）</td>
+<td>制作会社</td>
+<td>3〜6週</td>
+</tr>
+<tr>
+<td>6</td>
+<td>CTA（電話・問い合わせ）の常時表示</td>
+<td>制作会社</td>
+<td>1週</td>
+</tr>
+<tr>
+<td>7</td>
+<td>掲載事例20件の選定と許諾取得</td>
+<td>重光建設</td>
+<td>3週</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Phase 1 完了時点の到達状態</strong>
+スマートフォンで問題なく閲覧でき、検索結果に正しく表示され、電話がかけられる。数値が測れる。</p>
+<h3>Phase 2: 主戦力をつくる（2〜4ヶ月）</h3>
+<p><strong>目的</strong>: 集客と説得のエンジンを構築する</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>作業</th>
+<th>担当</th>
+<th>期間</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>WordPress構築（サイト設計・デザイン・実装）</td>
+<td>制作会社</td>
+<td>6〜10週</td>
+</tr>
+<tr>
+<td>2</td>
+<td>写真撮影（5〜8現場）</td>
+<td>カメラマン</td>
+<td>4〜6週</td>
+</tr>
+<tr>
+<td>3</td>
+<td>施工事例20本の執筆・入稿</td>
+<td>ライター＋重光建設</td>
+<td>6週</td>
+</tr>
+<tr>
+<td>4</td>
+<td>家づくりの流れ・費用ページ制作</td>
+<td>制作会社＋重光建設</td>
+<td>2週</td>
+</tr>
+<tr>
+<td>5</td>
+<td>会社案内ページの統合・代表挨拶・スタッフ紹介</td>
+<td>制作会社＋重光建設</td>
+<td>3週</td>
+</tr>
+<tr>
+<td>6</td>
+<td>お客様の声 6件の収集・制作</td>
+<td>重光建設＋ライター</td>
+<td>4週</td>
+</tr>
+<tr>
+<td>7</td>
+<td>フォーム刷新、構造化データ実装</td>
+<td>制作会社</td>
+<td>2週</td>
+</tr>
+<tr>
+<td>8</td>
+<td>テスト・公開・リダイレクト最終確認</td>
+<td>制作会社</td>
+<td>1週</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Phase 2 完了時点の到達状態</strong>
+地域＋用途の検索に対して20の受け皿があり、訪問者が納得して問い合わせできる状態。</p>
+<h3>Phase 3: 育てる（継続）</h3>
+<p><strong>目的</strong>: 資産を積み上げ、改善を回す</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>作業</th>
+<th>頻度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>施工事例の追加</td>
+<td>月1〜2件</td>
+</tr>
+<tr>
+<td>お知らせの更新</td>
+<td>月2本</td>
+</tr>
+<tr>
+<td>お客様の声の追加</td>
+<td>四半期1〜2件</td>
+</tr>
+<tr>
+<td>Googleビジネスプロフィールへの投稿</td>
+<td>月1〜2回</td>
+</tr>
+<tr>
+<td>口コミへの返信</td>
+<td>都度</td>
+</tr>
+<tr>
+<td>数値の確認と改善</td>
+<td>月次30分／四半期2時間</td>
+</tr>
+<tr>
+<td>WordPress・プラグイン更新</td>
+<td>月次</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>3. 概算費用</h2>
+<h3>制作費（一括）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>概算</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Phase 1（応急改修＋計測環境）</td>
+<td>30〜60万円</td>
+<td>既存サイトを活かす場合</td>
+</tr>
+<tr>
+<td>Phase 2（WordPress新規構築）</td>
+<td>100〜200万円</td>
+<td>ページ数・デザインの作り込み度による</td>
+</tr>
+<tr>
+<td>写真撮影</td>
+<td>30〜80万円</td>
+<td>5〜8現場 × 5〜10万円</td>
+</tr>
+<tr>
+<td>原稿執筆（事例20本＋固定5本）</td>
+<td>45〜90万円</td>
+<td>内製すれば圧縮可能</td>
+</tr>
+<tr>
+<td><strong>合計</strong></td>
+<td><strong>205〜430万円</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>Phase 1 と Phase 2 を分けずに、最初から新サイトを構築する場合</strong>は、Phase 1 の応急改修費（30〜60万円）が不要になり、合計 <strong>175〜370万円</strong> 程度になります。
+ただしその場合、新サイト公開までの数ヶ月間、現状のまま放置することになります。
+スマートフォン対応が特に急ぐ場合は、Phase 1 を先行させる価値があります。</p>
+</blockquote>
+<h3>費用を抑える選択肢</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>抑え方</th>
+<th>品質への影響</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原稿執筆</td>
+<td>社内で執筆（ヒアリングシートに沿って書く）</td>
+<td>中。時間はかかるが、担当者の言葉のほうが良い場合もある</td>
+</tr>
+<tr>
+<td>写真撮影</td>
+<td>現場数を絞る（3現場）</td>
+<td>中。<strong>ここは削らないほうがよい</strong></td>
+</tr>
+<tr>
+<td>事例本数</td>
+<td>初期10件から開始し、順次追加</td>
+<td>小。ただし検索効果の立ち上がりは遅れる</td>
+</tr>
+<tr>
+<td>デザイン</td>
+<td>既製テーマをベースにカスタマイズ</td>
+<td>中。デザインガイドラインに沿えるテーマを選ぶこと</td>
+</tr>
+<tr>
+<td>事例のページ数</td>
+<td>—</td>
+<td><strong>削らない。ここが核心</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h3>運用費（月額）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>月額</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>サーバー</td>
+<td>1,000〜2,000円</td>
+<td>共用サーバーで十分</td>
+</tr>
+<tr>
+<td>ドメイン</td>
+<td>約500円</td>
+<td>年額 5,000〜6,000円</td>
+</tr>
+<tr>
+<td>SSL証明書</td>
+<td>0円</td>
+<td>Let's Encrypt</td>
+</tr>
+<tr>
+<td>保守（更新・バックアップ・障害対応）</td>
+<td>1〜3万円</td>
+<td>制作会社に依頼する場合</td>
+</tr>
+<tr>
+<td>コンテンツ追加（事例1件あたり）</td>
+<td>2〜5万円</td>
+<td>内製なら0円</td>
+</tr>
+<tr>
+<td><strong>合計</strong></td>
+<td><strong>月 1.2〜8万円</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h3>初年度総額の目安</h3>
+<pre><code>制作費   205〜430万円
+運用費   月3万円 × 12ヶ月 = 36万円
+────────────────────────
+初年度   241〜466万円
+</code></pre>
+<p><strong>投資の回収について</strong>
+年間で新築1棟を受注できれば、多くの場合この投資は回収されます。
+Web経由の問い合わせが月5件、そのうち商談化が2件、年間の受注が1〜2棟であれば、十分に成立する投資です。</p>
+<hr />
+<h2>4. 体制</h2>
+<h3>重光建設側</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>役割</th>
+<th>担当</th>
+<th>主な作業</th>
+<th>想定工数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>意思決定者</td>
+<td>代表</td>
+<td>方針決定、原稿の最終確認、代表挨拶</td>
+<td>計10時間</td>
+</tr>
+<tr>
+<td>窓口担当</td>
+<td>1名（固定）</td>
+<td>制作会社とのやりとり、社内調整</td>
+<td>週2〜3時間</td>
+</tr>
+<tr>
+<td>事例担当</td>
+<td>現場担当者</td>
+<td>ヒアリング対応、写真提供、施主への許諾依頼</td>
+<td>1事例あたり1時間</td>
+</tr>
+<tr>
+<td>更新担当</td>
+<td>1名</td>
+<td>公開後のお知らせ更新</td>
+<td>月2時間</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>窓口担当は必ず1名に固定してください。</strong> 複数人が別々に指示を出すと、制作が停滞し、費用も膨らみます。</p>
+</blockquote>
+<h3>外部</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>役割</th>
+<th>選定基準</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Web制作会社</td>
+<td><strong>工務店・住宅系の実績があること。</strong> 制作事例を必ず見せてもらう。「更新マニュアルを納品するか」「写真データの著作権はどうなるか」を契約前に確認</td>
+</tr>
+<tr>
+<td>カメラマン</td>
+<td>建築写真の実績。ポートフォリオで住宅の作例を確認</td>
+</tr>
+<tr>
+<td>ライター</td>
+<td>建築・住宅分野の執筆実績。電話ヒアリングに対応できること</td>
+</tr>
+</tbody>
+</table></div>
+<h3>制作会社選定時の確認事項</h3>
+<p>契約前に必ず聞いてください。</p>
+<ol>
+<li>工務店・住宅会社の制作実績を見せてください（3社以上）</li>
+<li>施工事例は社内で追加できますか。その操作マニュアルは納品されますか</li>
+<li>301リダイレクトの設定は含まれますか</li>
+<li>構造化データの実装は含まれますか</li>
+<li>撮影した写真の著作権と利用範囲はどうなりますか</li>
+<li>公開後の保守内容と月額費用を具体的に教えてください</li>
+<li>契約終了時、ソースコードとデータは引き渡してもらえますか</li>
+<li>表示速度（PageSpeed Insights）の目標値は設定されますか</li>
+</ol>
+<p><strong>7番は特に重要です。</strong> データを渡さない制作会社と契約すると、乗り換えが事実上できなくなります。</p>
+<hr />
+<h2>5. リスクと対策</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>リスク</th>
+<th>影響</th>
+<th>対策</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>写真・原稿の準備が遅れる</td>
+<td>公開が数ヶ月遅延</td>
+<td>事例選定と許諾取得をPhase 1と並行して開始する</td>
+</tr>
+<tr>
+<td>301リダイレクトの設定漏れ</td>
+<td>既存の検索評価を喪失</td>
+<td>03章の対応表をそのまま制作会社へ渡し、公開前後に全URLを検証</td>
+</tr>
+<tr>
+<td>公開後にコンテンツ更新が止まる</td>
+<td>サイトが陳腐化</td>
+<td>更新担当を決め、月2本という現実的な目標にする</td>
+</tr>
+<tr>
+<td>制作会社に依存しすぎる</td>
+<td>乗り換え不能・費用増</td>
+<td>更新マニュアル・ソースコード・写真原本の納品を契約に明記</td>
+</tr>
+<tr>
+<td>効果が出ないと判断して中断する</td>
+<td>投資が無駄になる</td>
+<td><strong>SEOの効果は3〜6ヶ月かかる</strong>ことを事前に共有。月次で数値を見て、途中経過を可視化</td>
+</tr>
+<tr>
+<td>施主から掲載許諾が得られない</td>
+<td>事例が揃わない</td>
+<td>引き渡し時に許諾を取る運用を標準化。過去案件は丁寧に個別相談</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>6. まず今月やること（費用ゼロ）</h2>
+<p>制作会社への発注を待たずに、今日から始められることがあります。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>作業</th>
+<th>所要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Googleビジネスプロフィールのオーナー確認と情報整備、写真20枚の登録</td>
+<td>3時間</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Google Analytics 4 と Search Console の設置（制作会社に依頼、または自社で）</td>
+<td>1時間</td>
+</tr>
+<tr>
+<td>3</td>
+<td>手持ちの施工写真を棚卸しし、掲載できる案件をリストアップ</td>
+<td>4時間</td>
+</tr>
+<tr>
+<td>4</td>
+<td>過去のお客様のうち、声を寄せていただけそうな方を5名リストアップ</td>
+<td>1時間</td>
+</tr>
+<tr>
+<td>5</td>
+<td>自社サイトをスマートフォンで全ページ開き、問題点を書き出す</td>
+<td>30分</td>
+</tr>
+<tr>
+<td>6</td>
+<td>競合3社のサイトをスマートフォンで見て、良い点を書き出す</td>
+<td>1時間</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>5番と6番は、代表ご自身が行ってください。</strong> 数値の報告より、実際に見たときの違和感のほうが、改善の出発点として確かです。</p></section><section class="chapter" id="ch11"><h1>11. 前提条件と要確認事項</h1><h2>1. 本設計書の作成条件</h2>
+<p>本設計書を作成した実行環境では、<strong>ネットワークの外部接続制限により対象サイト（www.juko-kensetsu.co.jp）へアクセスできませんでした。</strong>
+<code>curl</code> および Web取得ツールの双方で、egress proxy による 403（接続拒否）が返っています。Wayback Machine 等のアーカイブサービス、および企業情報サイトの本文取得も同様に遮断されました。</p>
+<p>そのため現状分析は、<strong>検索エンジンの索引に残る情報の断片から再構成した推定</strong>を含みます。</p>
+<h3>何が推定で、何が確定か</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>区分</th>
+<th>内容</th>
+<th>確度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>企業の基本情報（社名・住所・電話番号）</td>
+<td>複数の独立した情報源で一致</td>
+<td>高</td>
+</tr>
+<tr>
+<td>建設業許可番号（第063975号）</td>
+<td>複数の情報源で一致</td>
+<td>中〜高</td>
+</tr>
+<tr>
+<td>資本金（3,300万円）</td>
+<td>企業情報サイト1件の記載のみ</td>
+<td>中</td>
+</tr>
+<tr>
+<td>サイトの存在ページとURL</td>
+<td>検索索引で確認</td>
+<td>高</td>
+</tr>
+<tr>
+<td>ページタイトルの表記（分かち書き）</td>
+<td>検索結果の表示で確認</td>
+<td>高</td>
+</tr>
+<tr>
+<td>www有無・http/https の混在</td>
+<td>検索結果に両方が存在することを確認</td>
+<td>高</td>
+</tr>
+<tr>
+<td>会社の理念・訴求メッセージ</td>
+<td>検索結果のスニペットから復元</td>
+<td>中〜高</td>
+</tr>
+<tr>
+<td><strong>レスポンシブ対応の有無</strong></td>
+<td><strong>未確認・推定</strong></td>
+<td><strong>低</strong></td>
+</tr>
+<tr>
+<td><strong>施工事例の個別ページの有無</strong></td>
+<td><strong>未確認・推定</strong></td>
+<td><strong>低</strong></td>
+</tr>
+<tr>
+<td><strong>CTAの配置状況</strong></td>
+<td><strong>未確認・推定</strong></td>
+<td><strong>低</strong></td>
+</tr>
+<tr>
+<td><strong>フォームの仕様</strong></td>
+<td><strong>未確認</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>表示速度・画像最適化の状況</strong></td>
+<td><strong>未確認</strong></td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>改善方針・情報設計・デザイン仕様・SEO設計・実施計画は、現状の細部が多少異なってもそのまま適用できる設計</strong>にしてあります。
+ただし下記の確認を経て、不要な施策の削除と、優先順位の調整を行ってください。</p>
+<hr />
+<h2>2. 実装着手前に必ず確認すること</h2>
+<h3>A. サイトの現状（実機確認）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>確認項目</th>
+<th>確認方法</th>
+<th>結果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A-1</td>
+<td>スマートフォンで全ページが正しく表示されるか</td>
+<td>iPhone / Android の実機で全ページ確認</td>
+<td></td>
+</tr>
+<tr>
+<td>A-2</td>
+<td>横スクロールが発生していないか</td>
+<td>同上</td>
+<td></td>
+</tr>
+<tr>
+<td>A-3</td>
+<td>電話番号がタップで発信できるか</td>
+<td>同上</td>
+<td></td>
+</tr>
+<tr>
+<td>A-4</td>
+<td>施工事例は個別ページになっているか、一覧のみか</td>
+<td>PCで確認</td>
+<td></td>
+</tr>
+<tr>
+<td>A-5</td>
+<td>施工事例の掲載件数</td>
+<td>同上</td>
+<td></td>
+</tr>
+<tr>
+<td>A-6</td>
+<td>問い合わせフォームの項目・自動返信・送信完了ページの有無</td>
+<td>テスト送信</td>
+<td></td>
+</tr>
+<tr>
+<td>A-7</td>
+<td>各ページの title / description の現状</td>
+<td>ソース表示</td>
+<td></td>
+</tr>
+<tr>
+<td>A-8</td>
+<td>画像のalt属性の設定状況</td>
+<td>ソース表示</td>
+<td></td>
+</tr>
+<tr>
+<td>A-9</td>
+<td>見出しタグ（h1〜h3）の使われ方</td>
+<td>ソース表示</td>
+<td></td>
+</tr>
+<tr>
+<td>A-10</td>
+<td>構造化データの有無</td>
+<td>リッチリザルトテスト</td>
+<td></td>
+</tr>
+<tr>
+<td>A-11</td>
+<td>OGP・faviconの設定</td>
+<td>ソース表示</td>
+<td></td>
+</tr>
+<tr>
+<td>A-12</td>
+<td>sitemap.xml / robots.txt の有無</td>
+<td><code>/sitemap.xml</code>, <code>/robots.txt</code> にアクセス</td>
+<td></td>
+</tr>
+<tr>
+<td>A-13</td>
+<td>表示速度（モバイル・PC）</td>
+<td>PageSpeed Insights</td>
+<td></td>
+</tr>
+<tr>
+<td>A-14</td>
+<td>httpsでアクセスできるか、警告が出ないか</td>
+<td>ブラウザで確認</td>
+<td></td>
+</tr>
+<tr>
+<td>A-15</td>
+<td>施工事例・お問い合わせページの実際のURL</td>
+<td>サイト内のリンクを確認</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h3>B. 運用・契約の状況（社内確認）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>確認項目</th>
+<th>結果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>B-1</td>
+<td>現在のサイトは誰が制作し、誰が保守しているか</td>
+<td></td>
+</tr>
+<tr>
+<td>B-2</td>
+<td>更新を社内でできる状態か（CMSの有無）</td>
+<td></td>
+</tr>
+<tr>
+<td>B-3</td>
+<td>サーバー・ドメインの契約先と管理アカウントの所在</td>
+<td></td>
+</tr>
+<tr>
+<td>B-4</td>
+<td>ドメインの有効期限と自動更新設定</td>
+<td></td>
+</tr>
+<tr>
+<td>B-5</td>
+<td>Google Analytics / Search Console は導入済みか。アカウントは誰が持っているか</td>
+<td></td>
+</tr>
+<tr>
+<td>B-6</td>
+<td>Googleビジネスプロフィールのオーナー確認は済んでいるか</td>
+<td></td>
+</tr>
+<tr>
+<td>B-7</td>
+<td>現在の問い合わせ数（月あたり、フォーム・電話それぞれ）</td>
+<td></td>
+</tr>
+<tr>
+<td>B-8</td>
+<td>問い合わせのうち、Web経由は何割か</td>
+<td></td>
+</tr>
+<tr>
+<td>B-9</td>
+<td>現在の集客経路の内訳（紹介・Web・チラシ・看板など）</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h3>C. 企業情報の確定（掲載に必要）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>項目</th>
+<th>現在の把握状況</th>
+<th>確定値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C-1</td>
+<td>代表者名</td>
+<td>不明</td>
+<td></td>
+</tr>
+<tr>
+<td>C-2</td>
+<td>設立年月日</td>
+<td>不明</td>
+<td></td>
+</tr>
+<tr>
+<td>C-3</td>
+<td>創業年（設計事務所としての）</td>
+<td>不明</td>
+<td></td>
+</tr>
+<tr>
+<td>C-4</td>
+<td>従業員数</td>
+<td>4〜30名（情報源により差）</td>
+<td></td>
+</tr>
+<tr>
+<td>C-5</td>
+<td>FAX番号</td>
+<td>不明</td>
+<td></td>
+</tr>
+<tr>
+<td>C-6</td>
+<td>建設業許可の区分と有効期限</td>
+<td>東京都知事許可 第063975号（建築工事業）。般/特の別と更新年が不明</td>
+<td></td>
+</tr>
+<tr>
+<td>C-7</td>
+<td>宅地建物取引業免許番号</td>
+<td>保有は確認済み、番号不明</td>
+<td></td>
+</tr>
+<tr>
+<td>C-8</td>
+<td>一級建築士事務所の登録番号（重光企画設計）</td>
+<td>不明</td>
+<td></td>
+</tr>
+<tr>
+<td>C-9</td>
+<td>有資格者の人数（一級建築士、二級建築士、施工管理技士など）</td>
+<td>不明</td>
+<td></td>
+</tr>
+<tr>
+<td>C-10</td>
+<td>加盟団体</td>
+<td>不明</td>
+<td></td>
+</tr>
+<tr>
+<td>C-11</td>
+<td>沿革の年表（主要な出来事と年）</td>
+<td>不明</td>
+<td></td>
+</tr>
+<tr>
+<td>C-12</td>
+<td>対応エリア（実際に施工している市区町村）</td>
+<td>八王子中心と推定</td>
+<td></td>
+</tr>
+<tr>
+<td>C-13</td>
+<td>年間の施工棟数</td>
+<td>不明</td>
+<td></td>
+</tr>
+<tr>
+<td>C-14</td>
+<td>保証・アフターサービスの内容（保証年数、点検の頻度）</td>
+<td>不明</td>
+<td></td>
+</tr>
+<tr>
+<td>C-15</td>
+<td>重光企画設計株式会社との役割分担の実態</td>
+<td>不明</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>C-6、C-7、C-14 は特に重要です。</strong> 許可番号と保証内容は、検討者が必ず確認する項目です。</p>
+</blockquote>
+<h3>D. 事業方針の確認（ヒアリング）</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>質問</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D-1</td>
+<td>今後、注文住宅・リノベーション・医院店舗・公共施設のどれを伸ばしたいか</td>
+</tr>
+<tr>
+<td>D-2</td>
+<td>対応可能な年間の受注棟数（増やしたいのか、質を保ちたいのか）</td>
+</tr>
+<tr>
+<td>D-3</td>
+<td>価格帯を公開することへの抵抗はあるか</td>
+</tr>
+<tr>
+<td>D-4</td>
+<td>施工事例の写真撮影に、予算をどこまで充てられるか</td>
+</tr>
+<tr>
+<td>D-5</td>
+<td>公開後、社内で更新できる人はいるか</td>
+</tr>
+<tr>
+<td>D-6</td>
+<td>採用（職人・設計）の課題はあるか（<code>/recruit/</code> の必要性判断）</td>
+</tr>
+<tr>
+<td>D-7</td>
+<td>宅建業免許を活かした土地探しのサービスを訴求したいか（<code>/land/</code> の必要性判断）</td>
+</tr>
+<tr>
+<td>D-8</td>
+<td>完成見学会・構造見学会は実施しているか</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>3. 確認結果による設計の変更ポイント</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>確認結果</th>
+<th>設計への影響</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A-1がすでに問題ない（レスポンシブ済み）</td>
+<td>Phase 1の最優先施策が不要に。Phase 2を前倒しできる。費用は30〜60万円削減</td>
+</tr>
+<tr>
+<td>A-4で個別ページが既にある</td>
+<td>事例のCMS化が不要または軽微に。既存ページの内容充実に振り替える</td>
+</tr>
+<tr>
+<td>A-6でフォームが正常動作している</td>
+<td>フォーム刷新の優先度を下げ、サンクスページ追加のみに</td>
+</tr>
+<tr>
+<td>B-2でCMSが既にある</td>
+<td>構築方式の再検討（既存CMSの活用も選択肢）</td>
+</tr>
+<tr>
+<td>B-6が未確認</td>
+<td>Googleビジネスプロフィールを最優先で実施（効果が最も早い）</td>
+</tr>
+<tr>
+<td>D-3で価格公開に強い抵抗がある</td>
+<td>04-6の費用セクションを「費用の考え方」のみに縮小</td>
+</tr>
+<tr>
+<td>D-5で更新できる人がいない</td>
+<td>保守契約に更新代行を含める。または更新の容易さを最優先に構築方式を選定</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>4. この設計書の使い方</h2>
+<h3>社内で検討する場合</h3>
+<ol>
+<li>本章の確認表（A〜D）を埋める</li>
+<li><code>00_エグゼクティブサマリー.md</code> と <code>10_実施計画・体制・概算費用.md</code> で方針と予算を決める</li>
+<li>Phase 1 の「今月やること」（10章 第6節）から着手する</li>
+</ol>
+<h3>制作会社に発注する場合</h3>
+<ol>
+<li>本章の確認表を埋めた上で、<strong>設計書一式（<code>docs/</code> と <code>images/</code>）をそのまま渡す</strong></li>
+<li>特に以下を発注仕様として明示する
+   - 03章の301リダイレクト対応表
+   - 05章のデザインガイドライン（カラー・タイポグラフィ・コンポーネント）
+   - 06章の title / description 設定表と構造化データ
+   - 07章の納品物リスト</li>
+<li>10章 第4節の「制作会社選定時の確認事項」8項目を、見積依頼時に質問する</li>
+</ol>
+<h3>相見積もりを取る場合</h3>
+<p>同じ設計書を複数社に渡してください。<strong>仕様が揃っていないと、見積金額を比較できません。</strong>
+安い見積もりが出てきたら、「何が含まれていないか」を確認してください。多くの場合、301リダイレクト、構造化データ、更新マニュアル、写真撮影のいずれかが抜けています。</p>
+<hr />
+<h2>5. 免責</h2>
+<ul>
+<li>本設計書に記載した企業情報は、公開情報から収集したものです。<strong>掲載前に必ず自社で正確性を確認してください。</strong></li>
+<li>目標値（KPI）は業界の一般的な水準からの推定であり、達成を保証するものではありません。</li>
+<li>概算費用は2026年時点の一般的な相場からの推定です。制作会社・条件により変動します。</li>
+<li>競合に関する記述は、公開情報に基づく一般的な傾向であり、特定企業を評価するものではありません。</li>
+</ul></section>
+<section class="chapter" id="figs"><h1>付録. 図版一覧</h1><div class="figs"><figure><figcaption>現行サイト構成（推定）　<code>images/01_sitemap_current.png</code></figcaption><img src="images/01_sitemap_current.png" alt="現行サイト構成（推定）" loading="lazy"></figure><figure><figcaption>提案サイト構成　<code>images/02_sitemap_proposed.png</code></figcaption><img src="images/02_sitemap_proposed.png" alt="提案サイト構成" loading="lazy"></figure><figure><figcaption>ユーザー導線図　<code>images/03_user_flow.png</code></figcaption><img src="images/03_user_flow.png" alt="ユーザー導線図" loading="lazy"></figure><figure><figcaption>カラー・タイポグラフィ仕様　<code>images/04_design_tokens.png</code></figcaption><img src="images/04_design_tokens.png" alt="カラー・タイポグラフィ仕様" loading="lazy"></figure><figure><figcaption>改善施策 優先度マトリクス　<code>images/05_priority_matrix.png</code></figcaption><img src="images/05_priority_matrix.png" alt="改善施策 優先度マトリクス" loading="lazy"></figure><figure><figcaption>共通レイアウト・グリッド仕様　<code>images/06_layout_grid.png</code></figcaption><img src="images/06_layout_grid.png" alt="共通レイアウト・グリッド仕様" loading="lazy"></figure><figure><figcaption>ワイヤーフレーム：トップページ（PC）　<code>images/10_wf_top_pc.png</code></figcaption><img src="images/10_wf_top_pc.png" alt="ワイヤーフレーム：トップページ（PC）" loading="lazy"></figure><figure><figcaption>ワイヤーフレーム：トップページ（スマートフォン）　<code>images/11_wf_top_sp.png</code></figcaption><img src="images/11_wf_top_sp.png" alt="ワイヤーフレーム：トップページ（スマートフォン）" loading="lazy"></figure><figure><figcaption>ワイヤーフレーム：家づくりのこだわり　<code>images/12_wf_concept_pc.png</code></figcaption><img src="images/12_wf_concept_pc.png" alt="ワイヤーフレーム：家づくりのこだわり" loading="lazy"></figure><figure><figcaption>ワイヤーフレーム：施工事例 一覧　<code>images/13_wf_works_list_pc.png</code></figcaption><img src="images/13_wf_works_list_pc.png" alt="ワイヤーフレーム：施工事例 一覧" loading="lazy"></figure><figure><figcaption>ワイヤーフレーム：施工事例 詳細　<code>images/14_wf_works_detail_pc.png</code></figcaption><img src="images/14_wf_works_detail_pc.png" alt="ワイヤーフレーム：施工事例 詳細" loading="lazy"></figure><figure><figcaption>ワイヤーフレーム：お客様の声　<code>images/15_wf_voice_pc.png</code></figcaption><img src="images/15_wf_voice_pc.png" alt="ワイヤーフレーム：お客様の声" loading="lazy"></figure><figure><figcaption>ワイヤーフレーム：家づくりの流れ・費用　<code>images/16_wf_flow_pc.png</code></figcaption><img src="images/16_wf_flow_pc.png" alt="ワイヤーフレーム：家づくりの流れ・費用" loading="lazy"></figure><figure><figcaption>ワイヤーフレーム：会社案内　<code>images/17_wf_company_pc.png</code></figcaption><img src="images/17_wf_company_pc.png" alt="ワイヤーフレーム：会社案内" loading="lazy"></figure><figure><figcaption>ワイヤーフレーム：お問い合わせ（PC）　<code>images/18_wf_contact_pc.png</code></figcaption><img src="images/18_wf_contact_pc.png" alt="ワイヤーフレーム：お問い合わせ（PC）" loading="lazy"></figure><figure><figcaption>ワイヤーフレーム：お問い合わせ（スマートフォン）　<code>images/19_wf_contact_sp.png</code></figcaption><img src="images/19_wf_contact_sp.png" alt="ワイヤーフレーム：お問い合わせ（スマートフォン）" loading="lazy"></figure></div></section>
+</div>
+</body>
+</html>

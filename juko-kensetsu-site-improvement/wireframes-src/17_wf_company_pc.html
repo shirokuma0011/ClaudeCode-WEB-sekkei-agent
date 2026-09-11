@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="utf-8"><title>17 会社案内（PC）</title>
+<style id="kit">
+/* ============================================================
+   重光建設株式会社 サイト改善設計  wireframe kit  v1.0 2026-09-11
+   Lo-fi grayscale wireframe kit. Inlined into each HTML by build.sh
+   ============================================================ */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:"IPAPGothic","IPAGothic",sans-serif;color:#333;background:#fff;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,p,ul,ol,figure,table{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:inherit;text-decoration:none}
+b,strong{font-weight:bold}
+.mono{font-family:"DejaVu Sans Mono","Liberation Mono",monospace}
+
+/* ---- title strip (top of every image) ---- */
+.titlebar{background:#222;color:#fff;font-size:14px;line-height:1;padding:12px 18px;letter-spacing:.03em;display:flex;justify-content:space-between;align-items:center}
+.titlebar .ver{opacity:.75;font-size:12px}
+
+/* ---- placeholders & blocks ---- */
+.ph{position:relative;border:1.5px dashed #9A9A9A;background-color:#F4F4F4;
+  background-image:
+    linear-gradient(to top right,transparent calc(50% - .75px),#C6C6C6 calc(50% - .75px),#C6C6C6 calc(50% + .75px),transparent calc(50% + .75px)),
+    linear-gradient(to top left ,transparent calc(50% - .75px),#C6C6C6 calc(50% - .75px),#C6C6C6 calc(50% + .75px),transparent calc(50% + .75px));
+  display:flex;align-items:center;justify-content:center;color:#555;font-size:13px;overflow:hidden}
+.ph>.lbl{background:rgba(255,255,255,.94);padding:3px 9px;border:1px solid #BBB;border-radius:3px;white-space:nowrap;line-height:1.5}
+.blk{background:#E9E9E9}
+.bar{height:9px;background:#DCDCDC;border-radius:4px;margin:8px 0}
+.bar.w90{width:90%}.bar.w80{width:80%}.bar.w70{width:70%}.bar.w60{width:60%}.bar.w50{width:50%}.bar.w40{width:40%}.bar.w30{width:30%}
+.bars .bar:last-child{width:62%}
+.bars.sm .bar{height:7px;margin:6px 0}
+
+/* ---- buttons ---- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:0 26px;height:48px;border:2px solid #2F5D4B;border-radius:4px;font-size:15px;font-weight:bold;color:#2F5D4B;background:#fff;white-space:nowrap;line-height:1}
+.btn.pri{background:#2F5D4B;color:#fff}
+.btn.sm{height:38px;padding:0 16px;font-size:13px}
+.btn.lg{height:60px;padding:0 40px;font-size:18px}
+.btn.blk-w{width:100%}
+.tag{display:inline-block;background:#E2E2E2;color:#333;font-size:12px;padding:2px 9px;border-radius:3px;line-height:1.5;white-space:nowrap}
+.tag.dk{background:#555;color:#fff}
+.ico{display:inline-block;width:18px;height:18px;border:2px solid currentColor;border-radius:50%;flex:none;position:relative}
+.ico.tel::after{content:"";position:absolute;left:5px;top:3px;width:4px;height:8px;border:2px solid currentColor;border-radius:2px}
+
+/* ---- annotations ---- */
+.an{position:absolute;top:8px;left:8px;width:30px;height:30px;border-radius:50%;background:#C0392B;color:#fff;font-weight:bold;font-size:16px;display:flex;align-items:center;justify-content:center;z-index:20;box-shadow:0 0 0 3px #fff;line-height:1}
+.an.inl{position:static;display:inline-flex;width:26px;height:26px;font-size:14px;box-shadow:none;flex:none}
+.legend{margin:32px 40px 40px;border:2px solid #C0392B;border-radius:6px;background:#FFF8F6;padding:18px 22px 14px}
+.legend h3{color:#C0392B;font-size:15px;margin-bottom:10px;letter-spacing:.04em}
+.legend li{display:flex;align-items:flex-start;gap:10px;font-size:15px;line-height:1.55;margin:7px 0}
+.legend li .an.inl{margin-top:2px}
+.sp .legend{margin:24px 12px 28px;padding:14px 14px 10px}
+.sp .legend li{font-size:14px}
+
+/* ---- notes ---- */
+.note{border:1px solid #BBB;background:#FAFAFA;padding:12px 16px;font-size:13px;line-height:1.75}
+.note.warn{border-color:#C0392B;background:#FFF8F6}
+.note h4{font-size:13px;margin-bottom:4px}
+.foot{color:#666;font-size:13px;margin-top:20px}
+
+/* ---- diagram common ---- */
+.dg{padding:30px 40px 36px}
+.dg h2{font-size:22px;margin-bottom:6px;letter-spacing:.04em}
+.dg .sub{color:#666;font-size:14px;margin-bottom:24px}
+.node{display:inline-block;border:2px solid #555;background:#fff;border-radius:4px;padding:8px 10px;font-size:13px;line-height:1.4;text-align:center;min-width:120px}
+.node .url{display:block;color:#666;font-size:11px;margin-top:2px;font-family:"DejaVu Sans Mono","Liberation Mono",monospace}
+.node.root{background:#333;color:#fff;border-color:#333}
+.node.root .url{color:#DDD}
+.node.dash{border-style:dashed;border-color:#888;color:#666;background:#FAFAFA}
+.bd{display:inline-block;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:bold;vertical-align:middle;margin-left:4px;line-height:1.5}
+.bd.new{background:#C0392B;color:#fff}
+.bd.merge{background:#2E6DB4;color:#fff}
+.bd.p2{border:1.5px dashed #888;color:#666;background:#fff}
+
+/* CSS org-chart tree */
+.tree ul{padding-top:22px;position:relative;display:flex;justify-content:center;align-items:flex-start;margin:0}
+.tree>ul{padding-top:0}
+.tree li{text-align:center;position:relative;padding:22px 5px 0 5px}
+.tree>ul>li{padding-top:0}
+.tree li::before,.tree li::after{content:"";position:absolute;top:0;right:50%;border-top:2px solid #777;width:50%;height:22px}
+.tree li::after{right:auto;left:50%;border-left:2px solid #777}
+.tree li:only-child::after,.tree li:only-child::before{display:none}
+.tree li:only-child{padding-top:22px}
+.tree li:first-child::before,.tree li:last-child::after{border:0 none}
+.tree li:last-child::before{border-right:2px solid #777;border-radius:0 5px 0 0}
+.tree li:first-child::after{border-radius:5px 0 0 0}
+.tree ul ul::before,.tree li:only-child::before{content:"";position:absolute;top:0;left:50%;border-left:2px solid #777;width:0;height:22px;display:block;border-top:0;right:auto}
+.tree>ul>li::before,.tree>ul>li::after,.tree>ul>li:only-child::before{display:none}
+.tree>ul>li:only-child{padding-top:0}
+.tree>ul>li>ul::before{display:block}
+
+/* flow arrows */
+.arr{flex:none;width:34px;height:2px;background:#555;position:relative;margin:0 2px}
+.arr::after{content:"";position:absolute;right:-1px;top:-5px;border:6px solid transparent;border-left:8px solid #555;border-right:0}
+.arr.dn{width:2px;height:28px;margin:2px auto}
+.arr.dn::after{right:auto;left:-5px;top:auto;bottom:-1px;border:6px solid transparent;border-top:8px solid #555;border-bottom:0}
+
+/* ---- wireframe common (PC) ---- */
+.wf{width:1280px;margin:0 auto;background:#fff;position:relative}
+.container{width:1120px;margin:0 auto;position:relative}
+.wf-header{height:80px;border-bottom:2px solid #333;display:flex;align-items:center;padding:0 40px;gap:28px;position:relative;background:#fff}
+.logo{font-size:20px;font-weight:bold;line-height:1.2;white-space:nowrap}
+.logo small{display:block;font-size:11px;color:#666;font-weight:normal;margin-top:3px}
+.nav{display:flex;gap:20px;font-size:14px;margin-left:auto;white-space:nowrap}
+.tel{font-weight:bold;font-size:18px;line-height:1.2;white-space:nowrap;display:flex;align-items:center;gap:8px}
+.tel small{display:block;font-size:11px;font-weight:normal;color:#555;margin-top:2px}
+.sec{position:relative;padding:64px 0}
+.sec.alt{background:#F1F1F1}
+.sec.tight{padding:40px 0}
+.h2{font-size:28px;font-weight:bold;text-align:center;margin-bottom:32px;letter-spacing:.04em;line-height:1.3}
+.h2 small{display:block;font-size:13px;color:#666;font-weight:normal;margin-top:6px;letter-spacing:.1em}
+.h2.left{text-align:left}
+.h3{font-size:18px;font-weight:bold;margin-bottom:10px;line-height:1.4}
+.lead{font-size:16px;line-height:1.9;text-align:center;color:#444;margin-bottom:24px}
+.grid{display:grid;gap:32px}
+.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.card{border:1.5px solid #AAA;background:#fff;border-radius:4px;overflow:hidden}
+.card .body{padding:14px 16px 16px}
+.card .ttl{font-weight:bold;font-size:15px;margin:8px 0 4px;line-height:1.4}
+.center{text-align:center}
+.mt8{margin-top:8px}.mt16{margin-top:16px}.mt24{margin-top:24px}.mt32{margin-top:32px}.mt40{margin-top:40px}
+.cta-band{background:#E9E9E9;border-top:2px solid #333;border-bottom:2px solid #333;text-align:center;padding:52px 0;position:relative}
+.cta-band .h2{margin-bottom:20px}
+.cta-row{display:flex;justify-content:center;align-items:center;gap:40px}
+.cta-tel{font-size:34px;font-weight:bold;line-height:1.1;display:flex;align-items:center;gap:12px}
+.cta-tel small{display:block;font-size:13px;font-weight:normal;color:#555;margin-top:6px}
+.wf-footer{background:#DDDDDD;padding:40px 40px 24px;border-top:2px solid #333;font-size:13px}
+.wf-footer .row{display:flex;justify-content:space-between;align-items:flex-start;gap:40px}
+.wf-footer .fnav{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px}
+.wf-footer .copy{margin-top:22px;padding-top:12px;border-top:1px solid #AAA;text-align:center;color:#555;font-size:12px}
+.pagehero{background:#EFEFEF;border-bottom:1.5px solid #CCC;padding:44px 0 40px;text-align:center;position:relative}
+.pagehero h1{font-size:34px;letter-spacing:.06em;margin-bottom:8px;line-height:1.3}
+.pagehero .lead{margin-bottom:0}
+.crumb{font-size:12px;color:#666;padding:12px 0}
+.tbl{width:100%;border-collapse:collapse;background:#fff}
+.tbl th,.tbl td{border:1px solid #BBB;padding:10px 14px;text-align:left;font-size:14px;vertical-align:top;line-height:1.5}
+.tbl th{background:#EFEFEF;width:190px;font-weight:bold}
+.tabs{display:flex;justify-content:center;gap:8px;margin-bottom:32px;flex-wrap:wrap}
+.tabs span{display:inline-block;padding:9px 20px;border:1.5px solid #555;border-radius:24px;font-size:14px;background:#fff}
+.tabs span.on{background:#333;color:#fff;border-color:#333}
+
+/* forms */
+.fld{margin-bottom:18px}
+.fld label{display:block;font-weight:bold;font-size:14px;margin-bottom:6px}
+.req{display:inline-block;background:#C0392B;color:#fff;font-size:11px;padding:1px 6px;border-radius:3px;margin-left:8px;font-weight:bold;vertical-align:middle}
+.opt{display:inline-block;background:#888;color:#fff;font-size:11px;padding:1px 6px;border-radius:3px;margin-left:8px;font-weight:normal;vertical-align:middle}
+.inp{height:48px;border:1.5px solid #888;border-radius:4px;background:#fff;padding:0 12px;display:flex;align-items:center;color:#999;font-size:14px}
+.inp.ta{height:140px;align-items:flex-start;padding-top:10px}
+.radios{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:14px}
+.radios span,.chk{display:inline-flex;align-items:center;gap:6px}
+.radios span::before{content:"";width:18px;height:18px;border:1.5px solid #666;border-radius:50%;background:#fff;flex:none}
+.chk::before{content:"";width:18px;height:18px;border:1.5px solid #666;border-radius:3px;background:#fff;flex:none}
+.hint{font-size:12px;color:#666;margin-top:4px}
+
+/* ---- SP ---- */
+.sp{width:390px;margin:0 auto;background:#fff;position:relative}
+.sp .container{width:auto;padding:0 16px}
+.sp .sec{padding:40px 0}
+.sp .h2{font-size:22px;margin-bottom:20px}
+.sp .grid{gap:16px}
+.sp .g2,.sp .g3,.sp .g4{grid-template-columns:1fr}
+.sp .g2.keep{grid-template-columns:1fr 1fr}
+.sp .card .body{padding:12px 14px 14px}
+.sp .cta-band{padding:36px 0}
+.sp .cta-tel{font-size:26px}
+.sp .wf-footer{padding:28px 16px 24px}
+.sp .wf-footer .row{flex-direction:column;gap:20px}
+.sp .legend{margin:20px 12px 24px}
+.sp-header{height:60px;border-bottom:2px solid #333;display:flex;align-items:center;padding:0 12px 0 16px;gap:12px;position:relative;background:#fff}
+.sp-header .logo{font-size:16px}
+.sp-header .logo small{font-size:10px}
+.sp-header .icons{margin-left:auto;display:flex;gap:8px}
+.sp-header .icons>span{width:40px;height:40px;border:1.5px solid #333;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:bold}
+.sp-header .icons>span.telbtn{background:#2F5D4B;color:#fff;border-color:#2F5D4B}
+.sp-fixbar{height:64px;display:flex;border-top:2px solid #333;background:#fff;position:relative;z-index:10;box-shadow:0 -6px 12px rgba(0,0,0,.12)}
+.sp-fixbar>span{flex:1;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:16px;gap:8px}
+.sp-fixbar>span:first-child{background:#fff;color:#2F5D4B;border-right:2px solid #333}
+.sp-fixbar>span:last-child{background:#2F5D4B;color:#fff}
+
+</style>
+<style>
+
+.anchors{display:flex;justify-content:center;gap:10px;margin-top:22px;position:relative}
+.anchors span{border:1.5px solid #555;background:#fff;border-radius:24px;padding:9px 22px;font-size:14px}
+.anchors span::after{content:" ▼";font-size:10px}
+.greet{display:grid;grid-template-columns:400px 1fr;gap:48px;align-items:start}
+.greet .ph{height:480px}
+.greet h3{font-size:24px;line-height:1.5;margin-bottom:16px;letter-spacing:.04em}
+.greet p{font-size:15px;line-height:1.95;color:#444;margin-bottom:12px}
+.greet .name{margin-top:20px;font-size:15px;text-align:right}
+.greet .name b{font-size:20px;margin-left:10px}
+.his{border-left:3px solid #333;margin-left:120px;padding-left:36px;position:relative}
+.his li{position:relative;padding:0 0 30px;display:grid;grid-template-columns:120px 1fr;gap:16px;font-size:15px}
+.his li::before{content:"";position:absolute;left:-45px;top:4px;width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid #333}
+.his li .y{font-weight:bold;color:#2F5D4B;font-size:16px}
+.his li p{color:#444;line-height:1.7}
+.his li p small{display:block;color:#888;font-size:12px}
+.stf .ph{height:220px}
+.stf .role{font-size:12px;color:#666}
+.stf .nm{font-weight:bold;font-size:16px;margin:4px 0 6px}
+.stf .q{font-size:12.5px;color:#555;line-height:1.6}
+.stf .q .tag{margin:2px 4px 2px 0;font-size:11px}
+.acc{display:grid;grid-template-columns:1fr 480px;gap:40px;align-items:start}
+.acc .ph{height:360px}
+.acc .tbl th{width:120px}
+.h2.anc{margin-bottom:28px}
+
+</style></head><body><div class="titlebar"><span>重光建設株式会社 サイト改善設計｜会社案内 ワイヤーフレーム（PC 1280px）｜v1.0 2026-09-11</span><span class="ver">17_wf_company_pc</span></div>
+<div class="wf">
+  <header class="wf-header">
+    <div class="logo">重光建設株式会社<small>設計事務所が原点の工務店｜東京都八王子市</small></div>
+    <nav class="nav"><span>家づくりのこだわり</span><span>施工事例</span><span>お客様の声</span><span>家づくりの流れ</span><span>会社案内</span><span>お知らせ</span></nav>
+    <div class="tel"><span class="ico tel"></span><span>042-642-8180<small>受付 9:00〜17:00（日祝除く）</small></span></div>
+    <span class="btn pri sm" style="height:44px">無料相談・お問い合わせ</span>
+  </header>
+  <section class="pagehero"><span class="an">1</span>
+    <h1>会社案内</h1>
+    <p class="lead">設計事務所として創業し、施工まで手がける八王子の工務店です。</p><div class="anchors"><span>代表挨拶</span><span>会社概要</span><span>沿革</span><span>スタッフ</span><span>アクセス</span></div>
+  </section>
+  <section class="sec" id="greeting">
+    <span class="an">2</span>
+    <div class="container">
+      <h2 class="h2 anc">代表挨拶<small>MESSAGE</small></h2>
+      <div class="greet">
+        <div class="ph"><span class="lbl">写真：代表（自然光・現場 or 事務所）</span></div>
+        <div>
+          <h3>より良い家をつくりたい。<br>その一心で、設計から施工へ。</h3>
+          <p>重光建設は設計事務所として創業しました。図面を描くだけでは、思い描いた品質の家が建たない――そのもどかしさから、自ら施工にも携わるようになったのが私たちの原点です。</p>
+          <p>本物の素材と職人の手仕事で、流行に流されない家をつくること。時と共に価値と愛着が増し、次の世代に誇れる家を残すこと。そして、誠実な対応で「任せて安心」と言っていただけること。この3つを大切にしています。</p>
+          <div class="bars "><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+          <p class="name">重光建設株式会社 代表取締役<b>○○ ○○</b></p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="sec alt" id="outline">
+    <span class="an">3</span>
+    <div class="container">
+      <h2 class="h2 anc">会社概要<small>OUTLINE</small></h2>
+      <table class="tbl">
+        <tr><th>会社名</th><td>重光建設株式会社</td></tr>
+        <tr><th>所在地</th><td>〒192-0045 東京都八王子市大和田町1-32-1</td></tr>
+        <tr><th>TEL・FAX</th><td>TEL 042-642-8180（受付 9:00〜17:00 日曜・祝日除く）／ FAX 042-XXX-XXXX（要確認）</td></tr>
+        <tr><th>設立</th><td>○○○○年（要確認）</td></tr>
+        <tr><th>資本金</th><td>3,300万円</td></tr>
+        <tr><th>代表者</th><td>代表取締役 ○○ ○○（要確認）</td></tr>
+        <tr><th>事業内容</th><td>注文住宅の設計・施工／リノベーション・リフォーム／医院・店舗の設計・施工／公共施設・木造建築（中学校・公民館・木造県営住宅など）／不動産（土地探し）</td></tr>
+        <tr><th>建設業許可</th><td>東京都知事許可 第063975号（建築工事業）</td></tr>
+        <tr><th>宅地建物取引業免許</th><td>東京都知事（X）第XXXXX号（要確認）</td></tr>
+        <tr><th>関連会社</th><td>重光企画設計株式会社（同住所）</td></tr>
+      </table>
+    </div>
+  </section>
+  <section class="sec" id="history">
+    <div class="container">
+      <h2 class="h2 anc">沿革<small>HISTORY</small></h2>
+      <ul class="his">
+        <li><span class="y">○○○○年</span><p>設計事務所として創業<small>※年次は現行「沿革」ページを確認して記入</small></p></li>
+        <li><span class="y">○○○○年</span><p>より良い家づくりのため、施工部門を開始</p></li>
+        <li><span class="y">○○○○年</span><p>重光建設株式会社 設立（設計部門は重光企画設計株式会社として分社）</p></li>
+        <li><span class="y">○○○○年</span><p>公共施設・木造建築（中学校・公民館・木造県営住宅など）の実績を重ねる</p></li>
+        <li><span class="y">現在</span><p>八王子・多摩エリアを中心に、注文住宅・リノベーション・医院/店舗建築を手がける</p></li>
+      </ul>
+    </div>
+  </section>
+  <section class="sec alt" id="staff">
+    <div class="container">
+      <h2 class="h2 anc">スタッフ<small>STAFF</small></h2>
+      <div class="grid g4"><div class="card stf"><div class="ph"><span class="lbl">写真：スタッフ</span></div><div class="body"><p class="role">代表取締役／一級建築士</p><p class="nm">○○ ○○</p><p class="q"><span class="tag">一級建築士</span><span class="tag">宅地建物取引士</span></p><div class="bars sm"><div class="bar"></div><div class="bar"></div></div></div></div><div class="card stf"><div class="ph"><span class="lbl">写真：スタッフ</span></div><div class="body"><p class="role">設計担当／一級建築士</p><p class="nm">○○ ○○</p><p class="q"><span class="tag">一級建築士</span><span class="tag">既存住宅状況調査技術者</span></p><div class="bars sm"><div class="bar"></div><div class="bar"></div></div></div></div><div class="card stf"><div class="ph"><span class="lbl">写真：スタッフ</span></div><div class="body"><p class="role">工事担当／施工管理技士</p><p class="nm">○○ ○○</p><p class="q"><span class="tag">1級建築施工管理技士</span><span class="tag">二級建築士</span></p><div class="bars sm"><div class="bar"></div><div class="bar"></div></div></div></div><div class="card stf"><div class="ph"><span class="lbl">写真：スタッフ</span></div><div class="body"><p class="role">工事担当／二級建築士</p><p class="nm">○○ ○○</p><p class="q"><span class="tag">二級建築士</span><span class="tag">2級建築施工管理技士</span></p><div class="bars sm"><div class="bar"></div><div class="bar"></div></div></div></div></div>
+    </div>
+  </section>
+  <section class="sec" id="access">
+    <div class="container">
+      <h2 class="h2 anc">アクセス<small>ACCESS</small></h2>
+      <div class="acc">
+        <div class="ph"><span class="lbl">地図：Googleマップ埋め込み（事務所・駐車場をピン表示）</span></div>
+        <div>
+          <table class="tbl">
+            <tr><th>所在地</th><td>〒192-0045 東京都八王子市大和田町1-32-1</td></tr>
+            <tr><th>電車</th><td>京王線「京王八王子駅」から徒歩約20分</td></tr>
+            <tr><th>お車</th><td>駐車場あり（お越しの際はご連絡ください）</td></tr>
+            <tr><th>受付</th><td>9:00〜17:00（日曜・祝日除く）</td></tr>
+          </table>
+          <p class="mt16"><span class="btn sm">Googleマップで開く</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="cta-band">
+    <h2 class="h2">見学・ご相談はお気軽にどうぞ</h2>
+    <div class="cta-row">
+      <div class="cta-tel"><span class="ico tel" style="width:30px;height:30px"></span><span>042-642-8180<small>受付 9:00〜17:00（日曜・祝日除く）</small></span></div>
+      <span class="btn pri lg">無料相談・お問い合わせフォーム</span>
+    </div>
+  </section>
+  <footer class="wf-footer">
+    <div class="row">
+      <div><div class="logo">重光建設株式会社</div><p class="mt8">〒192-0045 東京都八王子市大和田町1-32-1<br>TEL 042-642-8180（受付 9:00〜17:00 日曜・祝日除く）<br>建設業許可 東京都知事許可 第063975号／関連会社 重光企画設計株式会社</p></div>
+      <div class="fnav"><span>家づくりのこだわり</span><span>施工事例</span><span>お客様の声</span><span>家づくりの流れ・費用</span><span>会社案内</span><span>お知らせ</span><span>お問い合わせ</span><span>プライバシーポリシー</span></div>
+    </div>
+    <p class="copy">© 2026 重光建設株式会社</p>
+  </footer>
+</div>
+<div class="legend">
+  <h3>改善ポイント（会社案内）</h3>
+  <ul>
+    <li><span class="an inl">1</span>3ページに分散した会社情報（概要・沿革・アクセス）を1ページに統合し、アンカーで移動。旧URLは301リダイレクト</li>
+    <li><span class="an inl">2</span>代表の顔と言葉で信頼形成（写真は自然光で、現場や事務所で撮影）</li>
+    <li><span class="an inl">3</span>許可番号・免許・資本金・関連会社を明記し、公共工事実績とあわせて信頼性を担保。「要確認」箇所は公開前に確定</li>
+  </ul>
+</div>
+</body></html>

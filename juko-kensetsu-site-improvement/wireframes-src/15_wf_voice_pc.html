@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="utf-8"><title>15 お客様の声（PC）</title>
+<style id="kit">
+/* ============================================================
+   重光建設株式会社 サイト改善設計  wireframe kit  v1.0 2026-09-11
+   Lo-fi grayscale wireframe kit. Inlined into each HTML by build.sh
+   ============================================================ */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:"IPAPGothic","IPAGothic",sans-serif;color:#333;background:#fff;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,p,ul,ol,figure,table{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:inherit;text-decoration:none}
+b,strong{font-weight:bold}
+.mono{font-family:"DejaVu Sans Mono","Liberation Mono",monospace}
+
+/* ---- title strip (top of every image) ---- */
+.titlebar{background:#222;color:#fff;font-size:14px;line-height:1;padding:12px 18px;letter-spacing:.03em;display:flex;justify-content:space-between;align-items:center}
+.titlebar .ver{opacity:.75;font-size:12px}
+
+/* ---- placeholders & blocks ---- */
+.ph{position:relative;border:1.5px dashed #9A9A9A;background-color:#F4F4F4;
+  background-image:
+    linear-gradient(to top right,transparent calc(50% - .75px),#C6C6C6 calc(50% - .75px),#C6C6C6 calc(50% + .75px),transparent calc(50% + .75px)),
+    linear-gradient(to top left ,transparent calc(50% - .75px),#C6C6C6 calc(50% - .75px),#C6C6C6 calc(50% + .75px),transparent calc(50% + .75px));
+  display:flex;align-items:center;justify-content:center;color:#555;font-size:13px;overflow:hidden}
+.ph>.lbl{background:rgba(255,255,255,.94);padding:3px 9px;border:1px solid #BBB;border-radius:3px;white-space:nowrap;line-height:1.5}
+.blk{background:#E9E9E9}
+.bar{height:9px;background:#DCDCDC;border-radius:4px;margin:8px 0}
+.bar.w90{width:90%}.bar.w80{width:80%}.bar.w70{width:70%}.bar.w60{width:60%}.bar.w50{width:50%}.bar.w40{width:40%}.bar.w30{width:30%}
+.bars .bar:last-child{width:62%}
+.bars.sm .bar{height:7px;margin:6px 0}
+
+/* ---- buttons ---- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:0 26px;height:48px;border:2px solid #2F5D4B;border-radius:4px;font-size:15px;font-weight:bold;color:#2F5D4B;background:#fff;white-space:nowrap;line-height:1}
+.btn.pri{background:#2F5D4B;color:#fff}
+.btn.sm{height:38px;padding:0 16px;font-size:13px}
+.btn.lg{height:60px;padding:0 40px;font-size:18px}
+.btn.blk-w{width:100%}
+.tag{display:inline-block;background:#E2E2E2;color:#333;font-size:12px;padding:2px 9px;border-radius:3px;line-height:1.5;white-space:nowrap}
+.tag.dk{background:#555;color:#fff}
+.ico{display:inline-block;width:18px;height:18px;border:2px solid currentColor;border-radius:50%;flex:none;position:relative}
+.ico.tel::after{content:"";position:absolute;left:5px;top:3px;width:4px;height:8px;border:2px solid currentColor;border-radius:2px}
+
+/* ---- annotations ---- */
+.an{position:absolute;top:8px;left:8px;width:30px;height:30px;border-radius:50%;background:#C0392B;color:#fff;font-weight:bold;font-size:16px;display:flex;align-items:center;justify-content:center;z-index:20;box-shadow:0 0 0 3px #fff;line-height:1}
+.an.inl{position:static;display:inline-flex;width:26px;height:26px;font-size:14px;box-shadow:none;flex:none}
+.legend{margin:32px 40px 40px;border:2px solid #C0392B;border-radius:6px;background:#FFF8F6;padding:18px 22px 14px}
+.legend h3{color:#C0392B;font-size:15px;margin-bottom:10px;letter-spacing:.04em}
+.legend li{display:flex;align-items:flex-start;gap:10px;font-size:15px;line-height:1.55;margin:7px 0}
+.legend li .an.inl{margin-top:2px}
+.sp .legend{margin:24px 12px 28px;padding:14px 14px 10px}
+.sp .legend li{font-size:14px}
+
+/* ---- notes ---- */
+.note{border:1px solid #BBB;background:#FAFAFA;padding:12px 16px;font-size:13px;line-height:1.75}
+.note.warn{border-color:#C0392B;background:#FFF8F6}
+.note h4{font-size:13px;margin-bottom:4px}
+.foot{color:#666;font-size:13px;margin-top:20px}
+
+/* ---- diagram common ---- */
+.dg{padding:30px 40px 36px}
+.dg h2{font-size:22px;margin-bottom:6px;letter-spacing:.04em}
+.dg .sub{color:#666;font-size:14px;margin-bottom:24px}
+.node{display:inline-block;border:2px solid #555;background:#fff;border-radius:4px;padding:8px 10px;font-size:13px;line-height:1.4;text-align:center;min-width:120px}
+.node .url{display:block;color:#666;font-size:11px;margin-top:2px;font-family:"DejaVu Sans Mono","Liberation Mono",monospace}
+.node.root{background:#333;color:#fff;border-color:#333}
+.node.root .url{color:#DDD}
+.node.dash{border-style:dashed;border-color:#888;color:#666;background:#FAFAFA}
+.bd{display:inline-block;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:bold;vertical-align:middle;margin-left:4px;line-height:1.5}
+.bd.new{background:#C0392B;color:#fff}
+.bd.merge{background:#2E6DB4;color:#fff}
+.bd.p2{border:1.5px dashed #888;color:#666;background:#fff}
+
+/* CSS org-chart tree */
+.tree ul{padding-top:22px;position:relative;display:flex;justify-content:center;align-items:flex-start;margin:0}
+.tree>ul{padding-top:0}
+.tree li{text-align:center;position:relative;padding:22px 5px 0 5px}
+.tree>ul>li{padding-top:0}
+.tree li::before,.tree li::after{content:"";position:absolute;top:0;right:50%;border-top:2px solid #777;width:50%;height:22px}
+.tree li::after{right:auto;left:50%;border-left:2px solid #777}
+.tree li:only-child::after,.tree li:only-child::before{display:none}
+.tree li:only-child{padding-top:22px}
+.tree li:first-child::before,.tree li:last-child::after{border:0 none}
+.tree li:last-child::before{border-right:2px solid #777;border-radius:0 5px 0 0}
+.tree li:first-child::after{border-radius:5px 0 0 0}
+.tree ul ul::before,.tree li:only-child::before{content:"";position:absolute;top:0;left:50%;border-left:2px solid #777;width:0;height:22px;display:block;border-top:0;right:auto}
+.tree>ul>li::before,.tree>ul>li::after,.tree>ul>li:only-child::before{display:none}
+.tree>ul>li:only-child{padding-top:0}
+.tree>ul>li>ul::before{display:block}
+
+/* flow arrows */
+.arr{flex:none;width:34px;height:2px;background:#555;position:relative;margin:0 2px}
+.arr::after{content:"";position:absolute;right:-1px;top:-5px;border:6px solid transparent;border-left:8px solid #555;border-right:0}
+.arr.dn{width:2px;height:28px;margin:2px auto}
+.arr.dn::after{right:auto;left:-5px;top:auto;bottom:-1px;border:6px solid transparent;border-top:8px solid #555;border-bottom:0}
+
+/* ---- wireframe common (PC) ---- */
+.wf{width:1280px;margin:0 auto;background:#fff;position:relative}
+.container{width:1120px;margin:0 auto;position:relative}
+.wf-header{height:80px;border-bottom:2px solid #333;display:flex;align-items:center;padding:0 40px;gap:28px;position:relative;background:#fff}
+.logo{font-size:20px;font-weight:bold;line-height:1.2;white-space:nowrap}
+.logo small{display:block;font-size:11px;color:#666;font-weight:normal;margin-top:3px}
+.nav{display:flex;gap:20px;font-size:14px;margin-left:auto;white-space:nowrap}
+.tel{font-weight:bold;font-size:18px;line-height:1.2;white-space:nowrap;display:flex;align-items:center;gap:8px}
+.tel small{display:block;font-size:11px;font-weight:normal;color:#555;margin-top:2px}
+.sec{position:relative;padding:64px 0}
+.sec.alt{background:#F1F1F1}
+.sec.tight{padding:40px 0}
+.h2{font-size:28px;font-weight:bold;text-align:center;margin-bottom:32px;letter-spacing:.04em;line-height:1.3}
+.h2 small{display:block;font-size:13px;color:#666;font-weight:normal;margin-top:6px;letter-spacing:.1em}
+.h2.left{text-align:left}
+.h3{font-size:18px;font-weight:bold;margin-bottom:10px;line-height:1.4}
+.lead{font-size:16px;line-height:1.9;text-align:center;color:#444;margin-bottom:24px}
+.grid{display:grid;gap:32px}
+.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.card{border:1.5px solid #AAA;background:#fff;border-radius:4px;overflow:hidden}
+.card .body{padding:14px 16px 16px}
+.card .ttl{font-weight:bold;font-size:15px;margin:8px 0 4px;line-height:1.4}
+.center{text-align:center}
+.mt8{margin-top:8px}.mt16{margin-top:16px}.mt24{margin-top:24px}.mt32{margin-top:32px}.mt40{margin-top:40px}
+.cta-band{background:#E9E9E9;border-top:2px solid #333;border-bottom:2px solid #333;text-align:center;padding:52px 0;position:relative}
+.cta-band .h2{margin-bottom:20px}
+.cta-row{display:flex;justify-content:center;align-items:center;gap:40px}
+.cta-tel{font-size:34px;font-weight:bold;line-height:1.1;display:flex;align-items:center;gap:12px}
+.cta-tel small{display:block;font-size:13px;font-weight:normal;color:#555;margin-top:6px}
+.wf-footer{background:#DDDDDD;padding:40px 40px 24px;border-top:2px solid #333;font-size:13px}
+.wf-footer .row{display:flex;justify-content:space-between;align-items:flex-start;gap:40px}
+.wf-footer .fnav{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px}
+.wf-footer .copy{margin-top:22px;padding-top:12px;border-top:1px solid #AAA;text-align:center;color:#555;font-size:12px}
+.pagehero{background:#EFEFEF;border-bottom:1.5px solid #CCC;padding:44px 0 40px;text-align:center;position:relative}
+.pagehero h1{font-size:34px;letter-spacing:.06em;margin-bottom:8px;line-height:1.3}
+.pagehero .lead{margin-bottom:0}
+.crumb{font-size:12px;color:#666;padding:12px 0}
+.tbl{width:100%;border-collapse:collapse;background:#fff}
+.tbl th,.tbl td{border:1px solid #BBB;padding:10px 14px;text-align:left;font-size:14px;vertical-align:top;line-height:1.5}
+.tbl th{background:#EFEFEF;width:190px;font-weight:bold}
+.tabs{display:flex;justify-content:center;gap:8px;margin-bottom:32px;flex-wrap:wrap}
+.tabs span{display:inline-block;padding:9px 20px;border:1.5px solid #555;border-radius:24px;font-size:14px;background:#fff}
+.tabs span.on{background:#333;color:#fff;border-color:#333}
+
+/* forms */
+.fld{margin-bottom:18px}
+.fld label{display:block;font-weight:bold;font-size:14px;margin-bottom:6px}
+.req{display:inline-block;background:#C0392B;color:#fff;font-size:11px;padding:1px 6px;border-radius:3px;margin-left:8px;font-weight:bold;vertical-align:middle}
+.opt{display:inline-block;background:#888;color:#fff;font-size:11px;padding:1px 6px;border-radius:3px;margin-left:8px;font-weight:normal;vertical-align:middle}
+.inp{height:48px;border:1.5px solid #888;border-radius:4px;background:#fff;padding:0 12px;display:flex;align-items:center;color:#999;font-size:14px}
+.inp.ta{height:140px;align-items:flex-start;padding-top:10px}
+.radios{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:14px}
+.radios span,.chk{display:inline-flex;align-items:center;gap:6px}
+.radios span::before{content:"";width:18px;height:18px;border:1.5px solid #666;border-radius:50%;background:#fff;flex:none}
+.chk::before{content:"";width:18px;height:18px;border:1.5px solid #666;border-radius:3px;background:#fff;flex:none}
+.hint{font-size:12px;color:#666;margin-top:4px}
+
+/* ---- SP ---- */
+.sp{width:390px;margin:0 auto;background:#fff;position:relative}
+.sp .container{width:auto;padding:0 16px}
+.sp .sec{padding:40px 0}
+.sp .h2{font-size:22px;margin-bottom:20px}
+.sp .grid{gap:16px}
+.sp .g2,.sp .g3,.sp .g4{grid-template-columns:1fr}
+.sp .g2.keep{grid-template-columns:1fr 1fr}
+.sp .card .body{padding:12px 14px 14px}
+.sp .cta-band{padding:36px 0}
+.sp .cta-tel{font-size:26px}
+.sp .wf-footer{padding:28px 16px 24px}
+.sp .wf-footer .row{flex-direction:column;gap:20px}
+.sp .legend{margin:20px 12px 24px}
+.sp-header{height:60px;border-bottom:2px solid #333;display:flex;align-items:center;padding:0 12px 0 16px;gap:12px;position:relative;background:#fff}
+.sp-header .logo{font-size:16px}
+.sp-header .logo small{font-size:10px}
+.sp-header .icons{margin-left:auto;display:flex;gap:8px}
+.sp-header .icons>span{width:40px;height:40px;border:1.5px solid #333;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:bold}
+.sp-header .icons>span.telbtn{background:#2F5D4B;color:#fff;border-color:#2F5D4B}
+.sp-fixbar{height:64px;display:flex;border-top:2px solid #333;background:#fff;position:relative;z-index:10;box-shadow:0 -6px 12px rgba(0,0,0,.12)}
+.sp-fixbar>span{flex:1;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:16px;gap:8px}
+.sp-fixbar>span:first-child{background:#fff;color:#2F5D4B;border-right:2px solid #333}
+.sp-fixbar>span:last-child{background:#2F5D4B;color:#fff}
+
+</style>
+<style>
+
+.vc{display:grid;grid-template-columns:220px 1fr;position:relative}
+.vc .ph{height:100%;min-height:230px;border:0;border-right:1.5px solid #AAA}
+.vc .body{padding:18px 22px 16px}
+.vc .who{font-weight:bold;font-size:15px;margin-bottom:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.vc .q{font-size:14.5px;line-height:1.85;color:#444;margin-bottom:10px}
+.vc .st{font-size:13px;color:#555;border-top:1px dashed #BBB;padding-top:8px;margin-top:6px}
+.vc .st b{color:#2F5D4B}
+.vc .lnk{font-size:13px;font-weight:bold;color:#2F5D4B;text-align:right;margin-top:8px}
+
+</style></head><body><div class="titlebar"><span>重光建設株式会社 サイト改善設計｜お客様の声 ワイヤーフレーム（PC 1280px）｜v1.0 2026-09-11</span><span class="ver">15_wf_voice_pc</span></div>
+<div class="wf">
+  <header class="wf-header">
+    <div class="logo">重光建設株式会社<small>設計事務所が原点の工務店｜東京都八王子市</small></div>
+    <nav class="nav"><span>家づくりのこだわり</span><span>施工事例</span><span>お客様の声</span><span>家づくりの流れ</span><span>会社案内</span><span>お知らせ</span></nav>
+    <div class="tel"><span class="ico tel"></span><span>042-642-8180<small>受付 9:00〜17:00（日祝除く）</small></span></div>
+    <span class="btn pri sm" style="height:44px">無料相談・お問い合わせ</span>
+  </header>
+  <section class="pagehero">
+    <h1>お客様の声</h1>
+    <p class="lead">家づくりを終えたお客様に、率直な感想をうかがいました。<br>掲載はすべてご本人の許諾をいただいたものです。</p>
+  </section>
+  <section class="sec">
+    <div class="container">
+      <div class="tabs"><span class="on">すべて</span><span>新築</span><span>リノベーション</span><span>医院・店舗</span></div>
+      <div class="grid g2">
+        <div class="card vc"><span class="an" style="left:auto;right:-14px;top:-14px">3</span><span class="an" style="left:206px;top:70px">1</span><span class="an" style="left:auto;right:-14px;bottom:-14px;top:auto">2</span><div class="ph"><span class="lbl">写真：ご家族</span></div><div class="body"><p class="who"><span>八王子市 K様</span><span class="tag">新築</span><span class="tag">2024年</span></p><p class="q">「設計の段階から私たちの暮らし方を丁寧に聞いてくださり、完成した家は想像以上でした。無垢の床は年々味が出てきて、住むほどに愛着が増しています。工事中も毎週の報告があり、安心して見守ることができました。」</p><p class="st"><b>担当者より：</b>庭と一体の平屋というご要望を、縁側の深い軒で実現しました。</p><p class="lnk">この事例を見る（八王子市 K様邸｜木の温もりを感じる平屋） →</p></div></div>
+        <div class="card vc"><div class="ph"><span class="lbl">写真：院長</span></div><div class="body"><p class="who"><span>日野市 M内科クリニック 院長</span><span class="tag">医院・店舗</span><span class="tag">2023年</span></p><p class="q">「動線や患者さんの目線まで考えた設計提案に納得。開業スケジュールに合わせた工程管理も的確で、予定どおり開院できました。」</p><p class="st"><b>担当者より：</b>待合の採光と診察室のプライバシーを両立させる配置を検討しました。</p><p class="lnk">この事例を見る（日野市 内科クリニック 新築） →</p></div></div>
+        <div class="card vc"><div class="ph"><span class="lbl">写真：ご夫婦</span></div><div class="body"><p class="who"><span>多摩市 T様</span><span class="tag">リノベーション</span><span class="tag">2024年</span></p><p class="q">「築30年の実家を残したいという想いを汲んで、構造から見直してくれました。耐震補強と断熱で、冬の寒さが嘘のようです。」</p><p class="st"><b>担当者より：</b>既存の梁を活かしつつ、耐震・断熱を現行基準まで引き上げました。</p><p class="lnk">この事例を見る（多摩市 築30年戸建てフルリノベーション） →</p></div></div>
+        <div class="card vc"><div class="ph"><span class="lbl">写真：ご家族</span></div><div class="body"><p class="who"><span>八王子市 S様</span><span class="tag">新築</span><span class="tag">2022年</span></p><p class="q">「二世帯それぞれの生活時間が違う私たちに、中庭を挟んだプランを提案してもらいました。程よい距離感で快適に暮らせています。」</p><p class="st"><b>担当者より：</b>中庭を介して気配は伝わり、音は伝わらない距離を設計しました。</p><p class="lnk">この事例を見る（八王子市 S様邸｜中庭のある二世帯住宅） →</p></div></div>
+        <div class="card vc"><div class="ph"><span class="lbl">写真：院長・スタッフ</span></div><div class="body"><p class="who"><span>あきる野市 O歯科医院</span><span class="tag">医院・店舗</span><span class="tag">2023年</span></p><p class="q">「診療を続けながらの増築工事でしたが、騒音や動線への配慮が行き届いていて、患者さんからの苦情はゼロでした。」</p><p class="st"><b>担当者より：</b>診療時間外の作業工程を組み、仮設動線を毎日確認しました。</p><p class="lnk">この事例を見る（あきる野市 歯科医院 増築・改修） →</p></div></div>
+        <div class="card vc"><div class="ph"><span class="lbl">写真：ご家族</span></div><div class="body"><p class="who"><span>町田市 M様</span><span class="tag">新築</span><span class="tag">2021年</span></p><p class="q">「薪ストーブのある家という夢を、防火や煙突の納まりまで含めて形にしてもらいました。冬は家族が自然と一箇所に集まります。」</p><p class="st"><b>担当者より：</b>ストーブを中心に吹抜けで熱を回す断面計画としました。</p><p class="lnk">この事例を見る（町田市 M様邸｜薪ストーブのある家） →</p></div></div>
+      </div>
+      <p class="center mt40"><span class="btn">もっと見る</span></p>
+    </div>
+  </section>
+  <section class="cta-band">
+    <h2 class="h2">家づくりのこと、まずはお気軽にご相談ください</h2>
+    <div class="cta-row">
+      <div class="cta-tel"><span class="ico tel" style="width:30px;height:30px"></span><span>042-642-8180<small>受付 9:00〜17:00（日曜・祝日除く）</small></span></div>
+      <span class="btn pri lg">無料相談・お問い合わせフォーム</span>
+    </div>
+  </section>
+  <footer class="wf-footer">
+    <div class="row">
+      <div><div class="logo">重光建設株式会社</div><p class="mt8">〒192-0045 東京都八王子市大和田町1-32-1<br>TEL 042-642-8180（受付 9:00〜17:00 日曜・祝日除く）<br>建設業許可 東京都知事許可 第063975号／関連会社 重光企画設計株式会社</p></div>
+      <div class="fnav"><span>家づくりのこだわり</span><span>施工事例</span><span>お客様の声</span><span>家づくりの流れ・費用</span><span>会社案内</span><span>お知らせ</span><span>お問い合わせ</span><span>プライバシーポリシー</span></div>
+    </div>
+    <p class="copy">© 2026 重光建設株式会社</p>
+  </footer>
+</div>
+<div class="legend">
+  <h3>改善ポイント（お客様の声）</h3>
+  <ul>
+    <li><span class="an inl">1</span>星評価は使わず本文で語らせる（信頼性）。ご要望→結果→暮らしの変化が伝わる3〜4行の引用</li>
+    <li><span class="an inl">2</span>事例詳細へ相互リンク（声 ⇄ 施工事例）。写真は事例と共通のものを使う</li>
+    <li><span class="an inl">3</span>掲載許諾を得た実名／イニシャル＋地域＋用途＋年で表記。担当者コメントを1行添えて双方向の関係を示す</li>
+  </ul>
+</div>
+</body></html>
