@@ -1,0 +1,3265 @@
+<title>MUTO coffee roastery 設計書</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Shippori+Mincho+B1:wght@600&display=swap">
+<style>
+:root{
+  --paper:#F4F3EE; --surface:#FBFAF7; --ink:#1E1915; --ink-2:#5B534B; --ink-3:#8A8177;
+  --roast:#4A2E22; --bean:#5F7A32; --bean-soft:#E7EDD9; --copper:#B05E2A; --copper-soft:#F4E3D5;
+  --slate:#3B5A78; --slate-soft:#DDE6EE; --stone:#6E6A62; --stone-soft:#E8E5DD;
+  --rule:#DAD5C9; --rule-soft:#E9E5DC; --code-bg:#ECE9E0; --link:#4E6A22;
+  --shadow:0 1px 0 rgba(30,25,21,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#16130F; --surface:#1E1A15; --ink:#ECE6DA; --ink-2:#B9B0A2; --ink-3:#8B8375;
+    --roast:#D8B48F; --bean:#A8C066; --bean-soft:#2A331A; --copper:#E08A52; --copper-soft:#3D2717;
+    --slate:#8FB2D3; --slate-soft:#1F2C3A; --stone:#A29B8F; --stone-soft:#2B2823;
+    --rule:#3A342B; --rule-soft:#2A2621; --code-bg:#221E18; --link:#B4CB74;
+    --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#16130F; --surface:#1E1A15; --ink:#ECE6DA; --ink-2:#B9B0A2; --ink-3:#8B8375;
+  --roast:#D8B48F; --bean:#A8C066; --bean-soft:#2A331A; --copper:#E08A52; --copper-soft:#3D2717;
+  --slate:#8FB2D3; --slate-soft:#1F2C3A; --stone:#A29B8F; --stone-soft:#2B2823;
+  --rule:#3A342B; --rule-soft:#2A2621; --code-bg:#221E18; --link:#B4CB74;
+  --shadow:none;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans JP","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+  font-size:15px; line-height:1.85; padding-inline:16px; padding-block:0;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--link); text-decoration-thickness:1px; text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--bean); outline-offset:2px}
+code{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace; font-size:.88em; background:var(--code-bg); padding:.1em .38em; border-radius:3px; color:var(--ink)}
+strong{font-weight:600}
+
+/* ---------- masthead ---------- */
+.mast{max-width:1180px; margin:0 auto; padding-block:40px 28px; border-bottom:1px solid var(--rule)}
+.mast .eyebrow{display:flex; flex-wrap:wrap; gap:8px 18px; align-items:center; color:var(--ink-3); font-size:12px; letter-spacing:.12em; text-transform:uppercase}
+.mast .eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--bean); display:inline-block}
+.mast h1.doc-title{
+  font-family:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif; font-weight:600;
+  font-size:clamp(28px,4.2vw,44px); line-height:1.25; margin:14px 0 6px; color:var(--roast); text-wrap:balance; letter-spacing:.01em;
+}
+.mast .sub{font-size:16px; color:var(--ink-2); margin:0 0 26px; max-width:70ch}
+.meta{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px 28px; border-top:1px solid var(--rule); padding-top:18px}
+.meta div{display:flex; flex-direction:column; gap:2px; min-width:0}
+.meta dt{font-size:11px; letter-spacing:.14em; color:var(--ink-3); text-transform:uppercase}
+.meta dd{margin:0; font-size:14px; color:var(--ink); overflow-wrap:anywhere}
+.meta dd.num{font-variant-numeric:tabular-nums}
+.legend{display:flex; flex-wrap:wrap; gap:10px 22px; margin-top:22px; align-items:center; font-size:13px; color:var(--ink-2)}
+.legend .item{display:inline-flex; gap:8px; align-items:center}
+
+/* ---------- layout ---------- */
+.wrap{max-width:1180px; margin:0 auto; display:grid; grid-template-columns:1fr; gap:0 56px; padding-block:24px 80px}
+.toc{display:none}
+@media (min-width:1024px){
+  .wrap{grid-template-columns:236px minmax(0,1fr)}
+  .toc{display:block; position:sticky; top:0; align-self:start; max-height:100vh; overflow-y:auto; padding-block:28px 40px; padding-right:8px; font-size:13px; scrollbar-width:thin}
+}
+.toc ul{list-style:none; margin:0; padding:0}
+.toc > ul > li{margin-bottom:14px}
+.toc a{display:block; color:var(--ink-2); text-decoration:none; line-height:1.45; padding:2px 0 2px 10px; border-left:2px solid transparent}
+.toc a:hover{color:var(--ink)}
+.toc .toc-ch > a{font-weight:600; color:var(--ink); display:flex; gap:8px}
+.toc .toc-num{font-family:"IBM Plex Mono",monospace; color:var(--bean); font-weight:500; font-variant-numeric:tabular-nums}
+.toc .toc-ch ul{margin:4px 0 0 0}
+.toc .toc-ch ul a{font-size:12px; color:var(--ink-3); padding-left:30px}
+.toc a.active{border-left-color:var(--bean); color:var(--ink)}
+.toc .toc-ch ul a.active{color:var(--ink)}
+
+main{min-width:0; max-width:820px}
+.chapter{padding-block:36px 8px; border-bottom:1px solid var(--rule)}
+.chapter:last-of-type{border-bottom:0}
+.ch-head{display:grid; grid-template-columns:auto 1fr; gap:2px 14px; align-items:baseline; margin-bottom:22px}
+.ch-num{font-family:"IBM Plex Mono",monospace; font-size:34px; line-height:1; color:var(--bean); font-variant-numeric:tabular-nums; grid-row:1/3; align-self:center}
+.ch-label{font-size:11px; letter-spacing:.16em; color:var(--ink-3)}
+.ch-head h1{font-family:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif; font-weight:600; font-size:clamp(22px,3vw,30px); margin:0; line-height:1.3; color:var(--roast); text-wrap:balance}
+h2{font-family:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif; font-weight:600; font-size:21px; line-height:1.35; margin:40px 0 12px; padding-top:14px; border-top:1px solid var(--rule-soft); color:var(--ink); text-wrap:balance}
+h3{font-size:15.5px; font-weight:600; margin:26px 0 8px; color:var(--ink); letter-spacing:.01em}
+h4{font-size:14px; font-weight:600; margin:18px 0 6px; color:var(--ink-2)}
+p{margin:0 0 14px; max-width:72ch}
+ul,ol{margin:0 0 16px; padding-left:1.4em; max-width:72ch}
+li{margin:3px 0}
+li::marker{color:var(--ink-3)}
+ul.check{list-style:none; padding-left:0}
+ul.check li{display:flex; gap:10px; align-items:flex-start; padding:5px 0; border-bottom:1px dashed var(--rule-soft)}
+ul.check li::before{content:""; flex:0 0 auto; width:14px; height:14px; margin-top:6px; border:1.5px solid var(--ink-3); border-radius:3px}
+aside.note{border-left:3px solid var(--copper); background:var(--copper-soft); padding:10px 14px; margin:8px 0 18px; font-size:14px; max-width:72ch; border-radius:0 4px 4px 0}
+
+/* ---------- tables ---------- */
+.tbl{overflow-x:auto; margin:6px 0 22px; border:1px solid var(--rule); border-radius:4px; background:var(--surface); box-shadow:var(--shadow)}
+table{border-collapse:collapse; width:100%; font-size:13.5px; line-height:1.6}
+th,td{padding:8px 12px; vertical-align:top; text-align:left; border-bottom:1px solid var(--rule-soft)}
+th{font-size:11.5px; letter-spacing:.06em; color:var(--ink-3); font-weight:600; background:var(--paper); white-space:nowrap; border-bottom:1px solid var(--rule)}
+tbody tr:last-child td{border-bottom:0}
+td{min-width:6ch}
+td:first-child{white-space:nowrap}
+table code{white-space:nowrap}
+.cell-note{color:var(--ink-2); font-size:12.5px}
+
+/* ---------- tags ---------- */
+.tag{display:inline-block; font-size:11px; line-height:1; padding:4px 7px 3px; border-radius:3px; letter-spacing:.06em; font-weight:600; white-space:nowrap; vertical-align:middle}
+.tag.ok{background:var(--bean-soft); color:var(--bean)}
+.tag.est{background:var(--stone-soft); color:var(--stone)}
+.tag.chk{background:var(--copper-soft); color:var(--copper)}
+.tag.prop{background:var(--slate-soft); color:var(--slate)}
+.tag.must{background:var(--roast); color:var(--paper)}
+.tag.rec{background:transparent; color:var(--ink-2); border:1px solid var(--rule)}
+:root[data-theme="dark"] .tag.must{background:var(--roast); color:#1E1915}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .tag.must{color:#1E1915} }
+
+/* ---------- code / wireframes / diagrams ---------- */
+pre{margin:6px 0 22px; overflow-x:auto; border-radius:4px; font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace; font-size:12.5px; line-height:1.55}
+pre code{background:transparent; padding:0; font-size:inherit}
+pre.wire{background:var(--surface); border:1px dashed var(--rule); padding:16px 18px; color:var(--ink-2)}
+pre.code{background:var(--code-bg); padding:16px 18px; color:var(--ink)}
+.dia{background:var(--surface); border:1px solid var(--rule); border-radius:4px; padding:14px; margin:6px 0 22px; overflow-x:auto}
+.dia pre.mermaid{margin:0; background:transparent; overflow:visible}
+.dia svg{max-width:100%; height:auto}
+
+/* ---------- footer ---------- */
+.foot{max-width:1180px; margin:0 auto; padding-block:20px 40px; border-top:1px solid var(--rule); font-size:12.5px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:6px 24px}
+</style>
+<header class="mast">
+  <div class="eyebrow"><span class="dot"></span><span>Web サイト設計書</span><span>Version 1.0</span><span>2026-09-11</span></div>
+  <h1 class="doc-title">MUTO coffee roastery 設計書</h1>
+  <p class="sub">東京・中野の自家焙煎コーヒー店 <a href="https://muto-coffee.com/">muto-coffee.com</a> を対象に、現行サイト（店舗サイト＋オンラインショップ）の構成を整理し、再構築・改修時にそのまま使える設計仕様としてまとめたもの。</p>
+  <dl class="meta">
+    <div><dt>対象</dt><dd>https://muto-coffee.com/<br>https://www.muto-coffee.com/shop/</dd></div>
+    <div><dt>店舗</dt><dd>東京都中野区中野 3-34-18<br><span class="num">11:30–19:00（L.O. 18:00）／ 定休 水・木</span></dd></div>
+    <div><dt>運営</dt><dd>株式会社 Lounge M<br>運営責任者 武藤 修一郎</dd></div>
+    <div><dt>作成方法</dt><dd>公開情報（検索インデックス・第三者メディア）の調査に基づく。直接アクセスは未実施</dd></div>
+  </dl>
+  <div class="legend">
+    <span class="item"><span class="tag ok">確認済</span>公開ページ・複数メディアで裏付け</span>
+    <span class="item"><span class="tag est">推定</span>URL 構造や CMS の仕様から推定</span>
+    <span class="item"><span class="tag chk">要確認</span>実機（ブラウザ）での確認が必要</span>
+    <span class="item"><span class="tag prop">提案</span>現行に無い、または変更を推奨する設計</span>
+  </div>
+</header>
+<div class="wrap">
+  <nav class="toc" aria-label="目次"><ul><li class="toc-ch"><a href="#ch01"><span class="toc-num">01</span>概要・要件定義</a><ul><li><a href="#ch01-s1">プロジェクト概要</a></li><li><a href="#ch01-s5">事業・店舗情報</a></li><li><a href="#ch01-s7">サイトの目的と KPI</a></li><li><a href="#ch01-s8">ターゲットユーザー</a></li><li><a href="#ch01-s9">機能要件</a></li><li><a href="#ch01-s12">非機能要件</a></li></ul></li><li class="toc-ch"><a href="#ch02"><span class="toc-num">02</span>サイト構成・URL設計</a><ul><li><a href="#ch02-s1">システム全体構成</a></li><li><a href="#ch02-s2">サイトマップ</a></li><li><a href="#ch02-s3">ページ一覧</a></li><li><a href="#ch02-s4">URL 設計</a></li><li><a href="#ch02-s8">ナビゲーション設計</a></li></ul></li><li class="toc-ch"><a href="#ch03"><span class="toc-num">03</span>画面設計</a><ul><li><a href="#ch03-s1">共通レイアウト</a></li><li><a href="#ch03-s5">P-01 トップページ</a></li><li><a href="#ch03-s9">P-02 News 一覧</a></li><li><a href="#ch03-s11">P-03 News 詳細</a></li><li><a href="#ch03-s12">P-10 ショップ TOP</a></li><li><a href="#ch03-s13">P-11 商品一覧</a></li><li><a href="#ch03-s14">P-12 商品詳細</a></li><li><a href="#ch03-s15">P-13〜P-15 カート・購入手続き・完了</a></li><li><a href="#ch03-s16">P-16〜P-18 会員登録・ログイン・マイページ</a></li><li><a href="#ch03-s17">P-19〜P-23 ヘルプ・法定ページ</a></li><li><a href="#ch03-s18">レスポンシブ方針</a></li></ul></li><li class="toc-ch"><a href="#ch04"><span class="toc-num">04</span>機能・データ設計</a><ul><li><a href="#ch04-s1">店舗サイト（WordPress）機能設計</a></li><li><a href="#ch04-s6">オンラインショップ（EC-CUBE）機能設計</a></li><li><a href="#ch04-s10">データ設計</a></li><li><a href="#ch04-s16">メール通知一覧（ショップ）</a></li><li><a href="#ch04-s17">外部連携</a></li></ul></li><li class="toc-ch"><a href="#ch05"><span class="toc-num">05</span>デザイン・非機能要件</a><ul><li><a href="#ch05-s1">トーン＆マナー</a></li><li><a href="#ch05-s2">カラーパレット【提案】</a></li><li><a href="#ch05-s3">タイポグラフィ【提案】</a></li><li><a href="#ch05-s4">コンポーネント規約</a></li><li><a href="#ch05-s5">画像・アセット</a></li><li><a href="#ch05-s6">SEO 設計</a></li><li><a href="#ch05-s10">アクセシビリティ</a></li><li><a href="#ch05-s11">パフォーマンス</a></li><li><a href="#ch05-s12">セキュリティ</a></li></ul></li><li class="toc-ch"><a href="#ch06"><span class="toc-num">06</span>運用・改善提案</a><ul><li><a href="#ch06-s1">運用体制</a></li><li><a href="#ch06-s2">更新フロー</a></li><li><a href="#ch06-s7">現状の課題と改善提案</a></li><li><a href="#ch06-s8">実装ロードマップ</a></li><li><a href="#ch06-s9">検収基準（再構築時）</a></li></ul></li><li class="toc-ch"><a href="#ch99"><span class="toc-num">99</span>調査ログ・未確認事項</a><ul><li><a href="#ch99-s1">調査方法</a></li><li><a href="#ch99-s2">情報ソース一覧</a></li><li><a href="#ch99-s5">確認済／推定／未確認の一覧</a></li><li><a href="#ch99-s6">実機確認チェックリスト</a></li></ul></li></ul></nav>
+  <main>
+<section class="chapter" id="ch01">
+<header class="ch-head"><span class="ch-num">01</span><span class="ch-label">第1章</span><h1>概要・要件定義</h1></header>
+<h2 id="ch01-s1">1. プロジェクト概要</h2>
+<h3 id="ch01-s2">1.1 対象</h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>項目</th>
+<th>内容</th>
+</tr></thead><tbody>
+<tr>
+<td>サイト名</td>
+<td>MUTO coffee roastery（ムトウ コーヒー ロースタリー）</td>
+</tr>
+<tr>
+<td>URL</td>
+<td>https://muto-coffee.com/ （店舗サイト）／ https://www.muto-coffee.com/shop/ （オンラインショップ）</td>
+</tr>
+<tr>
+<td>業種</td>
+<td>自家焙煎コーヒー豆販売・カフェ（スペシャルティコーヒー）</td>
+</tr>
+<tr>
+<td>所在地</td>
+<td>東京都中野区中野 3-34-18</td>
+</tr>
+<tr>
+<td>運営会社</td>
+<td>株式会社 Lounge M（特定商取引法表記より）<span class="tag ok">確認済</span></td>
+</tr>
+<tr>
+<td>運営責任者</td>
+<td>武藤 修一郎 <span class="tag ok">確認済</span></td>
+</tr>
+</tbody></table></div>
+<h3 id="ch01-s3">1.2 本書の目的</h3>
+<ol>
+<li>現行サイトの構成（ページ、URL、機能、データ）を体系的に文書化し、関係者間の共通理解を作る。</li>
+<li>再構築・改修時に、そのまま実装仕様として利用できる粒度の設計を提供する。</li>
+<li>現状の課題を洗い出し、改善の優先順位を示す（06章）。</li>
+</ol>
+<h3 id="ch01-s4">1.3 サイトの現状構成（サマリ）</h3>
+<p>現行サイトは、性格の異なる2つのシステムで構成されている。【推定：URL構造より】</p>
+<div class="tbl"><table>
+<thead><tr>
+<th>領域</th>
+<th>役割</th>
+<th>基盤</th>
+<th>根拠</th>
+</tr></thead><tbody>
+<tr>
+<td>店舗サイト（<code>muto-coffee.com/</code>）</td>
+<td>店舗案内、メニュー、News（お知らせ・新入荷）</td>
+<td>WordPress <span class="tag est">推定</span></td>
+<td>投稿タイトルがそのまま日本語スラッグになった固定リンク（<code>/年末・年始-営業日時のお知らせ-2/</code> 等）、<code>/news/</code> アーカイブ、ページタイトルの <code>| サイト名</code> 形式</td>
+</tr>
+<tr>
+<td>オンラインショップ（<code>/shop/</code>）</td>
+<td>コーヒー豆の通信販売</td>
+<td>EC-CUBE <span class="tag est">推定</span></td>
+<td><code>/shop/products/list</code>、<code>/shop/products/detail/{id}</code>、<code>/shop/help/about</code>、<code>/shop/help/tradelaw</code> という EC-CUBE 3/4 系標準ルーティング、「TOPページ」「当サイトについて」という既定ページ名</td>
+</tr>
+</tbody></table></div>
+<h2 id="ch01-s5">2. 事業・店舗情報</h2>
+<p>以下は設計上「店舗情報マスタ」として扱うデータである（04章参照）。</p>
+<div class="tbl"><table>
+<thead><tr>
+<th>項目</th>
+<th>値</th>
+<th>区分</th>
+</tr></thead><tbody>
+<tr>
+<td>店名</td>
+<td>MUTO coffee roastery</td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+<tr>
+<td>店名（カナ）</td>
+<td>ムトウ コーヒー ロースタリー</td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+<tr>
+<td>郵便番号</td>
+<td>164-0001</td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+<tr>
+<td>住所</td>
+<td>東京都中野区中野 3-34-18</td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+<tr>
+<td>電話番号</td>
+<td>03-6382-5439</td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+<tr>
+<td>メール</td>
+<td>shop@muto-coffee.com（ショップ問い合わせ先）</td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+<tr>
+<td>営業時間</td>
+<td>11:30〜19:00（ラストオーダー 18:00、豆・器具の販売は 19:00 まで）</td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+<tr>
+<td>定休日</td>
+<td>水曜日・木曜日</td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+<tr>
+<td>アクセス</td>
+<td>JR中央線・総武線／東京メトロ東西線「中野駅」南口 徒歩2〜3分（中野マルイ裏手）</td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+<tr>
+<td>開業</td>
+<td>2010年10月（中野経済新聞の開店記事より）</td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+<tr>
+<td>焙煎機</td>
+<td>オランダ GIESEN 社製（6kg 釜）、店舗入口付近に設置</td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+<tr>
+<td>取扱豆</td>
+<td>常時10種類以上（オリジナルブレンド＋シングルオリジン）</td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+<tr>
+<td>店内設備</td>
+<td>Wi-Fi あり、電源あり、予約可</td>
+<td>第三者メディア／要確認</td>
+</tr>
+<tr>
+<td>席数</td>
+<td>17〜30席（メディアにより記載差あり）</td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+<tr>
+<td>提供サービス</td>
+<td>店内喫茶、テイクアウト、豆の量り売り、ギフト包装、オンライン販売</td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+<tr>
+<td>SNS</td>
+<td>Instagram <code>@mutocoffeeroastery</code>、Facebook <code>mutocoffeeroastery</code></td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+</tbody></table></div>
+<aside class="note">注意: Instagram の <code>@mutou.coffee</code>（武藤珈琲）は別の店舗であり、本サイトとは無関係。SNS リンク実装時に取り違えないこと。</aside>
+<h3 id="ch01-s6">2.1 ブランドの特徴（コンテンツの核）</h3>
+<ul>
+<li>元CMプロデューサーのオーナーが堀口珈琲で修業ののち開業、というストーリー性。</li>
+<li>トレーサビリティの明確なスペシャルティコーヒーを、店頭の GIESEN 焙煎機で毎日焙煎。</li>
+<li>ハンドドリップで浅煎り〜中煎りを中心に提供、深煎りブレンドも用意。</li>
+<li>自家製スイーツ（ベイクドチーズケーキ、ガトーショコラ、季節のパウンドケーキ）。</li>
+<li>木とレザーを基調とした落ち着いた店内（第三者メディアより）。</li>
+</ul>
+<h2 id="ch01-s7">3. サイトの目的と KPI</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>目的</th>
+<th>指標（KPI）</th>
+<th>目標の考え方</th>
+</tr></thead><tbody>
+<tr>
+<td>来店促進</td>
+<td>店舗情報ページの閲覧数、電話タップ数、地図リンクのクリック数</td>
+<td>営業時間・定休日を迷わず確認できること</td>
+</tr>
+<tr>
+<td>オンライン販売</td>
+<td>商品詳細→カート投入率、購入完了数、会員登録数</td>
+<td>店頭で購入した豆をリピート購入する導線</td>
+</tr>
+<tr>
+<td>認知・信頼</td>
+<td>News 更新頻度、SNS への送客数、指名検索数</td>
+<td>焙煎のこだわりとオーナーのストーリーを伝える</td>
+</tr>
+<tr>
+<td>運用負荷の低減</td>
+<td>更新にかかる時間、更新者数</td>
+<td>店主1名でも News と商品を即日更新できる</td>
+</tr>
+</tbody></table></div>
+<h2 id="ch01-s8">4. ターゲットユーザー</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>ペルソナ</th>
+<th>状況</th>
+<th>主な行動</th>
+<th>必要な情報</th>
+</tr></thead><tbody>
+<tr>
+<td>A. 近隣住民・勤務者</td>
+<td>中野駅周辺で休憩したい</td>
+<td>スマホで「中野 コーヒー」検索→営業中か確認→来店</td>
+<td>営業時間、定休日、地図、混雑・席数</td>
+</tr>
+<tr>
+<td>B. コーヒー愛好家</td>
+<td>焙煎の質で店を選ぶ</td>
+<td>Instagram や記事から来訪→豆ラインナップを吟味</td>
+<td>焙煎度、精製方法、味わい、焙煎機、オーナーの経歴</td>
+</tr>
+<tr>
+<td>C. リピーター（遠方）</td>
+<td>店頭で買った豆を再購入</td>
+<td>ショップに直行→ログイン→購入</td>
+<td>在庫、価格、送料、発送日</td>
+</tr>
+<tr>
+<td>D. ギフト購入者</td>
+<td>贈答用に豆を探す</td>
+<td>ギフト包装の可否と配送先指定</td>
+<td>ギフト対応、支払方法、納期</td>
+</tr>
+</tbody></table></div>
+<h2 id="ch01-s9">5. 機能要件</h2>
+<h3 id="ch01-s10">5.1 店舗サイト（CMS）</h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>ID</th>
+<th>要件</th>
+<th>優先度</th>
+<th>現行</th>
+</tr></thead><tbody>
+<tr>
+<td>F-01</td>
+<td>トップページで店名・営業時間・定休日・住所・電話を表示する</td>
+<td><span class="tag must">必須</span></td>
+<td>あり</td>
+</tr>
+<tr>
+<td>F-02</td>
+<td>店内メニュー（ドリンク・スイーツ）と価格を一覧表示する</td>
+<td><span class="tag must">必須</span></td>
+<td>あり</td>
+</tr>
+<tr>
+<td>F-03</td>
+<td>News（お知らせ・新入荷・セール）を投稿・一覧・詳細表示する</td>
+<td><span class="tag must">必須</span></td>
+<td>あり</td>
+</tr>
+<tr>
+<td>F-04</td>
+<td>News をカテゴリ分類し、種類ごとに絞り込める</td>
+<td><span class="tag rec">推奨</span></td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+<tr>
+<td>F-05</td>
+<td>オンラインショップへの導線（グローバルナビ・トップ・フッター）を設ける</td>
+<td><span class="tag must">必須</span></td>
+<td>あり</td>
+</tr>
+<tr>
+<td>F-06</td>
+<td>地図（Google マップ埋め込み等）と経路案内リンクを表示する</td>
+<td><span class="tag rec">推奨</span></td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+<tr>
+<td>F-07</td>
+<td>店舗・焙煎のこだわりを紹介する About セクション／ページ</td>
+<td><span class="tag rec">推奨</span></td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+<tr>
+<td>F-08</td>
+<td>SNS（Instagram／Facebook）へのリンクを表示する</td>
+<td><span class="tag rec">推奨</span></td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+<tr>
+<td>F-09</td>
+<td>臨時休業・営業時間変更を目立つ位置に掲示できる（お知らせバー）</td>
+<td><span class="tag prop">提案</span></td>
+<td>なし</td>
+</tr>
+<tr>
+<td>F-10</td>
+<td>お問い合わせ（電話／メール／フォーム）</td>
+<td><span class="tag rec">推奨</span></td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+</tbody></table></div>
+<h3 id="ch01-s11">5.2 オンラインショップ（EC）</h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>ID</th>
+<th>要件</th>
+<th>優先度</th>
+<th>現行</th>
+</tr></thead><tbody>
+<tr>
+<td>E-01</td>
+<td>商品一覧（カテゴリ別・検索）を表示する</td>
+<td><span class="tag must">必須</span></td>
+<td>あり</td>
+</tr>
+<tr>
+<td>E-02</td>
+<td>商品詳細に価格（税込）、内容量、精製方法、焙煎度、味わいを表示する</td>
+<td><span class="tag must">必須</span></td>
+<td>あり</td>
+</tr>
+<tr>
+<td>E-03</td>
+<td>カートに追加・数量変更・削除ができる</td>
+<td><span class="tag must">必須</span></td>
+<td>あり（EC-CUBE 標準）</td>
+</tr>
+<tr>
+<td>E-04</td>
+<td>会員登録・ログイン・マイページ（注文履歴、配送先管理）</td>
+<td><span class="tag must">必須</span></td>
+<td>あり</td>
+</tr>
+<tr>
+<td>E-05</td>
+<td>非会員（ゲスト）購入</td>
+<td><span class="tag rec">推奨</span></td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+<tr>
+<td>E-06</td>
+<td>クレジットカード決済</td>
+<td><span class="tag must">必須</span></td>
+<td>あり</td>
+</tr>
+<tr>
+<td>E-07</td>
+<td>配送はヤマト運輸宅急便、国内のみ、注文確認後3営業日以内に発送</td>
+<td><span class="tag must">必須</span></td>
+<td>あり</td>
+</tr>
+<tr>
+<td>E-08</td>
+<td>特定商取引法に基づく表記、当サイトについて、プライバシーポリシー</td>
+<td><span class="tag must">必須</span></td>
+<td>一部あり（プライバシー要確認）</td>
+</tr>
+<tr>
+<td>E-09</td>
+<td>注文確認・発送通知メールの自動送信</td>
+<td><span class="tag must">必須</span></td>
+<td>あり（EC-CUBE 標準）</td>
+</tr>
+<tr>
+<td>E-10</td>
+<td>豆の挽き方（豆のまま／粗挽き／中挽き 等）を注文時に選択できる</td>
+<td><span class="tag prop">提案</span></td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+<tr>
+<td>E-11</td>
+<td>ギフト包装オプション</td>
+<td><span class="tag prop">提案</span></td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+<tr>
+<td>E-12</td>
+<td>在庫切れ商品の表示制御（非表示または「売り切れ」表示）</td>
+<td><span class="tag rec">推奨</span></td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="ch01-s12">6. 非機能要件</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>分類</th>
+<th>要件</th>
+</tr></thead><tbody>
+<tr>
+<td>対応デバイス</td>
+<td>スマートフォン優先（モバイルファースト）、タブレット、PC</td>
+</tr>
+<tr>
+<td>対応ブラウザ</td>
+<td>各 OS 最新版の Chrome、Safari、Edge、Firefox。iOS Safari は直近2メジャーバージョン</td>
+</tr>
+<tr>
+<td>表示性能</td>
+<td>LCP 2.5秒以内、CLS 0.1以下（モバイル 4G 相当）。画像は WebP＋遅延読み込み</td>
+</tr>
+<tr>
+<td>可用性</td>
+<td>年間稼働率 99.5% 以上（共用レンタルサーバー水準）</td>
+</tr>
+<tr>
+<td>セキュリティ</td>
+<td>全ページ HTTPS、管理画面の IP 制限または二要素認証、CMS・EC の定期アップデート、決済情報は非保持（決済代行トークン方式）</td>
+</tr>
+<tr>
+<td>アクセシビリティ</td>
+<td>WCAG 2.1 AA 相当（コントラスト比 4.5:1、キーボード操作、代替テキスト）</td>
+</tr>
+<tr>
+<td>SEO</td>
+<td>ページごとの title／description、正規 URL の統一、構造化データ（CafeOrCoffeeShop、Product）</td>
+</tr>
+<tr>
+<td>多言語</td>
+<td>日本語のみ（将来の英語対応を妨げない構造にする）</td>
+</tr>
+<tr>
+<td>運用</td>
+<td>店主が管理画面から News・商品・営業時間を更新できる。専門知識不要</td>
+</tr>
+<tr>
+<td>バックアップ</td>
+<td>DB・ファイルを日次で自動バックアップ、30日保持</td>
+</tr>
+<tr>
+<td>法令</td>
+<td>特定商取引法、個人情報保護法、景品表示法（価格表示は税込）</td>
+</tr>
+</tbody></table></div>
+</section><section class="chapter" id="ch02">
+<header class="ch-head"><span class="ch-num">02</span><span class="ch-label">第2章</span><h1>サイト構成・URL設計</h1></header>
+<h2 id="ch02-s1">1. システム全体構成</h2>
+<div class="dia"><pre class="mermaid">flowchart LR
+    U["ユーザー&lt;br/&gt;スマホ / PC"] --&gt;|HTTPS| DNS["muto-coffee.com&lt;br/&gt;www.muto-coffee.com"]
+    DNS --&gt; WP["店舗サイト&lt;br/&gt;WordPress（推定）&lt;br/&gt;/ ・ /news/ ・ /記事スラッグ/"]
+    DNS --&gt; EC["オンラインショップ&lt;br/&gt;EC-CUBE（推定）&lt;br/&gt;/shop/ 配下"]
+    WP --&gt;|グローバルナビ・バナー| EC
+    EC --&gt;|ロゴ・店舗サイトへ戻る| WP
+    EC --&gt; PAY["クレジットカード決済代行"]
+    EC --&gt; MAIL["注文・発送通知メール&lt;br/&gt;shop@muto-coffee.com"]
+    EC -. 発送 .-&gt; YAMATO["ヤマト運輸 宅急便&lt;br/&gt;国内のみ"]
+    WP -. リンク .-&gt; SNS["Instagram / Facebook"]</pre></div>
+<div class="tbl"><table>
+<thead><tr>
+<th>構成要素</th>
+<th>内容</th>
+<th>区分</th>
+</tr></thead><tbody>
+<tr>
+<td>ドメイン</td>
+<td><code>muto-coffee.com</code>（店舗サイトは非 www、ショップは <code>www</code> 付き URL がインデックスされている）</td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+<tr>
+<td>店舗サイト</td>
+<td>WordPress。投稿（News）＋固定ページ（トップ）</td>
+<td><span class="tag est">推定</span></td>
+</tr>
+<tr>
+<td>ショップ</td>
+<td>EC-CUBE 3 系または 4 系（ルーティングが <code>/products/detail/{id}</code> 形式で <code>.php</code> を含まないため 2 系ではない）</td>
+<td><span class="tag est">推定</span></td>
+</tr>
+<tr>
+<td>決済</td>
+<td>クレジットカード（決済代行サービス経由と想定）</td>
+<td><span class="tag ok">確認済</span> <span class="cell-note">（カード可）／代行会社は要確認</span></td>
+</tr>
+<tr>
+<td>配送</td>
+<td>ヤマト運輸宅急便、国内限定、注文確認後3営業日以内発送</td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="ch02-s2">2. サイトマップ</h2>
+<div class="dia"><pre class="mermaid">flowchart TD
+    TOP["トップ&lt;br/&gt;/"]
+    NEWS["News一覧&lt;br/&gt;/news/"]
+    POST["News詳細&lt;br/&gt;/{投稿スラッグ}/"]
+    SHOP["ショップTOP&lt;br/&gt;/shop/"]
+    LIST["商品一覧&lt;br/&gt;/shop/products/list"]
+    DETAIL["商品詳細&lt;br/&gt;/shop/products/detail/{id}"]
+    CART["カート&lt;br/&gt;/shop/cart"]
+    SHOPPING["購入手続き&lt;br/&gt;/shop/shopping"]
+    COMPLETE["注文完了&lt;br/&gt;/shop/shopping/complete"]
+    ENTRY["会員登録&lt;br/&gt;/shop/entry"]
+    LOGIN["ログイン&lt;br/&gt;/shop/mypage/login"]
+    MYPAGE["マイページ&lt;br/&gt;/shop/mypage/"]
+    ABOUT["当サイトについて&lt;br/&gt;/shop/help/about"]
+    TRADE["特定商取引法表記&lt;br/&gt;/shop/help/tradelaw"]
+    PRIVACY["プライバシーポリシー&lt;br/&gt;/shop/help/privacy"]
+    GUIDE["ご利用ガイド&lt;br/&gt;/shop/help/guide"]
+    CONTACT["お問い合わせ&lt;br/&gt;/shop/contact"]
+
+    TOP --&gt; NEWS --&gt; POST
+    TOP --&gt; SHOP
+    SHOP --&gt; LIST --&gt; DETAIL --&gt; CART --&gt; SHOPPING --&gt; COMPLETE
+    SHOP --&gt; ENTRY
+    SHOP --&gt; LOGIN --&gt; MYPAGE
+    SHOP --&gt; ABOUT
+    SHOP --&gt; TRADE
+    SHOP --&gt; PRIVACY
+    SHOP --&gt; GUIDE
+    SHOP --&gt; CONTACT</pre></div>
+<h2 id="ch02-s3">3. ページ一覧</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>ID</th>
+<th>ページ名</th>
+<th>URL</th>
+<th>領域</th>
+<th>テンプレート</th>
+<th>目的</th>
+<th>区分</th>
+</tr></thead><tbody>
+<tr>
+<td>P-01</td>
+<td>トップ</td>
+<td><code>/</code></td>
+<td>店舗</td>
+<td>front-page</td>
+<td>店舗情報・メニュー・最新 News・ショップ導線</td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+<tr>
+<td>P-02</td>
+<td>News 一覧</td>
+<td><code>/news/</code></td>
+<td>店舗</td>
+<td>archive</td>
+<td>お知らせ・新入荷・セール等の時系列一覧</td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+<tr>
+<td>P-03</td>
+<td>News 詳細</td>
+<td><code>/{投稿スラッグ}/</code></td>
+<td>店舗</td>
+<td>single</td>
+<td>個別記事。スラッグは投稿タイトル由来の日本語</td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+<tr>
+<td>P-04</td>
+<td>About（店舗・焙煎のこだわり）</td>
+<td><code>/about/</code></td>
+<td>店舗</td>
+<td>page</td>
+<td>オーナー・焙煎機・豆の選定方針</td>
+<td><span class="tag prop">提案</span> <span class="cell-note">（現行はトップ内セクションの可能性）</span></td>
+</tr>
+<tr>
+<td>P-05</td>
+<td>メニュー</td>
+<td><code>/menu/</code></td>
+<td>店舗</td>
+<td>page</td>
+<td>店内メニュー全量</td>
+<td><span class="tag prop">提案</span> <span class="cell-note">（現行はトップ内セクション）</span></td>
+</tr>
+<tr>
+<td>P-06</td>
+<td>アクセス</td>
+<td><code>/access/</code></td>
+<td>店舗</td>
+<td>page</td>
+<td>地図・経路・営業時間</td>
+<td><span class="tag prop">提案</span> <span class="cell-note">（現行はトップ内セクション）</span></td>
+</tr>
+<tr>
+<td>P-10</td>
+<td>ショップ TOP</td>
+<td><code>/shop/</code></td>
+<td>EC</td>
+<td>index</td>
+<td>おすすめ・新着商品、会員導線</td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+<tr>
+<td>P-11</td>
+<td>商品一覧</td>
+<td><code>/shop/products/list</code></td>
+<td>EC</td>
+<td>product_list</td>
+<td>全商品・カテゴリ絞り込み・検索結果</td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+<tr>
+<td>P-12</td>
+<td>商品詳細</td>
+<td><code>/shop/products/detail/{id}</code></td>
+<td>EC</td>
+<td>product_detail</td>
+<td>価格、内容量、精製方法、焙煎度、味わい、カート投入</td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+<tr>
+<td>P-13</td>
+<td>カート</td>
+<td><code>/shop/cart</code></td>
+<td>EC</td>
+<td>cart</td>
+<td>数量変更・削除・小計</td>
+<td><span class="tag est">推定</span> <span class="cell-note">（EC-CUBE 標準）</span></td>
+</tr>
+<tr>
+<td>P-14</td>
+<td>購入手続き</td>
+<td><code>/shop/shopping</code></td>
+<td>EC</td>
+<td>shopping</td>
+<td>配送先・支払方法・確認</td>
+<td><span class="tag est">推定</span></td>
+</tr>
+<tr>
+<td>P-15</td>
+<td>注文完了</td>
+<td><code>/shop/shopping/complete</code></td>
+<td>EC</td>
+<td>complete</td>
+<td>注文番号表示</td>
+<td><span class="tag est">推定</span></td>
+</tr>
+<tr>
+<td>P-16</td>
+<td>会員登録</td>
+<td><code>/shop/entry</code></td>
+<td>EC</td>
+<td>entry</td>
+<td>新規会員登録</td>
+<td><span class="tag ok">確認済</span> <span class="cell-note">（ショップ TOP に「新規会員登録」リンク）</span></td>
+</tr>
+<tr>
+<td>P-17</td>
+<td>ログイン</td>
+<td><code>/shop/mypage/login</code></td>
+<td>EC</td>
+<td>login</td>
+<td>会員ログイン</td>
+<td><span class="tag ok">確認済</span> <span class="cell-note">（同上「ログイン」）</span></td>
+</tr>
+<tr>
+<td>P-18</td>
+<td>マイページ</td>
+<td><code>/shop/mypage/</code></td>
+<td>EC</td>
+<td>mypage</td>
+<td>注文履歴、会員情報、配送先</td>
+<td><span class="tag est">推定</span></td>
+</tr>
+<tr>
+<td>P-19</td>
+<td>当サイトについて</td>
+<td><code>/shop/help/about</code></td>
+<td>EC</td>
+<td>help_about</td>
+<td>店舗紹介・連絡先</td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+<tr>
+<td>P-20</td>
+<td>特定商取引法に基づく表記</td>
+<td><code>/shop/help/tradelaw</code></td>
+<td>EC</td>
+<td>help_tradelaw</td>
+<td>販売業者、責任者、支払・配送条件</td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+<tr>
+<td>P-21</td>
+<td>プライバシーポリシー</td>
+<td><code>/shop/help/privacy</code></td>
+<td>EC</td>
+<td>help_privacy</td>
+<td>個人情報の取扱い</td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+<tr>
+<td>P-22</td>
+<td>ご利用ガイド</td>
+<td><code>/shop/help/guide</code></td>
+<td>EC</td>
+<td>help_guide</td>
+<td>注文〜到着までの流れ、送料</td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+<tr>
+<td>P-23</td>
+<td>お問い合わせ</td>
+<td><code>/shop/contact</code></td>
+<td>EC</td>
+<td>contact</td>
+<td>問い合わせフォーム</td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+<tr>
+<td>P-24</td>
+<td>商品検索結果</td>
+<td><code>/shop/products/list?name=...</code></td>
+<td>EC</td>
+<td>product_list</td>
+<td>キーワード検索</td>
+<td><span class="tag est">推定</span></td>
+</tr>
+<tr>
+<td>P-25</td>
+<td>404</td>
+<td><code>/404</code> 相当</td>
+<td>共通</td>
+<td>404</td>
+<td>存在しない URL の案内</td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="ch02-s4">4. URL 設計</h2>
+<h3 id="ch02-s5">4.1 現状（As-Is）</h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>観点</th>
+<th>現状</th>
+<th>課題</th>
+</tr></thead><tbody>
+<tr>
+<td>ホスト名</td>
+<td>店舗サイトは <code>https://muto-coffee.com/</code>、ショップは <code>https://www.muto-coffee.com/shop/...</code> と <code>https://muto-coffee.com/shop/...</code> の両方がインデックスされている</td>
+<td>重複 URL。正規化されていない可能性</td>
+</tr>
+<tr>
+<td>News 詳細</td>
+<td><code>/年末・年始-営業日時のお知らせ-2/</code> のようにタイトル由来の日本語スラッグ。同名記事は <code>-2</code> が付く</td>
+<td>URL が長く、共有時にパーセントエンコードで可読性が落ちる。<code>/news/</code> 配下でない</td>
+</tr>
+<tr>
+<td>商品詳細</td>
+<td><code>/shop/products/detail/{数値ID}</code></td>
+<td>EC-CUBE 標準。SEO 上は商品名を含まないが、変更コストが高いので維持</td>
+</tr>
+<tr>
+<td>末尾スラッシュ</td>
+<td>WordPress 側はスラッシュあり、EC-CUBE 側はなし</td>
+<td>フレームワーク差なので許容。リダイレクトで統一</td>
+</tr>
+</tbody></table></div>
+<h3 id="ch02-s6">4.2 目標（To-Be）<span class="tag prop">提案</span></h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>ルール</th>
+<th>内容</th>
+</tr></thead><tbody>
+<tr>
+<td>R-01</td>
+<td>正規ホストを <code>https://muto-coffee.com</code> に統一し、<code>www</code> と <code>http</code> からは 301 リダイレクト</td>
+</tr>
+<tr>
+<td>R-02</td>
+<td>News 詳細を <code>/news/{YYYY}/{MM}/{英数字スラッグ}/</code> に変更。旧 URL からは 301 リダイレクト（既存記事は個別マッピング表を作成）</td>
+</tr>
+<tr>
+<td>R-03</td>
+<td>News カテゴリ一覧を <code>/news/category/{info|arrival|sale|sweets}/</code> で提供</td>
+</tr>
+<tr>
+<td>R-04</td>
+<td>ショップは <code>/shop/</code> プレフィックスを維持し、EC-CUBE の標準ルートを変更しない</td>
+</tr>
+<tr>
+<td>R-05</td>
+<td>固定ページを新設する場合は英小文字スラッグ（<code>/about/</code>、<code>/menu/</code>、<code>/access/</code>）</td>
+</tr>
+<tr>
+<td>R-06</td>
+<td>各ページに <code>&lt;link rel="canonical"&gt;</code> を出力。ショップの商品一覧はソート・ページング用クエリを canonical から除外</td>
+</tr>
+<tr>
+<td>R-07</td>
+<td><code>sitemap.xml</code> を店舗サイト・ショップそれぞれで生成し、<code>robots.txt</code> から両方を参照</td>
+</tr>
+</tbody></table></div>
+<h3 id="ch02-s7">4.3 リダイレクト対応表（例）</h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>旧 URL</th>
+<th>新 URL</th>
+<th>種別</th>
+</tr></thead><tbody>
+<tr>
+<td><code>http://muto-coffee.com/*</code></td>
+<td><code>https://muto-coffee.com/*</code></td>
+<td>301</td>
+</tr>
+<tr>
+<td><code>https://www.muto-coffee.com/*</code></td>
+<td><code>https://muto-coffee.com/*</code></td>
+<td>301</td>
+</tr>
+<tr>
+<td><code>/年末・年始-営業日時のお知らせ-2/</code></td>
+<td><code>/news/2025/12/nenmatsu-nenshi-2025/</code></td>
+<td>301（個別）</td>
+</tr>
+<tr>
+<td><code>/ルワンダ・コアカカ-ムガンザ/</code></td>
+<td><code>/news/{YYYY}/{MM}/rwanda-koakaka-muganza/</code></td>
+<td>301（個別）</td>
+</tr>
+</tbody></table></div>
+<h2 id="ch02-s8">5. ナビゲーション設計</h2>
+<h3 id="ch02-s9">5.1 グローバルナビゲーション（店舗サイト）</h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>順</th>
+<th>ラベル</th>
+<th>リンク先</th>
+<th>備考</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>Home</td>
+<td><code>/</code></td>
+<td>ロゴクリックでも遷移</td>
+</tr>
+<tr>
+<td>2</td>
+<td>About</td>
+<td><code>/about/</code>（または <code>/#about</code>）</td>
+<td>焙煎・オーナー</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Menu</td>
+<td><code>/menu/</code>（または <code>/#menu</code>）</td>
+<td>店内メニュー</td>
+</tr>
+<tr>
+<td>4</td>
+<td>News</td>
+<td><code>/news/</code></td>
+<td>一覧</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Access</td>
+<td><code>/access/</code>（または <code>/#access</code>）</td>
+<td>地図・営業時間</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Online Shop</td>
+<td><code>/shop/</code></td>
+<td>強調ボタン扱い。別システムへの遷移</td>
+</tr>
+</tbody></table></div>
+<p>モバイルではハンバーガーメニューに格納し、「Online Shop」と「電話する」は常時表示のフローティングボタンとする<span class="tag prop">提案</span>。</p>
+<h3 id="ch02-s10">5.2 グローバルナビゲーション（ショップ）</h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>順</th>
+<th>ラベル</th>
+<th>リンク先</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>ロゴ</td>
+<td><code>/shop/</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td>商品一覧</td>
+<td><code>/shop/products/list</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td>ブレンド</td>
+<td><code>/shop/products/list?category_id={ブレンド}</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td>シングルオリジン</td>
+<td><code>/shop/products/list?category_id={シングルオリジン}</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td>カフェインレス</td>
+<td><code>/shop/products/list?category_id={カフェインレス}</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td>検索窓</td>
+<td><code>/shop/products/list?name=</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td>新規会員登録／ログイン／マイページ</td>
+<td><code>/shop/entry</code>、<code>/shop/mypage/login</code>、<code>/shop/mypage/</code></td>
+</tr>
+<tr>
+<td>8</td>
+<td>カート（点数バッジ付き）</td>
+<td><code>/shop/cart</code></td>
+</tr>
+<tr>
+<td>9</td>
+<td>店舗サイトへ</td>
+<td><code>/</code></td>
+</tr>
+</tbody></table></div>
+<h3 id="ch02-s11">5.3 フッター（共通）</h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>ブロック</th>
+<th>内容</th>
+</tr></thead><tbody>
+<tr>
+<td>店舗情報</td>
+<td>店名、住所、電話、営業時間、定休日</td>
+</tr>
+<tr>
+<td>リンク</td>
+<td>About／Menu／News／Access／Online Shop</td>
+</tr>
+<tr>
+<td>ショップ関連</td>
+<td>当サイトについて／ご利用ガイド／特定商取引法に基づく表記／プライバシーポリシー／お問い合わせ</td>
+</tr>
+<tr>
+<td>SNS</td>
+<td>Instagram、Facebook（アイコン）</td>
+</tr>
+<tr>
+<td>コピーライト</td>
+<td><code>© 2010– MUTO coffee roastery / Lounge M Inc.</code></td>
+</tr>
+</tbody></table></div>
+<h3 id="ch02-s12">5.4 パンくずリスト</h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>ページ</th>
+<th>表示</th>
+</tr></thead><tbody>
+<tr>
+<td>News 詳細</td>
+<td>Home ＞ News ＞ 記事タイトル</td>
+</tr>
+<tr>
+<td>商品詳細</td>
+<td>Home ＞ Online Shop ＞ カテゴリ名 ＞ 商品名</td>
+</tr>
+<tr>
+<td>ヘルプ系</td>
+<td>Home ＞ Online Shop ＞ ページ名</td>
+</tr>
+</tbody></table></div>
+<p>構造化データ <code>BreadcrumbList</code> を併せて出力する（05章）。</p>
+</section><section class="chapter" id="ch03">
+<header class="ch-head"><span class="ch-num">03</span><span class="ch-label">第3章</span><h1>画面設計</h1></header>
+<p>本章の「現状」は、インデックスされたテキストと URL 構造から推定した要素構成であり、実際の配置・ビジュアルは実機確認が必要（99章）。「設計」は再構築時の目標仕様。</p>
+<h2 id="ch03-s1">1. 共通レイアウト</h2>
+<h3 id="ch03-s2">1.1 ヘッダー（店舗サイト）</h3>
+<pre class="wire"><code>+--------------------------------------------------------------------------+
+| [ロゴ MUTO coffee roastery]      Home  About  Menu  News  Access  [Online Shop] |
++--------------------------------------------------------------------------+
+| ▲ お知らせバー（臨時休業・年末年始など。管理画面で ON/OFF）【提案】            |
++--------------------------------------------------------------------------+</code></pre>
+<div class="tbl"><table>
+<thead><tr>
+<th>要素</th>
+<th>仕様</th>
+</tr></thead><tbody>
+<tr>
+<td>ロゴ</td>
+<td>SVG。クリックでトップへ。高さ 40px（PC）／32px（SP）</td>
+</tr>
+<tr>
+<td>ナビ</td>
+<td>02章 5.1 の順。現在地は下線</td>
+</tr>
+<tr>
+<td>Online Shop ボタン</td>
+<td>塗りボタン。外部システム遷移だが同一ドメインのため同一タブ</td>
+</tr>
+<tr>
+<td>お知らせバー</td>
+<td>管理画面の「サイト設定」で文言・リンク・表示期間を設定。空なら非表示</td>
+</tr>
+<tr>
+<td>スクロール挙動</td>
+<td>固定ヘッダー。SP は高さ 56px、ハンバーガー</td>
+</tr>
+</tbody></table></div>
+<h3 id="ch03-s3">1.2 フッター（共通）</h3>
+<pre class="wire"><code>+--------------------------------------------------------------------------+
+| MUTO coffee roastery                                                     |
+| 〒164-0001 東京都中野区中野 3-34-18   TEL 03-6382-5439                     |
+| 11:30-19:00 (L.O. 18:00 / 豆・器具の販売は 19:00 まで)  定休日: 水・木        |
+|                                                                          |
+| About | Menu | News | Access | Online Shop                               |
+| 当サイトについて | ご利用ガイド | 特定商取引法に基づく表記 | プライバシーポリシー | お問い合わせ |
+| [Instagram] [Facebook]                                                   |
+| © MUTO coffee roastery / Lounge M Inc.                                   |
++--------------------------------------------------------------------------+</code></pre>
+<h3 id="ch03-s4">1.3 モバイル固定要素<span class="tag prop">提案</span></h3>
+<p>画面下部に「電話する（tel:0363825439）」「地図を開く」「Online Shop」の3ボタン。ショップ内では「カートを見る」に差し替える。</p>
+<h2 id="ch03-s5">2. P-01 トップページ</h2>
+<h3 id="ch03-s6">2.1 セクション構成</h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>順</th>
+<th>セクション</th>
+<th>現状</th>
+<th>設計</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>ヒーロー</td>
+<td><span class="tag chk">要確認</span></td>
+<td>店内または焙煎機の写真（横 1920px）、店名、キャッチコピー「中野駅徒歩2分、自家焙煎スペシャルティコーヒー」、CTA「Online Shop」「メニューを見る」</td>
+</tr>
+<tr>
+<td>2</td>
+<td>営業案内</td>
+<td>営業時間・LO・定休日を表示<span class="tag ok">確認済</span></td>
+<td>「本日の営業状況（営業中／本日定休日）」を曜日から自動判定して表示。臨時休業は News 連動</td>
+</tr>
+<tr>
+<td>3</td>
+<td>News（最新）</td>
+<td>最新記事を表示<span class="tag ok">確認済</span></td>
+<td>最新3〜5件。日付・カテゴリラベル・タイトル。「News 一覧へ」</td>
+</tr>
+<tr>
+<td>4</td>
+<td>About</td>
+<td><span class="tag chk">要確認</span></td>
+<td>GIESEN 焙煎機、オーナーの経歴、豆の選定方針を写真付き3カラム</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Menu</td>
+<td>ドリンク・ケーキと価格を表示<span class="tag ok">確認済</span></td>
+<td>2.2 の表をカード表示。価格は税込</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Beans / Online Shop 導線</td>
+<td><span class="tag chk">要確認</span></td>
+<td>「常時10種類以上の豆」。ショップから新着・おすすめ4件を取得して表示（EC-CUBE の Web API または RSS）<span class="tag prop">提案</span></td>
+</tr>
+<tr>
+<td>7</td>
+<td>Access</td>
+<td><span class="tag chk">要確認</span></td>
+<td>Google マップ埋め込み、住所、経路テキスト（中野駅南口→マルイ裏）</td>
+</tr>
+<tr>
+<td>8</td>
+<td>SNS</td>
+<td><span class="tag chk">要確認</span></td>
+<td>Instagram 最新投稿6枚（埋め込み）またはリンク</td>
+</tr>
+</tbody></table></div>
+<h3 id="ch03-s7">2.2 Menu セクションの表示データ（現行価格）<span class="tag ok">確認済</span></h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>区分</th>
+<th>品名</th>
+<th>価格（税込）</th>
+<th>補足</th>
+</tr></thead><tbody>
+<tr>
+<td>ブレンド</td>
+<td>ももぞのブレンド</td>
+<td>580円</td>
+<td>果実の爽やかな酸味と甘みのアロマ、後味すっきり</td>
+</tr>
+<tr>
+<td>ブレンド</td>
+<td>なかなかブレンド</td>
+<td>580円</td>
+<td>香り、コク、キレ、苦み、酸味が調和した芳醇な味わい</td>
+</tr>
+<tr>
+<td>ブレンド</td>
+<td>ふかいりブレンド</td>
+<td>580円</td>
+<td>深煎り</td>
+</tr>
+<tr>
+<td>シングルオリジン</td>
+<td>エチオピア／ケニア／タンザニア／コロンビア／グアテマラ／コスタリカ／マンデリン 等</td>
+<td>650円〜</td>
+<td>時期により入替</td>
+</tr>
+<tr>
+<td>アレンジ</td>
+<td>アイスコーヒー</td>
+<td>680円</td>
+<td></td>
+</tr>
+<tr>
+<td>アレンジ</td>
+<td>ミルクコーヒー</td>
+<td>680円</td>
+<td></td>
+</tr>
+<tr>
+<td>その他</td>
+<td>グレープジュース</td>
+<td>680円</td>
+<td></td>
+</tr>
+<tr>
+<td>スイーツ</td>
+<td>ベイクドチーズケーキ</td>
+<td>580円</td>
+<td></td>
+</tr>
+<tr>
+<td>スイーツ</td>
+<td>ガトーショコラ</td>
+<td>580円</td>
+<td></td>
+</tr>
+<tr>
+<td>セット</td>
+<td>ケーキセット</td>
+<td>お好きなお飲物代 ＋420円</td>
+<td></td>
+</tr>
+</tbody></table></div>
+<h3 id="ch03-s8">2.3 ワイヤーフレーム（SP）</h3>
+<pre class="wire"><code>+------------------------------+
+| [≡]  MUTO coffee roastery    |
++------------------------------+
+| [ヒーロー画像]                 |
+|  自家焙煎スペシャルティコーヒー   |
+|  [Online Shop] [Menu]        |
++------------------------------+
+| 本日: 営業中 11:30-19:00      |
+| L.O.18:00 / 定休 水・木        |
++------------------------------+
+| News                          |
+| 2026.01.26 [お知らせ] ○○○○    |
+| 2025.12.22 [新入荷] ○○○○      |
+| 2025.10.27 [お知らせ] ○○○○    |
+|            [News 一覧へ →]    |
++------------------------------+
+| About                         |
+| [写真] GIESEN 焙煎機で毎日焙煎  |
+| [写真] オーナー                |
+| [写真] 豆の選定                |
++------------------------------+
+| Menu                          |
+| ももぞのブレンド ....... 580   |
+| なかなかブレンド ....... 580   |
+| ...                           |
++------------------------------+
+| Beans / Online Shop           |
+| [商品][商品][商品][商品]        |
+|          [ショップへ →]        |
++------------------------------+
+| Access                        |
+| [地図]                        |
+| 中野駅南口 徒歩2分 マルイ裏     |
++------------------------------+
+| [Instagram] [Facebook]        |
+| フッター                       |
++------------------------------+
+| [電話] [地図] [Online Shop]    | ← 固定
++------------------------------+</code></pre>
+<h2 id="ch03-s9">3. P-02 News 一覧</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>要素</th>
+<th>仕様</th>
+</tr></thead><tbody>
+<tr>
+<td>見出し</td>
+<td>「News」＋説明文</td>
+</tr>
+<tr>
+<td>フィルタ</td>
+<td>カテゴリタブ：すべて／お知らせ／新入荷／セール／スイーツ<span class="tag prop">提案</span></td>
+</tr>
+<tr>
+<td>リスト</td>
+<td>1件＝日付、カテゴリラベル、タイトル、サムネイル（任意）。新しい順</td>
+</tr>
+<tr>
+<td>ページング</td>
+<td>1ページ 10件。番号＋前後</td>
+</tr>
+<tr>
+<td>サイド／下部</td>
+<td>年別アーカイブ（2021〜）。現行記事は 2021年以降が確認できる</td>
+</tr>
+</tbody></table></div>
+<h3 id="ch03-s10">3.1 現行 News の内容傾向<span class="tag ok">確認済</span></h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>カテゴリ（設計）</th>
+<th>現行記事の例</th>
+</tr></thead><tbody>
+<tr>
+<td>お知らせ（営業案内）</td>
+<td>年末・年始 営業日時のお知らせ／本日7月26日（火）18時で閉店いたします。／営業時間変更（新型コロナウイルス感染拡大防止のため）／営業再開のお知らせ</td>
+</tr>
+<tr>
+<td>新入荷</td>
+<td>新入荷 パナマ カジェホン農園 ゲイシャ（ナチュラル）／ルワンダ・コアカカ ムガンザ／ニカラグア／フローレンシア ナチュラル精製</td>
+</tr>
+<tr>
+<td>セール</td>
+<td>３周年ブレンド豆半額セール／テイク・アウト 始めました。そしてお試しセール！</td>
+</tr>
+<tr>
+<td>スイーツ</td>
+<td>オレンジのパウンドケーキ</td>
+</tr>
+</tbody></table></div>
+<h2 id="ch03-s11">4. P-03 News 詳細</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>要素</th>
+<th>仕様</th>
+</tr></thead><tbody>
+<tr>
+<td>パンくず</td>
+<td>Home ＞ News ＞ タイトル</td>
+</tr>
+<tr>
+<td>タイトル</td>
+<td>h1</td>
+</tr>
+<tr>
+<td>メタ</td>
+<td>公開日、カテゴリ</td>
+</tr>
+<tr>
+<td>本文</td>
+<td>WordPress ブロックエディタ。画像は最大幅 800px、遅延読み込み</td>
+</tr>
+<tr>
+<td>関連導線</td>
+<td>新入荷記事には該当商品（ショップ）へのボタン<span class="tag prop">提案</span></td>
+</tr>
+<tr>
+<td>ナビ</td>
+<td>前の記事／次の記事、一覧へ戻る</td>
+</tr>
+<tr>
+<td>シェア</td>
+<td>X／Facebook／LINE／URL コピー<span class="tag prop">提案</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="ch03-s12">5. P-10 ショップ TOP</h2>
+<pre class="wire"><code>+--------------------------------------------------------------------------+
+| [ロゴ]  商品一覧  ブレンド  シングルオリジン  カフェインレス  [検索]  新規会員登録 ログイン [カート 0] |
++--------------------------------------------------------------------------+
+| [メインビジュアル：焙煎したての豆を全国へ]                                    |
++--------------------------------------------------------------------------+
+| ご利用案内バナー: クレジットカード決済 / ヤマト宅急便 / 3営業日以内発送 / 国内配送のみ |
++--------------------------------------------------------------------------+
+| 新着・おすすめ商品  [商品カード]×4                                           |
++--------------------------------------------------------------------------+
+| カテゴリ: ブレンド | シングルオリジン | カフェインレス | ギフト                     |
++--------------------------------------------------------------------------+
+| ショップからのお知らせ（EC-CUBE 新着情報）                                      |
++--------------------------------------------------------------------------+
+| フッター（当サイトについて / ご利用ガイド / 特商法 / プライバシー / お問い合わせ / 店舗サイトへ） |
++--------------------------------------------------------------------------+</code></pre>
+<h2 id="ch03-s13">6. P-11 商品一覧</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>要素</th>
+<th>仕様</th>
+</tr></thead><tbody>
+<tr>
+<td>カテゴリ絞り込み</td>
+<td>ブレンド／シングルオリジン／カフェインレス／ギフト・器具【提案区分】</td>
+</tr>
+<tr>
+<td>並び替え</td>
+<td>新着順、価格順、おすすめ順</td>
+</tr>
+<tr>
+<td>表示件数</td>
+<td>12／24／48</td>
+</tr>
+<tr>
+<td>商品カード</td>
+<td>画像（正方形 600px）、商品名、内容量（200g）、税込価格、焙煎度バッジ（シティ／フルシティ／フレンチ）、売り切れ表示</td>
+</tr>
+<tr>
+<td>空状態</td>
+<td>「該当する商品がありません」＋全商品へ</td>
+</tr>
+</tbody></table></div>
+<h2 id="ch03-s14">7. P-12 商品詳細</h2>
+<pre class="wire"><code>+------------------------------+------------------------------------------+
+| [商品画像 メイン]              | 商品名: ケニア／キリニャガ カムワンギ・ファクトリー |
+| [サムネ][サムネ][サムネ]       | 税込 2,200円（200g）                          |
+|                              | 精製方法: Washed                              |
+|                              | 焙煎度: フレンチ                               |
+|                              | 挽き方: [豆のまま ▼]【提案】                    |
+|                              | 数量: [ 1 ]  [カートに入れる]                   |
+|                              | [お気に入りに追加]                              |
++------------------------------+------------------------------------------+
+| 味わい                                                                    |
+| 完熟した果実やベリーの凝縮感、なめらかな酸味と甘み。ケニアらしい複雑な風味。深く豊かなボディと |
+| クリアで長い余韻。                                                          |
++--------------------------------------------------------------------------+
+| 商品情報: 生産国 / 地域 / 農園・ウォッシングステーション / 品種 / 標高 / 精製 / 焙煎度 / 内容量 |
++--------------------------------------------------------------------------+
+| 関連商品（同カテゴリ）×4                                                    |
++--------------------------------------------------------------------------+</code></pre>
+<div class="tbl"><table>
+<thead><tr>
+<th>要素</th>
+<th>仕様</th>
+</tr></thead><tbody>
+<tr>
+<td>商品名</td>
+<td>「生産国／農園・地域」または「ブレンド名」。h1</td>
+</tr>
+<tr>
+<td>価格</td>
+<td>税込表示（景表法）。内容量を併記</td>
+</tr>
+<tr>
+<td>属性</td>
+<td>精製方法、焙煎度、味わい（現行商品ページで確認できる3項目）に加え、地域・品種・標高を任意項目として追加<span class="tag prop">提案</span></td>
+</tr>
+<tr>
+<td>規格</td>
+<td>挽き方（豆のまま／中挽き／細挽き）を EC-CUBE の規格機能で実装<span class="tag prop">提案</span>。価格差なし</td>
+</tr>
+<tr>
+<td>在庫</td>
+<td>在庫切れ時は「カートに入れる」を非活性化し「入荷待ち」表示</td>
+</tr>
+<tr>
+<td>構造化データ</td>
+<td><code>Product</code>（05章）</td>
+</tr>
+</tbody></table></div>
+<h2 id="ch03-s15">8. P-13〜P-15 カート・購入手続き・完了</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>画面</th>
+<th>主要素</th>
+<th>仕様</th>
+</tr></thead><tbody>
+<tr>
+<td>カート</td>
+<td>商品行（画像、名前、規格、単価、数量、小計）、合計、「購入手続きへ」「買い物を続ける」</td>
+<td>送料は次画面で確定する旨を明記</td>
+</tr>
+<tr>
+<td>購入手続き</td>
+<td>ログイン／会員登録／ゲスト購入の選択→配送先→配送方法（ヤマト運輸）→お届け希望日時→支払方法（クレジットカード）→確認</td>
+<td>3営業日以内発送、国内のみをインライン表示</td>
+</tr>
+<tr>
+<td>完了</td>
+<td>注文番号、確認メール送付済みの案内、店舗サイト・ショップ TOP へ</td>
+<td></td>
+</tr>
+</tbody></table></div>
+<h2 id="ch03-s16">9. P-16〜P-18 会員登録・ログイン・マイページ</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>画面</th>
+<th>項目</th>
+</tr></thead><tbody>
+<tr>
+<td>会員登録</td>
+<td>氏名、フリガナ、郵便番号、住所、電話番号、メールアドレス、パスワード、メルマガ希望</td>
+</tr>
+<tr>
+<td>ログイン</td>
+<td>メールアドレス、パスワード、ログイン状態保持、パスワード再発行リンク</td>
+</tr>
+<tr>
+<td>マイページ</td>
+<td>注文履歴、会員情報編集、配送先編集、お気に入り、退会</td>
+</tr>
+</tbody></table></div>
+<h2 id="ch03-s17">10. P-19〜P-23 ヘルプ・法定ページ</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>画面</th>
+<th>掲載内容</th>
+</tr></thead><tbody>
+<tr>
+<td>当サイトについて</td>
+<td>店舗紹介、焙煎へのこだわり、住所・電話・営業時間、店舗サイトへのリンク</td>
+</tr>
+<tr>
+<td>特定商取引法に基づく表記</td>
+<td>販売業者（株式会社 Lounge M）、運営責任者（武藤修一郎）、所在地、電話、メール、URL、販売価格、商品代金以外の必要料金（送料・手数料）、支払方法（クレジットカード）、支払時期、引渡時期（注文確認後3営業日以内発送）、返品・交換条件</td>
+</tr>
+<tr>
+<td>プライバシーポリシー</td>
+<td>取得する情報、利用目的、第三者提供、決済代行への委託、Cookie、問い合わせ窓口</td>
+</tr>
+<tr>
+<td>ご利用ガイド</td>
+<td>注文の流れ、配送（ヤマト運輸・国内限定）、送料表、支払、ギフト対応、豆の保存方法</td>
+</tr>
+<tr>
+<td>お問い合わせ</td>
+<td>氏名、メール、電話（任意）、種別（商品／注文／その他）、本文、確認画面</td>
+</tr>
+</tbody></table></div>
+<h2 id="ch03-s18">11. レスポンシブ方針</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>ブレークポイント</th>
+<th>対象</th>
+<th>レイアウト</th>
+</tr></thead><tbody>
+<tr>
+<td>〜599px</td>
+<td>スマートフォン</td>
+<td>1カラム。ナビはハンバーガー。固定ボタン表示</td>
+</tr>
+<tr>
+<td>600〜1023px</td>
+<td>タブレット</td>
+<td>2カラム（商品カード）。ナビはハンバーガー</td>
+</tr>
+<tr>
+<td>1024px〜</td>
+<td>PC</td>
+<td>最大コンテンツ幅 1120px。商品カード4列。ナビ展開</td>
+</tr>
+</tbody></table></div>
+<p>画像は <code>srcset</code> で 480／960／1920px を出し分け、ヒーローのみ <code>fetchpriority="high"</code>。</p>
+</section><section class="chapter" id="ch04">
+<header class="ch-head"><span class="ch-num">04</span><span class="ch-label">第4章</span><h1>機能・データ設計</h1></header>
+<h2 id="ch04-s1">1. 店舗サイト（WordPress）機能設計</h2>
+<h3 id="ch04-s2">1.1 コンテンツタイプ</h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>種別</th>
+<th>名称</th>
+<th>用途</th>
+<th>主要フィールド</th>
+</tr></thead><tbody>
+<tr>
+<td>投稿（post）</td>
+<td>News</td>
+<td>お知らせ・新入荷・セール・スイーツ</td>
+<td>タイトル、本文、公開日、カテゴリ、アイキャッチ、関連商品 URL（カスタムフィールド）<span class="tag prop">提案</span></td>
+</tr>
+<tr>
+<td>固定ページ（page）</td>
+<td>トップ／About／Menu／Access</td>
+<td>静的ページ</td>
+<td>ブロックエディタ本文</td>
+</tr>
+<tr>
+<td>カスタム投稿<span class="tag prop">提案</span></td>
+<td>メニュー（menu_item）</td>
+<td>店内メニューを構造化管理</td>
+<td>品名、区分、価格、説明、表示順、提供中フラグ</td>
+</tr>
+<tr>
+<td>サイト設定<span class="tag prop">提案</span></td>
+<td>店舗情報</td>
+<td>フッター・構造化データ・営業状況表示の単一ソース</td>
+<td>店名、住所、電話、営業時間、定休日、臨時休業日、SNS URL、お知らせバー</td>
+</tr>
+</tbody></table></div>
+<h3 id="ch04-s3">1.2 News カテゴリ</h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>スラッグ</th>
+<th>名称</th>
+<th>現行記事の対応</th>
+</tr></thead><tbody>
+<tr>
+<td>info</td>
+<td>お知らせ</td>
+<td>年末年始、臨時休業、営業時間変更、営業再開</td>
+</tr>
+<tr>
+<td>arrival</td>
+<td>新入荷</td>
+<td>パナマ ゲイシャ、ルワンダ、ニカラグア 等</td>
+</tr>
+<tr>
+<td>sale</td>
+<td>セール</td>
+<td>周年セール、お試しセール</td>
+</tr>
+<tr>
+<td>sweets</td>
+<td>スイーツ</td>
+<td>オレンジのパウンドケーキ 等</td>
+</tr>
+</tbody></table></div>
+<h3 id="ch04-s4">1.3 営業状況の自動表示<span class="tag prop">提案</span></h3>
+<pre class="wire"><code>入力: 現在日時（Asia/Tokyo）、定休日（水・木）、営業時間（11:30-19:00）、臨時休業日リスト
+判定:
+  1. 本日が臨時休業日 → 「本日は臨時休業」
+  2. 本日が定休日     → 「本日定休日」
+  3. 営業時間内       → 「営業中（L.O. 18:00）」
+  4. それ以外         → 「本日の営業は終了」または「本日 11:30 開店」
+出力: トップの営業案内セクション、SP 固定バー</code></pre>
+<p>年末年始などの変則営業は「臨時休業日リスト」と News の両方で管理し、二重更新を避けるため管理画面の同一フォームから News 下書きを生成できるようにする。</p>
+<h3 id="ch04-s5">1.4 プラグイン方針（WordPress）</h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>目的</th>
+<th>方針</th>
+</tr></thead><tbody>
+<tr>
+<td>SEO</td>
+<td>title／description／OGP／sitemap を出力できるもの1つ</td>
+</tr>
+<tr>
+<td>フォーム</td>
+<td>お問い合わせをショップ側（EC-CUBE <code>/shop/contact</code>）に集約するなら不要</td>
+</tr>
+<tr>
+<td>キャッシュ</td>
+<td>ページキャッシュ＋画像 WebP 変換</td>
+</tr>
+<tr>
+<td>セキュリティ</td>
+<td>ログイン試行制限、管理画面 URL 変更またはベーシック認証</td>
+</tr>
+<tr>
+<td>バックアップ</td>
+<td>日次 DB＋ファイル、外部ストレージへ転送</td>
+</tr>
+</tbody></table></div>
+<h2 id="ch04-s6">2. オンラインショップ（EC-CUBE）機能設計</h2>
+<h3 id="ch04-s7">2.1 機能一覧</h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>ID</th>
+<th>機能</th>
+<th>内容</th>
+<th>現行</th>
+</tr></thead><tbody>
+<tr>
+<td>S-01</td>
+<td>商品管理</td>
+<td>商品登録、画像、カテゴリ、規格、在庫、公開／非公開</td>
+<td>標準</td>
+</tr>
+<tr>
+<td>S-02</td>
+<td>カテゴリ</td>
+<td>ブレンド／シングルオリジン／カフェインレス／ギフト・器具</td>
+<td><span class="tag chk">要確認</span> <span class="cell-note">（提案区分）</span></td>
+</tr>
+<tr>
+<td>S-03</td>
+<td>規格</td>
+<td>挽き方（豆のまま／中挽き／細挽き）を規格1として設定<span class="tag prop">提案</span></td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+<tr>
+<td>S-04</td>
+<td>カート</td>
+<td>セッション保持、会員はログイン後にマージ</td>
+<td>標準</td>
+</tr>
+<tr>
+<td>S-05</td>
+<td>会員</td>
+<td>登録、ログイン、マイページ、配送先複数登録、退会</td>
+<td>標準</td>
+</tr>
+<tr>
+<td>S-06</td>
+<td>ゲスト購入</td>
+<td>会員登録なしで購入</td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+<tr>
+<td>S-07</td>
+<td>決済</td>
+<td>クレジットカード（決済代行プラグイン）。カード情報は非保持</td>
+<td><span class="tag ok">確認済</span> <span class="cell-note">（カード可）</span></td>
+</tr>
+<tr>
+<td>S-08</td>
+<td>配送</td>
+<td>ヤマト運輸宅急便、国内のみ、希望日時指定</td>
+<td><span class="tag ok">確認済</span></td>
+</tr>
+<tr>
+<td>S-09</td>
+<td>送料</td>
+<td>地域別または一律。一定金額以上で無料【要確認・提案】</td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+<tr>
+<td>S-10</td>
+<td>メール</td>
+<td>注文受付、発送完了、会員登録、パスワード再発行</td>
+<td>標準</td>
+</tr>
+<tr>
+<td>S-11</td>
+<td>お知らせ</td>
+<td>ショップ TOP の新着情報ブロック</td>
+<td>標準</td>
+</tr>
+<tr>
+<td>S-12</td>
+<td>受注管理</td>
+<td>ステータス（新規受付→入金済→発送済→完了／キャンセル）</td>
+<td>標準</td>
+</tr>
+<tr>
+<td>S-13</td>
+<td>検索</td>
+<td>商品名・カテゴリ</td>
+<td>標準</td>
+</tr>
+<tr>
+<td>S-14</td>
+<td>お気に入り</td>
+<td>会員のお気に入り登録</td>
+<td>標準</td>
+</tr>
+<tr>
+<td>S-15</td>
+<td>ギフトオプション</td>
+<td>包装・のし・メッセージカードを注文オプションで選択<span class="tag prop">提案</span></td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+</tbody></table></div>
+<h3 id="ch04-s8">2.2 購入フロー</h3>
+<div class="dia"><pre class="mermaid">flowchart TD
+    A["商品一覧 / 検索"] --&gt; B["商品詳細"]
+    B --&gt; C{"規格・数量選択"}
+    C --&gt; D["カート"]
+    D --&gt; E{"ログイン状態?"}
+    E --&gt;|会員| G["配送先選択"]
+    E --&gt;|未ログイン| F["ログイン / 会員登録 / ゲスト購入"]
+    F --&gt; G
+    G --&gt; H["配送方法: ヤマト運輸&lt;br/&gt;希望日時"]
+    H --&gt; I["支払方法: クレジットカード"]
+    I --&gt; J["注文内容確認"]
+    J --&gt; K["決済代行でカード認証"]
+    K --&gt;|成功| L["注文完了&lt;br/&gt;受付メール送信"]
+    K --&gt;|失敗| I
+    L --&gt; M["店舗: 焙煎・梱包&lt;br/&gt;3営業日以内"]
+    M --&gt; N["発送完了メール&lt;br/&gt;追跡番号"]</pre></div>
+<h3 id="ch04-s9">2.3 受注ステータス遷移</h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>状態</th>
+<th>遷移条件</th>
+<th>顧客メール</th>
+</tr></thead><tbody>
+<tr>
+<td>新規受付</td>
+<td>注文完了</td>
+<td>注文受付メール</td>
+</tr>
+<tr>
+<td>入金済（カード決済済）</td>
+<td>決済代行の承認</td>
+<td>なし</td>
+</tr>
+<tr>
+<td>発送準備中</td>
+<td>店舗で焙煎・梱包開始</td>
+<td>なし</td>
+</tr>
+<tr>
+<td>発送済</td>
+<td>伝票番号登録</td>
+<td>発送完了メール（追跡番号付き）</td>
+</tr>
+<tr>
+<td>完了</td>
+<td>配達完了から一定日数</td>
+<td>なし</td>
+</tr>
+<tr>
+<td>キャンセル</td>
+<td>顧客依頼または在庫切れ</td>
+<td>キャンセル通知</td>
+</tr>
+</tbody></table></div>
+<h2 id="ch04-s10">3. データ設計</h2>
+<h3 id="ch04-s11">3.1 商品（Product）項目定義</h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>項目</th>
+<th>型</th>
+<th>必須</th>
+<th>説明</th>
+<th>例</th>
+</tr></thead><tbody>
+<tr>
+<td>product_id</td>
+<td>整数</td>
+<td>○</td>
+<td>EC-CUBE 自動採番。URL に使用</td>
+<td>12</td>
+</tr>
+<tr>
+<td>name</td>
+<td>文字列</td>
+<td>○</td>
+<td>「生産国／農園・地域」または「ブレンド名」</td>
+<td>ケニア／キリニャガ カムワンギ・ファクトリー</td>
+</tr>
+<tr>
+<td>category</td>
+<td>選択</td>
+<td>○</td>
+<td>ブレンド／シングルオリジン／カフェインレス／ギフト・器具</td>
+<td>シングルオリジン</td>
+</tr>
+<tr>
+<td>price_incl_tax</td>
+<td>整数</td>
+<td>○</td>
+<td>税込価格（円）</td>
+<td>2200</td>
+</tr>
+<tr>
+<td>weight_g</td>
+<td>整数</td>
+<td>○</td>
+<td>内容量（g）</td>
+<td>200</td>
+</tr>
+<tr>
+<td>country</td>
+<td>文字列</td>
+<td>△</td>
+<td>生産国（ブレンドは空）</td>
+<td>ケニア</td>
+</tr>
+<tr>
+<td>region</td>
+<td>文字列</td>
+<td>△</td>
+<td>地域</td>
+<td>キリニャガ</td>
+</tr>
+<tr>
+<td>farm</td>
+<td>文字列</td>
+<td>△</td>
+<td>農園・ステーション</td>
+<td>カムワンギ・ファクトリー</td>
+</tr>
+<tr>
+<td>variety</td>
+<td>文字列</td>
+<td>△</td>
+<td>品種</td>
+<td>SL28, SL34</td>
+</tr>
+<tr>
+<td>altitude</td>
+<td>文字列</td>
+<td>△</td>
+<td>標高</td>
+<td>1,700m</td>
+</tr>
+<tr>
+<td>process</td>
+<td>選択</td>
+<td>○</td>
+<td>精製方法</td>
+<td>Washed／Natural／Honey 等</td>
+</tr>
+<tr>
+<td>roast_level</td>
+<td>選択</td>
+<td>○</td>
+<td>焙煎度</td>
+<td>ミディアム／ハイ／シティ／フルシティ／フレンチ</td>
+</tr>
+<tr>
+<td>tasting_note</td>
+<td>テキスト</td>
+<td>○</td>
+<td>味わい</td>
+<td>完熟した果実やベリーの凝縮感…</td>
+</tr>
+<tr>
+<td>description</td>
+<td>テキスト</td>
+<td>△</td>
+<td>農園・生産者の紹介</td>
+<td></td>
+</tr>
+<tr>
+<td>image_main</td>
+<td>画像</td>
+<td>○</td>
+<td>正方形 1200px</td>
+<td></td>
+</tr>
+<tr>
+<td>image_sub[]</td>
+<td>画像</td>
+<td>△</td>
+<td>最大4枚</td>
+<td></td>
+</tr>
+<tr>
+<td>grind_options</td>
+<td>規格</td>
+<td>△</td>
+<td>豆のまま／中挽き／細挽き<span class="tag prop">提案</span></td>
+<td></td>
+</tr>
+<tr>
+<td>stock</td>
+<td>整数 or 無制限</td>
+<td>○</td>
+<td>在庫</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>選択</td>
+<td>○</td>
+<td>公開／非公開／廃止</td>
+<td></td>
+</tr>
+<tr>
+<td>is_recommended</td>
+<td>真偽</td>
+<td>△</td>
+<td>ショップ TOP のおすすめ表示</td>
+<td></td>
+</tr>
+<tr>
+<td>created_at / updated_at</td>
+<td>日時</td>
+<td>○</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table></div>
+<h3 id="ch04-s12">3.2 現行商品ラインナップ【確認済（価格は調査時点）】</h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>ID</th>
+<th>商品名</th>
+<th>区分</th>
+<th>内容量</th>
+<th>税込価格</th>
+<th>精製</th>
+<th>焙煎度</th>
+<th>味わい（要約）</th>
+</tr></thead><tbody>
+<tr>
+<td>8</td>
+<td>ふかいりブレンド</td>
+<td>ブレンド</td>
+<td>200g</td>
+<td>1,800円</td>
+<td>–</td>
+<td>深煎り</td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+<tr>
+<td>10</td>
+<td>ももぞのブレンド</td>
+<td>ブレンド</td>
+<td>200g</td>
+<td>1,800円</td>
+<td>–</td>
+<td>シティ</td>
+<td>果実の爽やかな酸味と甘みのアロマ、後味すっきり</td>
+</tr>
+<tr>
+<td>11</td>
+<td>カフェインレス／メキシコ トリウンフォ・ベルデ</td>
+<td>カフェインレス</td>
+<td>200g</td>
+<td>2,000円</td>
+<td><span class="tag chk">要確認</span></td>
+<td><span class="tag chk">要確認</span></td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+<tr>
+<td>12</td>
+<td>ケニア／キリニャガ カムワンギ・ファクトリー</td>
+<td>シングルオリジン</td>
+<td>200g</td>
+<td>2,200円</td>
+<td>Washed</td>
+<td>フレンチ</td>
+<td>完熟果実・ベリーの凝縮感、なめらかな酸味と甘み、深いボディと長い余韻</td>
+</tr>
+<tr>
+<td>15</td>
+<td>イタリアンブレンド</td>
+<td>ブレンド</td>
+<td>200g</td>
+<td>1,900円</td>
+<td>–</td>
+<td><span class="tag chk">要確認</span> <span class="cell-note">（極深煎り想定）</span></td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+<tr>
+<td>17</td>
+<td>ホンジュラス／チャギテ IH-90</td>
+<td>シングルオリジン</td>
+<td>200g</td>
+<td>1,700円</td>
+<td><span class="tag chk">要確認</span></td>
+<td><span class="tag chk">要確認</span></td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+<tr>
+<td>20</td>
+<td>タンザニア／ハイツ農園 ブルーリボンAA</td>
+<td>シングルオリジン</td>
+<td>200g</td>
+<td>1,950円</td>
+<td><span class="tag chk">要確認</span></td>
+<td><span class="tag chk">要確認</span></td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+<tr>
+<td>34</td>
+<td>エチオピア／ファロ</td>
+<td>シングルオリジン</td>
+<td>200g</td>
+<td>1,850円</td>
+<td><span class="tag chk">要確認</span></td>
+<td><span class="tag chk">要確認</span></td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+<tr>
+<td>37</td>
+<td>エチオピア／ゴロ・ペデッサ ナチュラル</td>
+<td>シングルオリジン</td>
+<td>200g</td>
+<td><span class="tag chk">要確認</span></td>
+<td>Natural</td>
+<td><span class="tag chk">要確認</span></td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+<tr>
+<td>41</td>
+<td>ホンジュラス／サンミゲル・デ・セルグァパ</td>
+<td>シングルオリジン</td>
+<td>200g</td>
+<td><span class="tag chk">要確認</span></td>
+<td><span class="tag chk">要確認</span></td>
+<td><span class="tag chk">要確認</span></td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+<tr>
+<td>55</td>
+<td>グアテマラ／ウエウエテナンゴ サンタバルバラ</td>
+<td>シングルオリジン</td>
+<td>200g</td>
+<td>1,900円</td>
+<td><span class="tag chk">要確認</span></td>
+<td><span class="tag chk">要確認</span></td>
+<td><span class="tag chk">要確認</span></td>
+</tr>
+</tbody></table></div>
+<p>価格帯は 200g あたり 1,700〜2,200円。商品 ID が 55 まで採番されていることから、季節入替により累計 50 点以上が登録・非公開化されてきたと推定できる。</p>
+<h3 id="ch04-s13">3.3 News（Post）項目定義</h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>項目</th>
+<th>型</th>
+<th>必須</th>
+<th>説明</th>
+</tr></thead><tbody>
+<tr>
+<td>post_id</td>
+<td>整数</td>
+<td>○</td>
+<td>WordPress 自動採番</td>
+</tr>
+<tr>
+<td>title</td>
+<td>文字列</td>
+<td>○</td>
+<td>記事タイトル</td>
+</tr>
+<tr>
+<td>slug</td>
+<td>文字列</td>
+<td>○</td>
+<td>英数字（To-Be）。現行は日本語タイトル由来</td>
+</tr>
+<tr>
+<td>category</td>
+<td>選択</td>
+<td>○</td>
+<td>info／arrival／sale／sweets</td>
+</tr>
+<tr>
+<td>published_at</td>
+<td>日時</td>
+<td>○</td>
+<td>公開日</td>
+</tr>
+<tr>
+<td>body</td>
+<td>リッチテキスト</td>
+<td>○</td>
+<td>本文</td>
+</tr>
+<tr>
+<td>eyecatch</td>
+<td>画像</td>
+<td>△</td>
+<td>一覧サムネイル</td>
+</tr>
+<tr>
+<td>related_product_url</td>
+<td>URL</td>
+<td>△</td>
+<td>新入荷記事から商品詳細へ<span class="tag prop">提案</span></td>
+</tr>
+<tr>
+<td>pinned</td>
+<td>真偽</td>
+<td>△</td>
+<td>トップに固定表示（臨時休業など）<span class="tag prop">提案</span></td>
+</tr>
+</tbody></table></div>
+<h3 id="ch04-s14">3.4 店舗情報（Site Settings）項目定義</h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>項目</th>
+<th>値（現行）</th>
+</tr></thead><tbody>
+<tr>
+<td>shop_name</td>
+<td>MUTO coffee roastery</td>
+</tr>
+<tr>
+<td>shop_name_kana</td>
+<td>ムトウ コーヒー ロースタリー</td>
+</tr>
+<tr>
+<td>company</td>
+<td>株式会社 Lounge M</td>
+</tr>
+<tr>
+<td>representative</td>
+<td>武藤 修一郎</td>
+</tr>
+<tr>
+<td>postal_code</td>
+<td>164-0001</td>
+</tr>
+<tr>
+<td>address</td>
+<td>東京都中野区中野 3-34-18</td>
+</tr>
+<tr>
+<td>tel</td>
+<td>03-6382-5439</td>
+</tr>
+<tr>
+<td>email</td>
+<td>shop@muto-coffee.com</td>
+</tr>
+<tr>
+<td>open_time / close_time</td>
+<td>11:30 / 19:00</td>
+</tr>
+<tr>
+<td>last_order</td>
+<td>18:00</td>
+</tr>
+<tr>
+<td>retail_until</td>
+<td>19:00（豆・器具）</td>
+</tr>
+<tr>
+<td>regular_holidays</td>
+<td>水, 木</td>
+</tr>
+<tr>
+<td>special_holidays[]</td>
+<td>管理画面で追加（例: 年末年始）</td>
+</tr>
+<tr>
+<td>access_text</td>
+<td>JR中央線・総武線／東京メトロ東西線 中野駅 南口 徒歩2分（中野マルイ裏）</td>
+</tr>
+<tr>
+<td>map_embed</td>
+<td>Google マップ埋め込み URL</td>
+</tr>
+<tr>
+<td>instagram_url</td>
+<td>https://www.instagram.com/mutocoffeeroastery/</td>
+</tr>
+<tr>
+<td>facebook_url</td>
+<td>https://www.facebook.com/mutocoffeeroastery/</td>
+</tr>
+<tr>
+<td>notice_bar</td>
+<td>文言／リンク／表示期間</td>
+</tr>
+</tbody></table></div>
+<h3 id="ch04-s15">3.5 店内メニュー（MenuItem）項目定義<span class="tag prop">提案</span></h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>項目</th>
+<th>型</th>
+<th>説明</th>
+</tr></thead><tbody>
+<tr>
+<td>name</td>
+<td>文字列</td>
+<td>品名</td>
+</tr>
+<tr>
+<td>group</td>
+<td>選択</td>
+<td>ブレンド／シングルオリジン／アレンジ／その他ドリンク／スイーツ／セット</td>
+</tr>
+<tr>
+<td>price</td>
+<td>整数 or 文字列</td>
+<td>税込。「650円〜」「＋420円」のような表記を許容</td>
+</tr>
+<tr>
+<td>note</td>
+<td>文字列</td>
+<td>味の説明</td>
+</tr>
+<tr>
+<td>sort_order</td>
+<td>整数</td>
+<td>表示順</td>
+</tr>
+<tr>
+<td>available</td>
+<td>真偽</td>
+<td>提供中</td>
+</tr>
+</tbody></table></div>
+<p>初期データは 03章 2.2 の表を投入する。</p>
+<h2 id="ch04-s16">4. メール通知一覧（ショップ）</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>メール</th>
+<th>送信契機</th>
+<th>宛先</th>
+<th>主要内容</th>
+</tr></thead><tbody>
+<tr>
+<td>注文受付</td>
+<td>注文完了</td>
+<td>顧客、店舗（shop@）</td>
+<td>注文番号、商品、金額、配送先、発送予定（3営業日以内）</td>
+</tr>
+<tr>
+<td>発送完了</td>
+<td>発送済に変更</td>
+<td>顧客</td>
+<td>追跡番号、到着目安</td>
+</tr>
+<tr>
+<td>会員登録完了</td>
+<td>会員登録</td>
+<td>顧客</td>
+<td>ログイン案内</td>
+</tr>
+<tr>
+<td>パスワード再発行</td>
+<td>申請</td>
+<td>顧客</td>
+<td>再設定リンク（有効期限付き）</td>
+</tr>
+<tr>
+<td>お問い合わせ受付</td>
+<td>フォーム送信</td>
+<td>顧客、店舗</td>
+<td>内容の控え</td>
+</tr>
+</tbody></table></div>
+<h2 id="ch04-s17">5. 外部連携</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>連携先</th>
+<th>方式</th>
+<th>用途</th>
+</tr></thead><tbody>
+<tr>
+<td>決済代行</td>
+<td>EC-CUBE 決済プラグイン（トークン方式）</td>
+<td>クレジットカード</td>
+</tr>
+<tr>
+<td>ヤマト運輸</td>
+<td>伝票番号手入力（初期）。件数増加時は B2 クラウド CSV 連携</td>
+<td>追跡番号通知</td>
+</tr>
+<tr>
+<td>Google マップ</td>
+<td>iframe 埋め込み</td>
+<td>アクセス</td>
+</tr>
+<tr>
+<td>Instagram</td>
+<td>埋め込み or 公式リンク</td>
+<td>SNS 送客</td>
+</tr>
+<tr>
+<td>店舗サイト⇔ショップ</td>
+<td>ショップの新着商品を店舗トップに表示（RSS または Web API）<span class="tag prop">提案</span></td>
+<td>商品露出</td>
+</tr>
+</tbody></table></div>
+</section><section class="chapter" id="ch05">
+<header class="ch-head"><span class="ch-num">05</span><span class="ch-label">第5章</span><h1>デザイン・非機能要件</h1></header>
+<h2 id="ch05-s1">1. トーン＆マナー</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>観点</th>
+<th>方針</th>
+</tr></thead><tbody>
+<tr>
+<td>キーワード</td>
+<td>静かな路地裏、木とレザー、焙煎の手仕事、誠実、上質だが気取らない</td>
+</tr>
+<tr>
+<td>全体印象</td>
+<td>余白を広く取り、写真（焙煎機・豆・カップ・店内）を主役にする。装飾は最小限</td>
+</tr>
+<tr>
+<td>文体</td>
+<td>丁寧語。News は店主の声として一人称を許容。英字ラベル（About／Menu／News／Access）と日本語本文の併用</td>
+</tr>
+<tr>
+<td>写真</td>
+<td>自然光、暖色寄り。人物は手元中心。スタンプ的な加工はしない</td>
+</tr>
+</tbody></table></div>
+<p>現行サイトの実際の配色・書体は未確認（99章）。以下は再構築時の提案値であり、現行ブランド資産（ロゴ・店頭サイン）に合わせて最終決定する。</p>
+<h2 id="ch05-s2">2. カラーパレット<span class="tag prop">提案</span></h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>役割</th>
+<th>名称</th>
+<th>HEX</th>
+<th>用途</th>
+</tr></thead><tbody>
+<tr>
+<td>Primary</td>
+<td>Roast Brown</td>
+<td><code>#4A3327</code></td>
+<td>見出し、ボタン、ロゴ</td>
+</tr>
+<tr>
+<td>Primary Light</td>
+<td>Latte</td>
+<td><code>#8C6A50</code></td>
+<td>ホバー、リンク</td>
+</tr>
+<tr>
+<td>Accent</td>
+<td>Copper</td>
+<td><code>#B8733A</code></td>
+<td>CTA（Online Shop）、バッジ</td>
+</tr>
+<tr>
+<td>Background</td>
+<td>Cream</td>
+<td><code>#F7F3EE</code></td>
+<td>ページ背景</td>
+</tr>
+<tr>
+<td>Surface</td>
+<td>White</td>
+<td><code>#FFFFFF</code></td>
+<td>カード、フォーム</td>
+</tr>
+<tr>
+<td>Text</td>
+<td>Charcoal</td>
+<td><code>#2B2523</code></td>
+<td>本文</td>
+</tr>
+<tr>
+<td>Text Sub</td>
+<td>Stone</td>
+<td><code>#6F6661</code></td>
+<td>補足、日付</td>
+</tr>
+<tr>
+<td>Border</td>
+<td>Sand</td>
+<td><code>#E2D9CF</code></td>
+<td>罫線</td>
+</tr>
+<tr>
+<td>Success／Error</td>
+<td><code>#3B7D4F</code>／<code>#B23A3A</code></td>
+<td>営業中表示、フォームエラー</td>
+</tr>
+</tbody></table></div>
+<p>コントラスト: Text on Cream = 13.2:1、Accent on White = 4.6:1（AA 準拠）。Accent 上の白文字はボタンなど大きめの文字に限定する。</p>
+<h2 id="ch05-s3">3. タイポグラフィ<span class="tag prop">提案</span></h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>用途</th>
+<th>書体</th>
+<th>サイズ（PC／SP）</th>
+<th>行間</th>
+</tr></thead><tbody>
+<tr>
+<td>見出し（英字）</td>
+<td>Cormorant Garamond または同系セリフ</td>
+<td>40／28px</td>
+<td>1.2</td>
+</tr>
+<tr>
+<td>見出し（日本語）</td>
+<td>Noto Serif JP</td>
+<td>28／22px</td>
+<td>1.4</td>
+</tr>
+<tr>
+<td>本文</td>
+<td>Noto Sans JP</td>
+<td>16／15px</td>
+<td>1.8</td>
+</tr>
+<tr>
+<td>価格・数値</td>
+<td>Noto Sans JP（tabular-nums）</td>
+<td>16px</td>
+<td>–</td>
+</tr>
+<tr>
+<td>ラベル・日付</td>
+<td>Noto Sans JP</td>
+<td>13px</td>
+<td>1.5</td>
+</tr>
+</tbody></table></div>
+<p>Web フォントは表示遅延を避けるため <code>font-display: swap</code>、日本語はサブセット配信。ショップ（EC-CUBE）側も同じ CSS 変数を読み込み、ヘッダー・フッター・ボタンの見た目を店舗サイトと揃える。</p>
+<h2 id="ch05-s4">4. コンポーネント規約</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>コンポーネント</th>
+<th>仕様</th>
+</tr></thead><tbody>
+<tr>
+<td>ボタン（Primary）</td>
+<td>高さ 48px、角丸 4px、背景 Accent、文字 白、ホバーで 10% 暗く</td>
+</tr>
+<tr>
+<td>ボタン（Secondary）</td>
+<td>枠線 Primary、背景 透明</td>
+</tr>
+<tr>
+<td>カード（商品）</td>
+<td>画像 1:1、余白 16px、影なし、枠線 Border</td>
+</tr>
+<tr>
+<td>バッジ（焙煎度）</td>
+<td>小型ピル。浅煎り=Latte、中煎り=Copper、深煎り=Roast Brown</td>
+</tr>
+<tr>
+<td>News 行</td>
+<td>日付（Stone）＋カテゴリラベル＋タイトル。行全体がリンク</td>
+</tr>
+<tr>
+<td>フォーム</td>
+<td>ラベル上置き、入力高さ 48px、エラーは赤文字＋アイコン＋枠線</td>
+</tr>
+</tbody></table></div>
+<h2 id="ch05-s5">5. 画像・アセット</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>種別</th>
+<th>仕様</th>
+</tr></thead><tbody>
+<tr>
+<td>ヒーロー</td>
+<td>1920×1080、WebP、200KB 以下</td>
+</tr>
+<tr>
+<td>商品画像</td>
+<td>1200×1200、WebP、背景は白または木目で統一</td>
+</tr>
+<tr>
+<td>News サムネイル</td>
+<td>1200×800</td>
+</tr>
+<tr>
+<td>ロゴ</td>
+<td>SVG（モノクロ版も用意）</td>
+</tr>
+<tr>
+<td>OGP</td>
+<td>1200×630、店名入り</td>
+</tr>
+<tr>
+<td>favicon</td>
+<td>SVG＋PNG 32/180/512</td>
+</tr>
+</tbody></table></div>
+<h2 id="ch05-s6">6. SEO 設計</h2>
+<h3 id="ch05-s7">6.1 title／description</h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>ページ</th>
+<th>title</th>
+<th>description（120字以内）</th>
+</tr></thead><tbody>
+<tr>
+<td>トップ</td>
+<td>MUTO coffee roastery ｜ 中野の自家焙煎スペシャルティコーヒー</td>
+<td>中野駅南口徒歩2分。GIESEN 焙煎機で毎日焙煎するスペシャルティコーヒーとハンドドリップ、自家製ケーキ。豆の販売・オンラインショップも。</td>
+</tr>
+<tr>
+<td>News 一覧</td>
+<td>News ｜ MUTO coffee roastery</td>
+<td>営業のお知らせ、新入荷豆、セール情報。</td>
+</tr>
+<tr>
+<td>News 詳細</td>
+<td>{記事タイトル} ｜ MUTO coffee roastery</td>
+<td>記事冒頭 100 字</td>
+</tr>
+<tr>
+<td>ショップ TOP</td>
+<td>オンラインショップ ｜ MUTO coffee roastery</td>
+<td>焙煎したてのコーヒー豆を全国へ。クレジットカード決済、3営業日以内発送。</td>
+</tr>
+<tr>
+<td>商品詳細</td>
+<td>{商品名} 200g ｜ MUTO coffee roastery オンラインショップ</td>
+<td>焙煎度・精製方法・味わいの要約</td>
+</tr>
+</tbody></table></div>
+<p>現行のサイト名表記は「MUTO coffee roastery」と「MUTO coffee roastary」（News 側のタイトル末尾）が混在している。正しい綴りは roastery であり、WordPress の一般設定「サイトのタイトル」を修正する（06章）。</p>
+<h3 id="ch05-s8">6.2 構造化データ（JSON-LD）</h3>
+<p>トップ（店舗）:</p>
+<pre class="code"><code>{
+  "@context": "https://schema.org",
+  "@type": "CafeOrCoffeeShop",
+  "name": "MUTO coffee roastery",
+  "url": "https://muto-coffee.com/",
+  "telephone": "+81-3-6382-5439",
+  "address": {
+    "@type": "PostalAddress",
+    "postalCode": "164-0001",
+    "addressRegion": "東京都",
+    "addressLocality": "中野区",
+    "streetAddress": "中野3-34-18",
+    "addressCountry": "JP"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Friday", "Saturday", "Sunday"],
+      "opens": "11:30",
+      "closes": "19:00"
+    }
+  ],
+  "servesCuisine": "Coffee",
+  "sameAs": [
+    "https://www.instagram.com/mutocoffeeroastery/",
+    "https://www.facebook.com/mutocoffeeroastery/"
+  ]
+}</code></pre>
+<p>商品詳細:</p>
+<pre class="code"><code>{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "ケニア／キリニャガ カムワンギ・ファクトリー",
+  "image": "https://muto-coffee.com/shop/html/upload/save_image/xxx.jpg",
+  "description": "Washed / フレンチ。完熟果実やベリーの凝縮感、なめらかな酸味と甘み。",
+  "brand": { "@type": "Brand", "name": "MUTO coffee roastery" },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://muto-coffee.com/shop/products/detail/12",
+    "priceCurrency": "JPY",
+    "price": "2200",
+    "availability": "https://schema.org/InStock"
+  }
+}</code></pre>
+<p>News 詳細には <code>NewsArticle</code>、各ページに <code>BreadcrumbList</code> を出力する。</p>
+<h3 id="ch05-s9">6.3 その他</h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>項目</th>
+<th>方針</th>
+</tr></thead><tbody>
+<tr>
+<td>canonical</td>
+<td>02章 R-06</td>
+</tr>
+<tr>
+<td>sitemap</td>
+<td>店舗サイト <code>/sitemap.xml</code>、ショップ <code>/shop/sitemap.xml</code>。<code>robots.txt</code> で両方を宣言</td>
+</tr>
+<tr>
+<td>OGP／Twitter Card</td>
+<td>全ページ。商品詳細は商品画像、News は アイキャッチ</td>
+</tr>
+<tr>
+<td>見出し構造</td>
+<td>h1 は1ページ1つ。セクションは h2、カード内は h3</td>
+</tr>
+<tr>
+<td>Google ビジネスプロフィール</td>
+<td>営業時間・定休日をサイトと同期。臨時休業は両方更新</td>
+</tr>
+</tbody></table></div>
+<h2 id="ch05-s10">7. アクセシビリティ</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>項目</th>
+<th>基準</th>
+</tr></thead><tbody>
+<tr>
+<td>コントラスト</td>
+<td>本文 4.5:1 以上、大文字 3:1 以上</td>
+</tr>
+<tr>
+<td>キーボード</td>
+<td>全ての操作要素にフォーカス可視化。ハンバーガーメニューはフォーカストラップ</td>
+</tr>
+<tr>
+<td>代替テキスト</td>
+<td>商品画像は商品名、装飾画像は空 alt</td>
+</tr>
+<tr>
+<td>フォーム</td>
+<td><code>label</code> と <code>input</code> を関連付け。エラーは <code>aria-describedby</code></td>
+</tr>
+<tr>
+<td>動き</td>
+<td>自動再生スライダーは使わない。使う場合は停止ボタン</td>
+</tr>
+<tr>
+<td>言語</td>
+<td><code>&lt;html lang="ja"&gt;</code></td>
+</tr>
+<tr>
+<td>電話</td>
+<td><code>tel:</code> リンク。SP で即発信可能</td>
+</tr>
+</tbody></table></div>
+<h2 id="ch05-s11">8. パフォーマンス</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>指標</th>
+<th>目標</th>
+<th>施策</th>
+</tr></thead><tbody>
+<tr>
+<td>LCP</td>
+<td>2.5秒以内</td>
+<td>ヒーロー画像の事前読み込み、WebP、CDN またはサーバー側キャッシュ</td>
+</tr>
+<tr>
+<td>CLS</td>
+<td>0.1以下</td>
+<td>画像に width／height 指定、Web フォントの swap</td>
+</tr>
+<tr>
+<td>INP</td>
+<td>200ms以下</td>
+<td>JS は最小限。埋め込み（地図・Instagram）は遅延読み込み</td>
+</tr>
+<tr>
+<td>転送量</td>
+<td>トップ 1.5MB 以下</td>
+<td>画像最適化、未使用 CSS 削除</td>
+</tr>
+</tbody></table></div>
+<h2 id="ch05-s12">9. セキュリティ</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>項目</th>
+<th>方針</th>
+</tr></thead><tbody>
+<tr>
+<td>通信</td>
+<td>全ページ HTTPS、HSTS</td>
+</tr>
+<tr>
+<td>管理画面</td>
+<td>WordPress <code>/wp-admin/</code>、EC-CUBE <code>/shop/admin/</code> とも IP 制限またはベーシック認証＋強固なパスワード。二要素認証を推奨</td>
+</tr>
+<tr>
+<td>更新</td>
+<td>WordPress／EC-CUBE 本体とプラグインを月次で更新。EC-CUBE 3 系はサポート終了のため、4 系への移行を計画（06章）</td>
+</tr>
+<tr>
+<td>決済</td>
+<td>カード情報は決済代行のトークン方式で非保持。PCI DSS 対応は代行側に委ねる</td>
+</tr>
+<tr>
+<td>フォーム</td>
+<td>CSRF トークン、reCAPTCHA 等のスパム対策</td>
+</tr>
+<tr>
+<td>バックアップ</td>
+<td>日次自動、外部保管、復元手順を文書化</td>
+</tr>
+<tr>
+<td>ログ</td>
+<td>管理画面ログイン失敗の監視、WAF（レンタルサーバー提供のもので可）</td>
+</tr>
+<tr>
+<td>個人情報</td>
+<td>会員情報は EC-CUBE DB のみで保持。CSV エクスポートはローカルに残さない</td>
+</tr>
+</tbody></table></div>
+</section><section class="chapter" id="ch06">
+<header class="ch-head"><span class="ch-num">06</span><span class="ch-label">第6章</span><h1>運用・改善提案</h1></header>
+<h2 id="ch06-s1">1. 運用体制</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>役割</th>
+<th>担当</th>
+<th>業務</th>
+</tr></thead><tbody>
+<tr>
+<td>コンテンツ更新</td>
+<td>店主（武藤氏）</td>
+<td>News 投稿、営業時間・臨時休業の更新、商品登録・在庫更新、受注処理</td>
+</tr>
+<tr>
+<td>技術保守</td>
+<td>制作会社または担当エンジニア</td>
+<td>CMS・EC の更新、バックアップ確認、障害対応、ドメイン・サーバー更新</td>
+</tr>
+<tr>
+<td>決済・配送</td>
+<td>店主</td>
+<td>発送、伝票番号入力、返品対応</td>
+</tr>
+</tbody></table></div>
+<h2 id="ch06-s2">2. 更新フロー</h2>
+<h3 id="ch06-s3">2.1 News 投稿</h3>
+<ol>
+<li>WordPress 管理画面 → 投稿 → 新規追加</li>
+<li>タイトル、本文、カテゴリ（お知らせ／新入荷／セール／スイーツ）、アイキャッチ</li>
+<li>新入荷の場合は「関連商品 URL」にショップの商品詳細 URL を入力</li>
+<li>臨時休業の場合は「サイト設定 → 臨時休業日」にも日付を追加（営業状況表示に反映）</li>
+<li>公開。Instagram にも同内容を投稿</li>
+</ol>
+<h3 id="ch06-s4">2.2 商品の入替</h3>
+<ol>
+<li>EC-CUBE 管理画面 → 商品管理 → 新規登録</li>
+<li>商品名、カテゴリ、税込価格、内容量、精製方法、焙煎度、味わい、画像</li>
+<li>挽き方の規格を割当（提案採用時）</li>
+<li>公開。終売品は「非公開」にし削除しない（注文履歴・URL 維持のため）</li>
+<li>店舗サイトの News に「新入荷」記事を投稿（2.1）</li>
+</ol>
+<h3 id="ch06-s5">2.3 受注処理</h3>
+<ol>
+<li>注文受付メールを確認（shop@）</li>
+<li>焙煎・梱包（注文確認後3営業日以内）</li>
+<li>ヤマト運輸で発送、伝票番号を受注に入力し「発送済」に変更 → 発送完了メール自動送信</li>
+</ol>
+<h3 id="ch06-s6">2.4 定期メンテナンス</h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>頻度</th>
+<th>作業</th>
+</tr></thead><tbody>
+<tr>
+<td>日次</td>
+<td>自動バックアップの成否確認（通知メール）</td>
+</tr>
+<tr>
+<td>週次</td>
+<td>受注・問い合わせの未処理確認、スパムコメント削除</td>
+</tr>
+<tr>
+<td>月次</td>
+<td>WordPress／EC-CUBE／プラグイン更新（ステージングで検証後）、Search Console のエラー確認</td>
+</tr>
+<tr>
+<td>年次</td>
+<td>ドメイン・SSL・サーバー契約更新、特商法表記の見直し、年末年始の営業案内投稿</td>
+</tr>
+</tbody></table></div>
+<h2 id="ch06-s7">3. 現状の課題と改善提案</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>No.</th>
+<th>課題（現状）</th>
+<th>影響</th>
+<th>提案</th>
+<th>優先度</th>
+</tr></thead><tbody>
+<tr>
+<td>I-01</td>
+<td>サイト名の綴りが「roastery」と「roastary」で混在（News 側タイトル末尾）</td>
+<td>ブランド表記の不統一、検索結果の見栄え</td>
+<td>WordPress 一般設定のサイトタイトルを「MUTO coffee roastery」に修正</td>
+<td>高・即日</td>
+</tr>
+<tr>
+<td>I-02</td>
+<td>ショップ URL が <code>www</code> あり／なしの両方でインデックスされている</td>
+<td>重複コンテンツ、評価分散</td>
+<td>正規ホストを決め 301 リダイレクト、canonical 出力</td>
+<td>高</td>
+</tr>
+<tr>
+<td>I-03</td>
+<td>News 詳細 URL がタイトル由来の日本語スラッグで <code>/news/</code> 配下にない</td>
+<td>共有時に長大なエンコード URL、構造が不明瞭</td>
+<td>新規記事から英数字スラッグ＋<code>/news/</code> 配下に変更。旧 URL は 301</td>
+<td>中</td>
+</tr>
+<tr>
+<td>I-04</td>
+<td>News のカテゴリ分類が確認できない</td>
+<td>営業案内と新入荷が混在し、探しにくい</td>
+<td>4カテゴリ導入、一覧にタブ</td>
+<td>中</td>
+</tr>
+<tr>
+<td>I-05</td>
+<td>臨時休業・年末年始が News 記事のみで、トップの営業案内と二重管理</td>
+<td>更新漏れリスク</td>
+<td>営業状況の自動表示＋お知らせバー</td>
+<td>中</td>
+</tr>
+<tr>
+<td>I-06</td>
+<td>店舗サイトとショップが別システムでデザイン・ヘッダーが乖離する可能性</td>
+<td>回遊率低下、ブランド一貫性</td>
+<td>共通 CSS 変数とヘッダー／フッターの共通化</td>
+<td>中</td>
+</tr>
+<tr>
+<td>I-07</td>
+<td>商品詳細の情報が精製・焙煎度・味わいの3項目</td>
+<td>愛好家（ペルソナ B）の判断材料が不足</td>
+<td>地域・品種・標高・生産者を任意項目で追加</td>
+<td>中</td>
+</tr>
+<tr>
+<td>I-08</td>
+<td>挽き方の選択可否が不明</td>
+<td>器具を持たない購入者の離脱</td>
+<td>規格「挽き方」を追加</td>
+<td>中</td>
+</tr>
+<tr>
+<td>I-09</td>
+<td>プライバシーポリシー・ご利用ガイド・送料表がインデックスに見当たらない</td>
+<td>法令・信頼面の不安、購入前の離脱</td>
+<td>ヘルプページを整備し、フッターから常時リンク</td>
+<td>高</td>
+</tr>
+<tr>
+<td>I-10</td>
+<td>SNS リンク（Instagram／Facebook）の設置状況が不明</td>
+<td>送客・認知機会の損失</td>
+<td>ヘッダー・フッター・トップに設置。公式は <code>@mutocoffeeroastery</code></td>
+<td>低</td>
+</tr>
+<tr>
+<td>I-11</td>
+<td>構造化データ（店舗・商品）の有無が不明</td>
+<td>検索結果でのリッチ表示機会の損失</td>
+<td>05章 6.2 の JSON-LD を実装</td>
+<td>低</td>
+</tr>
+<tr>
+<td>I-12</td>
+<td>EC-CUBE のバージョンが不明。3 系の場合はサポート終了</td>
+<td>セキュリティリスク</td>
+<td>バージョン確認のうえ 4 系最新へ移行計画</td>
+<td>高（確認は即日）</td>
+</tr>
+<tr>
+<td>I-13</td>
+<td>店舗サイト側にお問い合わせ手段（フォーム）があるか不明</td>
+<td>電話以外の問い合わせ手段不足</td>
+<td>ショップの <code>/shop/contact</code> へ統一導線</td>
+<td>低</td>
+</tr>
+<tr>
+<td>I-14</td>
+<td>席数・Wi-Fi・電源など来店前に知りたい設備情報が公式に見当たらない</td>
+<td>第三者サイト依存</td>
+<td>Access セクションに「店内設備」を追記</td>
+<td>低</td>
+</tr>
+</tbody></table></div>
+<h2 id="ch06-s8">4. 実装ロードマップ</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>フェーズ</th>
+<th>期間目安</th>
+<th>内容</th>
+<th>対応課題</th>
+</tr></thead><tbody>
+<tr>
+<td>Phase 0: 実機確認</td>
+<td>1週間</td>
+<td>99章チェックリストの消化、CMS／EC のバージョン・プラグイン・テーマ確認、Search Console 導入</td>
+<td>I-12</td>
+</tr>
+<tr>
+<td>Phase 1: 即効改善</td>
+<td>1〜2週間</td>
+<td>サイト名修正、URL 正規化（301／canonical）、ヘルプページ整備、SNS リンク、構造化データ</td>
+<td>I-01, I-02, I-09, I-10, I-11</td>
+</tr>
+<tr>
+<td>Phase 2: コンテンツ構造化</td>
+<td>1か月</td>
+<td>News カテゴリ、スラッグ規約、営業状況の自動表示、お知らせバー、店内メニューの構造化</td>
+<td>I-03, I-04, I-05</td>
+</tr>
+<tr>
+<td>Phase 3: ショップ強化</td>
+<td>1〜2か月</td>
+<td>EC-CUBE 4 系移行（必要時）、商品属性拡張、挽き方規格、ギフトオプション、店舗サイトとの共通デザイン</td>
+<td>I-06, I-07, I-08, I-12</td>
+</tr>
+<tr>
+<td>Phase 4: 継続運用</td>
+<td>継続</td>
+<td>月次更新、KPI 計測（01章 3）、写真の更新</td>
+<td>–</td>
+</tr>
+</tbody></table></div>
+<h2 id="ch06-s9">5. 検収基準（再構築時）</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>項目</th>
+<th>基準</th>
+</tr></thead><tbody>
+<tr>
+<td>機能</td>
+<td>01章 5 の「必須」要件を全て満たす。テスト注文（カード決済）が完了し、メールが届く</td>
+</tr>
+<tr>
+<td>表示</td>
+<td>03章 11 の3ブレークポイントで崩れがない。主要ブラウザで確認</td>
+</tr>
+<tr>
+<td>性能</td>
+<td>Lighthouse（モバイル）Performance 80 以上、Accessibility 90 以上</td>
+</tr>
+<tr>
+<td>SEO</td>
+<td>旧 URL が全て 301 で新 URL に到達。sitemap が Search Console で受理</td>
+</tr>
+<tr>
+<td>セキュリティ</td>
+<td>管理画面のアクセス制限が有効。全ページ HTTPS</td>
+</tr>
+<tr>
+<td>運用</td>
+<td>店主が News・商品・臨時休業を自力で更新できることを操作説明で確認</td>
+</tr>
+</tbody></table></div>
+</section><section class="chapter" id="ch99">
+<header class="ch-head"><span class="ch-num">99</span><span class="ch-label">付録</span><h1>調査ログ・未確認事項</h1></header>
+<h2 id="ch99-s1">1. 調査方法</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>項目</th>
+<th>内容</th>
+</tr></thead><tbody>
+<tr>
+<td>実施日</td>
+<td>2026-09-11</td>
+</tr>
+<tr>
+<td>直接アクセス</td>
+<td><code>https://muto-coffee.com/</code> への HTTP アクセス（curl、フェッチツール）は作成環境のネットワークポリシーで拒否（403）。第三者メディア（さんたつ、中野経済新聞、Only Roaster、CafeSnap）も同様に拒否</td>
+</tr>
+<tr>
+<td>代替手段</td>
+<td>検索エンジンのインデックス（<code>site:muto-coffee.com</code> 等）に含まれるページタイトル・スニペット、および第三者メディアの検索スニペット</td>
+</tr>
+<tr>
+<td>限界</td>
+<td>HTML ソース、CSS、画像、ナビゲーションの実配置、フォーム項目、EC-CUBE と WordPress のバージョンは未確認</td>
+</tr>
+</tbody></table></div>
+<h2 id="ch99-s2">2. 情報ソース一覧</h2>
+<h3 id="ch99-s3">2.1 公式サイト（インデックスされたページ）</h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>URL</th>
+<th>得られた情報</th>
+</tr></thead><tbody>
+<tr>
+<td>https://muto-coffee.com/</td>
+<td>ページタイトル「MUTO coffee roastery - 中野 / 東京」、営業時間 11:30-19:00（L.O. 18:00、豆・器具販売は 19:00 まで）、定休日 水・木、店内メニューと価格、News の存在</td>
+</tr>
+<tr>
+<td>https://muto-coffee.com/news/</td>
+<td>「News一覧 | MUTO coffee roastary」、2021〜2026年の記事（2026年1月26日、2025年12月22日、2025年10月27日、2025年3月29日 等）</td>
+</tr>
+<tr>
+<td>News 詳細各記事</td>
+<td>年末・年始 営業日時のお知らせ／本日7月26日（火）18時で閉店いたします。／営業時間変更（新型コロナウイルス感染拡大防止のため）／営業再開のお知らせ／３周年ブレンド豆半額セール／テイク・アウト 始めました。そしてお試しセール！／新入荷 パナマ カジェホン農園 ゲイシャ（ナチュラル）／ルワンダ・コアカカ ムガンザ／ニカラグア／フローレンシア ナチュラル精製／オレンジのパウンドケーキ</td>
+</tr>
+<tr>
+<td>https://www.muto-coffee.com/shop/</td>
+<td>「MUTO coffee roastery / TOPページ」、新規会員登録・ログインリンク</td>
+</tr>
+<tr>
+<td>https://www.muto-coffee.com/shop/products/list</td>
+<td>商品一覧</td>
+</tr>
+<tr>
+<td>https://www.muto-coffee.com/shop/products/detail/{8,10,11,12,15,17,20,34,37,41,55}</td>
+<td>商品名、200g、税込価格、精製方法、焙煎度、味わい</td>
+</tr>
+<tr>
+<td>https://www.muto-coffee.com/shop/help/about</td>
+<td>「当サイトについて」</td>
+</tr>
+<tr>
+<td>https://www.muto-coffee.com/shop/help/tradelaw</td>
+<td>販売業者 株式会社 Lounge M、運営責任者 武藤修一郎、〒164-0001 東京都中野区中野3-34-18、03-6382-5439、shop@muto-coffee.com、クレジットカード決済、ヤマト運輸宅急便、国内のみ、注文確認後3営業日以内発送</td>
+</tr>
+</tbody></table></div>
+<h3 id="ch99-s4">2.2 第三者メディア（検索スニペット）</h3>
+<div class="tbl"><table>
+<thead><tr>
+<th>ソース</th>
+<th>URL</th>
+<th>得られた情報</th>
+</tr></thead><tbody>
+<tr>
+<td>さんたつ by 散歩の達人</td>
+<td>https://san-tatsu.jp/articles/217904/</td>
+<td>住所、営業時間、定休日、中野駅徒歩2分、GIESEN 6kg 焙煎機、常時10種類以上、オーナー経歴（元CMプロデューサー、堀口珈琲で修業）</td>
+</tr>
+<tr>
+<td>中野経済新聞</td>
+<td>https://nakano.keizai.biz/headline/557/</td>
+<td>2010年10月3日開店、中野マルイ裏、焙煎へのこだわり</td>
+</tr>
+<tr>
+<td>Only Roaster</td>
+<td>https://onlyroaster.com/mutocoffee/</td>
+<td>焙煎機、ギフト対応、10種類以上の豆</td>
+</tr>
+<tr>
+<td>CafeSnap</td>
+<td>https://cafesnap.me/c/353</td>
+<td>店内の雰囲気（木・レザー）、ハンドドリップ、浅煎り〜中煎り中心</td>
+</tr>
+<tr>
+<td>食べログ／ヒトサラ／Retty</td>
+<td>https://tabelog.com/en/tokyo/A1319/A131902/13173656/ ほか</td>
+<td>席数（17〜30席で記載差）、Wi-Fi、電源、予約可、予算〜999円</td>
+</tr>
+<tr>
+<td>Yelp</td>
+<td>（検索結果）</td>
+<td>住所、電話番号 03-6382-5439</td>
+</tr>
+<tr>
+<td>Instagram</td>
+<td>https://www.instagram.com/mutocoffeeroastery/</td>
+<td>公式アカウント</td>
+</tr>
+<tr>
+<td>Facebook</td>
+<td>https://www.facebook.com/mutocoffeeroastery/</td>
+<td>公式ページ</td>
+</tr>
+<tr>
+<td>無印良品 中野マルイ 店舗記事</td>
+<td>https://www.muji.com/jp/ja/shop/045289/articles/other/346071</td>
+<td>中野まち歩き記事での紹介</td>
+</tr>
+</tbody></table></div>
+<h2 id="ch99-s5">3. 確認済／推定／未確認の一覧</h2>
+<div class="tbl"><table>
+<thead><tr>
+<th>項目</th>
+<th>状態</th>
+<th>備考</th>
+</tr></thead><tbody>
+<tr>
+<td>店名・住所・電話・メール</td>
+<td><span class="tag ok">確認済</span></td>
+<td>特商法表記と複数メディアで一致</td>
+</tr>
+<tr>
+<td>営業時間・定休日</td>
+<td><span class="tag ok">確認済</span></td>
+<td>公式トップとメディアで一致</td>
+</tr>
+<tr>
+<td>運営会社・責任者</td>
+<td><span class="tag ok">確認済</span></td>
+<td>特商法表記</td>
+</tr>
+<tr>
+<td>店内メニューと価格</td>
+<td><span class="tag ok">確認済</span></td>
+<td>公式トップのインデックス内容。調査時点の価格</td>
+</tr>
+<tr>
+<td>商品ラインナップ・価格</td>
+<td><span class="tag ok">確認済</span> <span class="cell-note">（一部）</span></td>
+<td>ID 37、41 の価格未取得</td>
+</tr>
+<tr>
+<td>決済・配送条件</td>
+<td><span class="tag ok">確認済</span></td>
+<td>送料額・返品条件は未取得</td>
+</tr>
+<tr>
+<td>WordPress 利用</td>
+<td><span class="tag est">推定</span></td>
+<td>URL パターンとタイトル形式</td>
+</tr>
+<tr>
+<td>EC-CUBE 利用・バージョン</td>
+<td><span class="tag est">推定</span> <span class="cell-note">／未確認</span></td>
+<td>ルーティングは 3 系・4 系共通</td>
+</tr>
+<tr>
+<td>トップページのセクション順・ビジュアル</td>
+<td>未確認</td>
+<td></td>
+</tr>
+<tr>
+<td>ナビゲーションのラベル</td>
+<td>未確認</td>
+<td></td>
+</tr>
+<tr>
+<td>プライバシーポリシー／ご利用ガイド／お問い合わせの有無</td>
+<td>未確認</td>
+<td>インデックスに見当たらない</td>
+</tr>
+<tr>
+<td>SNS リンクの設置有無</td>
+<td>未確認</td>
+<td></td>
+</tr>
+<tr>
+<td>席数・設備</td>
+<td>未確認</td>
+<td>メディア間で差異</td>
+</tr>
+<tr>
+<td>ゲスト購入可否、挽き方選択、ギフト包装オプション</td>
+<td>未確認</td>
+<td></td>
+</tr>
+<tr>
+<td>開店年</td>
+<td><span class="tag ok">確認済</span></td>
+<td>2010年10月（中野経済新聞）。一部スニペットに 2014年 の記載があるが記事 ID の古さから 2010年 を採用</td>
+</tr>
+</tbody></table></div>
+<h2 id="ch99-s6">4. 実機確認チェックリスト</h2>
+<p>実装着手前に、ブラウザで以下を確認し本書を更新すること。</p>
+<ul class="check">
+<li>トップページのセクション構成、ナビゲーションのラベルと順序、ヒーロー画像</li>
+<li>HTML ソースから CMS（<code>wp-content</code>、<code>generator</code> メタ）と EC-CUBE のバージョン（<code>/shop/</code> の HTML コメント・アセットパス）</li>
+<li>使用テーマ・プラグイン、Google アナリティクス・タグの有無</li>
+<li><code>https://muto-coffee.com/shop/</code> と <code>https://www.muto-coffee.com/shop/</code> のリダイレクト・canonical の状態</li>
+<li><code>robots.txt</code>、<code>sitemap.xml</code> の有無</li>
+<li>News のカテゴリ・タグの有無、記事総数、年別アーカイブ</li>
+<li>商品一覧のカテゴリ構成、総商品数、並び替え・検索の有無</li>
+<li>商品詳細の全項目（規格、在庫表示、画像枚数）</li>
+<li>送料表、返品・交換条件、ギフト対応の記載</li>
+<li>ゲスト購入の可否、決済代行会社、利用可能カードブランド</li>
+<li>プライバシーポリシー、ご利用ガイド、お問い合わせフォームの有無と項目</li>
+<li>SNS リンク、地図埋め込みの有無</li>
+<li>現行の配色・書体・ロゴ（ブランド資産の引き継ぎ）</li>
+<li>モバイル表示の状態（ハンバーガー、固定要素）</li>
+<li>Lighthouse スコア（モバイル）</li>
+<li>席数・Wi-Fi・電源・予約可否（店舗に確認）</li>
+</ul>
+</section>
+  </main>
+</div>
+<footer class="foot"><span>MUTO coffee roastery Webサイト設計書 v1.0</span><span>作成 2026-09-11</span><span>Markdown 原本: docs/muto-coffee/ （ClaudeCode-WEB-sekkei-agent リポジトリ）</span></footer>
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  if(!links.length || !('IntersectionObserver' in window)) return;
+  var map = {};
+  links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(map).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  var current = null;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        if(current) current.classList.remove('active');
+        current = map[e.target.id]; if(current) current.classList.add('active');
+      }
+    });
+  }, {rootMargin:'-10% 0px -75% 0px', threshold:0});
+  targets.forEach(function(t){ io.observe(t); });
+})();
+</script>
